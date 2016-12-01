@@ -282,7 +282,7 @@ var app = {
 				//facebookConnectPlugin.browserInit("1647443792236383");	
 				
 				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id,first_name,email, picture", ["public_profile","email"],
+				 facebookConnectPlugin.api("/me?fields=id,first_name,email", ["public_profile","email"],
 					  function onSuccess (result) {
 						  /*
 						    facebookConnectPlugin.getAccessToken(function(token) {
