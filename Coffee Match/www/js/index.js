@@ -148,7 +148,7 @@ var app = {
 								}								
 							});
 		
-		
+		/*
 		myApp.onPageInit('starbucks-map', function(){
 			
 			var latLng = new google.maps.LatLng(latitude, longitude);
@@ -190,6 +190,7 @@ var app = {
 			
 			
 		});
+		*/
 		
 		myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
