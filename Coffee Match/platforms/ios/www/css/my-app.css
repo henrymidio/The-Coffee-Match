@@ -1,0 +1,340 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+	font-family: lato;
+}
+
+body {
+    overflow: hidden;
+}
+
+.none {
+	visibility: hidden;
+}
+
+.visivel {
+	visibility: visible;
+}
+
+.oculto {
+display: none !important;
+}
+
+.no-radius {
+	bolder-radius: 0px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+.logo {
+//text-align:center;
+font-family: 'Reenie Beanie', cursive; /*Reenie Beanie is available through Google Webfonts http://code.google.com/webfonts/specimen/Reenie+Beanie*/
+font-size: 20px !important;
+font-style: bol !important;
+color: white;
+letter-spacing:0.09em;
+}
+
+.big-logo {
+text-align:center;
+font-family: 'Reenie Beanie', cursive; /*Reenie Beanie is available through Google Webfonts http://code.google.com/webfonts/specimen/Reenie+Beanie*/
+font-size: 45px;
+color: white;
+letter-spacing:0.09em;
+box-shadow: 2px solid white;
+}
+
+.navigation-drawer {
+	padding: 0px !important;
+	margin: 0px !important;
+	height: 100%;
+}
+
+.statusbar-overlay {
+    background: #8D7A4B;
+    /* We can add transition for smooth color animation */
+    -webkit-transition: 400ms;
+    transition: 400ms;
+}
+
+.header-panel {
+	height: 40%;
+	background: #8D7A4B;
+	text-align: center;
+	color: white;
+	display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
+}
+
+.item-title {
+	font-size: 18px !important;
+	color: #8D7A4B !important;
+	
+}
+
+.subtitle {
+	font-size: 14px;
+	color: gray;
+}
+
+.username {
+	margin-top: -5px;
+	//text-align: left;
+	font-size: 20px;
+	//float: left;
+}
+
+.occupation {
+	margin-top: -15px;
+}
+
+.college {
+	color: gray;
+	margin-top: -15px;
+	font-size: 16px;
+	//float: right;
+}
+
+.friends {
+	margin-top: -8px;	
+}
+
+.friends img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+
+.profile-photo {
+    margin-top: 30px;
+	margin-bottom: 10px;
+    width: 120px;
+    height: 120px;
+	border: 3px solid white;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;    
+    border-radius: 80px;
+}
+
+#pic-confirm {
+    width: 120px;
+    height: 120px;
+	border: 3px solid white;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;    
+    border-radius: 80px;
+}
+
+.search-effect {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin-top: -57px;
+    margin-left: -70px;
+	border: 3px solid white;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;    
+    border-radius: 80px;
+    position: absolute;
+	box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+    top: 50%;
+    left: 51%;
+    z-index: 1;
+    overflow: hidden;
+	-webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	-moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	-ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 120px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 120px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 120px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 120px rgba(232, 76, 61, 0);}}
+
+#search-box {
+	//display: none;
+	text-align: center;
+}
+
+.search-text {
+	display: block;
+    margin-top: -100px;
+    //margin-left: -60px;
+    position: relative;
+    bottom: 10%;
+    //left: 40%;
+    z-index: 1;
+	font-size: 20px;
+    overflow: hidden;
+}
+
+//ESTILOS SLIDE
+/* A bit of demo styles */;
+.swiper-container {
+  height: 100%;
+}
+.swiper-slide {
+  height: 60vh;
+  background:#fff;
+}
+.swiper-slide img{
+  width: 100%;
+  height: 100%;
+}
+
+/* Button designs */
+
+.buts {
+	position: absolute;
+	bottom: 2%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	z-index: 4;
+}
+
+.but-nope, .but-yay {
+  display: inline-block;
+  
+}
+
+.buts button {
+
+  background: #4cd964;
+  border: none;
+  color: #fff;
+  border-radius: 50% 50%;
+  width: 70px;
+  height: 70px;
+  line-height: 30px;
+  margin: 0 .5em;
+  margin-top: 20px;
+  display: inline-block;
+  font-size: 20px;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+  -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+}
+
+.buts .but-nope {
+  background: #ff3b30;
+  width: 50px;
+  height: 50px;
+}
+
+.buts .but-yay {
+  width: 50px;
+  height: 50px;
+}
+
+.buts .but-info {
+  background: #03a9f4;
+  //width: 50px;
+  //height: 50px;
+}
+
+.friends-list {
+ list-style: none;
+ padding-left: 0px !important;
+}
+
+.friends-list li {
+display: inline-block;
+
+}
+
+.Facebook
+{
+    background: #3b5998;
+    text-align: center;
+	border-radius: 4px;
+    color: #fff;
+    font-family: Lucida Grande, Tahoma Verdana, Arial, Sans-serif;
+    width: 90%;
+    margin: 0 auto;
+   cursor: pointer;
+}
+
+.Facebook .Conteudo
+{
+   vertical-align: middle;
+   margin-left: 10px;
+}
+
+.LogotipoFacebook
+{
+   font-weight: bold;
+   font-size: 30px;
+   vertical-align: middle;
+}
+
+.rating > span:hover:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  font-size: 45px;
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.cont:before {
+        position: absolute;
+        content: '';
+        background-color:#FF0000;
+        border-radius:50%;
+		border: 2px solid white;
+        width: 12px;
+        height: 12px;
+        pointer-events: none;
+    }
+
+

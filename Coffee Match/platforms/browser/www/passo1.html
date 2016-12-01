@@ -1,0 +1,66 @@
+<!-- Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">	    
+            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+            <div class="sliding center color-white">Passo 1-2</div>
+          </div>
+        </div>
+
+<div class="pages">
+  <div data-page="passo1" class="page">
+		<div class="page-content" style="background: #F4F4F6">
+			<div class="text-center">
+				<h2>Bem vindo ao Coffee Match!</h2>
+				<p>Vamos começar! <br>Selecione as suas preferências.</p>
+			</div>
+				<div class="card">
+					<div class="card-content">
+						<div class="card-content-inner">
+							<p style="color: #8D7A4B"><b>Receber notificações</b></p>	
+							<div style="height: 50px">
+								<p style="float: left; margin-top: 5px; font-size: 16px">Convites</p>
+								<div class="item-input" style="float: right">
+											<label class="label-switch">
+											  <input type="checkbox" id="convites" value="1" checked>
+											  <div class="checkbox"></div>
+											</label>
+								</div>
+							</div>
+							<div style="height: 50px">
+								<p style="float: left; margin-top: 5px; font-size: 16px">Mensagens</p>
+								<div class="item-input" style="float: right">
+											<label class="label-switch">
+											  <input type="checkbox" id="mensagens" value="1" checked>
+											  <div class="checkbox"></div>
+											</label>
+								</div>
+							</div>
+								
+							
+						</div>
+					</div>
+				</div>
+				
+				<p style="margin-left: 10px; color: #8D7A4B"><b>Distância</b> <span style="float: right; font-style: bold; margin-right: 10px" id="valBox"><b>5km</b></span></p>
+				<div class="card">
+					<div class="card-content">
+						<div class="card-content-inner">
+							<div class="range-slider">
+								<input type="range" oninput="showVal(this.value)" onchange="showVal(this.value)" min="2" max="10" step="1">
+							</div>
+						</div>
+					</div>
+				</div>
+				 
+				<div class="content-block">
+					<div class="text-center">
+				
+				<p>Você poderá alterar depois.</p>
+			</div>
+			   </div>
+			  
+				<a href="passo2.html" class="button button-big button-fill" id="next-step" style="border-radius: 0px; position: absolute; bottom: 0; width: 100%; background: #E3C383; color: black">PRÓXIMO</a>
+			
+		</div>
+  </div>
+</div>  

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Your app title -->
+    <title>Coffee Match</title>
+    <!-- Path to Framework7 iOS CSS theme styles-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <!-- Path to Framework7 iOS related color styles -->
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+	
+	<link rel="stylesheet" href="css/jTinder.css">
+	
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Reenie+Beanie' rel='stylesheet' type='text/css'>
+  </head>
+  <body class="layout-white">
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-cover">
+      <div class="content-block navigation-drawer">
+        <div class="header-panel">
+		 <a href="profile.html" class="close-panel" style="color: white">
+		 <div style="align-self: center;">
+			<img class="profile-photo" src="http://successpenpal.com/wp-content/uploads/2014/01/Howard-Schultz.jpg" />
+			<p class="username"><b><span id="name">Howard</span>, <span id="age">63</span></b></p>
+			<p class="occupation">Ver Perfil</p>
+		 </div>	
+		 </a>
+		</div>
+		<div class="list-block" style="margin-top: 0px">
+			<ul>
+				<li class="item-content">
+				  <div class="item-media">
+					<img class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACgUlEQVRYR9VX0XHbMAwljv5vNmg7Qa0T9N1kg2SCuhPU3sCdwM0EdSdoM0HzT+hkb2BP0GQAHXvPR/koijIln3Np+SuAeAIegEdSZxwR+aaU+uK7Wmu/FkWxHHsdjXWAvTHmkYg+Br4PzHw79r6zAIjIH6XUVRBsx8zvLwKgqqppXdc/lVILZv7lX1pV1VVd1wDQOczc+SERQVZWWuu7LMs2oVPHwQX/7f3hWmu9yLLsCc4igtqDA51DRJ/zPF/jgwO6UkrNnOGT1vomBNECEAneBNkR0dpai8veJdK8A0DYEtE0sO2AaAEQETi/HVvHkfZbZj4CawEwxlwTEdL/Ysdae1MUxWMTIEaaTo9fEM09M8/9+2IkBMuB8MMFA+OqVup7M+CYfvEsENEiz/NO90QHUc+gCROyVUo1fQ1SpTIWHVRhGyL9n/r63CF4JqJl+DdlWc6ttdgFb06Ubqa1fmhmCuzIGLNy/Yq/CMfryWETfnQgMHxSB0NtY63dkIjYlLX3PUok319EUJZUOY4uYwH8YOZmtEZxiwhGMco46PxfAFCzoiiyU79mjKkiO6DXBSRceiRM7oG+fkaEESTcH0l4BpPB4CUz3wfkw5pGG/Z2kr+uU5MwuRUPLUR0GETW2umAtO+ZubPK+ybh641ip2SqAcJjUJs1RsjYZDKBIjooq94SiMh3T0aNCjLA+PQ6dgISYvQlz50vdF9DkrXIGBOlECPhRts6UQo1k5oVeyI6iNLITnjWWl/7yrhPlvsgWnUry3JmrQVPOifs8+AJ1wmOC6Jt6OQ5ZPjcF5BwGPswcUIXb4vbQQ+TIewTEbRSWKbooEndd9bb8F94nF7sef4XnktbjW3sivYAAAAASUVORK5CYII=" width="32" height="32">
+				  </div>
+				   <div class="item-inner">
+					<a href="settings.html" class="item-link close-panel"><div class="item-title"><b>Discovery Settings</b><br><span class="subtitle">Distance, age and more</span></div></a>
+				  </div>
+				</li>
+				<li class="item-content">
+				  <div class="item-media">
+				  <img class="icon icons8-Map-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABe0lEQVRYR+2XwW2DQBBF/wjucQdJBxEC7qSCKBXEHZhUENwBqSB2BXEHcc6AcDpwCfYdmGgQa63QAiKH5ODdCxK7f+fN38t8wj8vyvN8B+AjCILtHJayLBfa+YXnecc5+qIolsz8KADcCeWCZApECjdNs2LmmJmfREtEnwA2juOsp0CyLIuI6BVA1Go1ANWAEUQvDKDtnpkfNACl3zPzOgzDve5IWZZ3dV2/q8JqzwSgg7wEQbDLsiwhopUqrA4MAFxAALyJPs/zDYBn0xONAUiHX2EYRgaX2rsmACb1Q09wAbUA1gHrgHXAOmAdsA5YB6wDV+PAAcC9aWL9Awe+SQp3KSUBcKuDjAHInuu6SwCnuq5T09g9oj8TUeL7ftoCqNUHMV0g/yRBDQSPGIBA3XRje3+sPzNz6rpu6nneqR3LTdYrEGY+qlwwVLivlwRVVVVMRBLdDlqu2DqOk/SjmxFAXSo5TjpV3znhU84qncSyocw4CjC34G/O/wDfu97O0h/BXQAAAABJRU5ErkJggg==" width="32" height="32">
+				  </div>
+				  <div class="item-inner">
+					<a href="starbucks-map.html" class="item-link close-panel"><div class="item-title"><b>Coffee Map</b></div></a>
+				  </div>
+				</li>
+				<li class="item-content">
+				  <div class="item-media">
+				  <img class="icon icons8-Map-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABxElEQVRoQ+1a3VHDMAyWJwAmAGaI8s4oYQQmgQ1gBEbgPcoMtBOQTmAuvSSXGtc/spXcBfetZ3+f9Em25MRREPhr2/ZJKfUOAA8j5KC1fq7r+iuQwjktlV+FOkFE3wsRE+yAiI+hHK55qfwxQvTgCCKeMUR08T9VjMkXy78/IV3XNVrrVwC4dUXXzEhqJkx8BH+vlHqpqupj4JgzQkQ/PhG2pbWhkMF0j4h3phDnmk9dwz7Bsfzm/GVG/o2QHgBujMgeEXHqK76gO8eJKIqfnZGxYQ0b63706Ki1bjI3xGB+tpCkcAuAixCBoCZRejOSxL4BeGqgf8rvBr4kmbwqZBpIYl8B7F1aRcgKWViaKBmZIrBy4OcHOdMuOyO7E2IrBq7HUokx26M2+xjv2njSY0WILQLSUfe9RUne7LvZI6X8MiNw7chUlpZEP+BylvJbyq/nrf2mS4tZfNgwsarF9ogJFBOym85ehIxXdjkOm6WP7LKPMIsPGyZWtdgeMYHZhTD9EIOxj/FiHjGJixBm4MRgrozYblXFHMlEfELE85ca8wu68ROON8sVdCab2WlOANAg4ueFkOxmViYM/jpoZb+izf0CnPIoYNExtRYAAAAASUVORK5CYII=" width="32" height="32">
+				  </div>
+				  <div class="item-inner">
+					<a href="combinacoes.html" class="item-link close-panel"><div class="item-title"><b>Agendamentos</b></div></a>
+				  </div>
+				</li>
+				<li class="item-content">
+				  <div class="item-media">
+					<img class="icon icons8-Logout-Rounded-Up-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADCElEQVRYR72XX1LbMBDGd6W8l56g4QTF4/Vz4QSEEwAnAE7QcALgBIUTND0B9NnKODconKDwHludzyN5FMfGicLUMwyBWLs/7R/tJ6YdnqIoDrA8SZJFrBmOXTifz8+stT+wnpnP0zS9j7EVBRA6905jIbYG6HK+C0QnAHJbVdWxUuouSZJX7+A9530QRVHsVVV1oZR6SJLkuZ2mNQA4L8vykYj2iOiXiEywqOX8jZmn1tobZ/CBiE4D4yciMsPfxhjUBr571VonbYgVANAul8tHZq6rO8xrnudPzPyNiN601ofL5XKPmQFK1tojpdTYF6W19neWZYdtcGvtYjQaHYVRXQEInGDtg4ic+V25yFxqrW/RdnmeH4YAWZY9uf/hnWnYmkEUYG4mIidNyvyH0GAY+r7W6gJ4rw2NMUjJsY8YgOso+0XGGBTIFxfig66CCR1sC1AUxbgsyz8OYJFlWdIAGGNQaD/dl9dZlk2HDpVtAWAvz/MpM38Po1BHIMyR1vpzWCQflQLYCaNARHcicukB0OufNsl9V82gC3xOhyJnjMHc+EpEzyKyz63cbBR+F861Lhhy3k6DiDDH5HIXgPBAQ+T+O0B7w9zqgI1zGaZOa70/1LZ9tRMdAV/V+L2p846j+Si6CDcpuK53wrMALR/dhrEAQRu+iMg4+iCKAcC0Lcvyr1tbDzsPsPVRHAMQhp+Ias3QNYwgHFDVjRKKcdZe43aPYQShU4d/ZRq2FM+9iJx/hONg2jbj2O9+BcANJX9OQw1dpWl6+xEQxhjYuXBTsFFLawAuTNAFGEyAmKZper0LROgcoddaQ2s06e0TpVArNQQR3Wutr7atCXdSQrTWotZryfYtqleWl2UZQrwy821bpndFBo6rqjq11l66gsNr2Pmk6wrXezFxCnnmlHDjC8pWKTWz1j4rpWqdX1XVmJnheOIVtV8AhTwajeC8s6sGb0ZuWKGIoBe3eV6stWdDQmUQIGgj5BI/0Pt9MC+Q3UT05C8mQ8QbA4SGXHrqy4t/hnbaB/IPypA7QIjtDvUAAAAASUVORK5CYII=" width="32" height="32">  </div>
+				  <div class="item-inner">
+					<a href="login.html" class="item-link close-panel no-animation"><div class="item-title">LOGOUT</div></a>
+				  </div>
+				</li>
+			</ul>	
+		</div>
+      </div>
+    </div>
+    <!-- Views -->
+    <div class="views">
+      <div class="view view-main">
+        <!-- Top Navbar-->
+        <div id="invisible-nav" class="navbar" style="background-color: #8D7A4B">
+          <div class="navbar-inner">
+		    <div class="left">
+              <a href="#" class="link icon-only open-panel color-white"><i class="icon icon-bars color-white"></i></a>
+            </div>
+            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+            <div class="sliding center logo">COFFEE MATCH</div>
+			<div class="right">
+              <a href="convites.html" class="link icon-only color-white">
+				<img class="icon icons8-Speech-Bubble" width="22" height="22" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAD80lEQVRoQ+2a/VEUQRDFX0egRqBEoEQgRKBEoEYgRiBGIEagRIBEIEQgRCBEoETQ1u9qmhr39m5nZmfxH6Zqi2Nvt2fe9PebMy003P2ZpM+SXqQpLiV9MLPrJaa0JYQmED8lPR7I/yNpdwkwSwH5LumVpAtJrxMY7r2UdGZmca/bPi4F5HfSxhMzQwtyd7TD/Wsz2+mGIAlaCogn+TkQfOYX982s+7zdBbo7JnUsiYWfSzpIoE4l7aERSYdmdtZTK92AuPsbSUcJQMkaAXRkZiclD089MxtIilDsdoTZG0nfkjbeDpyd+2gFZ3+eheWDuZFsFhB3Z/E/kmNfJZPBnCaHuwMIEwQQAWHfzMg1TaMZyAAE5oHdryJUzXB3tIRZzgIzBwgJD42cmBkm1DwyMOdmtt8iqAmIu7Pwr5KuzCx8o2X+u3fcHbPCzN6ZGVqqGq1AyAeEV+y6yCemVpV8Bn9rSpjVQNydiEOUujEzwHQb7k5IftqyQS1AiDTvJX0yM/JGt+HuyPvYIrsFCKZE8dfNrGInMvO6MDPCc/FoAbJWEBbPNvFgSq74X7WftABZFYRLFH7Idfcm+Q9AHjQy7SfLm1YWVbpl9CGuLMPT2xcXkVU+Mic8lkY2d28K77VADhPFM7tQ3AQsKyCraq5aIJHV4af43H24e2zWFzPjc9GoBRKle/esPpLdL81stwgFea30wYzOuTWzIfFWKqbouUiKku5YmKkXa4CEyhch2PKFunsQfMUmXAMkehCIAiZabGStQnHNVQQk6wi79yBbolf0JkXRaxJI8g20gV8UCe2hqmzzICV2poiNrUASCNpP+vLqHmEuoCw5kuGJlBtZmo1ABsQbnNXe1K7MXfhIuYIVAIL2l78bibxRIMnZYEkQ9F9AZHkFa4BVCSIP814LNmtAMttE1up84741sUEzcb7C12uRcwxIhNnu5MJc08vIibWwPAYEh3qUIsUi532tgLKefq26GAMSXOxW52pdTOt7iWvGb0dp2jEgODg9QdD+2CYX4fdeNZQ0APUEKRjnjqPBZ1PUAgy1FRdmFgOzQ1NcfAZYDo7OsYiRTzkqNgv5sJZczM2uc+XF6W06hjgem6MkIcZuQJjloFqtpOY9Fo91rKyiKSGOzZZUza7FbsUuxuP8T/IqGZxs5doM7YbWiUzFpjxZa5WsKEte0XhtrJCzPFXVOE2tozeQIiqnlU3cBmYRINs6uywXdKVdewOJU6dtphXnK125sd5A4kgOJ4Vg+ycUp5CLHxEUuvY2XYFgwxlTuPqFQ6qe+YqcEb+I6KoNhC8BZFgZDH10kbagO5AsFGNmaCSyNwDIytUntlOhl+//Ao6T5UKu5fprAAAAAElFTkSuQmCC" />
+				</a>
+			</div>
+          </div>
+        </div>
+        <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through">
+          <!-- Page, "data-page" contains page name -->
+          <div data-page="index" class="page">
+            <!-- Scrollable page content -->
+            <div class="page-content">
+				<!-- CONTAINER QUE OCULTA A PÁGINA -->
+				<div id="invisible-container" class="none">
+				 <!-- start padding container -->
+					<div class="wrap">
+						<!-- start jtinder container -->
+						<div id="tinderslide">
+							<ul id="user-list">							
+								
+							</ul>
+						</div>
+						<!-- end jtinder container -->
+					</div>
+				<!-- end padding container -->
+				
+				
+				
+				</div>
+				
+				<div id="search-box">
+					<img class="search-effect" src="" />
+					<p class="search-text">Finding people nearby...</p>
+				</div>
+
+            </div>
+          </div>
+        </div>
+		
+		<div class="toolbar messagebar none" id="toolbar">
+			<div class="toolbar-inner">
+			<textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a>
+		</div>
+</div>
+        
+      </div>
+    </div>
+	<!-- jQuery lib -->
+    <script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/my-app.js"></script>
+	<!-- transform2d lib -->
+    <script type="text/javascript" src="js/jquery.transform2d.js"></script>
+    <!-- jTinder lib -->
+    <script type="text/javascript" src="js/jquery.jtinder.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcs3g8j5yPjagkK-GH9rhLK7aYe-CYA3w" type="text/javascript"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+  </body>
+</html>              
