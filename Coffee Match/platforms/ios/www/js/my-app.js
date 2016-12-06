@@ -226,7 +226,7 @@ myApp.onPageInit('profile', function (page) {
 		var descricao = $$("#description").val();
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
-		var idade     = $$("#profile-age").val();
+		var idade     = localStorage.getItem("age");
 		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);

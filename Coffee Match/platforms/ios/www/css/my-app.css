@@ -10,6 +10,18 @@ body {
     overflow: hidden;
 }
 
+.btn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  font-size: 20px;
+  background: ;
+  padding: 10px 20px 10px 20px;
+  border: solid #3B5998 2px;
+  text-decoration: none;
+}
+
 .none {
 	visibility: hidden;
 }
@@ -269,30 +281,15 @@ box-shadow: 2px solid white;
 display: inline-block;
 
 }
-
-.Facebook
-{
-    background: #3b5998;
-    text-align: center;
-	border-radius: 4px;
-    color: #fff;
-    font-family: Lucida Grande, Tahoma Verdana, Arial, Sans-serif;
-    width: 90%;
-    margin: 0 auto;
-   cursor: pointer;
-}
-
-.Facebook .Conteudo
-{
-   vertical-align: middle;
-   margin-left: 10px;
-}
-
 .LogotipoFacebook
 {
    font-weight: bold;
-   font-size: 30px;
+   font-size: 25px;
    vertical-align: middle;
+}
+
+.Conteudo {
+	font-size: 16px;
 }
 
 .rating > span:hover:before {

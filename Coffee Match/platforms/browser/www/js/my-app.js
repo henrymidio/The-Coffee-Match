@@ -17,9 +17,11 @@ myApp.onPageInit('passo1', function (page) {
 	StatusBar.overlaysWebView(false);	
 				
 	$$('#next-step').on('click touchstart', function(){
+		var convites = $$('#convites').val();
+		var mensagens = $$('#mensagens').val();
 		var distance = document.getElementById("valBox").html;
-		var fbid = localStorage.getItem("fbid");
-		setPreferences(distance, fbid, function(){
+		var user_id = localStorage.getItem("user_id");
+		setPreferences(distance, convites, mensagens, user_id, function(){
 			StatusBar.overlaysWebView(true);
 			mainView.router.loadPage('passo2.html');
 		})
@@ -40,7 +42,6 @@ myApp.onPageInit('passo2', function (page) {
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
-		alert(descricao);
 		var fbid = localStorage.getItem("fbid");
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, idade, faculdade, fbid);
@@ -225,7 +226,7 @@ myApp.onPageInit('profile', function (page) {
 		var descricao = $$("#description").val();
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
-		var idade     = $$("#profile-age").val();
+		var idade     = localStorage.getItem("age");
 		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
@@ -292,11 +293,20 @@ myApp.onPageInit('user', function (page) {
 
 
 myApp.onPageInit('settings', function (page) {
-	$$('#salvar').on('click touchstart', function(){
-		var distance = document.getElementById("valBox").html;
-		var fbid = localStorage.getItem("fbid");
-		setPreferences(distance, fbid, function(){
-			mainView.router.loadPage('index.html');
+	$$('#salvar').on('click', function(){
+		var convites = 0;
+		if($('#check-convites').is(":checked")){
+			var convites = 1;
+		};
+		var mensagens = 0;
+		if($('#check-mensagens').is(":checked")){
+			var convites = 1;
+		};
+		var distance = 4;//document.getElementById("valBox").html;
+		var user_id = localStorage.getItem("user_id");
+		setPreferences(distance, convites, mensagens, user_id, function(){
+			alert(convites + "-" + mensagens);
+			//mainView.router.loadPage('index.html');
 		})
 	})
 });
@@ -525,8 +535,9 @@ function showVal(newVal){
 }
 
 //Seta preferências
-function setPreferences(distance, user_id, callback){
-	var pref = {distance: distance, user_id: user_id};
+function setPreferences(distance, convites, mensagens, user_id, callback){
+	var pref = {distance: distance, convites: convites, mensagens: mensagens, user_id: user_id};
+	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/set-preferences.php',
 								type: 'post',

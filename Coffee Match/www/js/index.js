@@ -147,51 +147,7 @@ var app = {
 									});
 								}								
 							});
-		
-		/*
-		myApp.onPageInit('starbucks-map', function(){
-			
-			var latLng = new google.maps.LatLng(latitude, longitude);
-			var mapOptions = {
-				center: latLng,
-				zoom: 13,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-			
-			//Marker da localização do user
-			var marker = new google.maps.Marker({
-				position: latLng,
-				map: map
-			});
-			
-			$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-starbucks-map.php',
-								type: 'get',
-								dataType: 'json',
-								success: function (data) {
-									//Renderiza markers no mapa
-									for(i in data) {
-										var pin = data[i];		
-										var lat = pin.lat;
-										var lng = pin.lng;
-										
-										var coordenadas = new google.maps.LatLng(lat, lng);
-										
-										var marker = new google.maps.Marker({
-											position: coordenadas,
-											map: map,
-											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg',
-											title: pin.name
-										});
-									}
-								}
-							});
-			
-			
-		});
-		*/
-		
+				
 		myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
@@ -230,7 +186,7 @@ var app = {
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
 												+ "<div class='item-title'><span id='proximas-name'>"+data[i].name+"</span><br>"
-												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance'></span></span></div></div></a></li>";		
+												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance'>"+data[i].distance+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
 										var pin = data[i];		
@@ -246,7 +202,7 @@ var app = {
 										});
 									}
 									
-									$('.starbucks').on('click touch', function(){
+									$('.starbucks').on('click', function(){
 				
 										var starbucks = $(this).attr("id");
 										var metaData = {
@@ -307,10 +263,10 @@ var app = {
 								dataType: 'json',
 								data: person,
 								success: function (data) {
-									//alert(data.code);
+									
+									//AUTENTICA USUÁRIO
 									if(data.code == 1){
 										
-										//Armazena localmente os dados e redireciona para HOME
 										localStorage.setItem("name", result.first_name);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("user_id", data.user_id);
@@ -323,9 +279,10 @@ var app = {
 										mainView.router.loadPage("index.html");
 										
 									} 
+									
+									//CADASTRA USUÁRIO
 									if(data.code == 2){
 										
-										//Armazena localmente os dados e redireciona para PASSO 1
 										localStorage.setItem("name", result.first_name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);

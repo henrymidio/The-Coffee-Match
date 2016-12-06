@@ -75,6 +75,21 @@ var app = {
 		navigator.geolocation.getCurrentPosition(function(position){
 			latitude  = position.coords.latitude;
 			longitude = position.coords.longitude;
+			
+			var locs = {
+					lat: latitude,
+					lng: longitude,
+					user_id: localStorage.getItem('user_id')
+					}
+										  
+			$.ajax({
+				url: 'http://thecoffeematch.com/webservice/set-location.php',
+				type: 'post',
+				data: locs,
+				success: function (data) {
+					
+				}
+			});
 		}, function(){
 			alert('Não foi possível encontrar a sua localização');
 		});
@@ -132,50 +147,7 @@ var app = {
 									});
 								}								
 							});
-		
-		
-		myApp.onPageInit('starbucks-map', function(){
-			
-			var latLng = new google.maps.LatLng(latitude, longitude);
-			var mapOptions = {
-				center: latLng,
-				zoom: 13,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-			
-			//Marker da localização do user
-			var marker = new google.maps.Marker({
-				position: latLng,
-				map: map
-			});
-			
-			$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-starbucks-map.php',
-								type: 'get',
-								dataType: 'json',
-								success: function (data) {
-									//Renderiza markers no mapa
-									for(i in data) {
-										var pin = data[i];		
-										var lat = pin.lat;
-										var lng = pin.lng;
-										
-										var coordenadas = new google.maps.LatLng(lat, lng);
-										
-										var marker = new google.maps.Marker({
-											position: coordenadas,
-											map: map,
-											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg',
-											title: pin.name
-										});
-									}
-								}
-							});
-			
-			
-		});
-		
+				
 		myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
@@ -214,7 +186,7 @@ var app = {
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
 												+ "<div class='item-title'><span id='proximas-name'>"+data[i].name+"</span><br>"
-												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance'></span></span></div></div></a></li>";		
+												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance'>"+data[i].distance+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
 										var pin = data[i];		
@@ -230,7 +202,7 @@ var app = {
 										});
 									}
 									
-									$('.starbucks').on('click touch', function(){
+									$('.starbucks').on('click', function(){
 				
 										var starbucks = $(this).attr("id");
 										var metaData = {
@@ -263,8 +235,7 @@ var app = {
 
 		
 		myApp.onPageInit('login', function() {
-			    
-				
+			 
 				//facebookConnectPlugin.browserInit("1647443792236383");	
 				
 				var fbLoginSuccess = function (userData) {
@@ -277,11 +248,12 @@ var app = {
 								
 							 });
 							 */
+							 
 						    var person = {
 								fbid: result.id,
 								name: result.first_name,
 								email: result.email,
-								picture: 'https://graph.facebook.com/' + result.id + '/picture?type=large'
+								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
 							
 						  //Chamada ajax para registrar/autenticar usuário
@@ -302,7 +274,7 @@ var app = {
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
-										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?type=large');
+										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage("index.html");
 										
@@ -313,7 +285,7 @@ var app = {
 										localStorage.setItem("name", result.first_name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?type=large');
+										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage('passo1.html');
 									}
