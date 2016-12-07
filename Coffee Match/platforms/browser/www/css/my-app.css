@@ -11,6 +11,10 @@ body {
     overflow: hidden;
 }
 
+.layout-white .list-block ul {
+	background: #f2efe9;
+}
+
 .message-text {
 	font-size: 15px !important;
 }
@@ -106,8 +110,16 @@ letter-spacing:0.09em;
 	background-color: #04a6a0 !important;
 }
 
+.navbar:after {
+  background-color: transparent !important;
+}
+
 .page {
 	background-color: #f2efe9 !important;
+}
+
+.blue-page {
+	background-color: #04a6a0 !important;
 }
 
 .navigation-drawer {
@@ -124,10 +136,10 @@ letter-spacing:0.09em;
 }
 
 .header-panel {
-	height: 40%;
-	background: #8D7A4B;
+	height: 33%;
+	background: #f2efe9;
 	text-align: center;
-	color: white;
+	color: #775952;
 	display: flex;
   justify-content: center;
   margin-bottom: 0px;
@@ -135,13 +147,16 @@ letter-spacing:0.09em;
 
 .item-title {
 	font-size: 15px !important;
-	color: #8D7A4B !important;
-	
+	color: #775952 !important;
+}
+
+.layout-white .panel {
+	background: #f2efe9;
 }
 
 .subtitle {
 	font-size: 15px;
-	color: gray;
+	color: #775952;
 }
 
 .username {
@@ -156,14 +171,15 @@ letter-spacing:0.09em;
 }
 
 .college {
-	color: gray;
-	margin-top: -15px;
+	color: #775952;
+	margin-top: -33px;
 	font-size: 16px;
+	font-weight: bold;
 	//float: right;
 }
 
 .friends {
-	margin-top: -8px;	
+	//margin-top: -8px;	
 }
 
 .friends img {
@@ -175,12 +191,11 @@ letter-spacing:0.09em;
 .profile-photo {
     margin-top: 30px;
 	margin-bottom: 10px;
-    width: 120px;
-    height: 120px;
-	border: 3px solid white;
+    width: 80px;
+    height: 80px;
     -webkit-border-radius: 80px;
     -moz-border-radius: 80px;    
-    border-radius: 80px;
+    border-radius: 40px;
 }
 
 #pic-confirm {

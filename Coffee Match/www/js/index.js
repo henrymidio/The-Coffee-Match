@@ -128,11 +128,14 @@ var app = {
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+">"
-												+ "<a href='user.html' class='no-animation'>"
-												+ "<img class='img' src="+data[i].picture+" />"
-												+ "</a>"
-												+ "<p class='username'><b>"+data[i].name+"</b>, "+data[i].age+"</p>"
+												+ "<div class='row'>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>43</span><br><p class='subcol'>Coffees</p></div>"
+												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
+												+ "</div>"
+												+ "<p class='username'><b>"+data[i].name+"</b></p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
+												+ "<div style='margin-top: -10px'><span class='tag'>UX & UI</span><span class='tag'>Design</span><span class='tag'>Startups</span><br><span class='tag'>Comercial</span><span class='tag'>Branding</span></div>"
 												+ "<p class='friends'><img src='img/nicolas.jpg' /><img src='img/fulana.png' /></p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</li>";		
@@ -186,7 +189,7 @@ var app = {
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
 												+ "<div class='item-title'><span id='proximas-name'>"+data[i].name+"</span><br>"
-												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance'>"+data[i].distance+"</span></span></div></div></a></li>";		
+												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance' style='color: #ed7b83'>"+data[i].distance+"km</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
 										var pin = data[i];		

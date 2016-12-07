@@ -25,40 +25,67 @@
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-cover">
+    <div class="panel panel-left panel-reveal">
       <div class="content-block navigation-drawer">
         <div class="header-panel">
-		 <a href="profile.html" class="close-panel" style="color: white">
+		 <a href="profile.html" class="close-panel" style="color: #775952">
 		 <div style="align-self: center;">
 			<img class="profile-photo" src="http://successpenpal.com/wp-content/uploads/2014/01/Howard-Schultz.jpg" />
-			<p class="username"><b><span id="name">Howard</span>, <span id="age">63</span></b></p>
-			<p class="occupation">Ver Perfil</p>
+			<p class="username"><b><span id="name"></span></b></p>
+			<p class="occupation"><b>My Profile</b></p>
 		 </div>	
 		 </a>
 		</div>
-		<div class="list-block" style="margin-top: 0px">
+		<div class="list-block no-hairlines" style="margin-top: 0px">
 			<ul>
-				<li class="item-content">
-				  <div class="item-media">
-					<img class="icon icons8-Settings-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACgUlEQVRYR9VX0XHbMAwljv5vNmg7Qa0T9N1kg2SCuhPU3sCdwM0EdSdoM0HzT+hkb2BP0GQAHXvPR/koijIln3Np+SuAeAIegEdSZxwR+aaU+uK7Wmu/FkWxHHsdjXWAvTHmkYg+Br4PzHw79r6zAIjIH6XUVRBsx8zvLwKgqqppXdc/lVILZv7lX1pV1VVd1wDQOczc+SERQVZWWuu7LMs2oVPHwQX/7f3hWmu9yLLsCc4igtqDA51DRJ/zPF/jgwO6UkrNnOGT1vomBNECEAneBNkR0dpai8veJdK8A0DYEtE0sO2AaAEQETi/HVvHkfZbZj4CawEwxlwTEdL/Ysdae1MUxWMTIEaaTo9fEM09M8/9+2IkBMuB8MMFA+OqVup7M+CYfvEsENEiz/NO90QHUc+gCROyVUo1fQ1SpTIWHVRhGyL9n/r63CF4JqJl+DdlWc6ttdgFb06Ubqa1fmhmCuzIGLNy/Yq/CMfryWETfnQgMHxSB0NtY63dkIjYlLX3PUok319EUJZUOY4uYwH8YOZmtEZxiwhGMco46PxfAFCzoiiyU79mjKkiO6DXBSRceiRM7oG+fkaEESTcH0l4BpPB4CUz3wfkw5pGG/Z2kr+uU5MwuRUPLUR0GETW2umAtO+ZubPK+ybh641ip2SqAcJjUJs1RsjYZDKBIjooq94SiMh3T0aNCjLA+PQ6dgISYvQlz50vdF9DkrXIGBOlECPhRts6UQo1k5oVeyI6iNLITnjWWl/7yrhPlvsgWnUry3JmrQVPOifs8+AJ1wmOC6Jt6OQ5ZPjcF5BwGPswcUIXb4vbQQ+TIewTEbRSWKbooEndd9bb8F94nF7sef4XnktbjW3sivYAAAAASUVORK5CYII=" width="32" height="32">
+				<li style="text-align: center; padding-top: 13px">
+				   <div>
+					<a href="settings.html" class="item-link close-panel">
+						<div class="item-title">
+							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+						</div>
+					</a>
+					<span class="subtitle"><b>Agenda</b></span>
 				  </div>
-				   <div class="item-inner">
-					<a href="settings.html" class="item-link close-panel"><div class="item-title"><b>Discovery Settings</b><br><span class="subtitle">Distance, age and more</span></div></a>
+				</li><br>
+				<li style="text-align: center">
+				   <div>
+					<a href="settings.html" class="item-link close-panel">
+						<div class="item-title">
+							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+						</div>
+					</a>
+					<span class="subtitle"><b>Messages</b></span>
+				  </div>
+				</li><br>
+				<li style="text-align: center">
+				   <div>
+					<a href="settings.html" class="item-link close-panel">
+						<div class="item-title">
+							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+						</div>
+					</a>
+					<span class="subtitle"><b>History</b></span>
+				  </div>
+				</li><br>
+				<li style="text-align: center">
+				   <div>
+					<a href="settings.html" class="item-link close-panel">
+						<div class="item-title">
+							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+						</div>
+					</a>
+					<span class="subtitle"><b>Settings</b></span>
 				  </div>
 				</li>
-				<li class="item-content">
-				  <div class="item-media">
-				  <img class="icon icons8-Map-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABxElEQVRoQ+1a3VHDMAyWJwAmAGaI8s4oYQQmgQ1gBEbgPcoMtBOQTmAuvSSXGtc/spXcBfetZ3+f9Em25MRREPhr2/ZJKfUOAA8j5KC1fq7r+iuQwjktlV+FOkFE3wsRE+yAiI+hHK55qfwxQvTgCCKeMUR08T9VjMkXy78/IV3XNVrrVwC4dUXXzEhqJkx8BH+vlHqpqupj4JgzQkQ/PhG2pbWhkMF0j4h3phDnmk9dwz7Bsfzm/GVG/o2QHgBujMgeEXHqK76gO8eJKIqfnZGxYQ0b63706Ki1bjI3xGB+tpCkcAuAixCBoCZRejOSxL4BeGqgf8rvBr4kmbwqZBpIYl8B7F1aRcgKWViaKBmZIrBy4OcHOdMuOyO7E2IrBq7HUokx26M2+xjv2njSY0WILQLSUfe9RUne7LvZI6X8MiNw7chUlpZEP+BylvJbyq/nrf2mS4tZfNgwsarF9ogJFBOym85ehIxXdjkOm6WP7LKPMIsPGyZWtdgeMYHZhTD9EIOxj/FiHjGJixBm4MRgrozYblXFHMlEfELE85ca8wu68ROON8sVdCab2WlOANAg4ueFkOxmViYM/jpoZb+izf0CnPIoYNExtRYAAAAASUVORK5CYII=" width="32" height="32">
-				  </div>
-				  <div class="item-inner">
-					<a href="combinacoes.html" class="item-link close-panel"><div class="item-title"><b>Agendamentos</b></div></a>
-				  </div>
-				</li>
-				<li class="item-content">
-				  <div class="item-media">
-					<img class="icon icons8-Logout-Rounded-Up-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADCElEQVRYR72XX1LbMBDGd6W8l56g4QTF4/Vz4QSEEwAnAE7QcALgBIUTND0B9NnKODconKDwHludzyN5FMfGicLUMwyBWLs/7R/tJ6YdnqIoDrA8SZJFrBmOXTifz8+stT+wnpnP0zS9j7EVBRA6905jIbYG6HK+C0QnAHJbVdWxUuouSZJX7+A9530QRVHsVVV1oZR6SJLkuZ2mNQA4L8vykYj2iOiXiEywqOX8jZmn1tobZ/CBiE4D4yciMsPfxhjUBr571VonbYgVANAul8tHZq6rO8xrnudPzPyNiN601ofL5XKPmQFK1tojpdTYF6W19neWZYdtcGvtYjQaHYVRXQEInGDtg4ic+V25yFxqrW/RdnmeH4YAWZY9uf/hnWnYmkEUYG4mIidNyvyH0GAY+r7W6gJ4rw2NMUjJsY8YgOso+0XGGBTIFxfig66CCR1sC1AUxbgsyz8OYJFlWdIAGGNQaD/dl9dZlk2HDpVtAWAvz/MpM38Po1BHIMyR1vpzWCQflQLYCaNARHcicukB0OufNsl9V82gC3xOhyJnjMHc+EpEzyKyz63cbBR+F861Lhhy3k6DiDDH5HIXgPBAQ+T+O0B7w9zqgI1zGaZOa70/1LZ9tRMdAV/V+L2p846j+Si6CDcpuK53wrMALR/dhrEAQRu+iMg4+iCKAcC0Lcvyr1tbDzsPsPVRHAMQhp+Ias3QNYwgHFDVjRKKcdZe43aPYQShU4d/ZRq2FM+9iJx/hONg2jbj2O9+BcANJX9OQw1dpWl6+xEQxhjYuXBTsFFLawAuTNAFGEyAmKZper0LROgcoddaQ2s06e0TpVArNQQR3Wutr7atCXdSQrTWotZryfYtqleWl2UZQrwy821bpndFBo6rqjq11l66gsNr2Pmk6wrXezFxCnnmlHDjC8pWKTWz1j4rpWqdX1XVmJnheOIVtV8AhTwajeC8s6sGb0ZuWKGIoBe3eV6stWdDQmUQIGgj5BI/0Pt9MC+Q3UT05C8mQ8QbA4SGXHrqy4t/hnbaB/IPypA7QIjtDvUAAAAASUVORK5CYII=" width="32" height="32">  </div>
-				  <div class="item-inner">
-					<a href="login.html" class="item-link close-panel no-animation"><div class="item-title">LOGOUT</div></a>
+				<br><br>
+				<li style="text-align: center; padding-bottom: 13px">
+				   <div>
+					<a href="settings.html" class="item-link close-panel">
+						<div class="item-title">
+							Logout
+						</div>
+					</a>
 				  </div>
 				</li>
 			</ul>	
@@ -86,7 +113,7 @@
         <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
         <div class="pages navbar-through toolbar-through">
           <!-- Page, "data-page" contains page name -->
-          <div data-page="index" class="page">
+          <div data-page="index" class="page blue-page">
             <!-- Scrollable page content -->
             <div class="page-content">
 				<!-- CONTAINER QUE OCULTA A PÁGINA -->
