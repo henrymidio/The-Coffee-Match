@@ -305,7 +305,7 @@ myApp.onPageInit('settings', function (page) {
 		var distance = 4;//document.getElementById("valBox").html;
 		var user_id = localStorage.getItem("user_id");
 		setPreferences(distance, convites, mensagens, user_id, function(){
-			alert(convites + "-" + mensagens);
+			//alert(convites + "-" + mensagens);
 			//mainView.router.loadPage('index.html');
 		})
 	})
@@ -357,7 +357,7 @@ $$('.messagebar').on('click', function () {
 									type: 'post',
 									data: putMessageData,
 									success: function (data) {
-										alert(data);
+										
 									}
 		});
  
@@ -377,17 +377,21 @@ $$('.messagebar').on('click', function () {
 									for(i = 0; i < data.length; i++){
 										
 										if(data[i].id === user_id){
-											var line0 = "<div class='message message-sent'>"
+											var line0 = "<div class='message message-with-avatar message-sent'>"
 														+ "<div class='message-text'>"+data[i].message+"</div>"
+														+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
+														//+ "<div class='message-label'>"+data[i].data+"</div>"
 														+ "</div>";
 											$(".messages").append(line0);
 										} else {
 											user = data[i].id;
 											
 											//Monta o DOM
-											var line1 = "<div class='message message-received' id="+data[i].message_id+">"
+											var line1 = "<div class='message message-with-avatar message-received' id="+data[i].message_id+">"
 															+ "<div class='message-name'>"+data[i].name+"</div>"
 															+ "<div class='message-text'>"+data[i].message+"</div>"
+															+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
+															//+ "<div class='message-label'>"+data[i].data+"</div>"
 															+ "</div>";
 											$(".messages").append(line1);
 										}
@@ -474,25 +478,29 @@ var calendarInline = myApp.calendar({
         '<div class="toolbar calendar-custom-toolbar">' +
             '<div class="toolbar-inner">' +
                 '<div class="left">' +
-                    '<a href="#" class="link icon-only"><i class="icon icon-back"></i></a>' +
+                    '<p style="color: grey"></p>' +
                 '</div>' +
                 '<div class="center"></div>' +
                 '<div class="right">' +
-                    '<a href="#" class="link icon-only"><i class="icon icon-forward"></i></a>' +
+                    '<p style="color: grey"></p>' +
                 '</div>' +
             '</div>' +
         '</div>',
     onOpen: function (p) {
-        $$('.calendar-custom-toolbar .center').text(monthNames[p.currentMonth] +', ' + p.currentYear);
-        $$('.calendar-custom-toolbar .left .link').on('click', function () {
+		$$('.calendar-custom-toolbar .left p').text(monthNames[p.currentMonth - 1]);
+        $$('.calendar-custom-toolbar .center').text(monthNames[p.currentMonth]);
+		$$('.calendar-custom-toolbar .right p').text(monthNames[p.currentMonth + 1]);
+        $$('.calendar-custom-toolbar .left').on('click', function () {
             calendarInline.prevMonth();
         });
-        $$('.calendar-custom-toolbar .right .link').on('click', function () {
+        $$('.calendar-custom-toolbar .right').on('click', function () {
             calendarInline.nextMonth();
         });
     },
     onMonthYearChangeStart: function (p) {
-        $$('.calendar-custom-toolbar .center').text(monthNames[p.currentMonth] +', ' + p.currentYear);
+		$$('.calendar-custom-toolbar .left p').text(monthNames[p.currentMonth - 1]);
+        $$('.calendar-custom-toolbar .center').text(monthNames[p.currentMonth]);
+		$$('.calendar-custom-toolbar .right p').text(monthNames[p.currentMonth + 1]);
     }
 }); 
 

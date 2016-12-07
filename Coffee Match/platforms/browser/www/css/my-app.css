@@ -3,11 +3,28 @@ html, body {
     padding: 0;
     margin: 0;
     position: relative;
-	font-family: lato;
+	font-family: 'Dosis', sans-serif;
+	font-size: 15px;
 }
 
 body {
     overflow: hidden;
+}
+
+.message-text {
+	font-size: 15px !important;
+}
+
+::-webkit-input-placeholder {
+   color: #775952 !important;
+}
+
+.message-received .message-text {
+	background-color: #E8e3dd !important;
+}
+
+.message-sent .message-text {
+	background-color: #04a6a0 !important;
 }
 
 .btn {
@@ -19,6 +36,18 @@ body {
   background: ;
   padding: 10px 20px 10px 20px;
   border: solid #3B5998 2px;
+  text-decoration: none;
+}
+
+.btn-confirm {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #ed7b83;
+  padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
 
@@ -66,20 +95,19 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 
 .logo {
 //text-align:center;
-font-family: 'Reenie Beanie', cursive; /*Reenie Beanie is available through Google Webfonts http://code.google.com/webfonts/specimen/Reenie+Beanie*/
-font-size: 20px !important;
-font-style: bol !important;
+//font-family: 'Reenie Beanie', cursive; /*Reenie Beanie is available through Google Webfonts http://code.google.com/webfonts/specimen/Reenie+Beanie*/
+//font-size: 20px !important;
+//font-style: bol !important;
 color: white;
 letter-spacing:0.09em;
 }
 
-.big-logo {
-text-align:center;
-font-family: 'Reenie Beanie', cursive; /*Reenie Beanie is available through Google Webfonts http://code.google.com/webfonts/specimen/Reenie+Beanie*/
-font-size: 45px;
-color: white;
-letter-spacing:0.09em;
-box-shadow: 2px solid white;
+.navbar {
+	background-color: #04a6a0 !important;
+}
+
+.page {
+	background-color: #f2efe9 !important;
 }
 
 .navigation-drawer {
@@ -106,13 +134,13 @@ box-shadow: 2px solid white;
 }
 
 .item-title {
-	font-size: 18px !important;
+	font-size: 15px !important;
 	color: #8D7A4B !important;
 	
 }
 
 .subtitle {
-	font-size: 14px;
+	font-size: 15px;
 	color: gray;
 }
 
@@ -204,7 +232,7 @@ box-shadow: 2px solid white;
     bottom: 10%;
     //left: 40%;
     z-index: 1;
-	font-size: 20px;
+	font-size: 15px;
     overflow: hidden;
 }
 
@@ -281,6 +309,11 @@ box-shadow: 2px solid white;
 display: inline-block;
 
 }
+
+.picker-calendar-day.picker-calendar-day-selected span {
+	background: #ed7b83 !important;
+}
+
 .LogotipoFacebook
 {
    font-weight: bold;

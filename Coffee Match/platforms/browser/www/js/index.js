@@ -263,10 +263,10 @@ var app = {
 								dataType: 'json',
 								data: person,
 								success: function (data) {
-									//alert(data.code);
+									
+									//AUTENTICA USUÁRIO
 									if(data.code == 1){
 										
-										//Armazena localmente os dados e redireciona para HOME
 										localStorage.setItem("name", result.first_name);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("user_id", data.user_id);
@@ -279,9 +279,10 @@ var app = {
 										mainView.router.loadPage("index.html");
 										
 									} 
+									
+									//CADASTRA USUÁRIO
 									if(data.code == 2){
 										
-										//Armazena localmente os dados e redireciona para PASSO 1
 										localStorage.setItem("name", result.first_name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
