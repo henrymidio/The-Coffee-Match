@@ -55,7 +55,7 @@ var app = {
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
 		StatusBar.styleLightContent();
-		StatusBar.backgroundColorByHexString("#8D7A4B");
+		StatusBar.backgroundColorByHexString("#04a6a0");
 		
 		var pic = localStorage.getItem("picture");
 			
