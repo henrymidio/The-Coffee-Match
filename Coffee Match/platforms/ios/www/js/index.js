@@ -135,9 +135,12 @@ var app = {
 												+ "</div>"
 												+ "<p class='username'><b>"+data[i].name+"</b></p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
-												+ "<div style='margin-top: -10px'><span class='tag'>UX & UI</span><span class='tag'>Design</span><span class='tag'>Startups</span><br><span class='tag'>Comercial</span><span class='tag'>Branding</span></div>"
-												+ "<p class='friends'><img src='img/nicolas.jpg' /><img src='img/fulana.png' /></p>"
+												+ "<div style='margin-top: -10px'><span class='tag'>UX & UI</span><span class='tag'>Design</span><span class='tag'>Startups</span><br><span class='tag'>Comercial</span><span class='tag'>Branding</span></div><br>"
+												+ "<div class='row' style='margin-left: 10px'>"
+												+ "<div class='col-30'><p class='friends'>Friends in Coffee Match</p></div>"
+												+ "<div class='col-70 friends'><img src='http://static1.purepeople.com.br/articles/3/21/78/3/@/203742-will-smith-vira-ao-brasil-em-breve-175x175-2.jpg' /><img src='img/fulana.png' /><img src='http://discoveryourtruenorth.org/wp-content/uploads/2015/07/schultz.jpg' /></div>"
 												+ "<div class='like'></div><div class='dislike'></div>"
+												+ "</div>"
 												+ "</li>";		
 									$("#user-list").append(line1);
 									}

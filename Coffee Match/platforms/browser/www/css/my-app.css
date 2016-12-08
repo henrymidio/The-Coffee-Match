@@ -108,6 +108,7 @@ letter-spacing:0.09em;
 
 .navbar {
 	background-color: #04a6a0 !important;
+	//height: 54px !important;
 }
 
 .navbar:after {
@@ -179,7 +180,9 @@ letter-spacing:0.09em;
 }
 
 .friends {
-	//margin-top: -8px;	
+	//margin-top: -8px;
+	color: #775952;
+	font-size: 13px;
 }
 
 .friends img {

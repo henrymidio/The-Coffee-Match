@@ -40,9 +40,9 @@
 			<ul>
 				<li style="text-align: center; padding-top: 13px">
 				   <div>
-					<a href="settings.html" class="item-link close-panel">
+					<a href="combinacoes.html" class="item-link close-panel">
 						<div class="item-title">
-							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+							<img src="img/agenda_icon.png" />
 						</div>
 					</a>
 					<span class="subtitle"><b>Agenda</b></span>
@@ -52,7 +52,17 @@
 				   <div>
 					<a href="settings.html" class="item-link close-panel">
 						<div class="item-title">
-							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+							<img src="img/settings_icon.png" />
+						</div>
+					</a>
+					<span class="subtitle"><b>Settings</b></span>
+				  </div>
+				</li><br>
+				<li style="text-align: center">
+				   <div>
+					<a href="settings.html" class="item-link close-panel">
+						<div class="item-title">
+							<img src="img/message_icon.png" />
 						</div>
 					</a>
 					<span class="subtitle"><b>Messages</b></span>
@@ -62,28 +72,18 @@
 				   <div>
 					<a href="settings.html" class="item-link close-panel">
 						<div class="item-title">
-							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
+							<img src="img/history_icon.png" />
 						</div>
 					</a>
 					<span class="subtitle"><b>History</b></span>
-				  </div>
-				</li><br>
-				<li style="text-align: center">
-				   <div>
-					<a href="settings.html" class="item-link close-panel">
-						<div class="item-title">
-							<img width="22" height="22" src="http://www.chhs.colostate.edu/_support/img/calendar.png" />
-						</div>
-					</a>
-					<span class="subtitle"><b>Settings</b></span>
 				  </div>
 				</li>
 				<br><br>
 				<li style="text-align: center; padding-bottom: 13px">
 				   <div>
-					<a href="settings.html" class="item-link close-panel">
-						<div class="item-title">
-							Logout
+					<a href="preview1.html" class="item-link close-panel">
+						<div class="item-title" style="color: #a1c3ba">
+							Logout <img style="width: 11px; height: 11px; margin-left: 6px" src="img/logout_icon.png" />
 						</div>
 					</a>
 				  </div>
@@ -99,14 +99,16 @@
         <div id="invisible-nav" class="navbar">
           <div class="navbar-inner">
 		    <div class="left">
-              <a href="#" class="link icon-only open-panel color-white"><i class="icon icon-bars color-white"></i></a>
+			 <a href="#" class="link icon-only open-panel color-white">
+              <img class="icon" src="img/menu_icon.png" />
+			 </a>
             </div>
             <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-            <div class="sliding center logo">COFFEE MATCH</div>
+            <div class="sliding center logo">Coffee Match</div>
 			<div class="right">
               <a href="convites.html" class="link icon-only color-white">
-				<img class="icon icons8-Speech-Bubble" width="22" height="22" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAD80lEQVRoQ+2a/VEUQRDFX0egRqBEoEQgRKBEoEYgRiBGIEagRIBEIEQgRCBEoETQ1u9qmhr39m5nZmfxH6Zqi2Nvt2fe9PebMy003P2ZpM+SXqQpLiV9MLPrJaa0JYQmED8lPR7I/yNpdwkwSwH5LumVpAtJrxMY7r2UdGZmca/bPi4F5HfSxhMzQwtyd7TD/Wsz2+mGIAlaCogn+TkQfOYX982s+7zdBbo7JnUsiYWfSzpIoE4l7aERSYdmdtZTK92AuPsbSUcJQMkaAXRkZiclD089MxtIilDsdoTZG0nfkjbeDpyd+2gFZ3+eheWDuZFsFhB3Z/E/kmNfJZPBnCaHuwMIEwQQAWHfzMg1TaMZyAAE5oHdryJUzXB3tIRZzgIzBwgJD42cmBkm1DwyMOdmtt8iqAmIu7Pwr5KuzCx8o2X+u3fcHbPCzN6ZGVqqGq1AyAeEV+y6yCemVpV8Bn9rSpjVQNydiEOUujEzwHQb7k5IftqyQS1AiDTvJX0yM/JGt+HuyPvYIrsFCKZE8dfNrGInMvO6MDPCc/FoAbJWEBbPNvFgSq74X7WftABZFYRLFH7Idfcm+Q9AHjQy7SfLm1YWVbpl9CGuLMPT2xcXkVU+Mic8lkY2d28K77VADhPFM7tQ3AQsKyCraq5aIJHV4af43H24e2zWFzPjc9GoBRKle/esPpLdL81stwgFea30wYzOuTWzIfFWKqbouUiKku5YmKkXa4CEyhch2PKFunsQfMUmXAMkehCIAiZabGStQnHNVQQk6wi79yBbolf0JkXRaxJI8g20gV8UCe2hqmzzICV2poiNrUASCNpP+vLqHmEuoCw5kuGJlBtZmo1ABsQbnNXe1K7MXfhIuYIVAIL2l78bibxRIMnZYEkQ9F9AZHkFa4BVCSIP814LNmtAMttE1up84741sUEzcb7C12uRcwxIhNnu5MJc08vIibWwPAYEh3qUIsUi532tgLKefq26GAMSXOxW52pdTOt7iWvGb0dp2jEgODg9QdD+2CYX4fdeNZQ0APUEKRjnjqPBZ1PUAgy1FRdmFgOzQ1NcfAZYDo7OsYiRTzkqNgv5sJZczM2uc+XF6W06hjgem6MkIcZuQJjloFqtpOY9Fo91rKyiKSGOzZZUza7FbsUuxuP8T/IqGZxs5doM7YbWiUzFpjxZa5WsKEte0XhtrJCzPFXVOE2tozeQIiqnlU3cBmYRINs6uywXdKVdewOJU6dtphXnK125sd5A4kgOJ4Vg+ycUp5CLHxEUuvY2XYFgwxlTuPqFQ6qe+YqcEb+I6KoNhC8BZFgZDH10kbagO5AsFGNmaCSyNwDIytUntlOhl+//Ao6T5UKu5fprAAAAAElFTkSuQmCC" />
-				</a>
+				<img class="icon" src="img/notifications_icon.png" />
+			  </a>
 			</div>
           </div>
         </div>
