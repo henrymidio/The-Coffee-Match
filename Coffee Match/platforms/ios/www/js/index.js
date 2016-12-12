@@ -234,6 +234,73 @@ var app = {
 			
 			
 		});
+		
+		myApp.onPageInit('detail-calendar', function(){
+			
+			var userPicture = localStorage.getItem("picture");
+			var userName    = localStorage.getItem("name");
+			var match       = localStorage.getItem("match");
+			
+			//Renderiza o mapa
+			var latLng      = new google.maps.LatLng(latitude, longitude);	
+			
+			var mapOptions = {
+				center: latLng,
+				zoom: 12,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
+			
+			//Marker da localização do user
+			var marker = new google.maps.Marker({
+				position: latLng,
+				map: map
+			});
+			
+			var matchData = {
+				match: match
+				}
+			
+			$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-detail-calendar.php',
+								type: 'post',
+								dataType: 'json',
+								data: matchData,
+								success: function (data) {
+									
+										//Seta starbucks no mapa										
+										var lat = data.starbucks_lat;
+										var lng = data.starbucks_lng;
+										var coordenadas = new google.maps.LatLng(lat, lng);
+										map.setCenter(coordenadas);
+										var marker = new google.maps.Marker({
+											position: coordenadas,
+											map: map,
+											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
+										});
+										
+										document.getElementById("starbucks-name").innerHTML = data.starbucks_name;
+										document.getElementById("starbucks-address").innerHTML = data.street + ", " + data.num;
+										document.getElementById("first-user-pic").src= userPicture;
+										document.getElementById("first-user-name").innerHTML = userName;
+										document.getElementById("calendar").innerHTML = data.date;
+										if(data[0][0].id !== localStorage.getItem("user_id")){
+											document.getElementById("sec-user-pic").src= data[0][0].picture;
+											document.getElementById("sec-user-name").innerHTML= data[0][0].name;
+										}
+										else {
+											document.getElementById("sec-user-pic").src= data[0][1].picture;
+											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
+										}
+								
+								}
+			});	
+			
+			$$(".btn-pink").on("click", function(){
+				mainView.router.loadPage("chat.html");
+			})
+		});
+		
 	}).trigger();
 		
 		

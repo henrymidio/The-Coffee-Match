@@ -186,10 +186,10 @@ myApp.onPageInit('combinacoes', function (page) {
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
 												+ "<div class='item-media'>"
-												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 50px; height: 50px'>"
+												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='opcoes.html' class='item-link match' id="+data[i].id+">"
+												+ "<a href='detail-calendar.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/find_coffee_icon.png' />"+agendamento+"</span></div></div></a></li>";		
@@ -467,7 +467,7 @@ myApp.onPageInit('match', function (page) {
 });		
 
 myApp.onPageInit('calendario', function(page){
-	var monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto' , 'Setembro' , 'Outubro', 'Novembro', 'Decembro'];
+	var monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto' , 'Setembro' , 'Outubro', 'Novembro', 'Dezembro'];
  
 var calendarInline = myApp.calendar({
     container: '#calendar-inline-container',

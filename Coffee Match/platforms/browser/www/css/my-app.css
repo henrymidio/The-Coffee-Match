@@ -32,14 +32,22 @@ body {
 }
 
 .btn {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
   border-radius: 28px;
-  font-family: Arial;
   font-size: 20px;
   background: ;
   padding: 10px 20px 10px 20px;
   border: solid #3B5998 2px;
+  text-decoration: none;
+}
+
+.btn-pink {
+  border-radius: 28px;
+  font-size: 16px;
+  background: #ed7b83;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  margin-left: 90px;
+  margin-right: 90px;
   text-decoration: none;
 }
 
@@ -189,6 +197,23 @@ letter-spacing:0.09em;
 	width: 50px;
 	height: 50px;
 	border-radius: 100%;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.img-circle {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+
+.img-circle-plus {
+	width: 110px;
+	height: 110px;
+	border-radius: 100%;
+	vertical-align: middle;
 }
 
 .profile-photo {

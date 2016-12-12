@@ -106,7 +106,7 @@
     background: url("../img/nope.png") no-repeat scroll 0 0;
 }
 
-#tinderslide .tag {
+.tag {
 	margin: 3px;
 	color: #ed7b83;
 	padding: 3px;
