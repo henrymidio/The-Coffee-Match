@@ -2,7 +2,7 @@
         <div class="navbar">
           <div class="navbar-inner">	    
 			<div class="left sliding">
-				<a href="#" class="link back color-white"><i class="icon icon-back color-white"></i><span style="margin-left: 8px">Back</span></a>
+				<a href="#" class="link back color-white"><i class="icon icon-back color-white"></i><span style="margin-left: 8px"></span></a>
 			</div>
             <div class="sliding center logo">Settings</div>
           </div>
@@ -11,33 +11,54 @@
 <div class="pages">
   <div data-page="settings" class="page">
 		<div class="page-content">
-			<p style="margin-left: 10px; color: #775952"><b>Notificações</b></p>
-				<div class="card">
-					<div class="card-content">
-						<div class="card-content-inner">
-							<div style="height: 50px">
-								<p style="float: left; margin-top: 5px; font-size: 16px">invites</p>
-								<div class="item-input" style="float: right">
-											<label class="label-switch">
-											  <input type="checkbox" id="check-convites" value="1" checked>
-											  <div class="checkbox"></div>
-											</label>
-								</div>
-							</div>
-							<div style="height: 50px">
-								<p style="float: left; margin-top: 5px; font-size: 16px">Messages</p>
-								<div class="item-input" style="float: right">
-											<label class="label-switch">
-											  <input type="checkbox" id="check-mensagens" value="1" checked>
-											  <div class="checkbox"></div>
-											</label>
-								</div>
-							</div>
-								
-							
-						</div>
-					</div>
-				</div>
+			<div class="content-block-title" style="color: #775952; font-weight: bold">Notificações</div>
+				<div class="list-block">
+				  <ul>
+					<li class="item-content">
+					  <div class="item-inner">
+						<div class="item-title">Push notifications</div>
+						<label class="label-switch" style="float: right">
+							<input type="checkbox" checked>
+							<div class="checkbox"></div>
+						  </label>
+					  </div>
+					</li>
+					<li class="item-content">
+					  <div class="item-inner">
+						<div class="item-title">Email notifications</div>
+						<label class="label-switch" style="float: right">
+							<input type="checkbox" checked>
+							<div class="checkbox"></div>
+						  </label>
+					  </div>
+					</li>
+				  </ul>
+		</div>
+			
+			
+			<div class="content-block-title" style="color: #775952; font-weight: bold">Distances</div>
+				<div class="list-block">
+				  <ul>
+					<li class="item-content">
+					  <div class="item-inner">
+						<div class="item-title">Mile (Mi)</div>
+						<label class="label-switch" style="float: right">
+							<input type="checkbox">
+							<div class="checkbox"></div>
+						  </label>
+					  </div>
+					</li>
+					<li class="item-content">
+					  <div class="item-inner">
+						<div class="item-title">Kilometers (Km)</div>
+						<label class="label-switch" style="float: right">
+							<input type="checkbox" checked>
+							<div class="checkbox"></div>
+						  </label>
+					  </div>
+					</li>
+				  </ul>
+			</div>
 				
 				<p style="margin-left: 10px; color: #775952"><b>Distância</b> <span style="float: right; margin-right: 10px" id="valBox"><b>5km</b></span></p>
 				<div class="card">
@@ -49,12 +70,8 @@
 						</div>
 					</div>
 				</div>
-				<p style="margin-left: 10px; margin-top: 0px">O Coffee Match usa essas preferências para sugerir combinações.</p>
 				 
-				<div class="content-block">
-					
-			   </div>
-			  
+				
 		</div>
   </div>
 </div>  

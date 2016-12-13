@@ -15,6 +15,18 @@ body {
 	background: #f2efe9;
 }
 
+.layout-white .content-block-inner {
+	background: #f2efe9;
+}
+
+.layout-white .label-switch .checkbox:before {
+	background-color: #DDD6CE;
+}
+
+.label-switch input[type=checkbox]:checked+.checkbox {
+	background-color: #F4727A;
+}
+
 .message-text {
 	font-size: 15px !important;
 }

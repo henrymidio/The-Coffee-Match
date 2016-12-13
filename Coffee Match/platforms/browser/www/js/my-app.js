@@ -184,7 +184,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										}
 			
 										//Monta o DOM
-									    var line1 = "<li class='item-content'>"
+									    var line1 = "<li class='item-link item-content'>"
 												+ "<div class='item-media'>"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
@@ -204,6 +204,47 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("match", this.id);
 									});
 									
+								}
+															
+							});
+							
+	
+});
+
+myApp.onPageInit('messages', function (page) {
+	
+	var user = localStorage.getItem("user_id");
+	var x = {user_id: user}
+	myApp.showPreloader();
+	//Ajax request to get user
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-last-message.php',
+								type: 'post',
+								dataType: 'json',
+								data: x,
+								success: function (data) {
+									
+									for(i = 0; i < data.length; i++){
+										if(data[i].last_message === null){
+											data[i].last_message = "...";
+										}
+													
+										//Monta o DOM
+									    var line1 = "<li class='item-content'>"
+												+ "<div class='item-media'>"
+												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+												+ "</div>"
+												+ "<div class='item-inner'>"
+												+ "<a href='chat.html' class='item-link match' id="+data[i].id+">"
+												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
+												+ "<span class='subtitle'>"+data[i].last_message+"</span></div></div></a></li>";		
+									    $("#messages-li").append(line1);
+										
+									}
+									myApp.hidePreloader();
+								},
+								error: function (request, status, error) {
+									alert(request.responseText);
 								}
 															
 							});
@@ -475,7 +516,7 @@ var calendarInline = myApp.calendar({
     weekHeader: false,
 	input: '#picker-data',
     toolbarTemplate: 
-        '<div class="toolbar calendar-custom-toolbar">' +
+        '<div class="toolbar calendar-custom-toolbar" style="background: #f2efe9">' +
             '<div class="toolbar-inner">' +
                 '<div class="left">' +
                     '<p style="color: grey"></p>' +

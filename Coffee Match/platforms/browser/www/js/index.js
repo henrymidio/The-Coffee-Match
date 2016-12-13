@@ -129,17 +129,18 @@ var app = {
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+">"
 												+ "<div class='row'>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>43</span><br><p class='subcol'>Coffees</p></div>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0' id='distance'>10</span><br><p class='subcol' id='distance'>Km</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
 												+ "</div>"
 												+ "<p class='username'><b>"+data[i].name+"</b></p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<div style='margin-top: -10px'><span class='tag'>UX & UI</span><span class='tag'>Design</span><span class='tag'>Startups</span><br><span class='tag'>Comercial</span><span class='tag'>Branding</span></div><br>"
-												+ "<div class='row' style='margin-left: 10px'>"
-												+ "<div class='col-30'><p class='friends'>Friends in Coffee Match</p></div>"
-												+ "<div class='col-70 friends'><img src='http://static1.purepeople.com.br/articles/3/21/78/3/@/203742-will-smith-vira-ao-brasil-em-breve-175x175-2.jpg' /><img src='img/fulana.png' /><img src='http://discoveryourtruenorth.org/wp-content/uploads/2015/07/schultz.jpg' /></div>"
-												+ "<div class='like'></div><div class='dislike'></div>"
+												//+ "<div class='row' style='margin-left: 10px'>"
+												//+ "<div class='col-30'><p class='friends'>Friends in Coffee Match</p></div>"
+												//+ "<div class='col-70 friends'><img src='http://static1.purepeople.com.br/articles/3/21/78/3/@/203742-will-smith-vira-ao-brasil-em-breve-175x175-2.jpg' /><img src='img/fulana.png' /><img src='http://discoveryourtruenorth.org/wp-content/uploads/2015/07/schultz.jpg' /></div>"
+												+ "<p class='friends' style='margin-top: -10px'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>"
+												//+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
 												+ "</li>";		
 									$("#user-list").append(line1);
@@ -162,7 +163,7 @@ var app = {
 				zoom: 12,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
-			var map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
+			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 			
 			//Marker da localização do user
 			var marker = new google.maps.Marker({
@@ -299,6 +300,40 @@ var app = {
 			$$(".btn-pink").on("click", function(){
 				mainView.router.loadPage("chat.html");
 			})
+			
+			$$('.edit').on('click', function () {
+				
+				var buttons1 = [
+					{
+						text: 'Edit',
+						label: true
+					},
+					{
+						text: 'Starbucks',
+						bold: true,
+						onClick: function () {
+							mainView.router.loadPage("starbucks-proximas.html");
+						}
+					},
+					{
+						text: 'Calendar',
+						bold: true,
+						onClick: function () {
+							mainView.router.loadPage("calendario.html");
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);
+				
+			});
+
 		});
 		
 	}).trigger();
