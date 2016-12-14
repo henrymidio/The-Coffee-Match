@@ -13,21 +13,6 @@ var mainView = myApp.addView('.view-main', {
   animateNavBackIcon: true
 });  
 
-myApp.onPageInit('passo1', function (page) {
-	StatusBar.overlaysWebView(false);	
-				
-	$$('#next-step').on('click touchstart', function(){
-		var convites = $$('#convites').val();
-		var mensagens = $$('#mensagens').val();
-		var distance = document.getElementById("valBox").html;
-		var user_id = localStorage.getItem("user_id");
-		setPreferences(distance, convites, mensagens, user_id, function(){
-			StatusBar.overlaysWebView(true);
-			mainView.router.loadPage('passo2.html');
-		})
-	})
-});	
-
 myApp.onPageInit('passo2', function (page) {
 	var picture = localStorage.getItem("picture");
 	document.getElementById('picture').src = picture;
@@ -121,7 +106,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
-												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'>"+data[i].name+"</span><br>"
+												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle'>Este convite expira em 3 dias</span>"
 												+ "</div>"
 												+ "</div>"
@@ -211,6 +196,46 @@ myApp.onPageInit('combinacoes', function (page) {
 	
 });
 
+myApp.onPageInit('detail-calendar', function(page){
+	
+	$$(".btn-pink").on("click", function(){
+		mainView.router.loadPage("chat.html");
+	});
+	
+	$$('.edit').on('click', function () {
+				
+				var buttons1 = [
+					{
+						text: 'Edit',
+						label: true
+					},
+					{
+						text: 'Starbucks',
+						bold: true,
+						onClick: function () {
+							mainView.router.loadPage("starbucks-proximas.html");
+						}
+					},
+					{
+						text: 'Calendar',
+						bold: true,
+						onClick: function () {
+							mainView.router.loadPage("calendario.html");
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);
+				
+	});
+});
+
 myApp.onPageInit('messages', function (page) {
 	
 	var user = localStorage.getItem("user_id");
@@ -225,8 +250,9 @@ myApp.onPageInit('messages', function (page) {
 								success: function (data) {
 									
 									for(i = 0; i < data.length; i++){
+										
 										if(data[i].last_message === null){
-											data[i].last_message = "...";
+											data[i].last_message = "Combinado em "+data[i].date;
 										}
 													
 										//Monta o DOM
@@ -235,11 +261,14 @@ myApp.onPageInit('messages', function (page) {
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='chat.html' class='item-link match' id="+data[i].id+">"
-												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
+												+ "<a href='chat.html' class='item-link chat' id="+data[i].id+">"
+												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle'>"+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
 										
+										$(".chat").on("click", function(){
+											localStorage.setItem("match", this.id);
+										});
 									}
 									myApp.hidePreloader();
 								},
@@ -333,22 +362,65 @@ myApp.onPageInit('user', function (page) {
 });
 
 
-myApp.onPageInit('settings', function (page) {
+myApp.onPageBeforeInit('settings', function (page) {
+	
+	var uid = localStorage.getItem("user_id");
+	var ud = {user_id: uid};
+	
+	//Ajax request to get user
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-preferences.php',
+								type: 'post',
+								dataType: 'json',
+								data: ud,
+								success: function (data) {
+									
+									if(data.notification_invites == false){
+										$('#check-convites').prop('checked', false);
+									}
+									if(data.notification_emails == false){
+										$('#check-emails').prop('checked', false);
+									}
+									if(data.metrica == 'k'){
+										$('#check-km').prop('checked', true);
+										$('#check-mile').prop('checked', false);
+									} else {
+										$('#check-km').prop('checked', false);
+										$('#check-mile').prop('checked', true);
+									}
+									
+								},
+								error: function (request, status, error) {
+									alert(error);
+								}
+	});
+	
+	$('#check-mile:checkbox').change(function() {
+		$('#check-km').prop('checked', false);
+	});
+	
+	$('#check-km:checkbox').change(function() {
+		$('#check-mile').prop('checked', false);
+	});
+	
 	$$('#salvar').on('click', function(){
 		var convites = 0;
 		if($('#check-convites').is(":checked")){
-			var convites = 1;
+			convites = 1;
 		};
-		var mensagens = 0;
-		if($('#check-mensagens').is(":checked")){
-			var convites = 1;
+		var emails = 0;
+		if($('#check-emails').is(":checked")){
+			emails= 1;
 		};
-		var distance = 4;//document.getElementById("valBox").html;
+		var metrica = 'k';
+		if($('#check-mile').is(":checked")){
+			metrica = 'm';
+		};
+		
+		var distance = document.getElementById("valBox").html;
 		var user_id = localStorage.getItem("user_id");
-		setPreferences(distance, convites, mensagens, user_id, function(){
-			//alert(convites + "-" + mensagens);
-			//mainView.router.loadPage('index.html');
-		})
+	
+		setPreferences(metrica, distance, convites, emails, user_id);
 	})
 });
 
@@ -584,33 +656,23 @@ function showVal(newVal){
 }
 
 //Seta preferências
-function setPreferences(distance, convites, mensagens, user_id, callback){
-	var pref = {distance: distance, convites: convites, mensagens: mensagens, user_id: user_id};
-	
+function setPreferences(metrica, distance, convites, emails, user_id){
+	  myApp.showPreloader();
+	var pref = {metrica: metrica, distance: distance, convites: convites, emails: emails, user_id: user_id};
+
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/set-preferences.php',
 								type: 'post',
-								dataType: 'json',
 								data: pref,
 								success: function (data) {
-									if(data.status == 1){
+										
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
-										callback();
-									}
+										myApp.hidePreloader();
+										myApp.alert('Settings updated!', 'The Coffee match');
 								}
 							});
 }
-
-/*
-function formatDate(date) {
-	  var hours = date.getHours();
-	  var minutes = date.getMinutes();
-	  minutes = minutes < 10 ? '0'+minutes : minutes;
-	  var strTime = hours + ':' + minutes;
-	  return date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "  " + strTime;
-	}
-*/
 
 //Seta informações do perfil (somente descrição por enquanto)
 function setProfile(description, occupation, age, college, fbid){

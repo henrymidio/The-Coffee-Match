@@ -192,7 +192,7 @@ var app = {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'>"+data[i].name+"</span><br>"
+												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance' style='color: #ed7b83'>"+data[i].distance+"km</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
@@ -215,18 +215,18 @@ var app = {
 										var metaData = {
 											  match: localStorage.getItem("match"),
 											  starbucks: starbucks
-										  }
+										}
 										  
-											  $.ajax({
+										$.ajax({
 																			url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
 																			type: 'post',
 																			data: metaData,
 																			success: function (data) {
-																				myApp.alert("Starbucks selecionada!!!", "");
-																				
+																				 
+																				mainView.router.loadPage("detail-calendar.html");
 																			}
-												});
-			});
+										});
+									});
 									
 								}
 							});
@@ -297,42 +297,6 @@ var app = {
 								}
 			});	
 			
-			$$(".btn-pink").on("click", function(){
-				mainView.router.loadPage("chat.html");
-			})
-			
-			$$('.edit').on('click', function () {
-				
-				var buttons1 = [
-					{
-						text: 'Edit',
-						label: true
-					},
-					{
-						text: 'Starbucks',
-						bold: true,
-						onClick: function () {
-							mainView.router.loadPage("starbucks-proximas.html");
-						}
-					},
-					{
-						text: 'Calendar',
-						bold: true,
-						onClick: function () {
-							mainView.router.loadPage("calendario.html");
-						}
-					}
-				];
-				var buttons2 = [
-					{
-						text: 'Cancel',
-						color: 'red'
-					}
-				];
-				var groups = [buttons1, buttons2];
-				myApp.actions(groups);
-				
-			});
 
 		});
 		
