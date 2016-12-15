@@ -15,6 +15,29 @@ body {
 	background: #f2efe9;
 }
 
+input.rounded {
+	border: none;
+	border-radius: 15px;
+	font-size: 15px;
+	padding: 9px 12px;
+	padding-left: 45px;
+	width: 265px;
+	background: #e6e2dc;
+	color: #775952;
+}
+
+select.rounded {
+	background: url('../img/icon_tag.png') no-repeat #e6e2dc 11px 12px !important;
+	border: none;
+	border-radius: 15px;
+	font-size: 15px;
+	padding: 9px 12px;
+	padding-left: 45px;
+	width: 280px;
+	background: #e6e2dc;
+	color: #775952;
+}
+
 .layout-white .content-block-inner {
 	background: #f2efe9;
 }
@@ -34,6 +57,7 @@ body {
 ::-webkit-input-placeholder {
    color: #775952 !important;
 }
+
 
 .message-received .message-text {
 	background-color: #E8e3dd !important;
@@ -60,6 +84,17 @@ body {
   padding: 10px 20px 10px 20px;
   margin-left: 90px;
   margin-right: 90px;
+  text-decoration: none;
+}
+
+.btn-yellow {
+  border-radius: 28px;
+  font-size: 16px;
+  background: #feb93b;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  margin-left: 55px;
+  margin-right: 55px;
   text-decoration: none;
 }
 
@@ -191,11 +226,33 @@ letter-spacing:0.09em;
 	margin-top: -15px;
 }
 
+#graduation {
+	background: url('../img/icon_business.png') no-repeat #e6e2dc 10px 10px !important;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 220px;
+}
+
+#occupation {
+	background: url('../img/icon_business.png') no-repeat #e6e2dc 10px 10px !important;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 220px;
+}
+
+#description {
+	background: url('../img/description.png') no-repeat #e6e2dc 10px 10px !important;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 220px;
+}
+
 .college {
 	color: #775952;
+	opacity: 0.8;
 	margin-top: -33px;
 	font-size: 16px;
-	font-weight: bold;
+	font-weight: 600;
 	//float: right;
 }
 
@@ -219,6 +276,10 @@ letter-spacing:0.09em;
 	width: 50px;
 	height: 50px;
 	border-radius: 100%;
+}
+
+.profile-div {
+	color: #775952;
 }
 
 .img-circle-plus {
@@ -288,6 +349,7 @@ letter-spacing:0.09em;
     //left: 40%;
     z-index: 1;
 	font-size: 15px;
+	color: white;
     overflow: hidden;
 }
 

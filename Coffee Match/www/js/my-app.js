@@ -285,7 +285,7 @@ myApp.onPageInit('messages', function (page) {
 
 myApp.onPageInit('profile', function (page) {
 	
-	$$("#profile-name").html(localStorage.getItem("name"));
+	$$(".profile-name").html(localStorage.getItem("name") + ", ");
 	$$("#profile-age").html(localStorage.getItem("age"));
 	$$("#description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
@@ -690,7 +690,7 @@ function setProfile(description, occupation, age, college, fbid){
 								dataType: 'json',
 								data: info,
 								success: function (data) {
-									alert(data);
+									
 									if(data.code == 1){
 										
 										//Atualiza preferências e executa função de callback

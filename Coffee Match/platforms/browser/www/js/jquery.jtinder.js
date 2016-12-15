@@ -38,7 +38,7 @@
 				
 			},
 			onLike: function(){ 
-				/*
+				
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -72,32 +72,9 @@
 				
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
-				*/
 				
-				//Faz o PUT (DIS)LIKE
-				var user_id       = localStorage.getItem("user_id");
-				var shown_user_id = panes.eq(current_pane).attr("id");
 				
-				localStorage.setItem("shown_user_id", shown_user_id);
-				var dados = {
-					user_id: user_id,
-					shown_user_id: shown_user_id,
-					liked: 0
-				}
 				
-				$.ajax({
-								url: 'http://thecoffeematch.com/webservice/put-like.php',
-								type: 'post',
-								data: dados,
-								success: function (data) {
-									var shown_user_id = panes.eq(current_pane).attr("id");
-									localStorage.setItem("shown_user_id", shown_user_id);									
-								}
-								
-							});
-				
-				//INVERTE NEXT COM CURRENT
-				panes.eq(current_pane - 1).toggleClass("next current");
 				 
 			},
 			animationRevertSpeed: 200,
