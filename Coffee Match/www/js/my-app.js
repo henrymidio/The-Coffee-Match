@@ -165,7 +165,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										var starbucksLine = "";
 															
 										if(data[i].starbucks !== null){
-											starbucksLine = "<span class='subtitle'>"+data[i].starbucks+"</span><br>";
+											starbucksLine = "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/map.png' />"+data[i].starbucks+"</span><br>";
 										}
 			
 										//Monta o DOM
@@ -177,7 +177,7 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ "<a href='detail-calendar.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ starbucksLine
-												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/find_coffee_icon.png' />"+agendamento+"</span></div></div></a></li>";		
+												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a></li>";		
 									    $("#match-li").append(line1);
 										
 										
@@ -429,6 +429,7 @@ myApp.onPageInit('chat', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	
 	var match = localStorage.getItem("match");
+	
 	var g = {match: match};
 		
 	// Handle message
@@ -462,9 +463,9 @@ $$('.messagebar').on('click', function () {
   var putMessageData = {
 	  user: user_id,
 	  message: messageText,
-	  combinacao: match
+	  combinacao: localStorage.getItem("match")
   }
- 
+ alert(putMessageData.combinacao)
 	  $.ajax({
 									url: 'http://thecoffeematch.com/webservice/put-message.php',
 									type: 'post',
@@ -521,6 +522,7 @@ $$('.messagebar').on('click', function () {
 	
 	
 	function getLastMessage(user, combinacao){
+		
 		var last_message_id = $(".message-received").last().attr("id");
 		var lm = {
 			  user: user,
@@ -529,15 +531,16 @@ $$('.messagebar').on('click', function () {
 		}
 		
 		$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-last-message.php',
+								url: 'http://thecoffeematch.com/webservice/ajax-get-last-message.php',
 								type: 'post',
 								dataType: 'json',
 								data: lm,
 								success: function (data) {
 									
-									var line1 = "<div class='message message-received' id="+data.message_id+">"
+									var line1 = "<div class='message message-with-avatar message-received' id="+data.message_id+">"
 															+ "<div class='message-name'>"+data.name+"</div>"
 															+ "<div class='message-text'>"+data.message+"</div>"
+															+ "<div style='background-image:url("+data.picture+")' class='message-avatar'></div>"
 															+ "</div>";
 											$(".messages").append(line1);
 								}
