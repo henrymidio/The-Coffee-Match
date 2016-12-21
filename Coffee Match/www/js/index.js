@@ -35,6 +35,27 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         //facebookConnectPlugin.browserInit("1647443792236383");
+
+        var notificationOpenedCallback = function(jsonData) {
+ 			console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+ 		};
+ 
+ 		window.plugins.OneSignal
+ 			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
+ 			.handleNotificationOpened(notificationOpenedCallback)
+ 			.endInit();
+ 
+ 			// Sync hashed email if you have a login system or collect it.
+ 			//   Will be used to reach the user at the most optimal time of day.
+ 			// window.plugins.OneSignal.syncHashedEmail(userEmail);
+ 			}, false);
+ 
+ 		window.plugins.OneSignal.getIds(function(ids) {
+ 			localStorage.setItem("push_id",ids.pushToken);
+ 		});
+ 
+
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -332,6 +353,7 @@ var app = {
 								fbid: result.id,
 								name: result.name,
 								email: result.email,
+								notification_key:localStorage.getItem("push_id"),
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
 							
