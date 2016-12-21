@@ -177,5 +177,13 @@
             "APP_ID": "1647443792236383",
             "APP_NAME": "Coffee Match"
         }
+    },
+    "onesignal-cordova-plugin": {
+        "source": {
+            "type": "registry",
+            "id": "onesignal-cordova-plugin"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
