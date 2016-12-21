@@ -318,7 +318,7 @@ var app = {
 				//facebookConnectPlugin.browserInit("1647443792236383");	
 				
 				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id,first_name,email", ["public_profile","email"],
+				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
 					  function onSuccess (result) {
 						  /*
 						    facebookConnectPlugin.getAccessToken(function(token) {
@@ -330,7 +330,7 @@ var app = {
 							 
 						    var person = {
 								fbid: result.id,
-								name: result.first_name,
+								name: result.name,
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
@@ -346,7 +346,7 @@ var app = {
 									//AUTENTICA USUÁRIO
 									if(data.code == 1){
 										
-										localStorage.setItem("name", result.first_name);
+										localStorage.setItem("name", result.name);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("age", data.age);
@@ -362,7 +362,7 @@ var app = {
 									//CADASTRA USUÁRIO
 									if(data.code == 2){
 										
-										localStorage.setItem("name", result.first_name);
+										localStorage.setItem("name", result.name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');

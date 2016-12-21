@@ -451,12 +451,14 @@ $$('.messagebar').on('click', function () {
   
   // Message type
   var messageType = "sent";
+  var avatar      = localStorage.getItem("picture");
   
   myMessages.addMessage({
     // Message text
     text: messageText,
     // Random message type
-    type: messageType
+    type: messageType,
+	avatar: avatar
   })
   
   //Put message on DB via ajax
@@ -465,7 +467,7 @@ $$('.messagebar').on('click', function () {
 	  message: messageText,
 	  combinacao: localStorage.getItem("match")
   }
- alert(putMessageData.combinacao)
+ 
 	  $.ajax({
 									url: 'http://thecoffeematch.com/webservice/put-message.php',
 									type: 'post',

@@ -26,6 +26,14 @@ input.rounded {
 	color: #775952;
 }
 
+.center {
+	color: white;
+}
+
+.close-popup i.icon.icon-back {
+	background-image: url('../img/ic_action_cancel.png');
+}
+
 select.rounded {
 	background: url('../img/icon_tag.png') no-repeat #e6e2dc 11px 12px !important;
 	border: none;
