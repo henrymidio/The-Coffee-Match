@@ -234,21 +234,21 @@ letter-spacing:0.09em;
 	margin-top: -15px;
 }
 
-#graduation {
+#graduation, #passo2-faculdade {
 	background: url('../img/school.png') no-repeat #e6e2dc 10px 10px !important;
 	margin-left: 0px;
 	margin-right: 0px;
 	width: 220px;
 }
 
-#occupation {
+#occupation, #passo2-profissao, #passo2-nascimento {
 	background: url('../img/icon_business.png') no-repeat #e6e2dc 10px 10px !important;
 	margin-left: 0px;
 	margin-right: 0px;
 	width: 220px;
 }
 
-#description {
+#description, #passo2-description {
 	background: url('../img/description.png') no-repeat #e6e2dc 10px 10px !important;
 	margin-left: 0px;
 	margin-right: 0px;

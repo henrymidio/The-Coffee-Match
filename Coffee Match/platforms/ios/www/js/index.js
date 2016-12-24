@@ -315,7 +315,7 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");	
+				facebookConnectPlugin.browserInit("1647443792236383");	
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
@@ -349,7 +349,7 @@ var app = {
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("user_id", data.user_id);
-										localStorage.setItem("age", data.age);
+										//localStorage.setItem("age", data.age);
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
@@ -367,7 +367,7 @@ var app = {
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage('passo1.html');
+										mainView.router.loadPage('passo2.html');
 									}
 									
 								

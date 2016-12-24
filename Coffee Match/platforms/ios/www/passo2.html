@@ -1,109 +1,93 @@
 <!-- Top Navbar-->
-        <div id="invisible-nav" class="navbar" style="background-color: #8D7A4B">
-          <div class="navbar-inner">
-		    
-            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-            <div class="sliding center color-white">Passos 2-2</div>
-     		<div class="right">
-              <a href="" class="link icon-only color-white" id="finalizar">Ir</a>
-            </div>
+        <div class="navbar">
+          <div class="navbar-inner">	    
+            <div class="sliding center color-white">Edit Profile</div>
           </div>
         </div>
 
-
 <div class="pages">
 	<div data-page="passo2" class="page">
-		<div class="page-content" style="background: #f1f1f1">			
+		<div class="page-content">			
 		      
-			  <!-- Slider -->
-			  <div class="swiper-container">
-				<div class="swiper-wrapper">
-				  <div class="swiper-slide" style="height: 65vh"><img id="picture" src="" /></div>
-				</div>
-				<div class="swiper-pagination"></div>
-			  </div>
-			  <!-- Description -->
-			  <div style="padding-top: 0px; line-height: 1px">
-			    
-				
 				<br>
+				 <div class="text-center">
+				  <img class="img-circle-plus" id="picture" src="" />
+				 </div>
+				 
+				 
+			  <!-- Description -->
+			<div class="text-center profile-div" style="padding-top: 0px; line-height: 1px">
+			    <br>
 				
-				<p style="font-size: 15px; margin-left: 12px"><img class="icon icons8-Circled-User-Male-Filled" style="margin-right: 8px" width="14" height="14" src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0iIzAwMDAwMCIgPiAgICA8cGF0aCBzdHlsZT0idGV4dC1pbmRlbnQ6MDt0ZXh0LWFsaWduOnN0YXJ0O2xpbmUtaGVpZ2h0Om5vcm1hbDt0ZXh0LXRyYW5zZm9ybTpub25lO2Jsb2NrLXByb2dyZXNzaW9uOnRiOy1pbmtzY2FwZS1mb250LXNwZWNpZmljYXRpb246Qml0c3RyZWFtIFZlcmEgU2FucyIgZD0iTSAyNSAwIEMgMTEuMjA0NzI2IDAgMCAxMS4yMDQ3MjYgMCAyNSBDIDAgMzguNzk1Mjc0IDExLjIwNDcyNiA1MCAyNSA1MCBDIDM4Ljc5NTI3NCA1MCA1MCAzOC43OTUyNzQgNTAgMjUgQyA1MCAxMS4yMDQ3MjYgMzguNzk1Mjc0IDAgMjUgMCB6IE0gMjUgMiBDIDM3LjcxNDM5NCAyIDQ4IDEyLjI4NTYwNiA0OCAyNSBDIDQ4IDMxLjY3NTE4NCA0NS4xNTgxODUgMzcuNjc1NzA3IDQwLjYyNSA0MS44NzUgQyAzNi44NDY5NzYgMzkuMTUyMTkyIDMxLjExNjcwOSAzOC43MDUwMzkgMjkuOTM3NSAzNS41MzEyNSBDIDI5Ljc5MTUgMzMuOTE5MjUgMjkuODQzNzUgMzIuNzg1NSAyOS44NDM3NSAzMS4zMTI1IEMgMzAuNTczNzUgMzAuOTI5NSAzMS44NzI3NSAyOC41MDA1IDMyLjA5Mzc1IDI2LjQzNzUgQyAzMi42Njc3NSAyNi4zOTA1IDMzLjU3ODc1IDI1LjgzNiAzMy44NDM3NSAyMy42MjUgQyAzMy45ODY3NSAyMi40MzggMzMuNDA4NSAyMS43NzI1IDMzLjA2MjUgMjEuNTYyNSBDIDMzLjk5NjUgMTguNzUzNSAzNS45NjIgMTAuMDU0MjUgMjkuNSA5LjE1NjI1IEMgMjguODM1IDcuOTg4MjUgMjcuMTE5MjUgNy40MDYyNSAyNC45MDYyNSA3LjQwNjI1IEMgMTYuMDUyMjUgNy41NjkyNSAxNC45OTY1IDE0LjA5MjUgMTYuOTM3NSAyMS41NjI1IEMgMTYuNTkyNSAyMS43NzI1IDE2LjAxNDI1IDIyLjQzOCAxNi4xNTYyNSAyMy42MjUgQyAxNi40MjIyNSAyNS44MzYgMTcuMzMyMjUgMjYuMzkwNSAxNy45MDYyNSAyNi40Mzc1IEMgMTguMTI2MjUgMjguNDk5NSAxOS40ODY3NSAzMC45Mjk1IDIwLjIxODc1IDMxLjMxMjUgQyAyMC4yMTg3NSAzMi43ODU1IDIwLjI3MSAzMy45MTkyNSAyMC4xMjUgMzUuNTMxMjUgQyAxOC45NDI4MTMgMzguNzA5Mzc1IDEzLjE2OTQ2MiAzOS4xMzk4OTkgOS4zNzUgNDEuODc1IEMgNC44NDE4MTUgMzcuNjc1NzA3IDIgMzEuNjc1MTg0IDIgMjUgQyAyIDEyLjI4NTYwNiAxMi4yODU2MDYgMiAyNSAyIHoiIGNvbG9yPSIjMDAwIiBvdmVyZmxvdz0idmlzaWJsZSIgZW5hYmxlLWJhY2tncm91bmQ9ImFjY3VtdWxhdGUiIGZvbnQtZmFtaWx5PSJCaXRzdHJlYW0gVmVyYSBTYW5zIj48L3BhdGg+PC9zdmc+'/><b>Interesses</b></p>
-
-				<div style="background: white; margin-top: 2px">
-					<div class="list-block" style="margin-top: -8px; padding-left: 20px">
-						<ul>
-							<li>
-							  <div class="item-content">
-								<div class="item-inner">
-								  <div class="item-input">
-									<input type="text" id="passo2-description">
-								  </div>
-								</div>
-							  </div>
-							</li>
-						</ul>
+				<h2 style="margin-left: 10px"><span id="passo2-name"></span></h2>
+				<p style="font-size: 15px; margin-left: 10px; padding-top: 6px; font-weight: bold">Brasil</p>
+				
+				<br><br><br>
+				
+					
+				<div style="padding-top: 1px">
+					
+					<div>
+						<input class="rounded" type="text" id="passo2-faculdade">
 					</div>
+				
 				</div>
 				
-				<p style="font-size: 15px; margin-left: 12px"><img class="icon icons8-Circled-User-Male-Filled" style="margin-right: 8px" width="14" height="14" src='https://maxcdn.icons8.com/iOS7/PNG/25/Business/job_filled-25.png'/><b>Atuação</b></p>
-				
-				<div style="background: white; margin-top: 2px">
-					<div class="list-block" style="margin-top: -8px; padding-left: 20px">
-						<ul>
-							<li>
-							  <div class="item-content">
-								<div class="item-inner">
-								  <div class="item-input">
-									<input type="text" id="passo2-profissao">
-								  </div>
-								</div>
-							  </div>
-							</li>
-						</ul>
+				<div style="padding-top: 1px; margin-top: 20px">
+					
+					<div>
+						<input class="rounded" type="text" id="passo2-nascimento">
 					</div>
+				
+				</div>
+			    
+				<div style="padding-top: 1px; margin-top: 20px">
+					
+					<div>
+						<input class="rounded" type="text" id="passo2-profissao">
+					</div>
+				
 				</div>
 				
-				<p style="font-size: 15px; margin-left: 12px"><img class="icon icons8-Circled-User-Male-Filled" style="margin-right: 8px" width="14" height="14" src='https://maxcdn.icons8.com/iOS7/PNG/25/Users/student_2_filled-25.png'/><b>Formação</b></p>
-
-				<div style="background: white; margin-top: 2px">
-					<div class="list-block" style="margin-top: -8px; padding-left: 20px">
-						<ul>
-							<li>
-							  <div class="item-content">
-								<div class="item-inner">
-								  <div class="item-input">
-									<input type="text" id="passo2-faculdade">
-								  </div>
-								</div>
-							  </div>
-							</li>
-						</ul>
+				<div style="padding-top: 1px; margin-top: 20px; margin-bottom: 10px">
+					
+					<div>
+						<input class="rounded" type="text" id="passo2-description" placeholder="What are you looking for?">
 					</div>
-				</div>
 				
-				<p style="font-size: 15px; margin-left: 12px"><img class="icon icons8-Circled-User-Male-Filled" style="margin-right: 8px" width="14" height="14" src='https://maxcdn.icons8.com/iOS7/PNG/25/Users/student_2_filled-25.png'/><b>Idade</b></p>
-
-				<div style="background: white; margin-top: 2px">
-					<div class="list-block" style="margin-top: -8px; padding-left: 20px">
-						<ul>
-							<li>
-							  <div class="item-content">
-								<div class="item-inner">
-								  <div class="item-input">
-									<input type="number" id="passo2-idade">
-								  </div>
-								</div>
-							  </div>
-							</li>
-						</ul>
-					</div>
 				</div>
-			    				
+				<br>
+				<h4>Share your skills</h4>
+				
 			  </div>
 			  
-		</div>
-			
+			<div class="list-block" style="margin-left: 13px; margin-right: 13px; margin-top: 0px">
+				  <ul style="border: none; border-radius: 15px; background: #e6e2dc">
+					<!-- Smart select item -->
+					<li>
+					  <!-- Additional "smart-select" class -->
+					  <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text=" " data-searchbar="true" data-searchbar-placeholder="Search skills">
+						<!-- select -->
+						<select name="tags" multiple maxlength="5">
+						  
+						</select>
+						<div class="item-content">
+						  <div class="item-inner">
+							<!-- Select label -->
+							<div class="item-title">Share your skills</div>
+						  </div>
+						</div>
+					  </a>
+					</li>
+					<!-- Another smart selects or list view elements -->
+					
+				  </ul>
+			</div>
+
+			  <div class="text-center" style="margin-top: -10px" id="finalizar">
+					<div class="btn-pink">Save</div>
+			  </div>
+			  
+		</div> 
 	</div>
 </div>  
-

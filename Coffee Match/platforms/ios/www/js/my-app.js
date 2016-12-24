@@ -14,25 +14,50 @@ var mainView = myApp.addView('.view-main', {
 });  
 
 myApp.onPageInit('passo2', function (page) {
+	
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-tags.php',
+								dataType: 'json',
+								success: function (data) {
+									for(i = 0; i < data.length; i++){
+										myApp.smartSelectAddOption('.smart-select select', "<option>"+data[i].nome+"</option>");
+									}
+								}
+	});
+	
 	var picture = localStorage.getItem("picture");
+	var name    = localStorage.getItem("name");
 	document.getElementById('picture').src = picture;
+	$$("#passo2-name").html(name);
+	
 	$$("#finalizar").on("click", function(){
+		var tags = [];
 		var descricao = $$("#passo2-description").val();
 		var profissao = $$("#passo2-profissao").val();
 		var faculdade = $$("#passo2-faculdade").val();
-		var idade     = $$("#passo2-idade").val();
+		var nascimento = $$("#passo2-nascimento").val();
 		
-		localStorage.setItem("age", idade);
+		$('select option:selected').each(function(){
+				tags.push($(this).text());
+		});
+		tags = tags.join(); 
+		
+		//localStorage.setItem("age", nascimento);
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
-		var fbid = localStorage.getItem("fbid");
+		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, idade, faculdade, fbid);
+		setProfile(descricao, profissao, nascimento, faculdade, tags, user_id);
 		
 		mainView.router.loadPage('index.html');
 	})
+	
+	var pickerDescribe = myApp.calendar({
+		input: '#passo2-nascimento',
+		dateFormat: 'yyyy-dd-mm'
+	}); 
 });
 
 myApp.onPageInit('confirmacao-convite', function (page) {
@@ -49,7 +74,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								success: function (data) {
 									
 									$$("#name-confirm").html(data.name);
-									$$("#age-confirm").html(data.age);
+									$$("#age-confirm").html(data.nascimento);
 									$$("#occupation-confirm").html(data.occupation);
 									$$("#pic-confirm").attr("src", data.picture);
 									$$("#message").html(data.message);
@@ -302,9 +327,9 @@ myApp.onPageInit('profile', function (page) {
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
-		var fbid = localStorage.getItem("fbid");
+		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, idade, faculdade, fbid);
+		setProfile(descricao, profissao, idade, faculdade, null, user_id);
 		
 		mainView.router.back();
 	})
@@ -680,14 +705,15 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 }
 
 //Seta informações do perfil (somente descrição por enquanto)
-function setProfile(description, occupation, age, college, fbid){
+function setProfile(description, occupation, nascimento, college, tags, user_id){
 	
 	var info = {
 		description: description, 
 		occupation: occupation,
-		age: age,
+		nascimento: nascimento,
 		college: college,
-		fbid: fbid
+		tags: tags,
+		user_id: user_id
 		}
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/set-profile-info.php',
