@@ -310,6 +310,28 @@ myApp.onPageInit('messages', function (page) {
 
 myApp.onPageInit('profile', function (page) {
 	
+	var user = {
+		user: localStorage.getItem("user_id")
+	};
+	
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-tags.php',
+								type: 'post',
+								data: user,
+								dataType: 'json',
+								success: function (data) {
+									
+									for(i = 1; i < data.length; i++){
+										if(data[i].nome == data[0].skill1 || data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3 || data[i].nome == data[0].skill4 || data[i].nome == data[0].skill5){
+												myApp.smartSelectAddOption('.smart-select select', "<option selected>"+data[i].nome+"</option>");
+										} else {
+											myApp.smartSelectAddOption('.smart-select select', "<option>"+data[i].nome+"</option>");
+										}
+										
+									}
+								}
+	});
+	
 	$$(".profile-name").html(localStorage.getItem("name") + ", ");
 	$$("#profile-age").html(localStorage.getItem("age"));
 	$$("#description").val(localStorage.getItem("description"));
@@ -318,18 +340,26 @@ myApp.onPageInit('profile', function (page) {
 	$$("#graduation").val(localStorage.getItem("college"));
 	
 	$$("#finalizar-edicao").on("click", function(){
+		var tags = [];
 		var descricao = $$("#description").val();
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
-		var idade     = localStorage.getItem("age");
+		var idade     = null;
+		
+		$('select option:selected').each(function(){
+			tags.push($(this).text());
+		});
+		tags = tags.join();
 		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
 		var user_id = localStorage.getItem("user_id");
+		
+		
 		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, idade, faculdade, null, user_id);
+		setProfile(descricao, profissao, idade, faculdade, tags, user_id);
 		
 		mainView.router.back();
 	})
@@ -358,15 +388,6 @@ myApp.onPageInit('user', function (page) {
 									$$("#occupation").html(data[0].occupation);
 									$$("#picture").attr("src", data[0].picture);
 									
-									//Handler dos amigos em comum
-									/*
-									var json = JSON.parse(data[0].mutual_friends);
-									var context = json.context;
-									//alert(context.mutual_friends)
-									if(context.mutual_friends){
-										//alert(context);
-									} 
-									*/
 								}
 							});
 	$$('.but-info').on('click', function () {

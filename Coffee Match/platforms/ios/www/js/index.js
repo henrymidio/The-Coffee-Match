@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        //facebookConnectPlugin.browserInit("1647443792236383");
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -131,6 +131,11 @@ var app = {
 											classe = "next";
 										}
 									
+									var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
+									var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
+									var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
+									var skill4 = data[i].skill4 ? "<span class='tag'>"+data[i].skill4+"</span>" : "";
+									var skill5 = data[i].skill5 ? "<span class='tag'>"+data[i].skill5+"</span>" : "";
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+">"
@@ -142,12 +147,9 @@ var app = {
 												+ "<p class='username'><b>"+data[i].name+"</b></p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-												+ "<div style='margin-top: -10px'><span class='tag'>UX & UI</span><span class='tag'>Design</span><span class='tag'>Startups</span><br><span class='tag'>Comercial</span><span class='tag'>Branding</span></div><br>"
-												//+ "<div class='row' style='margin-left: 10px'>"
-												//+ "<div class='col-30'><p class='friends'>Friends in Coffee Match</p></div>"
-												//+ "<div class='col-70 friends'><img src='http://static1.purepeople.com.br/articles/3/21/78/3/@/203742-will-smith-vira-ao-brasil-em-breve-175x175-2.jpg' /><img src='img/fulana.png' /><img src='http://discoveryourtruenorth.org/wp-content/uploads/2015/07/schultz.jpg' /></div>"
+												+ "<div style='margin-top: -10px'>"+skill1+skill2+skill3+"<br>"+skill4+skill5+"</div><br>"
 												+ "<p class='friends' style='margin-top: -10px'>"+data[i].description+"</p>"
-												//+ "<div class='like'></div><div class='dislike'></div>"
+												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
 												+ "</li>";		
 									$("#user-list").append(line1);
@@ -349,7 +351,7 @@ var app = {
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("user_id", data.user_id);
-										//localStorage.setItem("age", data.age);
+										localStorage.setItem("age", data.age);
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
