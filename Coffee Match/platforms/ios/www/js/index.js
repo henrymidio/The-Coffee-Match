@@ -53,10 +53,19 @@ var app = {
 		myApp.onPageInit('index', function() {
 				
 		$$('.invite').on('click', function () {
+			/*
 			myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				$("#tinderslide").jTinder('like');
 			});
+			*/
+			
+			var modal = myApp.modal({
+				title: '<b>Rating</b>',
+				text: 'What do you think about Coffee Match?',
+				afterText:  '<div style="padding-top: 20px; padding-bottom: 20px"><img src="img/stars.png" width="240" height="40" /></div>',
+				
+			  })
 		});
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
@@ -147,7 +156,7 @@ var app = {
 												+ "<p class='username'><b>"+data[i].name+"</b></p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-												+ "<div style='margin-top: -10px'>"+skill1+skill2+skill3+"<br>"+skill4+skill5+"</div><br>"
+												+ "<div class='skills text-center'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
 												+ "<p class='friends' style='margin-top: -10px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"

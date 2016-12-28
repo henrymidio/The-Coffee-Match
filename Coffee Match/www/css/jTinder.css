@@ -115,6 +115,7 @@
 	border: 2px solid #ed7b83;
 	border-radius: 33px;
 	font-size: 15px;
+	display: inline-block;
 }
 
 .subcol {

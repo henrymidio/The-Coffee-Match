@@ -26,9 +26,7 @@ input.rounded {
 	color: #775952;
 }
 
-.center {
-	color: white;
-}
+
 
 .close-popup i.icon.icon-back {
 	background-image: url('../img/ic_action_cancel.png');
@@ -255,6 +253,10 @@ letter-spacing:0.09em;
 	width: 220px;
 }
 
+.skills {
+	margin-top: -10;
+}
+
 .college {
 	color: #775952;
 	opacity: 0.8;
@@ -449,47 +451,5 @@ display: inline-block;
 .Conteudo {
 	font-size: 16px;
 }
-
-.rating > span:hover:before {
-   content: "\2605";
-   position: absolute;
-}
-
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-}
-
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-}
-.rating > span {
-  font-size: 45px;
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-}
-
-.cont:before {
-        position: absolute;
-        content: '';
-        background-color:#FF0000;
-        border-radius:50%;
-		border: 2px solid white;
-        width: 12px;
-        height: 12px;
-        pointer-events: none;
-    }
 
 

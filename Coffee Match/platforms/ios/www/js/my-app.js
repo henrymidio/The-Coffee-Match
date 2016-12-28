@@ -679,13 +679,21 @@ var pickerDescribe = myApp.picker({
         {
             values: ('00 30').split(' ')
         },
+		{
+            values: ('AM PM').split(' ')
+        },
     ]
 }); 
 
 $$("#confirmar-data").on("click", function(){
 	var data    = $$("#picker-data").val();
-	var horario = $$("#picker-horario").val();
-	var value   = data + " " + horario.replace(/\s/g,'') + ":00";
+	var horario = $$("#picker-horario").val().substring(0,6);
+	var complemento = $$("#picker-horario").val().substring(6,9);
+	
+	var value   = data + " " + horario.replace(/\s/g,'') + "" + complemento;
+	value = convertTo24(value);
+	alert(value)
+	
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
 	
@@ -757,4 +765,14 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 							});
 }
 
+function convertTo24(date){
+	var data = new Date(date);
+    var ano = data.getFullYear();
+	var mes = data.getMonth() + 1;
+	var dia = data.getDate();
+	var hora = data.getHours();
+	var minutos = data.getMinutes();
+	
+	return ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":00";
+}
 
