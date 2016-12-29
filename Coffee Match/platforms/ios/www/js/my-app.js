@@ -290,11 +290,13 @@ myApp.onPageInit('messages', function (page) {
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle'>"+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
-										
+																		
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
 										});
 									}
+									
+									
 									myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
@@ -559,6 +561,8 @@ $$('.messagebar').on('click', function () {
 										}
 									
 									}
+			
+									$('.messages')[0].scrollIntoView(false);
 									
 									myInterval = setInterval(function(){ 
 										getLastMessage(user, match); 
@@ -591,6 +595,7 @@ $$('.messagebar').on('click', function () {
 															+ "<div style='background-image:url("+data.picture+")' class='message-avatar'></div>"
 															+ "</div>";
 											$(".messages").append(line1);
+									$('.messages')[0].scrollIntoView(false);
 								}
 		});
 	}

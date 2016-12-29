@@ -39,6 +39,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		
+		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
 		
 		//Verifica se usuário está logado
@@ -51,21 +52,30 @@ var app = {
 		
 		
 		myApp.onPageInit('index', function() {
+			
+			var contador = localStorage.getItem("contador");
+			var lastLog  = localStorage.getItem("lastLog");
+			var curDate  = new Date();
+			
+			if(curDate > lastLog){
+				localStorage.setItem("contador") = 8;
+			}
 				
 		$$('.invite').on('click', function () {
-			/*
+			
 			myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				$("#tinderslide").jTinder('like');
 			});
-			*/
 			
+			/*
 			var modal = myApp.modal({
 				title: '<b>Rating</b>',
 				text: 'What do you think about Coffee Match?',
 				afterText:  '<div style="padding-top: 20px; padding-bottom: 20px"><img src="img/stars.png" width="240" height="40" /></div>',
 				
 			  })
+			*/
 		});
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);

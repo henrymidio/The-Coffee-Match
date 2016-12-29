@@ -39,7 +39,16 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		
+		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
+		
+		if(localStorage.getItem("contador") == null){
+				localStorage.setItem("contador") = 8;
+			}
+			
+		if(localStorage.getItem("lastLog") == null){
+				localStorage.getItem("lastLog") = new Date();
+			}
 		
 		//Verifica se usuário está logado
 		if(logged == null){
@@ -51,7 +60,17 @@ var app = {
 		
 		
 		myApp.onPageInit('index', function() {
-				
+			
+			//Verifica quando foi o último login para limitar número de usuários na listagem
+			var curDate  = new Date();
+			var lastLog  = localStorage.getItem("lastLog");
+			
+			if(curDate > lastLog){
+				localStorage.setItem("contador") = 8;
+				localStorage.setItem("lastLog") = curDate;
+			} 
+		
+			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
 			myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {

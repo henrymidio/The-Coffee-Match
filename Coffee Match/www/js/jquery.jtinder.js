@@ -38,6 +38,12 @@
 				
 			},
 			onLike: function(){ 
+			
+				var contador = localStorage.getItem("contador");
+				if(contador <= 0){
+					alert("Número de usuários limitados!")
+					return false;
+				}
 				
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
