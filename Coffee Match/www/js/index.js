@@ -44,10 +44,6 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
  			.endInit();
  
- 			// Sync hashed email if you have a login system or collect it.
- 			//   Will be used to reach the user at the most optimal time of day.
- 			// window.plugins.OneSignal.syncHashedEmail(userEmail);
- 			}, false);
 		
     },
     // Update DOM on a Received Event
