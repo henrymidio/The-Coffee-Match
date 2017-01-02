@@ -39,7 +39,16 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		
+		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
+		
+		if(localStorage.getItem("contador") == null){
+				localStorage.setItem("contador", 8);
+			}
+			
+		if(localStorage.getItem("lastLog") == null){
+				localStorage.setItem("lastLog", new Date());
+			}
 		
 		//Verifica se usuário está logado
 		if(logged == null){
@@ -51,12 +60,32 @@ var app = {
 		
 		
 		myApp.onPageInit('index', function() {
-				
+			
+			//Verifica quando foi o último login para limitar número de usuários na listagem
+			var curDate  = new Date();
+			var lastLog  = localStorage.getItem("lastLog");
+			
+			if(curDate > lastLog){
+				localStorage.setItem("contador", 8);
+				localStorage.setItem("lastLog", curDate);
+			} 
+			localStorage.setItem("contador", 8);
+			//Evento de envio do convite
 		$$('.invite').on('click', function () {
+			
 			myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				$("#tinderslide").jTinder('like');
 			});
+			
+			/*
+			var modal = myApp.modal({
+				title: '<b>Rating</b>',
+				text: 'What do you think about Coffee Match?',
+				afterText:  '<div style="padding-top: 20px; padding-bottom: 20px"><img src="img/stars.png" width="240" height="40" /></div>',
+				
+			  })
+			*/
 		});
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
@@ -147,14 +176,14 @@ var app = {
 												+ "<p class='username'><b>"+data[i].name+"</b></p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-												+ "<div style='margin-top: -10px'>"+skill1+skill2+skill3+"<br>"+skill4+skill5+"</div><br>"
+												+ "<div class='skills text-center'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
 												+ "<p class='friends' style='margin-top: -10px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
 												+ "</li>";		
 									$("#user-list").append(line1);
 									}
-																
+									$$(".invite").toggleClass("none visivel");						
 									/**
 									 * jTinder initialization
 									 */
@@ -246,7 +275,7 @@ var app = {
 		});
 		
 		myApp.onPageInit('detail-calendar', function(){
-			
+			myApp.showPreloader();
 			var userPicture = localStorage.getItem("picture");
 			var userName    = localStorage.getItem("name");
 			var match       = localStorage.getItem("match");
@@ -302,7 +331,11 @@ var app = {
 											document.getElementById("sec-user-pic").src= data[0][1].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
 										}
-								
+									myApp.hidePreloader();
+								},
+								error: function (request, status, error) {
+									myApp.hidePreloader();
+									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});	
 			

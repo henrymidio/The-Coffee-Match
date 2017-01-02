@@ -42,6 +42,14 @@ var app = {
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
 		
+		if(localStorage.getItem("contador") == null){
+				localStorage.setItem("contador", 8);
+			}
+			
+		if(localStorage.getItem("lastLog") == null){
+				localStorage.setItem("lastLog", new Date());
+			}
+		
 		//Verifica se usuário está logado
 		if(logged == null){
 			
@@ -53,14 +61,16 @@ var app = {
 		
 		myApp.onPageInit('index', function() {
 			
-			var contador = localStorage.getItem("contador");
-			var lastLog  = localStorage.getItem("lastLog");
+			//Verifica quando foi o último login para limitar número de usuários na listagem
 			var curDate  = new Date();
+			var lastLog  = localStorage.getItem("lastLog");
 			
 			if(curDate > lastLog){
-				localStorage.setItem("contador") = 8;
-			}
-				
+				localStorage.setItem("contador", 8);
+				localStorage.setItem("lastLog", curDate);
+			} 
+			localStorage.setItem("contador", 8);
+			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
 			myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {
@@ -173,7 +183,7 @@ var app = {
 												+ "</li>";		
 									$("#user-list").append(line1);
 									}
-																
+									$$(".invite").toggleClass("none visivel");						
 									/**
 									 * jTinder initialization
 									 */
@@ -265,7 +275,7 @@ var app = {
 		});
 		
 		myApp.onPageInit('detail-calendar', function(){
-			
+			myApp.showPreloader();
 			var userPicture = localStorage.getItem("picture");
 			var userName    = localStorage.getItem("name");
 			var match       = localStorage.getItem("match");
@@ -321,7 +331,11 @@ var app = {
 											document.getElementById("sec-user-pic").src= data[0][1].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
 										}
-								
+									myApp.hidePreloader();
+								},
+								error: function (request, status, error) {
+									myApp.hidePreloader();
+									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});	
 			

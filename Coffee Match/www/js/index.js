@@ -35,6 +35,20 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 		
+		var notificationOpenedCallback = function(jsonData) {
+ 			console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+ 		};
+ 
+ 		window.plugins.OneSignal
+ 			.startInit("d7720d27-4a1b-431f-8b2f-a5090220c497")
+ 			.handleNotificationOpened(notificationOpenedCallback)
+ 			.endInit();
+ 
+ 			// Sync hashed email if you have a login system or collect it.
+ 			//   Will be used to reach the user at the most optimal time of day.
+ 			// window.plugins.OneSignal.syncHashedEmail(userEmail);
+ 			}, false);
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -43,11 +57,11 @@ var app = {
 		var logged = localStorage.getItem("user_id");
 		
 		if(localStorage.getItem("contador") == null){
-				localStorage.setItem("contador") = 8;
+				localStorage.setItem("contador", 8);
 			}
 			
 		if(localStorage.getItem("lastLog") == null){
-				localStorage.getItem("lastLog") = new Date();
+				localStorage.setItem("lastLog", new Date());
 			}
 		
 		//Verifica se usuário está logado
@@ -66,10 +80,10 @@ var app = {
 			var lastLog  = localStorage.getItem("lastLog");
 			
 			if(curDate > lastLog){
-				localStorage.setItem("contador") = 8;
-				localStorage.setItem("lastLog") = curDate;
+				localStorage.setItem("contador", 8);
+				localStorage.setItem("lastLog", curDate);
 			} 
-		
+			localStorage.setItem("contador", 8);
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
@@ -183,7 +197,7 @@ var app = {
 												+ "</li>";		
 									$("#user-list").append(line1);
 									}
-																
+									$$(".invite").toggleClass("none visivel");						
 									/**
 									 * jTinder initialization
 									 */
@@ -275,7 +289,7 @@ var app = {
 		});
 		
 		myApp.onPageInit('detail-calendar', function(){
-			
+			myApp.showPreloader();
 			var userPicture = localStorage.getItem("picture");
 			var userName    = localStorage.getItem("name");
 			var match       = localStorage.getItem("match");
@@ -331,7 +345,11 @@ var app = {
 											document.getElementById("sec-user-pic").src= data[0][1].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
 										}
-								
+									myApp.hidePreloader();
+								},
+								error: function (request, status, error) {
+									myApp.hidePreloader();
+									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});	
 			
@@ -346,7 +364,7 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				facebookConnectPlugin.browserInit("1647443792236383");	
+				//facebookConnectPlugin.browserInit("1647443792236383");	
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
@@ -365,6 +383,12 @@ var app = {
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
+							
+							//Push Notifications
+ 							window.plugins.OneSignal.getIds(function(ids) {
+ 								console.log("Notification key: " + ids.pushToken);
+ 								person.notification_key = ids.pushToken;
+ 							});
 							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({

@@ -44,6 +44,34 @@ select.rounded {
 	color: #775952;
 }
 
+#user-one-img {
+	position: absolute;
+	width: 45px;
+	height: 45px;
+	left: 19%;
+	top: 33%;
+	border: 2px solid white;
+	border-radius: 100%;
+}
+
+#user-two-img {
+	position: absolute;
+	width: 45px;
+	height: 45px;
+	right: 19%;
+	top: 33%;
+	border: 2px solid white;
+	border-radius: 100%;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.visible {
+	visibility: visible;
+}
+
 .layout-white .content-block-inner {
 	background: #f2efe9;
 }

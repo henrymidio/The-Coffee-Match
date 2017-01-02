@@ -199,7 +199,7 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='detail-calendar.html' class='item-link match' id="+data[i].id+">"
+												+ "<a href='#' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a></li>";		
@@ -207,11 +207,10 @@ myApp.onPageInit('combinacoes', function (page) {
 										
 										
 									}
-									
-									
-									
+																	
 									$(".match").on("click", function(){
 										localStorage.setItem("match", this.id);
+										mainView.router.loadPage("detail-calendar.html");
 									});
 									
 								}
@@ -290,11 +289,13 @@ myApp.onPageInit('messages', function (page) {
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle'>"+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
-										
+																		
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
 										});
 									}
+									
+									
 									myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
@@ -475,8 +476,6 @@ myApp.onPageInit('chat', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	
 	var match = localStorage.getItem("match");
-	
-	var g = {match: match};
 		
 	// Handle message
 $$('.messagebar').on('click', function () {
@@ -527,6 +526,8 @@ $$('.messagebar').on('click', function () {
  
 	}); 
 	
+	var g = {match: match};
+	
 	//Request ajax que recupera a conversa
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-messages.php',
@@ -559,7 +560,8 @@ $$('.messagebar').on('click', function () {
 										}
 									
 									}
-									
+									$('.messagebar').trigger('click');
+																
 									myInterval = setInterval(function(){ 
 										getLastMessage(user, match); 
 									}, 3000);
@@ -591,6 +593,7 @@ $$('.messagebar').on('click', function () {
 															+ "<div style='background-image:url("+data.picture+")' class='message-avatar'></div>"
 															+ "</div>";
 											$(".messages").append(line1);
+									$('.messagebar').trigger('click');
 								}
 		});
 	}
@@ -621,13 +624,14 @@ myApp.onPageInit('match', function (page) {
 								dataType: 'json',
 								data: d,
 								success: function (data) {
-									
-									$$("#user-one-name").html(localStorage.getItem("name"));
-									$$("#user-two-name").html(data[0].name);
+								
 									$$("#user-one-img").attr("src", localStorage.getItem("picture"));
 									$$("#user-two-img").attr("src", data[0].picture);						
 								}
 							});
+	$$("#select-starbucks").on("click", function(){
+		mainView.router.loadPage('starbucks-proximas.html');
+	})
 });		
 
 myApp.onPageInit('calendario', function(page){
@@ -679,13 +683,20 @@ var pickerDescribe = myApp.picker({
         {
             values: ('00 30').split(' ')
         },
+		{
+            values: ('AM PM').split(' ')
+        },
     ]
 }); 
 
 $$("#confirmar-data").on("click", function(){
 	var data    = $$("#picker-data").val();
-	var horario = $$("#picker-horario").val();
-	var value   = data + " " + horario.replace(/\s/g,'') + ":00";
+	var horario = $$("#picker-horario").val().substring(0,6);
+	var complemento = $$("#picker-horario").val().substring(6,9);
+	
+	var value   = data + " " + horario.replace(/\s/g,'') + "" + complemento;
+	value = convertTo24(value);
+	
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
 	
@@ -694,7 +705,8 @@ $$("#confirmar-data").on("click", function(){
 								type: 'post',
 								data: d2,
 								success: function (data) {
-									myApp.alert("Horário agendado!", "")					
+									myApp.alert("Horário agendado!", "");
+									mainView.router.loadPage('combinacoes.html');
 								}
 					});
 })
@@ -757,4 +769,14 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 							});
 }
 
+function convertTo24(date){
+	var data = new Date(date);
+    var ano = data.getFullYear();
+	var mes = data.getMonth() + 1;
+	var dia = data.getDate();
+	var hora = data.getHours();
+	var minutos = data.getMinutes();
+	
+	return ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":00";
+}
 

@@ -199,7 +199,7 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='detail-calendar.html' class='item-link match' id="+data[i].id+">"
+												+ "<a href='#' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a></li>";		
@@ -207,11 +207,10 @@ myApp.onPageInit('combinacoes', function (page) {
 										
 										
 									}
-									
-									
-									
+																	
 									$(".match").on("click", function(){
 										localStorage.setItem("match", this.id);
+										mainView.router.loadPage("detail-calendar.html");
 									});
 									
 								}
@@ -477,8 +476,6 @@ myApp.onPageInit('chat', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	
 	var match = localStorage.getItem("match");
-	
-	var g = {match: match};
 		
 	// Handle message
 $$('.messagebar').on('click', function () {
@@ -529,6 +526,8 @@ $$('.messagebar').on('click', function () {
  
 	}); 
 	
+	var g = {match: match};
+	
 	//Request ajax que recupera a conversa
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-messages.php',
@@ -561,9 +560,8 @@ $$('.messagebar').on('click', function () {
 										}
 									
 									}
-			
-									$('.messages')[0].scrollIntoView(false);
-									
+									$('.messagebar').trigger('click');
+																
 									myInterval = setInterval(function(){ 
 										getLastMessage(user, match); 
 									}, 3000);
@@ -595,7 +593,7 @@ $$('.messagebar').on('click', function () {
 															+ "<div style='background-image:url("+data.picture+")' class='message-avatar'></div>"
 															+ "</div>";
 											$(".messages").append(line1);
-									$('.messages')[0].scrollIntoView(false);
+									$('.messagebar').trigger('click');
 								}
 		});
 	}
@@ -626,13 +624,14 @@ myApp.onPageInit('match', function (page) {
 								dataType: 'json',
 								data: d,
 								success: function (data) {
-									
-									$$("#user-one-name").html(localStorage.getItem("name"));
-									$$("#user-two-name").html(data[0].name);
+								
 									$$("#user-one-img").attr("src", localStorage.getItem("picture"));
 									$$("#user-two-img").attr("src", data[0].picture);						
 								}
 							});
+	$$("#select-starbucks").on("click", function(){
+		mainView.router.loadPage('starbucks-proximas.html');
+	})
 });		
 
 myApp.onPageInit('calendario', function(page){
@@ -697,7 +696,6 @@ $$("#confirmar-data").on("click", function(){
 	
 	var value   = data + " " + horario.replace(/\s/g,'') + "" + complemento;
 	value = convertTo24(value);
-	alert(value)
 	
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
@@ -707,7 +705,8 @@ $$("#confirmar-data").on("click", function(){
 								type: 'post',
 								data: d2,
 								success: function (data) {
-									myApp.alert("Horário agendado!", "")					
+									myApp.alert("Horário agendado!", "");
+									mainView.router.loadPage('combinacoes.html');
 								}
 					});
 })

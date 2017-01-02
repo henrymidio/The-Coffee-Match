@@ -35,10 +35,13 @@
 				
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
+				if(current_pane <= 0){
+					$$(".invite").toggleClass("visivel none");	
+				}
 				
 			},
 			onLike: function(){ 
-				
+			
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -64,6 +67,7 @@
 									} else {	
 										var shown_user_id = panes.eq(current_pane).attr("id");
 										localStorage.setItem("shown_user_id", shown_user_id);	
+										
 									}
 									
 								}
@@ -72,10 +76,11 @@
 				
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
+				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
+				if(current_pane <= 0){
+					$$(".invite").toggleClass("visivel none");	
+				}
 				
-				
-				
-				 
 			},
 			animationRevertSpeed: 200,
 			animationSpeed: 400,
@@ -137,6 +142,11 @@
 		},
 
 		like: function() {
+			var contador = localStorage.getItem("contador");
+				if(contador <= 0){
+					alert("Número de usuários limitados!")
+					return false;
+				}
 			panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
 			panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
 				if($that.settings.onLike) {
@@ -203,6 +213,16 @@
 					if (opa >= 1) {
 						if (posX > 0) {
 							panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
+								var contador = localStorage.getItem("contador");
+							if(contador <= 0){
+								alert("Número de usuários limitados!")
+								lastPosX = 0;
+								lastPosY = 0;
+								panes.eq(current_pane).animate({"transform": "translate(0px,0px) rotate(0deg)"}, $that.settings.animationRevertSpeed);
+								panes.eq(current_pane).find($that.settings.likeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
+								panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
+								return false;
+							}
 								if($that.settings.onLike) {
 									$that.settings.onLike(panes.eq(current_pane));
 								}
