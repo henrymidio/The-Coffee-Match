@@ -365,8 +365,8 @@ var app = {
 				notification_key = null;			
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
-					alert("Notification key: " + ids.pushToken);
-					notification_key = ids.pushToken;
+					alert("Notification key: " + ids.userId);
+					notification_key = ids.userId;
 				});
 				
 				var fbLoginSuccess = function (userData) {
