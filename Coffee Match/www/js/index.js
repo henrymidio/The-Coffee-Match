@@ -43,7 +43,7 @@ var app = {
  			.startInit("d7720d27-4a1b-431f-8b2f-a5090220c497")
  			.handleNotificationOpened(notificationOpenedCallback)
  			.endInit();
- 
+		
 		
     },
     // Update DOM on a Received Event
@@ -360,33 +360,27 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");	
+				//facebookConnectPlugin.browserInit("1647443792236383");
 				
-				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
-					  function onSuccess (result) {
-						  /*
-						    facebookConnectPlugin.getAccessToken(function(token) {
-								console.log(token)
-								localStorage.setItem("token", token);
-								
-							 });
-							 */
-							 
-						    var person = {
+				var person = {
 								fbid: result.id,
 								name: result.name,
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
 							
-							//Push Notifications
- 							window.plugins.OneSignal.getIds(function(ids) {
- 								alert("Notification key: " + ids.pushToken);
- 								person.notification_key = ids.pushToken;
- 							});
-							
-							alert(person.notification_key);
+				//Push Notifications
+				window.plugins.OneSignal.getIds(function(ids) {
+					alert("Notification key: " + ids.pushToken);
+					person.notification_key = ids.pushToken;
+				});
+				
+				var fbLoginSuccess = function (userData) {
+				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
+					  function onSuccess (result) {
+						  
+						 							
+							alert("person: " + person.notification_key);
 							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
