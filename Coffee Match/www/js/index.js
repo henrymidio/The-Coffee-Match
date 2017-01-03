@@ -386,6 +386,8 @@ var app = {
  								person.notification_key = ids.pushToken;
  							});
 							
+							alert(person.notification_key);
+							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
 								url: 'http://thecoffeematch.com/webservice/register.php',
