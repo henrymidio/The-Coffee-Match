@@ -36,7 +36,7 @@ var app = {
         app.receivedEvent('deviceready');
 		
 		var notificationOpenedCallback = function(jsonData) {
- 			console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+ 			alert('notificationOpenedCallback: ' + JSON.stringify(jsonData));
  		};
  
  		window.plugins.OneSignal
@@ -382,7 +382,7 @@ var app = {
 							
 							//Push Notifications
  							window.plugins.OneSignal.getIds(function(ids) {
- 								console.log("Notification key: " + ids.pushToken);
+ 								alert("Notification key: " + ids.pushToken);
  								person.notification_key = ids.pushToken;
  							});
 							
