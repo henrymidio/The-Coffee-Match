@@ -362,23 +362,24 @@ var app = {
 			 
 				//facebookConnectPlugin.browserInit("1647443792236383");
 				
-				var person = {
-								fbid: result.id,
-								name: result.name,
-								email: result.email,
-								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
-							}
-							
+				notification_key = null;			
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					alert("Notification key: " + ids.pushToken);
-					person.notification_key = ids.pushToken;
+					notification_key = ids.pushToken;
 				});
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
 					  function onSuccess (result) {
 						  
+						  var person = {
+								fbid: result.id,
+								notification_key: notification_key,
+								name: result.name,
+								email: result.email,
+								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
+							}
 						 							
 							alert("person: " + person.notification_key);
 							
