@@ -36,7 +36,10 @@ var app = {
         app.receivedEvent('deviceready');
 		
 		var notificationOpenedCallback = function(jsonData) {
- 			alert(jsonData.notification.payload.additionalData.foo);
+ 			//alert(jsonData.notification.payload.additionalData.foo);
+			if(jsonData.notification.payload.additionalData.foo == "invite") {
+				mainView.router.loadPage('convites.html');
+			}
  		};
  
  		window.plugins.OneSignal
