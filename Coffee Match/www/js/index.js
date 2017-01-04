@@ -36,11 +36,12 @@ var app = {
         app.receivedEvent('deviceready');
 		
 		var notificationOpenedCallback = function(jsonData) {
- 			alert('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+ 			alert(jsonData.notification.payload.additionalData.foo);
  		};
  
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
+			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.handleNotificationOpened(notificationOpenedCallback)
  			.endInit();
 		
@@ -365,7 +366,7 @@ var app = {
 				notification_key = null;			
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
-					alert("Notification key: " + ids.userId);
+					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
 				
@@ -415,7 +416,7 @@ var app = {
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage('passo2.html');
+										mainView.router.loadPage('presentation1.html');
 									}
 									
 								

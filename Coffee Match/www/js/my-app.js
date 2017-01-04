@@ -56,7 +56,8 @@ myApp.onPageInit('passo2', function (page) {
 	
 	var pickerDescribe = myApp.calendar({
 		input: '#passo2-nascimento',
-		dateFormat: 'yyyy-dd-mm'
+		dateFormat: 'yyyy-dd-mm',
+		closeOnSelect: true
 	}); 
 });
 
