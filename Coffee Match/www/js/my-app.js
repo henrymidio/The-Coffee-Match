@@ -54,11 +54,40 @@ myApp.onPageInit('passo2', function (page) {
 		mainView.router.loadPage('index.html');
 	})
 	
-	var pickerDescribe = myApp.calendar({
-		input: '#passo2-nascimento',
-		dateFormat: 'yyyy-dd-mm',
-		closeOnSelect: true
-	}); 
+	var today = new Date();
+ 
+	var pickerInline = myApp.picker({
+    input: '#passo2-nascimento',
+    toolbar: true,
+    rotateEffect: true,
+ 
+    formatValue: function (p, values, displayValues) {
+        return displayValues[0] + '-' + values[1] + '-' + values[2];
+    },
+ 
+    cols: [
+		// Years
+        {
+            values: (function () {
+                var arr = [];
+                for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+                return arr;
+            })(),
+			textAlign: 'left'
+        },
+        // Months
+        {
+            values: ('1 2 3 4 5 6 7 8 9 10 11 12').split(' '),
+            displayValues: ('January February March April May June July August September October November December').split(' '),
+            textAlign: 'center'
+        },
+        // Days
+        {
+            values: [01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+        }
+        
+    ]
+}); 
 });
 
 myApp.onPageInit('confirmacao-convite', function (page) {
@@ -124,7 +153,7 @@ myApp.onPageInit('convites', function (page) {
 									var idc = localStorage.setItem("idc", data[i].id);
 									
 									//Monta o DOM
-									var line1 = "<li class='swipeout'>"
+									var line1 = "<li class='swipeout' id='kjk'>"
 												+ "<div class='swipeout-content'>"
 												+ "<div class='item-content'>"
 												+ "<div class='item-media cont'>"
@@ -140,13 +169,31 @@ myApp.onPageInit('convites', function (page) {
 												+ "</a>"
 												+ "</div>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='swipeout-delete'>Deletar</a>"
+												+ "<a href='#' class='swipeout-delete' id='kjk'>Deletar</a>"
 												+ "</div>"
 												+ "</li>";
 														
 									$("#invites-li").append(line1);
 									
 									}
+									
+									//Deleta convite
+									$('.swipeout-delete').on('click', function () {
+									 
+									  var inviteId = $(this).parents("li").find("div.div-match").attr("id");										
+									
+									  var matchToDelete = {
+											invite: inviteId
+										};
+										
+										$.ajax({
+																	url: 'http://thecoffeematch.com/webservice/delete-invite.php',
+																	type: 'post',
+																	data: matchToDelete						
+										});
+										
+									});
+									
 									
 									$(".match").on("click touch", function(){
 										localStorage.setItem("idc", $(this).attr("id"));		
@@ -536,8 +583,9 @@ $$('.messagebar').on('click', function () {
 								dataType: 'json',
 								data: g,
 								success: function (data) {
-									var user;
+									var user; //shown_user
 									var message_id;
+								
 									for(i = 0; i < data.length; i++){
 										
 										if(data[i].id === user_id){
@@ -548,6 +596,7 @@ $$('.messagebar').on('click', function () {
 														+ "</div>";
 											$(".messages").append(line0);
 										} else {
+											if(data[i].id){
 											user = data[i].id;
 											
 											//Monta o DOM
@@ -558,9 +607,15 @@ $$('.messagebar').on('click', function () {
 															//+ "<div class='message-label'>"+data[i].data+"</div>"
 															+ "</div>";
 											$(".messages").append(line1);
+											} else {
+												if(data[0].first_user === user_id){
+													user = data[0].sec_user;
+												}
+											}
 										}
 									
 									}
+								
 									$('.messagebar').trigger('click');
 																
 									myInterval = setInterval(function(){ 
@@ -575,6 +630,9 @@ $$('.messagebar').on('click', function () {
 	function getLastMessage(user, combinacao){
 		
 		var last_message_id = $(".message-received").last().attr("id");
+		if(!last_message_id){
+			last_message_id = 0;
+		}
 		var lm = {
 			  user: user,
 			  last_message_id: last_message_id,

@@ -37,8 +37,11 @@ var app = {
 		
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
-			if(jsonData.notification.payload.additionalData.foo == "invite") {
+			if(jsonData.notification.payload.additionalData.type == "invite") {
 				mainView.router.loadPage('convites.html');
+			}
+			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
+				mainView.router.loadPage('combinacoes.html');
 			}
  		};
  
@@ -366,12 +369,14 @@ var app = {
 			 
 				//facebookConnectPlugin.browserInit("1647443792236383");
 				
-				notification_key = null;			
+				notification_key = null;
+				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
+				
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
@@ -467,6 +472,15 @@ var app = {
 			});
 		
 		myApp.onPageBeforeRemove('match', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+			
+			myApp.onPageInit('login', function() {
+			    StatusBar.overlaysWebView(true);
+	
+			});
+		
+		myApp.onPageBeforeRemove('login', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
 		}

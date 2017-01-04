@@ -34,6 +34,23 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		/*
+		var notificationOpenedCallback = function(jsonData) {
+ 			//alert(jsonData.notification.payload.additionalData.foo);
+			if(jsonData.notification.payload.additionalData.type == "invite") {
+				mainView.router.loadPage('convites.html');
+			}
+			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
+				mainView.router.loadPage('combinacoes.html');
+			}
+ 		};
+ 
+ 		window.plugins.OneSignal
+ 			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
+			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
+ 			.handleNotificationOpened(notificationOpenedCallback)
+ 			.endInit();
+		*/
 		
     },
     // Update DOM on a Received Event
@@ -350,25 +367,30 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				facebookConnectPlugin.browserInit("1647443792236383");	
+				facebookConnectPlugin.browserInit("1647443792236383");
+				
+				notification_key = null;
+				/*
+				//Push Notifications
+				window.plugins.OneSignal.getIds(function(ids) {
+					//alert("Notification key: " + ids.userId);
+					notification_key = ids.userId;
+				});
+				*/
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
 					  function onSuccess (result) {
-						  /*
-						    facebookConnectPlugin.getAccessToken(function(token) {
-								console.log(token)
-								localStorage.setItem("token", token);
-								
-							 });
-							 */
-							 
-						    var person = {
+						  
+						  var person = {
 								fbid: result.id,
+								notification_key: notification_key,
 								name: result.name,
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
+						 							
+							alert("person: " + person.notification_key);
 							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
@@ -402,7 +424,7 @@ var app = {
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage('passo2.html');
+										mainView.router.loadPage('presentation1.html');
 									}
 									
 								
@@ -450,6 +472,15 @@ var app = {
 			});
 		
 		myApp.onPageBeforeRemove('match', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+			
+			myApp.onPageInit('login', function() {
+			    StatusBar.overlaysWebView(true);
+	
+			});
+		
+		myApp.onPageBeforeRemove('login', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
 		}
