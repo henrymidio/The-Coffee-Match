@@ -367,7 +367,7 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				facebookConnectPlugin.browserInit("1647443792236383");
+				//facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
 				/*

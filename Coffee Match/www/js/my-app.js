@@ -102,8 +102,9 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								dataType: 'json',
 								data: dadosConfirm,
 								success: function (data) {
-									
-									$$("#name-confirm").html(data.name);
+									$$(".toolbar-image").attr("src", data.picture);
+									//$('.center').contents().last()[0].textContent= data.name;
+									$$("#name-confirm").html(data.name + ", " + data.age);
 									$$("#age-confirm").html(data.nascimento);
 									$$("#occupation-confirm").html(data.occupation);
 									$$("#pic-confirm").attr("src", data.picture);
@@ -140,6 +141,8 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 myApp.onPageInit('convites', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	var y = {user_id: user_id};
+	
+	myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-invites.php',
@@ -147,6 +150,10 @@ myApp.onPageInit('convites', function (page) {
 								dataType: 'json',
 								data: y,
 								success: function (data) {
+									if(data == null){
+										myApp.hidePreloader();
+										return false;
+									}
 									for(i = 0; i < data.length; i++){
 									
 									//Seta id da confirmacao-convite
@@ -202,6 +209,8 @@ myApp.onPageInit('convites', function (page) {
 										localStorage.setItem("invite", $(this).attr("id"));
 									})
 									
+									myApp.hidePreloader();
+									
 								}
 								
 								
@@ -214,7 +223,7 @@ myApp.onPageInit('combinacoes', function (page) {
 	
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}
-	
+	myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-matches.php',
@@ -260,6 +269,8 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
 									});
+									
+									myApp.hidePreloader();
 									
 								}
 															
@@ -322,9 +333,13 @@ myApp.onPageInit('messages', function (page) {
 								success: function (data) {
 									
 									for(i = 0; i < data.length; i++){
-										
+										var replyArrow = "";
 										if(data[i].last_message === null){
 											data[i].last_message = "Combinado em "+data[i].date;
+										}
+										
+										if(data[i].user == x.user_id) {
+											replyArrow = "<img style='width: 12px; height: 12px; margin-right: 5px' src='img/reply-arrow.png' /> "
 										}
 													
 										//Monta o DOM
@@ -335,7 +350,7 @@ myApp.onPageInit('messages', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='chat.html' class='item-link chat' id="+data[i].id+">"
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>"+data[i].last_message+"</span></div></div></a></li>";		
+												+ "<span class='subtitle'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
 																		
 										$(".chat").on("click", function(){
@@ -520,6 +535,8 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
+	myApp.showPreloader();
+	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
 	
@@ -583,6 +600,7 @@ $$('.messagebar').on('click', function () {
 								dataType: 'json',
 								data: g,
 								success: function (data) {
+									
 									var user; //shown_user
 									var message_id;
 								
@@ -613,6 +631,8 @@ $$('.messagebar').on('click', function () {
 												}
 											}
 										}
+										
+										myApp.hidePreloader();
 									
 									}
 								

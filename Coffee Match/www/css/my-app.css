@@ -285,6 +285,10 @@ letter-spacing:0.09em;
 	margin-top: -10;
 }
 
+.toolbar-image {
+	width: 30px; height: 30px; border-radius: 100%; margin-right: 13px;
+}
+
 .college {
 	color: #775952;
 	opacity: 0.8;
