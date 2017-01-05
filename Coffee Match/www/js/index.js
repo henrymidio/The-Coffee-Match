@@ -390,7 +390,7 @@ var app = {
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
 						 							
-							alert("person: " + person.notification_key);
+							
 							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
@@ -483,6 +483,30 @@ var app = {
 		myApp.onPageBeforeRemove('login', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
+			
+			myApp.onPageInit('presentation1', function() {
+			    StatusBar.overlaysWebView(true);
+			});
+			myApp.onPageBeforeRemove('presentation1', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+			
+			myApp.onPageInit('presentation2', function() {
+			    StatusBar.overlaysWebView(true);
+			});
+			myApp.onPageBeforeRemove('presentation2', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+			
+			myApp.onPageInit('presentation3', function() {
+			    StatusBar.overlaysWebView(true);
+	
+			});
+			myApp.onPageBeforeRemove('presentation3', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+		
+		
 		}
 		
 		
