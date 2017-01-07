@@ -128,9 +128,8 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								type: 'post',
 								data: dados,
 								success: function (data) {
-											
-									mainView.router.loadPage("match.html");
-									
+									localStorage.setItem("match", data.match);
+									mainView.router.loadPage("match.html");	
 								}
 								
 							});
@@ -693,7 +692,7 @@ myApp.onPageBack('chat', function (page) {
 });
 
 myApp.onPageInit('match', function (page) {
-	var suid = localStorage.getItem("shown_user_id");
+	var suid = localStorage.getItem("idc");
 	var d = {shown_user_id: suid};
 	
 	//Ajax request to get user info
