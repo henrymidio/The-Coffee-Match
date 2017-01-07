@@ -292,7 +292,7 @@ var app = {
 		});
 		
 		myApp.onPageInit('detail-calendar', function(){
-			myApp.showPreloader();
+			//myApp.showPreloader();
 			var userPicture = localStorage.getItem("picture");
 			var userName    = localStorage.getItem("name");
 			var match       = localStorage.getItem("match");
@@ -341,14 +341,16 @@ var app = {
 										document.getElementById("first-user-name").innerHTML = userName;
 										document.getElementById("calendar").innerHTML = data.date;
 										if(data[0][0].id !== localStorage.getItem("user_id")){
+											
 											document.getElementById("sec-user-pic").src= data[0][0].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][0].name;
 										}
 										else {
+											
 											document.getElementById("sec-user-pic").src= data[0][1].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
 										}
-									myApp.hidePreloader();
+									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
 									myApp.hidePreloader();

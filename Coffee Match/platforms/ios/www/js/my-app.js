@@ -142,7 +142,7 @@ myApp.onPageInit('convites', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	var y = {user_id: user_id};
 	
-	myApp.showPreloader();
+	//myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-invites.php',
@@ -209,7 +209,7 @@ myApp.onPageInit('convites', function (page) {
 										localStorage.setItem("invite", $(this).attr("id"));
 									})
 									
-									myApp.hidePreloader();
+									//myApp.hidePreloader();
 									
 								}
 								
@@ -223,7 +223,7 @@ myApp.onPageInit('combinacoes', function (page) {
 	
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}
-	myApp.showPreloader();
+	//myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-matches.php',
@@ -270,7 +270,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										mainView.router.loadPage("detail-calendar.html");
 									});
 									
-									myApp.hidePreloader();
+									//myApp.hidePreloader();
 									
 								}
 															
@@ -309,8 +309,7 @@ myApp.onPageInit('detail-calendar', function(page){
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
-						color: 'red'
+						text: 'Cancel'
 					}
 				];
 				var groups = [buttons1, buttons2];
@@ -323,7 +322,7 @@ myApp.onPageInit('messages', function (page) {
 	
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
-	myApp.showPreloader();
+	//myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-last-message.php',
@@ -359,7 +358,7 @@ myApp.onPageInit('messages', function (page) {
 									}
 									
 									
-									myApp.hidePreloader();
+									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
 									alert(request.responseText);
@@ -484,7 +483,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 								dataType: 'json',
 								data: ud,
 								success: function (data) {
-									
+																		
 									if(data.notification_invites == false){
 										$('#check-convites').prop('checked', false);
 									}
@@ -494,9 +493,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 									if(data.metrica == 'k'){
 										$('#check-km').prop('checked', true);
 										$('#check-mile').prop('checked', false);
+										$$("#valBox").html(data.distance + " km");
 									} else {
 										$('#check-km').prop('checked', false);
 										$('#check-mile').prop('checked', true);
+										$$("#valBox").html(data.distance + "mi")
 									}
 									
 								},
@@ -527,15 +528,15 @@ myApp.onPageBeforeInit('settings', function (page) {
 			metrica = 'm';
 		};
 		
-		var distance = document.getElementById("valBox").html;
+		var distance = $$("#ranger").val();
 		var user_id = localStorage.getItem("user_id");
-	
+	alert(distance);
 		setPreferences(metrica, distance, convites, emails, user_id);
 	})
 });
 
 myApp.onPageInit('chat', function (page) {
-	myApp.showPreloader();
+	//myApp.showPreloader();
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
@@ -632,7 +633,7 @@ $$('.messagebar').on('click', function () {
 											}
 										}
 										
-										myApp.hidePreloader();
+										//myApp.hidePreloader();
 									
 									}
 								

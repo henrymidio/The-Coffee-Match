@@ -292,7 +292,7 @@ var app = {
 		});
 		
 		myApp.onPageInit('detail-calendar', function(){
-			myApp.showPreloader();
+			//myApp.showPreloader();
 			var userPicture = localStorage.getItem("picture");
 			var userName    = localStorage.getItem("name");
 			var match       = localStorage.getItem("match");
@@ -341,14 +341,16 @@ var app = {
 										document.getElementById("first-user-name").innerHTML = userName;
 										document.getElementById("calendar").innerHTML = data.date;
 										if(data[0][0].id !== localStorage.getItem("user_id")){
+											
 											document.getElementById("sec-user-pic").src= data[0][0].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][0].name;
 										}
 										else {
+											
 											document.getElementById("sec-user-pic").src= data[0][1].picture;
 											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
 										}
-									myApp.hidePreloader();
+									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
 									myApp.hidePreloader();
@@ -367,7 +369,7 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");
+				facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
 				/*
@@ -390,7 +392,7 @@ var app = {
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
 						 							
-							alert("person: " + person.notification_key);
+							
 							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
@@ -483,6 +485,30 @@ var app = {
 		myApp.onPageBeforeRemove('login', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
+			
+			myApp.onPageInit('presentation1', function() {
+			    StatusBar.overlaysWebView(true);
+			});
+			myApp.onPageBeforeRemove('presentation1', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+			
+			myApp.onPageInit('presentation2', function() {
+			    StatusBar.overlaysWebView(true);
+			});
+			myApp.onPageBeforeRemove('presentation2', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+			
+			myApp.onPageInit('presentation3', function() {
+			    StatusBar.overlaysWebView(true);
+	
+			});
+			myApp.onPageBeforeRemove('presentation3', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+		
+		
 		}
 		
 		
