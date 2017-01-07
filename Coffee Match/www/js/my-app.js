@@ -483,7 +483,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 								dataType: 'json',
 								data: ud,
 								success: function (data) {
-																		
+									$$("#ranger").val(data.distance);									
 									if(data.notification_invites == false){
 										$('#check-convites').prop('checked', false);
 									}
@@ -530,7 +530,6 @@ myApp.onPageBeforeInit('settings', function (page) {
 		
 		var distance = $$("#ranger").val();
 		var user_id = localStorage.getItem("user_id");
-	alert(distance);
 		setPreferences(metrica, distance, convites, emails, user_id);
 	})
 });
@@ -800,7 +799,7 @@ function showVal(newVal){
 
 //Seta preferências
 function setPreferences(metrica, distance, convites, emails, user_id){
-	  myApp.showPreloader();
+	//myApp.showPreloader();
 	var pref = {metrica: metrica, distance: distance, convites: convites, emails: emails, user_id: user_id};
 
 	$.ajax({
@@ -811,7 +810,7 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 										
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
-										myApp.hidePreloader();
+										//myApp.hidePreloader();
 										myApp.alert('Settings updated!', 'The Coffee match');
 								}
 							});
