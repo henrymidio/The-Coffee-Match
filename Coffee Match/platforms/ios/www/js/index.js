@@ -353,7 +353,7 @@ var app = {
 									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
-									myApp.hidePreloader();
+									//myApp.hidePreloader();
 									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});	

@@ -4,7 +4,7 @@ html, body {
     margin: 0;
     position: relative;
 	font-family: 'Dosis', sans-serif;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 input.rounded {
 	border: none;
 	border-radius: 15px;
-	font-size: 15px;
+	font-size: 16px;
 	padding: 9px 12px;
 	padding-left: 45px;
 	width: 265px;
@@ -29,14 +29,20 @@ input.rounded {
 
 
 .close-popup i.icon.icon-back {
-	background-image: url('../img/ic_action_cancel.png');
+	background-image: url('../img/ic_action_accept.png');
+	width: 22px;
+	height: 22px;
+}
+
+.navbar .center {
+	color: white;
 }
 
 select.rounded {
 	background: url('../img/icon_tag.png') no-repeat #e6e2dc 11px 12px !important;
 	border: none;
 	border-radius: 15px;
-	font-size: 15px;
+	font-size: 16px;
 	padding: 9px 12px;
 	padding-left: 45px;
 	width: 280px;
@@ -85,7 +91,7 @@ select.rounded {
 }
 
 .message-text {
-	font-size: 15px !important;
+	font-size: 16px !important;
 }
 
 ::-webkit-input-placeholder {
@@ -103,7 +109,7 @@ select.rounded {
 
 .btn {
   border-radius: 28px;
-  font-size: 20px;
+  font-size: 21px;
   background: ;
   padding: 10px 20px 10px 20px;
   border: solid #3B5998 2px;
@@ -112,7 +118,7 @@ select.rounded {
 
 .btn-pink {
   border-radius: 28px;
-  font-size: 16px;
+  font-size: 17px;
   background: #ed7b83;
   color: white;
   padding: 10px 20px 10px 20px;
@@ -123,7 +129,7 @@ select.rounded {
 
 .btn-yellow {
   border-radius: 28px;
-  font-size: 16px;
+  font-size: 17px;
   background: #feb93b;
   color: white;
   padding: 10px 20px 10px 20px;
@@ -138,7 +144,7 @@ select.rounded {
   border-radius: 28px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 16px;
   background: #ed7b83;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
@@ -236,7 +242,7 @@ letter-spacing:0.09em;
 }
 
 .item-title {
-	font-size: 15px !important;
+	font-size: 16px !important;
 	color: #775952 !important;
 }
 
@@ -245,7 +251,7 @@ letter-spacing:0.09em;
 }
 
 .subtitle {
-	font-size: 15px;
+	font-size: 16px;
 	color: #775952;
 }
 
@@ -281,6 +287,11 @@ letter-spacing:0.09em;
 	width: 220px;
 }
 
+#message {
+	padding: 10px; background: white; border-radius: 20px; font-size: 16px; margin-left: 30px; margin-right: 30px; box-shadow: 3px 3px 0px 0px  #FFFFFF;
+	
+}
+
 .skills {
 	margin-top: -10;
 }
@@ -293,7 +304,7 @@ letter-spacing:0.09em;
 	color: #775952;
 	opacity: 0.8;
 	margin-top: -33px;
-	font-size: 16px;
+	font-size: 17px;
 	font-weight: 600;
 	//float: right;
 }
@@ -301,7 +312,7 @@ letter-spacing:0.09em;
 .friends {
 	//margin-top: -8px;
 	color: #775952;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 .friends img {
@@ -390,7 +401,7 @@ letter-spacing:0.09em;
     bottom: 10%;
     //left: 40%;
     z-index: 1;
-	font-size: 15px;
+	font-size: 16px;
 	color: white;
     overflow: hidden;
 }
@@ -437,7 +448,7 @@ letter-spacing:0.09em;
   margin: 0 .5em;
   margin-top: 20px;
   display: inline-block;
-  font-size: 20px;
+  font-size: 21px;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
   -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
 }
@@ -481,7 +492,7 @@ display: inline-block;
 }
 
 .Conteudo {
-	font-size: 16px;
+	font-size: 17px;
 }
 
 .presentation {

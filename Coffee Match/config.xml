@@ -15,6 +15,7 @@
 	<preference name="windows-appx-target" value="8.1-phone" />
 	<preference name="WindowsToastCapable" value="true" />
 	
+	<preference name="orientation" value="portrait" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />

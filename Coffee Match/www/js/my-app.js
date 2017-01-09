@@ -70,7 +70,7 @@ myApp.onPageInit('passo2', function (page) {
         {
             values: (function () {
                 var arr = [];
-                for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+                for (var i = 1950; i <= 1999; i++) { arr.push(i); }
                 return arr;
             })(),
 			textAlign: 'left'
@@ -756,10 +756,10 @@ var pickerDescribe = myApp.picker({
     cols: [
         {
             textAlign: 'left',
-            values: ('00: 01: 02: 03: 04: 05: 06: 07: 08: 09: 10: 11: 12: 13: 14: 15: 16: 17: 18: 19: 20: 21: 22: 23:').split(' ')
+            values: ('01: 02: 03: 04: 05: 06: 07: 08: 09: 10: 11: 12:').split(' ')
         },
         {
-            values: ('00 30').split(' ')
+            values: ('00 15 30 45').split(' ')
         },
 		{
             values: ('AM PM').split(' ')
@@ -810,7 +810,7 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
 										//myApp.hidePreloader();
-										myApp.alert('Settings updated!', 'The Coffee match');
+										//myApp.alert('Settings updated!', 'The Coffee match');
 								}
 							});
 }
