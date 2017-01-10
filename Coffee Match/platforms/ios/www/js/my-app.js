@@ -42,7 +42,7 @@ myApp.onPageInit('passo2', function (page) {
 		});
 		tags = tags.join(); 
 		
-		//localStorage.setItem("age", nascimento);
+		localStorage.setItem("age", nascimento);
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
@@ -395,7 +395,7 @@ myApp.onPageInit('profile', function (page) {
 	});
 	
 	$$(".profile-name").html(localStorage.getItem("name") + ", ");
-	$$("#profile-age").html(localStorage.getItem("age"));
+	$$("#profile-age").html(getAge(localStorage.getItem("age")));
 	$$("#description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#occupation").val(localStorage.getItem("occupation"));
@@ -497,6 +497,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 										$('#check-km').prop('checked', false);
 										$('#check-mile').prop('checked', true);
 										$$("#valBox").html(data.distance + "mi")
+										//localStorage.setItem("metrica", "Mi");
 									}
 									
 								},
@@ -525,6 +526,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 		var metrica = 'k';
 		if($('#check-mile').is(":checked")){
 			metrica = 'm';
+			localStorage.setItem("metrica", "Mi");
 		};
 		
 		var distance = $$("#ranger").val();
@@ -777,7 +779,8 @@ $$("#confirmar-data").on("click", function(){
 	
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
-	
+	alert(d2.match)
+	alert(d2.data)
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
@@ -856,5 +859,16 @@ function convertTo24(date){
 	var minutos = data.getMinutes();
 	
 	return ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":00";
+}
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
 }
 

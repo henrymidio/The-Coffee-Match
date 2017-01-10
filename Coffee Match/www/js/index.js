@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		/*
+		
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -50,7 +50,7 @@ var app = {
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.handleNotificationOpened(notificationOpenedCallback)
  			.endInit();
-		*/
+		
 		
     },
     // Update DOM on a Received Event
@@ -163,7 +163,9 @@ var app = {
 								dataType: 'json',
 								data: dados,
 								crossDomain: true,
-								success: function (data) {							
+								success: function (data) {		
+									
+									var metrica = localStorage.getItem("metrica");
 									
 									var position = data.length - 1;
 									localStorage.setItem("shown_user_id", data[position].id);
@@ -186,7 +188,7 @@ var app = {
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+">"
 												+ "<div class='row'>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0' id='distance'>10</span><br><p class='subcol' id='distance'>Km</p></div>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
 												+ "</div>"
@@ -247,8 +249,8 @@ var app = {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span> - <span id='proximas-distance' style='color: #ed7b83'>"+data[i].distance+"km</span></span></div></div></a></li>";		
+												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'>"+data[i].distance+"km</span></span><br>"
+												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
 										var pin = data[i];		
@@ -369,16 +371,16 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				facebookConnectPlugin.browserInit("1647443792236383");
+				//facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				/*
+				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
-				*/
+				
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
@@ -412,6 +414,7 @@ var app = {
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
+										localStorage.setItem("metrica", "Km");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage("index.html");
@@ -424,6 +427,7 @@ var app = {
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
+										localStorage.setItem("metrica", "Km");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage('presentation1.html');
