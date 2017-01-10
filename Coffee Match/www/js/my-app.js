@@ -773,14 +773,15 @@ $$("#confirmar-data").on("click", function(){
 	var data    = $$("#picker-data").val();
 	var horario = $$("#picker-horario").val().substring(0,6);
 	var complemento = $$("#picker-horario").val().substring(6,9);
-	
+alert(data)
+alert(horario)
+alert(complemento)	
 	var value   = data + " " + horario.replace(/\s/g,'') + "" + complemento;
 	value = convertTo24(value);
 	
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
-	alert(d2.match)
-	alert(d2.data)
+	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
@@ -788,6 +789,7 @@ $$("#confirmar-data").on("click", function(){
 								success: function (data) {
 									myApp.alert("Horário agendado!", "");
 									mainView.router.loadPage('combinacoes.html');
+									return false;
 								}
 					});
 })
