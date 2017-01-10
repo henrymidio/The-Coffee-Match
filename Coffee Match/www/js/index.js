@@ -249,7 +249,7 @@ var app = {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'>"+data[i].distance+"km</span></span><br>"
+												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'> - "+data[i].distance+"km</span></span><br>"
 												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
@@ -266,14 +266,15 @@ var app = {
 										});
 									}
 									
-									$('.starbucks').on('click', function(){
+									$('.starbucks').on('touchstart click', function(e){
 				
 										var starbucks = $(this).attr("id");
 										var metaData = {
 											  match: localStorage.getItem("match"),
 											  starbucks: starbucks
 										}
-										  
+										 alert(metaData.match);
+										alert(metaData.starbucks);	
 										$.ajax({
 																			url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
 																			type: 'post',
@@ -283,6 +284,7 @@ var app = {
 																				mainView.router.loadPage("detail-calendar.html");
 																			}
 										});
+										e.stopPropagation();
 									});
 									
 								}
