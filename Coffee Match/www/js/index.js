@@ -44,7 +44,7 @@ var app = {
 				mainView.router.loadPage('combinacoes.html');
 			}
  		};
- 
+		
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
@@ -274,15 +274,14 @@ var app = {
 											  combinacao: comb,
 											  starbucks: starbucks
 										}
-										alert(metaData.combinacao);
-										alert(metaData.starbucks);	
+										
 										$.ajax({
 																			url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
 																			type: 'post',
 																			data: metaData,
 																			success: function (data) {
 																				 
-																				mainView.router.loadPage("detail-calendar.html");
+																				mainView.router.loadPage("calendario.html");
 																			}
 										});
 										e.stopPropagation(); //stops propagation

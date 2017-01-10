@@ -62,6 +62,7 @@
 								success: function (data) {
 									
 									if(data.message === "match")	{	
+										
 										localStorage.setItem("match", data.combinacao);
 										mainView.router.loadPage('match.html');
 									} else {	

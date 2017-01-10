@@ -127,8 +127,10 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								url: 'http://thecoffeematch.com/webservice/put-like.php',
 								type: 'post',
 								data: dados,
+								dataType: 'json',
 								success: function (data) {
-									localStorage.setItem("match", data.match);
+							
+									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
 								}
 								
@@ -769,18 +771,17 @@ var pickerDescribe = myApp.picker({
     ]
 }); 
 
-$$("#confirmar-data").on("click", function(){
+$$("#confirmar-data").on("touchstart click", function(e){
 	var data    = $$("#picker-data").val();
 	var horario = $$("#picker-horario").val().substring(0,6);
 	var complemento = $$("#picker-horario").val().substring(6,9);
-	
-	var value   = data + " " + horario.replace(/\s/g,'') + "" + complemento;
+
+	var value  = data + " " + horario.replace(/\s/g,'') + "" + complemento;
 	value = convertTo24(value);
-	
+
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
-	alert(d2.match)
-	alert(d2.data)
+	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
@@ -788,8 +789,10 @@ $$("#confirmar-data").on("click", function(){
 								success: function (data) {
 									myApp.alert("Horário agendado!", "");
 									mainView.router.loadPage('combinacoes.html');
+									
 								}
-					});
+	});
+	e.stopPropagation(); //stops propagation
 })
 
 })
@@ -851,7 +854,7 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 }
 
 function convertTo24(date){
-	var data = new Date(date);
+	var data = new Date(date.replace(/-/g, "/"));
     var ano = data.getFullYear();
 	var mes = data.getMonth() + 1;
 	var dia = data.getDate();

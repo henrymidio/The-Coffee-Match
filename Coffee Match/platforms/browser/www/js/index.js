@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -44,13 +44,13 @@ var app = {
 				mainView.router.loadPage('combinacoes.html');
 			}
  		};
- 
+		
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.handleNotificationOpened(notificationOpenedCallback)
  			.endInit();
-		
+		*/
 		
     },
     // Update DOM on a Received Event
@@ -249,7 +249,7 @@ var app = {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'>"+data[i].distance+"km</span></span><br>"
+												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'> - "+data[i].distance+"km</span></span><br>"
 												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
@@ -266,23 +266,25 @@ var app = {
 										});
 									}
 									
-									$('.starbucks').on('click', function(){
-				
+									$('.starbucks').on('touchstart click', function(e){
+										
+										var comb = localStorage.getItem("match");
 										var starbucks = $(this).attr("id");
 										var metaData = {
-											  match: localStorage.getItem("match"),
+											  combinacao: comb,
 											  starbucks: starbucks
 										}
-										  
+										
 										$.ajax({
 																			url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
 																			type: 'post',
 																			data: metaData,
 																			success: function (data) {
 																				 
-																				mainView.router.loadPage("detail-calendar.html");
+																				mainView.router.loadPage("calendario.html");
 																			}
 										});
+										e.stopPropagation(); //stops propagation
 									});
 									
 								}
@@ -371,16 +373,16 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");
+				facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
-				
+				*/
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],

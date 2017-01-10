@@ -127,8 +127,10 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								url: 'http://thecoffeematch.com/webservice/put-like.php',
 								type: 'post',
 								data: dados,
+								dataType: 'json',
 								success: function (data) {
-									localStorage.setItem("match", data.match);
+							
+									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
 								}
 								
