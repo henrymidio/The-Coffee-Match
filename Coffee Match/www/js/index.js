@@ -267,13 +267,14 @@ var app = {
 									}
 									
 									$('.starbucks').on('touchstart click', function(e){
+										e.stopPropagation();
 										var comb = localStorage.getItem("match");
 										var starbucks = $(this).attr("id");
 										var metaData = {
-											  match: comb,
+											  combinacao: comb,
 											  starbucks: starbucks
 										}
-										 alert(metaData.match);
+										alert(metaData.match);
 										alert(metaData.starbucks);	
 										$.ajax({
 																			url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
@@ -284,7 +285,7 @@ var app = {
 																				mainView.router.loadPage("detail-calendar.html");
 																			}
 										});
-										e.stopPropagation();
+										
 									});
 									
 								}
