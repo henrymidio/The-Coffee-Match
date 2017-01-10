@@ -775,9 +775,8 @@ $$("#confirmar-data").on("touchstart click", function(e){
 	var complemento = $$("#picker-horario").val().substring(6,9);
 
 	var value  = data + " " + horario.replace(/\s/g,'') + "" + complemento;
-	alert(value)
 	value = convertTo24(value);
-	alert(value)
+
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
 	
@@ -854,7 +853,9 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 
 function convertTo24(date){
 	var data = new Date(date);
+	alert(data)
     var ano = data.getFullYear();
+	alert(ano)
 	var mes = data.getMonth() + 1;
 	var dia = data.getDate();
 	var hora = data.getHours();
