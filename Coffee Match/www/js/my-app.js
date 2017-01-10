@@ -769,16 +769,15 @@ var pickerDescribe = myApp.picker({
     ]
 }); 
 
-$$("#confirmar-data").on("click", function(){
+$$("#confirmar-data").on("touchstart click", function(e){
 	var data    = $$("#picker-data").val();
 	var horario = $$("#picker-horario").val().substring(0,6);
 	var complemento = $$("#picker-horario").val().substring(6,9);
-alert(data)
-alert(horario)
-alert(complemento)	
-	var value   = data + " " + horario.replace(/\s/g,'') + "" + complemento;
+
+	var value  = data + " " + horario.replace(/\s/g,'') + "" + complemento;
+	alert(value)
 	value = convertTo24(value);
-	
+	alert(value)
 	var match = localStorage.getItem("match");
 	var d2 = {match: match, data: value};
 	
@@ -789,9 +788,10 @@ alert(complemento)
 								success: function (data) {
 									myApp.alert("Horário agendado!", "");
 									mainView.router.loadPage('combinacoes.html');
-									return false;
+									
 								}
-					});
+	});
+	e.stopPropagation(); //stops propagation
 })
 
 })
