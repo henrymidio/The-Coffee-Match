@@ -267,10 +267,10 @@ var app = {
 									}
 									
 									$('.starbucks').on('touchstart click', function(e){
-				
+										var comb = localStorage.getItem("match");
 										var starbucks = $(this).attr("id");
 										var metaData = {
-											  match: localStorage.getItem("match"),
+											  match: comb,
 											  starbucks: starbucks
 										}
 										 alert(metaData.match);
