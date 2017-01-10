@@ -852,10 +852,8 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 }
 
 function convertTo24(date){
-	var data = new Date(date);
-	alert(data)
+	var data = new Date(date.replace(/-/g, "/"));
     var ano = data.getFullYear();
-	alert(ano)
 	var mes = data.getMonth() + 1;
 	var dia = data.getDate();
 	var hora = data.getHours();
