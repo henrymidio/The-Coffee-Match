@@ -102,13 +102,23 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								dataType: 'json',
 								data: dadosConfirm,
 								success: function (data) {
+									var metrica = localStorage.getItem("metrica");
+									metrica = metrica ? metrica : "Km";
+									
+									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
+									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
+									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
+									var skill4 = data.skill4 ? "<span class='tag'>"+data.skill4+"</span>" : "";
+									var skill5 = data.skill5 ? "<span class='tag'>"+data.skill5+"</span>" : "";
+									
 									$$(".toolbar-image").attr("src", data.picture);
-									//$('.center').contents().last()[0].textContent= data.name;
-									$$("#name-confirm").html(data.name + ", " + data.age);
-									$$("#age-confirm").html(data.nascimento);
+									$$("#name-confirm").html(data.name);
+									$$("#invite-age").html(data.age);
+									$$("#invite-college").html(data.college);
 									$$("#occupation-confirm").html(data.occupation);
 									$$("#pic-confirm").attr("src", data.picture);
-									$$("#message").html(data.message);
+									$(".skills").append(skill1, skill2, skill3, skill4, skill5);
+									$$("#message").html("<b>My message is:</b><br> " + data.message);
 								}
 							});
 	
@@ -253,7 +263,7 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-link item-content'>"
-												+ "<div class='item-media'>"
+												+ "<div class='item-media profile' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -269,6 +279,12 @@ myApp.onPageInit('combinacoes', function (page) {
 									$(".match").on("click", function(){
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
+									});
+									
+									$(".profile").on("click", function(){
+										var idp = $(this).attr("id");
+										localStorage.setItem("preview", idp);
+										mainView.router.loadPage("profile-preview.html");
 									});
 									
 									//myApp.hidePreloader();
@@ -295,14 +311,12 @@ myApp.onPageInit('detail-calendar', function(page){
 					},
 					{
 						text: 'Starbucks',
-						bold: true,
 						onClick: function () {
 							mainView.router.loadPage("starbucks-proximas.html");
 						}
 					},
 					{
 						text: 'Calendar',
-						bold: true,
 						onClick: function () {
 							mainView.router.loadPage("calendario.html");
 						}
@@ -310,13 +324,53 @@ myApp.onPageInit('detail-calendar', function(page){
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel'
+						text: 'Cancel',
+						color: 'red'
 					}
 				];
 				var groups = [buttons1, buttons2];
 				myApp.actions(groups);
 				
 	});
+});
+
+myApp.onPageInit('profile-preview', function (page) {
+	//Preview é o id do usuário que irá ser visualizado
+	var preview = localStorage.getItem("preview");
+	
+	var dado = {
+		shown_user_id: preview
+	};
+	
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
+								type: 'post',
+								data: dado,
+								dataType: 'json',
+								success: function (data) {
+									
+									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
+									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
+									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
+									var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
+									
+									$$("#preview-img").attr("src", data[0].picture);
+									$$("#preview-name").html(data[0].name);
+									$$("#preview-age").html(data[0].age);
+									$$("#preview-occupation").html(data[0].occupation);
+									$(".habilidades").append(skill1, skill2, skill3, skill4, skill5);
+									$$("#preview-college").html(data[0].college);
+									$$("#preview-description").html(data[0].description);
+									
+								}
+								
+	});
+	
+	$("#to-edit-profile").on("click", function(){
+		mainView.router.loadPage('profile.html');
+	});
+	
 });
 
 myApp.onPageInit('messages', function (page) {
@@ -425,7 +479,7 @@ myApp.onPageInit('profile', function (page) {
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, idade, faculdade, tags, user_id);
 		
-		mainView.router.back();
+		mainView.router.loadPage('index.html');
 	})
 	
 	

@@ -156,7 +156,7 @@ var app = {
 				user_id: localStorage.getItem('user_id'),
 				distance: localStorage.getItem('distance')
 			}
-			
+			localStorage.setItem("preview", localStorage.getItem('user_id'));
 			$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
 								type: 'post',
@@ -166,6 +166,7 @@ var app = {
 								success: function (data) {		
 									
 									var metrica = localStorage.getItem("metrica");
+									metrica = metrica ? metrica : "Km";
 									
 									var position = data.length - 1;
 									localStorage.setItem("shown_user_id", data[position].id);
@@ -192,7 +193,7 @@ var app = {
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
 												+ "</div>"
-												+ "<p class='username'><b>"+data[i].name+"</b></p>"
+												+ "<p class='username'>"+data[i].name+"</p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
 												+ "<div class='skills text-center'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
@@ -248,7 +249,7 @@ var app = {
 												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.gif'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='#' class='item-link starbucks' id="+data[i].id+">"
+												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"
 												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'> - "+data[i].distance+"km</span></span><br>"
 												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
@@ -266,7 +267,7 @@ var app = {
 										});
 									}
 									
-									$('.starbucks').on('touchstart click', function(e){
+									$('.starbucks').on('click', function(e){
 										
 										var comb = localStorage.getItem("match");
 										var starbucks = $(this).attr("id");
@@ -284,7 +285,7 @@ var app = {
 																				mainView.router.loadPage("calendario.html");
 																			}
 										});
-										e.stopPropagation(); //stops propagation
+										//e.stopPropagation(); //stops propagation
 									});
 									
 								}
@@ -339,7 +340,7 @@ var app = {
 											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
 										});
 										
-										document.getElementById("starbucks-name").innerHTML = data.starbucks_name;
+										document.getElementById("starbucks-name").innerHTML = "Starbucks " + data.starbucks_name;
 										document.getElementById("starbucks-address").innerHTML = data.street + ", " + data.num;
 										document.getElementById("first-user-pic").src= userPicture;
 										document.getElementById("first-user-name").innerHTML = userName;
