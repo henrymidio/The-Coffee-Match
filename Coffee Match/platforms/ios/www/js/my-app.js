@@ -37,6 +37,26 @@ myApp.onPageInit('passo2', function (page) {
 		var faculdade = $$("#passo2-faculdade").val();
 		var nascimento = $$("#passo2-nascimento").val();
 		
+		if (descricao.length == 0) {
+			alert("Set description field");
+			return false;
+		}
+		
+		if (profissao.length == 0) {
+			alert("Set occupation field");
+			return false;
+		}
+		
+		if (faculdade.length == 0) {
+			alert("Set college field");
+			return false;
+		}
+		
+		if (nascimento.length == 0) {
+			alert("Set birthday field");
+			return false;
+		}
+		
 		$('select option:selected').each(function(){
 				tags.push($(this).text());
 		});
@@ -487,6 +507,7 @@ myApp.onPageInit('profile', function (page) {
 
 
 //SHOWN USER
+/*
 myApp.onPageInit('user', function (page) {
 	var suid = localStorage.getItem("shown_user_id");
 	var d = {shown_user_id: suid};
@@ -509,7 +530,7 @@ myApp.onPageInit('user', function (page) {
 								}
 							});
 	$$('.but-info').on('click', function () {
-		myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {
+		myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
 		    localStorage.setItem("message", value);
 			$("#tinderslide").jTinder('like');
 			mainView.router.back();
@@ -524,7 +545,7 @@ myApp.onPageInit('user', function (page) {
 		mainView.router.back();
 	});
 });
-
+*/
 
 myApp.onPageBeforeInit('settings', function (page) {
 	

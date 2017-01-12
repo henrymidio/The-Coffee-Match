@@ -90,7 +90,7 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt('Sobre o que você quer conversar?', "Coffee Match", function (value) {
+			myApp.prompt('My coffe message is:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				$("#tinderslide").jTinder('like');
 			});
@@ -197,7 +197,7 @@ var app = {
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
 												+ "<div class='skills text-center'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
-												+ "<p class='friends' style='margin-top: -10px'>"+data[i].description+"</p>"
+												+ "<p class='friends' style='margin-top: -20px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
 												+ "</li>";		
