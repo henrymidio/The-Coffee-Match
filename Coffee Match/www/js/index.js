@@ -90,7 +90,7 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt('My coffe message is:', "The Coffee Match", function (value) {
+			myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				$("#tinderslide").jTinder('like');
 			});
