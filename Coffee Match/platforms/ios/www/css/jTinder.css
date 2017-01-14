@@ -101,7 +101,7 @@
 }
 
 #tinderslide .dislike {
-    right: 45px;
+    right: -38px;
     left: auto;
     background: url("../img/nope.png") no-repeat scroll 0 0;
 }

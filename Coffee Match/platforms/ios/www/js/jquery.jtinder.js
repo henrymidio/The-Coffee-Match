@@ -41,7 +41,12 @@
 				
 			},
 			onLike: function(){ 
-			
+				/*
+				myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
+					
+					localStorage.setItem("message", value);
+				});
+				*/
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
