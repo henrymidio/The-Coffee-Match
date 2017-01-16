@@ -58,8 +58,8 @@ var app = {
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
- 			.handleNotificationOpened(notificationOpenedCallback)
 			.handleNotificationReceived(notificationReceivedCallback)
+ 			.handleNotificationOpened(notificationOpenedCallback)
  			.endInit();
 		
 		
@@ -251,6 +251,7 @@ var app = {
 								dataType: 'json',
 								data: latLngUser,
 								success: function (data) {
+									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
 										
@@ -261,7 +262,7 @@ var app = {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'> - "+data[i].distance+"km</span></span><br>"
+												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'> - "+data[i].distance+ " " + metrica + " </span></span><br>"
 												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
