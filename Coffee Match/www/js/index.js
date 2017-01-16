@@ -46,14 +46,14 @@ var app = {
  		};
 		
 		var notificationReceivedCallback = function(jsonData) {
-			alert("teste")
+			//alert("teste")
  		};
 		
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
 			.handleNotificationReceived(notificationReceivedCallback)
  			.handleNotificationOpened(notificationOpenedCallback)
-			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
+			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
 		
 		
