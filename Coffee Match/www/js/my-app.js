@@ -284,7 +284,7 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-link item-content'>"
-												+ "<div class='item-media profile' "+data[i].preview_id+">"
+												+ "<div class='item-media profile' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"

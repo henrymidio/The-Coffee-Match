@@ -10,7 +10,8 @@ var $$ = Dom7;
 var mainView = myApp.addView('.view-main', {
   // Because we want to use dynamic navbar, we need to enable it for this view:
   dynamicNavbar: true,
-  animateNavBackIcon: true
+  animateNavBackIcon: true,
+  preloadPreviousPage: false
 });  
 
 myApp.onPageInit('passo2', function (page) {
@@ -283,7 +284,7 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-link item-content'>"
-												+ "<div class='item-media profile'>"
+												+ "<div class='item-media profile' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -304,7 +305,7 @@ myApp.onPageInit('combinacoes', function (page) {
 									$(".profile").on("click", function(){
 										var idp = $(this).attr("id");
 										localStorage.setItem("preview", idp);
-										mainView.router.loadPage("profile-preview.html");
+										mainView.router.loadPage("profile-view.html");
 									});
 									
 									//myApp.hidePreloader();
@@ -389,6 +390,41 @@ myApp.onPageInit('profile-preview', function (page) {
 	
 	$("#to-edit-profile").on("click", function(){
 		mainView.router.loadPage('profile.html');
+	});
+	
+});
+
+myApp.onPageInit('profile-view', function (page) {
+	//Preview é o id do usuário que irá ser visualizado
+	var preview = localStorage.getItem("preview");
+	
+	var dado = {
+		shown_user_id: preview
+	};
+	
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
+								type: 'post',
+								data: dado,
+								dataType: 'json',
+								success: function (data) {
+									
+									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
+									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
+									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
+									var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
+									
+									$$("#profile-view-img").attr("src", data[0].picture);
+									$$("#profile-view-name").html(data[0].name);
+									$$("#profile-view-age").html(data[0].age);
+									$$("#profile-view-occupation").html(data[0].occupation);
+									$(".sks").append(skill1, skill2, skill3, skill4, skill5);
+									$$("#profile-view-college").html(data[0].college);
+									$$("#profile-view-description").html(data[0].description);
+									
+								}
+								
 	});
 	
 });
