@@ -45,10 +45,21 @@ var app = {
 			}
  		};
 		
+		var notificationReceivedCallback = function(jsonData) {
+ 			
+			if(jsonData.notification.payload.additionalData.type == "invite") {
+				alert("invite")
+			}
+			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
+				alert("matches")
+			}
+ 		};
+		
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.handleNotificationOpened(notificationOpenedCallback)
+			.handleNotificationReceived(notificationReceivedCallback)
  			.endInit();
 		
 		
@@ -246,7 +257,7 @@ var app = {
 																				
 										var line1 = "<li class='item-content'>"
 												+ "<div class='item-media'>"
-												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.gif'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks.png'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"

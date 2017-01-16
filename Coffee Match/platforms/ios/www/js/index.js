@@ -246,7 +246,7 @@ var app = {
 																				
 										var line1 = "<li class='item-content'>"
 												+ "<div class='item-media'>"
-												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.gif'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks.png'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"
