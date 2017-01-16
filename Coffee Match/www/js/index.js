@@ -46,20 +46,14 @@ var app = {
  		};
 		
 		var notificationReceivedCallback = function(jsonData) {
- 			
-			if(jsonData.notification.payload.additionalData.type == "invite") {
-				alert("invite")
-			}
-			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
-				alert("matches")
-			}
+			alert("teste")
  		};
 		
  		window.plugins.OneSignal
  			.startInit("a7b1d9c7-a559-4147-8b4f-044439baa349")
-			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
 			.handleNotificationReceived(notificationReceivedCallback)
  			.handleNotificationOpened(notificationOpenedCallback)
+			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None)
  			.endInit();
 		
 		
