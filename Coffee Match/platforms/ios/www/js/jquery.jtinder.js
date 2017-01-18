@@ -66,14 +66,12 @@
 								dataType: 'json',
 								success: function (data) {
 									
-									if(data.message === "match")	{	
-										
+									if(data.message === "match")	{		
 										localStorage.setItem("match", data.combinacao);
 										mainView.router.loadPage('match.html');
 									} else {	
 										var shown_user_id = panes.eq(current_pane).attr("id");
-										localStorage.setItem("shown_user_id", shown_user_id);	
-										
+										localStorage.setItem("shown_user_id", shown_user_id);		
 									}
 									
 								}

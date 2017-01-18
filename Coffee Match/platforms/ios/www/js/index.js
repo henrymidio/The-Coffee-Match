@@ -95,19 +95,11 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
+			myApp.prompt('Send a message:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				$("#tinderslide").jTinder('like');
 			});
 			
-			/*
-			var modal = myApp.modal({
-				title: '<b>Rating</b>',
-				text: 'What do you think about Coffee Match?',
-				afterText:  '<div style="padding-top: 20px; padding-bottom: 20px"><img src="img/stars.png" width="240" height="40" /></div>',
-				
-			  })
-			*/
 		});
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
