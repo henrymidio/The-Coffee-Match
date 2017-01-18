@@ -11,7 +11,7 @@ var mainView = myApp.addView('.view-main', {
   // Because we want to use dynamic navbar, we need to enable it for this view:
   dynamicNavbar: true,
   animateNavBackIcon: true,
-  swipePanel: 'left'
+  swipeBackPage: false
 });  
 
 myApp.onPageInit('passo2', function (page) {
@@ -912,14 +912,15 @@ $$("#confirmar-data").on("touchstart click", function(e){
 	value = convertTo24(value);
 
 	var match = localStorage.getItem("match");
-	var d2 = {match: match, data: value};
+	var user_id = localStorage.getItem("user_id");
+	var d2 = {match: match, data: value, user_id: user_id};
 	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
 								data: d2,
 								success: function (data) {
-									//myApp.alert("Horário agendado!", "");
+									
 									mainView.router.loadPage('detail-calendar.html');
 									
 								}
@@ -998,7 +999,7 @@ function convertTo24(date){
 
 function getAge(dateString) {
     var today = new Date();
-    var birthDate = new Date(dateString);
+    var birthDate = new Date(dateString.replace(/-/g, "/"));
     var age = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
