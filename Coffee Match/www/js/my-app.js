@@ -912,14 +912,15 @@ $$("#confirmar-data").on("touchstart click", function(e){
 	value = convertTo24(value);
 
 	var match = localStorage.getItem("match");
-	var d2 = {match: match, data: value};
+	var user_id = localStorage.getItem("user_id");
+	var d2 = {match: match, data: value, user_id: user_id};
 	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
 								data: d2,
 								success: function (data) {
-									//myApp.alert("Horário agendado!", "");
+									
 									mainView.router.loadPage('detail-calendar.html');
 									
 								}
