@@ -11,7 +11,7 @@ var mainView = myApp.addView('.view-main', {
   // Because we want to use dynamic navbar, we need to enable it for this view:
   dynamicNavbar: true,
   animateNavBackIcon: true,
-  swipePanel: 'left'
+  swipeBackPage: false
 });  
 
 myApp.onPageInit('passo2', function (page) {
