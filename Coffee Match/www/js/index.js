@@ -45,10 +45,9 @@ var app = {
 			}
  		};
 		
-		var notificationReceivedCallback = function(jsonData) {
+		var notificationReceivedCallback = function(json) {
 			//if(jsonData.notification.payload.additionalData.type == "invite") {
-				myApp.alert('test');
-				myApp.alert(jsonData.notification.payload.additionalData.type);
+				myApp.alert(JSON.stringify(json););
 				$$("#icon-invite").attr("src", "img/sino02.PNG");
 			//}	
  		};
