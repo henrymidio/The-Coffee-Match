@@ -47,7 +47,10 @@ var app = {
 		
 		var notificationReceivedCallback = function(json) {
 			//if(jsonData.notification.payload.additionalData.type == "invite") {
-				alert(json.notification.payload.additionalData.type);
+				alert(json.payload)
+				alert(json.payload.rawPayload)
+				alert(json.payload.rawPayload.custom)
+				alert(json.payload.rawPayload.custom.a.type);
 				$$("#icon-invite").attr("src", "img/sino02.PNG");
 			//}	
  		};
