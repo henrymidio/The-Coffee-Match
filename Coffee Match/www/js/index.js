@@ -46,13 +46,12 @@ var app = {
  		};
 		
 		var notificationReceivedCallback = function(json) {
-			//if(jsonData.notification.payload.additionalData.type == "invite") {
-				alert(json.payload)
-				alert(json.payload.rawPayload)
-				alert(json.payload.rawPayload.custom)
-				alert(json.payload.rawPayload.custom.a.type);
+			if(json.payload.rawPayload.custom.a.type == "invite") {
 				$$("#icon-invite").attr("src", "img/sino02.PNG");
-			//}	
+			}
+			if(json.payload.rawPayload.custom.a.type == "message") {
+				//$$("#icon-invite").attr("src", "img/sino02.PNG");
+			}
  		};
 		
  		window.plugins.OneSignal
