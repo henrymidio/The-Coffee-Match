@@ -903,7 +903,7 @@ var pickerDescribe = myApp.picker({
     ]
 }); 
 
-$$("#confirmar-data").one("click", function(e){
+$$("#confirmar-data").on("touchstart click", function(e){
 	var data    = $$("#picker-data").val();
 	var horario = $$("#picker-horario").val().substring(0,6);
 	var complemento = $$("#picker-horario").val().substring(6,9);
