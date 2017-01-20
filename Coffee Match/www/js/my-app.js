@@ -882,7 +882,7 @@ var calendarInline = myApp.calendar({
 		$$('.calendar-custom-toolbar .right p').text(monthNames[p.currentMonth + 1]);
     }, 
 	onDayClick: function (p, dayContainer, year, month, day) {
-		$("#picker-horario").trigger("touchstart");
+		pickerDescribe.open();
 	}
 }); 
 

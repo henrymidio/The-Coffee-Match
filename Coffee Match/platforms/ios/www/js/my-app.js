@@ -882,7 +882,7 @@ var calendarInline = myApp.calendar({
 		$$('.calendar-custom-toolbar .right p').text(monthNames[p.currentMonth + 1]);
     }, 
 	onDayClick: function (p, dayContainer, year, month, day) {
-		$("#picker-horario").trigger("click");
+		pickerDescribe.open();
 	}
 }); 
 
@@ -903,7 +903,7 @@ var pickerDescribe = myApp.picker({
     ]
 }); 
 
-$$("#confirmar-data").on("touchstart click", function(e){
+$("#confirmar-data").one("click", function(e){
 	var data    = $$("#picker-data").val();
 	var horario = $$("#picker-horario").val().substring(0,6);
 	var complemento = $$("#picker-horario").val().substring(6,9);
@@ -925,7 +925,7 @@ $$("#confirmar-data").on("touchstart click", function(e){
 									
 								}
 	});
-	e.stopPropagation(); //stops propagation
+	//e.stopPropagation(); //stops propagation
 });
 
 });

@@ -11,7 +11,7 @@ var mainView = myApp.addView('.view-main', {
   // Because we want to use dynamic navbar, we need to enable it for this view:
   dynamicNavbar: true,
   animateNavBackIcon: true,
-  preloadPreviousPage: false
+  swipeBackPage: false
 });  
 
 myApp.onPageInit('passo2', function (page) {
@@ -208,7 +208,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "</a>"
 												+ "</div>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='swipeout-delete' id='kjk'>Deletar</a>"
+												+ "<a href='#' class='swipeout-delete' id='kjk'>Delete</a>"
 												+ "</div>"
 												+ "</li>";
 														
@@ -374,13 +374,13 @@ myApp.onPageInit('profile-preview', function (page) {
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
 									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
-									var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
+									//var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
 									
 									$$("#preview-img").attr("src", data[0].picture);
 									$$("#preview-name").html(data[0].name);
 									$$("#preview-age").html(data[0].age);
 									$$("#preview-occupation").html(data[0].occupation);
-									$(".habilidades").append(skill1, skill2, skill3, skill4, skill5);
+									$(".habilidades").append(skill1, skill2, skill3, skill4);
 									$$("#preview-college").html(data[0].college);
 									$$("#preview-description").html(data[0].description);
 									
@@ -505,9 +505,10 @@ myApp.onPageInit('profile', function (page) {
 									}
 								}
 	});
-	
+	var birthday = localStorage.getItem("age");
+	var age = getAge(birthday);
 	$$(".profile-name").html(localStorage.getItem("name") + ", ");
-	$$("#profile-age").html(getAge(localStorage.getItem("age")));
+	$$("#profile-age").html(age);
 	$$("#description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#occupation").val(localStorage.getItem("occupation"));
@@ -587,6 +588,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 	
 	var uid = localStorage.getItem("user_id");
 	var ud = {user_id: uid};
+	var dst = null;
 	
 	//Ajax request to get user
 	$.ajax({
@@ -595,7 +597,8 @@ myApp.onPageBeforeInit('settings', function (page) {
 								dataType: 'json',
 								data: ud,
 								success: function (data) {
-									$$("#ranger").val(data.distance);									
+									$$("#ranger").val(data.distance);
+									dst = data.distance;
 									if(data.notification_invites == false){
 										$('#check-convites').prop('checked', false);
 									}
@@ -609,7 +612,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 									} else {
 										$('#check-km').prop('checked', false);
 										$('#check-mile').prop('checked', true);
-										$$("#valBox").html(data.distance + "mi")
+										$$("#valBox").html(data.distance + " Mi")
 										//localStorage.setItem("metrica", "Mi");
 									}
 									
@@ -620,11 +623,25 @@ myApp.onPageBeforeInit('settings', function (page) {
 	});
 	
 	$('#check-mile:checkbox').change(function() {
-		$('#check-km').prop('checked', false);
+		if($(this).is(":checked")) {
+			$('#check-km').prop('checked', false);
+			$$("#valBox").html(dst + " Mi");
+		} else {
+			$('#check-km').prop('checked', true);
+			$$("#valBox").html(dst + " km");
+		}
 	});
 	
 	$('#check-km:checkbox').change(function() {
-		$('#check-mile').prop('checked', false);
+		
+		if($(this).is(":checked")) {
+			$('#check-mile').prop('checked', false);
+			$$("#valBox").html(dst + " km");
+		} else {
+			$('#check-mile').prop('checked', true);
+			$$("#valBox").html(dst + " Mi");
+		}
+		
 	});
 	
 	$$('#salvar').on('click', function(){
@@ -645,7 +662,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 		var distance = $$("#ranger").val();
 		var user_id = localStorage.getItem("user_id");
 		setPreferences(metrica, distance, convites, emails, user_id);
-		mainView.router.loadPage('starbucks-proximas.html');
+		mainView.router.loadPage('index.html');
 	})
 });
 
@@ -863,7 +880,10 @@ var calendarInline = myApp.calendar({
 		$$('.calendar-custom-toolbar .left p').text(monthNames[p.currentMonth - 1]);
         $$('.calendar-custom-toolbar .center').text(monthNames[p.currentMonth]);
 		$$('.calendar-custom-toolbar .right p').text(monthNames[p.currentMonth + 1]);
-    }
+    }, 
+	onDayClick: function (p, dayContainer, year, month, day) {
+		pickerDescribe.open();
+	}
 }); 
 
 var pickerDescribe = myApp.picker({
@@ -883,7 +903,7 @@ var pickerDescribe = myApp.picker({
     ]
 }); 
 
-$$("#confirmar-data").on("touchstart click", function(e){
+$("#confirmar-data").one("click", function(e){
 	var data    = $$("#picker-data").val();
 	var horario = $$("#picker-horario").val().substring(0,6);
 	var complemento = $$("#picker-horario").val().substring(6,9);
@@ -892,22 +912,23 @@ $$("#confirmar-data").on("touchstart click", function(e){
 	value = convertTo24(value);
 
 	var match = localStorage.getItem("match");
-	var d2 = {match: match, data: value};
+	var user_id = localStorage.getItem("user_id");
+	var d2 = {match: match, data: value, user_id: user_id};
 	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
 								data: d2,
 								success: function (data) {
-									//myApp.alert("Horário agendado!", "");
-									mainView.router.loadPage('combinacoes.html');
+									
+									mainView.router.loadPage('detail-calendar.html');
 									
 								}
 	});
-	e.stopPropagation(); //stops propagation
-})
+	//e.stopPropagation(); //stops propagation
+});
 
-})
+});
 
 //Mudança do slider de distância
 function showVal(newVal){
@@ -978,7 +999,7 @@ function convertTo24(date){
 
 function getAge(dateString) {
     var today = new Date();
-    var birthDate = new Date(dateString);
+    var birthDate = new Date(dateString.replace(/-/g, "/"));
     var age = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {

@@ -45,8 +45,13 @@ var app = {
 			}
  		};
 		
-		var notificationReceivedCallback = function(jsonData) {
-			//alert("teste")
+		var notificationReceivedCallback = function(json) {
+			if(json.payload.rawPayload.custom.a.type == "invite") {
+				$$("#icon-invite").attr("src", "img/sino02.PNG");
+			}
+			if(json.payload.rawPayload.custom.a.type == "message") {
+				//$$("#icon-invite").attr("src", "img/sino02.PNG");
+			}
  		};
 		
  		window.plugins.OneSignal
@@ -95,19 +100,14 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
+			myApp.prompt('Send a message:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
+				if(value.length == 0){
+					localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+				}
 				$("#tinderslide").jTinder('like');
 			});
 			
-			/*
-			var modal = myApp.modal({
-				title: '<b>Rating</b>',
-				text: 'What do you think about Coffee Match?',
-				afterText:  '<div style="padding-top: 20px; padding-bottom: 20px"><img src="img/stars.png" width="240" height="40" /></div>',
-				
-			  })
-			*/
 		});
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
@@ -250,9 +250,9 @@ var app = {
 									for(i in data) {
 										
 																				
-										var line1 = "<li class='item-content'>"
+										var line1 = "<li class='item-content' style='padding-left: 8px'>"
 												+ "<div class='item-media'>"
-												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks.png'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.png'  style='margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"

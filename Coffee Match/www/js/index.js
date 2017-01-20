@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -60,7 +60,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
 		
     },
     // Update DOM on a Received Event
@@ -102,6 +102,9 @@ var app = {
 			
 			myApp.prompt('Send a message:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
+				if(value.length == 0){
+					localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+				}
 				$("#tinderslide").jTinder('like');
 			});
 			
@@ -247,9 +250,9 @@ var app = {
 									for(i in data) {
 										
 																				
-										var line1 = "<li class='item-content'>"
+										var line1 = "<li class='item-content' style='padding-left: 8px'>"
 												+ "<div class='item-media'>"
-												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.jpg'  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.png'  style='margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"
@@ -377,16 +380,16 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");
+				facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
-				
+				*/
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
