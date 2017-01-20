@@ -51,7 +51,7 @@
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				var message = localStorage.getItem("message");
-				if(message.length == 0){
+				if(!message){
 					message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
 				}
 								
