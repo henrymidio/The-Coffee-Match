@@ -66,7 +66,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
-		localStorage.removeItem("starCount")
+		
 		var starCount = localStorage.getItem("starCount");
 		
 		//Variável que testa se o usuário está logado
@@ -220,11 +220,10 @@ var app = {
 									});
 								}								
 							});
-				
-		myApp.onPageInit('starbucks-proximas', function(){
-			
-			if(starCount <= 0){
-				StatusBar.overlaysWebView(false);
+						
+		if(starCount <= 0){
+		 myApp.onPageInit('starbucks-proximas', function(){
+			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
 			var mapOptions = {
 				center: latLng,
@@ -301,13 +300,15 @@ var app = {
 									
 								}
 							});
-			}
+			
 			
 							
 			
-			localStorage.setItem("starCount", 1);
 			
-		});
+			
+		 });
+		}
+		localStorage.setItem("starCount", 1);
 		
 		myApp.onPageInit('detail-calendar', function(){
 			//myApp.showPreloader();
