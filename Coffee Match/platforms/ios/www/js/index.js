@@ -66,8 +66,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
-		
-		var starCount = localStorage.getItem("starCount");
+		localStorage.removeItem("starCount")
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
@@ -221,8 +220,9 @@ var app = {
 								}								
 							});
 						
-		if(starCount <= 0){
+		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
+			 
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
 			var mapOptions = {
