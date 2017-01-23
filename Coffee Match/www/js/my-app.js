@@ -521,6 +521,26 @@ myApp.onPageInit('profile', function (page) {
 		var faculdade = $$("#graduation").val();
 		var idade     = null;
 		
+		if (descricao.length == 0) {
+			alert("Set description field");
+			return false;
+		}
+		
+		if (profissao.length == 0) {
+			alert("Set occupation field");
+			return false;
+		}
+		
+		if (faculdade.length == 0) {
+			alert("Set college field");
+			return false;
+		}
+		
+		if (nascimento.length == 0) {
+			alert("Set birthday field");
+			return false;
+		}
+		
 		$('select option:selected').each(function(){
 			tags.push($(this).text());
 		});

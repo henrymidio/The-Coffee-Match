@@ -339,7 +339,7 @@ letter-spacing:0.09em;
 .img-circle-plus {
 	width: 110px;
 	height: 110px;
-	border-radius: 20%;
+	border-radius: 100%;
 	vertical-align: middle;
 }
 

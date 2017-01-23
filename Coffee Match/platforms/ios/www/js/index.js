@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -60,11 +60,14 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
 		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
+		localStorage.removeItem("starCount")
+		var starCount = localStorage.getItem("starCount");
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
@@ -219,7 +222,9 @@ var app = {
 							});
 				
 		myApp.onPageInit('starbucks-proximas', function(){
-			StatusBar.overlaysWebView(false);
+			
+			if(starCount <= 0){
+				StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
 			var mapOptions = {
 				center: latLng,
@@ -296,9 +301,11 @@ var app = {
 									
 								}
 							});
+			}
+			
 							
 			
-			
+			localStorage.setItem("starCount", 1);
 			
 		});
 		
@@ -380,16 +387,16 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");
+				facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
-				
+				*/
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
