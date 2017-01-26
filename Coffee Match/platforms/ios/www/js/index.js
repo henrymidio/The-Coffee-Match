@@ -50,7 +50,10 @@ var app = {
 				$$("#icon-invite").attr("src", "img/sino02.PNG");
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
-				//$$("#icon-invite").attr("src", "img/sino02.PNG");
+				$$("#icon-message").attr("src", "img/message_notification.png");
+			}
+			if(json.payload.rawPayload.custom.a.type == "booking") {
+				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
 			}
  		};
 		
@@ -111,6 +114,13 @@ var app = {
 			});
 			
 		});
+		$$('.nope').on('click', function () {
+				$("#tinderslide").jTinder('dislike');
+		});
+		$$('.yep').on('click', function () {
+				$("#tinderslide").jTinder('like');
+		});
+		
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
 		StatusBar.styleLightContent();
@@ -388,7 +398,7 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");
+			    //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
 				

@@ -41,16 +41,12 @@
 				
 			},
 			onLike: function(){ 
-				/*
-				myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
-					
-					localStorage.setItem("message", value);
-				});
-				*/
+				
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				var message = localStorage.getItem("message");
+				
 				
 				if(!message){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
@@ -63,13 +59,14 @@
 					message: message,
 					liked: 1
 				}
+				
 				$.ajax({
 								url: 'http://thecoffeematch.com/webservice/put-like.php',
 								type: 'post',
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-									
+									alert(data)
 									if(data.message === "match")	{		
 										localStorage.setItem("match", data.combinacao);
 										mainView.router.loadPage('match.html');
@@ -77,7 +74,10 @@
 										var shown_user_id = panes.eq(current_pane).attr("id");
 										localStorage.setItem("shown_user_id", shown_user_id);		
 									}
-									
+									localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+								},
+								error: function (request, status, error) {
+									alert(request.responseText);
 								}
 								
 							});
