@@ -50,7 +50,10 @@ var app = {
 				$$("#icon-invite").attr("src", "img/sino02.PNG");
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
-				//$$("#icon-invite").attr("src", "img/sino02.PNG");
+				$$("#icon-message").attr("src", "img/message_notification.png");
+			}
+			if(json.payload.rawPayload.custom.a.type == "booking") {
+				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
 			}
  		};
 		
@@ -105,12 +108,19 @@ var app = {
 			myApp.prompt('Send a message:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				if(value.length == 0){
-					localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				}
 				$("#tinderslide").jTinder('like');
 			});
 			
 		});
+		$$('.nope').on('click', function () {
+				$("#tinderslide").jTinder('dislike');
+		});
+		$$('.yep').on('click', function () {
+				$("#tinderslide").jTinder('like');
+		});
+		
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
 		StatusBar.styleLightContent();
@@ -210,7 +220,10 @@ var app = {
 												+ "</li>";		
 									$("#user-list").append(line1);
 									}
-									$$(".invite").toggleClass("none visivel");						
+									$$(".invite").toggleClass("none visivel");	
+									$$(".current").on("click", function(){
+										mainView.router.loadPage({url: "user.html", animatePages: false});
+									})
 									/**
 									 * jTinder initialization
 									 */
@@ -388,7 +401,7 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-				//facebookConnectPlugin.browserInit("1647443792236383");
+			    //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
 				

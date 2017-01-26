@@ -220,7 +220,10 @@ var app = {
 												+ "</li>";		
 									$("#user-list").append(line1);
 									}
-									$$(".invite").toggleClass("none visivel");						
+									$$(".invite").toggleClass("none visivel");	
+									$$(".current").on("click", function(){
+										mainView.router.loadPage({url: "user.html", animatePages: false});
+									})
 									/**
 									 * jTinder initialization
 									 */

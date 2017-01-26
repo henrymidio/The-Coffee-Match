@@ -1,7 +1,7 @@
 <!-- Top Navbar-->
         <div class="navbar">
           <div class="navbar-inner">	    
-            <div class="sliding center color-white">Edit Profile</div>
+            <div class="sliding center color-white">Complete Your Profile</div>
           </div>
         </div>
 
@@ -52,12 +52,12 @@
 				<div style="padding-top: 1px; margin-top: 19px; margin-bottom: 10px">
 					
 					<div>
-						<input class="rounded" type="text" id="passo2-description" placeholder="What are you looking for?">
+						<input class="rounded" type="text" id="passo2-description" placeholder="Tell me about your project or idea">
 					</div>
 				
 				</div>
 				<br>
-				<h4>Share your skills</h4>
+				<h4>Select your skills</h4>
 				
 			  </div>
 			  
@@ -66,7 +66,7 @@
 					<!-- Smart select item -->
 					<li>
 					  <!-- Additional "smart-select" class -->
-					  <a href="#" class="item-link smart-select" data-open-in="popup" data-popup-close-text=" " data-searchbar="true" data-page-title="Choose your skills (Min 02 - Max 04)" data-searchbar-placeholder="Search skills">
+					  <a href="#" id="skills" class="item-link smart-select" data-open-in="popup" data-popup-close-text=" " data-searchbar="true" data-page-title="Choose your skills (02 to 04)" data-searchbar-placeholder="Search skills">
 						<!-- select -->
 						<select name="tags" multiple maxlength="4">
 						  
@@ -82,6 +82,41 @@
 					<!-- Another smart selects or list view elements -->
 					
 				  </ul>
+			</div>
+			<div class="text-center" style="margin-top: -10px">
+				<h4 style="color: #775952">What are you looking for?</h4>
+				<div class="list-block" style="margin-left: 13px; margin-right: 13px; margin-top: -10px">
+					  <ul style="border: none; border-radius: 15px; background: #e6e2dc">
+						<!-- Smart select item -->
+						<li>
+						  <!-- Additional "smart-select" class -->
+						  <a href="#" id="looking-for" class="item-link smart-select" data-open-in="popup" data-popup-close-text=" " data-searchbar="true" data-page-title="What are you looking for? (02 to 04)" data-searchbar-placeholder="Search">
+							<!-- select -->
+							<select name="looking" multiple maxlength="3">
+								<option>Collaborators</option>
+								<option>Free time coffee</option>
+								<option>Freelance projects</option>
+								<option>Funding</option>
+								<option>Ideas & Inspiration</option>
+								<option>Job opportunities</option>
+								<option>Language lessons</option>
+								<option>Mentorship</option>
+								<option>New friends</option>
+								<option>Partnership</option>
+								<option>Talent to hire</option>
+							</select>
+							<div class="item-content">
+							  <div class="item-inner">
+								<!-- Select label -->
+								<div class="item-title"></div>
+							  </div>
+							</div>
+						  </a>
+						</li>
+						<!-- Another smart selects or list view elements -->
+						
+					  </ul>
+				</div>
 			</div>
 
 			  <div class="text-center" style="margin-top: -10px" id="finalizar">

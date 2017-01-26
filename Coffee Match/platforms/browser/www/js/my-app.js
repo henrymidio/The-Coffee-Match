@@ -21,7 +21,7 @@ myApp.onPageInit('passo2', function (page) {
 								dataType: 'json',
 								success: function (data) {
 									for(i = 0; i < data.length; i++){
-										myApp.smartSelectAddOption('.smart-select select', "<option>"+data[i].nome+"</option>");
+										myApp.smartSelectAddOption('#skills select', "<option>"+data[i].nome+"</option>");
 									}
 								}
 	});
@@ -33,6 +33,7 @@ myApp.onPageInit('passo2', function (page) {
 	
 	$$("#finalizar").on("click", function(){
 		var tags = [];
+		var looking = [];
 		var descricao = $$("#passo2-description").val();
 		var profissao = $$("#passo2-profissao").val();
 		var faculdade = $$("#passo2-faculdade").val();
@@ -58,10 +59,15 @@ myApp.onPageInit('passo2', function (page) {
 			return false;
 		}
 		
-		$('select option:selected').each(function(){
+		$('#skills select option:selected').each(function(){
 				tags.push($(this).text());
 		});
 		tags = tags.join(); 
+		
+		$('#looking-for select option:selected').each(function(){
+				looking.push($(this).text());
+		});
+		looking = looking.join(); 
 		
 		localStorage.setItem("age", nascimento);
 		localStorage.setItem("description", descricao);
@@ -70,7 +76,7 @@ myApp.onPageInit('passo2', function (page) {
 		
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, nascimento, faculdade, tags, user_id);
+		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
 		
 		mainView.router.loadPage('index.html');
 	})
@@ -383,6 +389,9 @@ myApp.onPageInit('profile-preview', function (page) {
 									$(".habilidades").append(skill1, skill2, skill3, skill4);
 									$$("#preview-college").html(data[0].college);
 									$$("#preview-description").html(data[0].description);
+									$$("#profile-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
+									$$("#profile-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
+									$$("#profile-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
 									
 								}
 								
@@ -422,6 +431,9 @@ myApp.onPageInit('profile-view', function (page) {
 									$(".sks").append(skill1, skill2, skill3, skill4, skill5);
 									$$("#profile-view-college").html(data[0].college);
 									$$("#profile-view-description").html(data[0].description);
+									$$("#view-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
+									$$("#view-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
+									$$("#view-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
 									
 								}
 								
@@ -497,12 +509,14 @@ myApp.onPageInit('profile', function (page) {
 									
 									for(i = 1; i < data.length; i++){
 										if(data[i].nome == data[0].skill1 || data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3 || data[i].nome == data[0].skill4 || data[i].nome == data[0].skill5){
-												myApp.smartSelectAddOption('.smart-select select', "<option selected>"+data[i].nome+"</option>");
+												myApp.smartSelectAddOption('#skills select', "<option selected>"+data[i].nome+"</option>");
 										} else {
-											myApp.smartSelectAddOption('.smart-select select', "<option>"+data[i].nome+"</option>");
+											myApp.smartSelectAddOption('#skills select', "<option>"+data[i].nome+"</option>");
 										}
-										
 									}
+									$("#looking-for select option:contains("+data[1].l1+")").prop('selected', true)
+									$("#looking-for select option:contains("+data[1].l2+")").prop('selected', true)
+									$("#looking-for select option:contains("+data[1].l3+")").prop('selected', true)
 								}
 	});
 	var birthday = localStorage.getItem("age");
@@ -516,6 +530,7 @@ myApp.onPageInit('profile', function (page) {
 	
 	$$("#finalizar-edicao").on("click", function(){
 		var tags = [];
+		var looking = [];
 		var descricao = $$("#description").val();
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
@@ -536,15 +551,15 @@ myApp.onPageInit('profile', function (page) {
 			return false;
 		}
 		
-		if (nascimento.length == 0) {
-			alert("Set birthday field");
-			return false;
-		}
-		
 		$('select option:selected').each(function(){
 			tags.push($(this).text());
 		});
 		tags = tags.join();
+		
+		$('#looking-for select option:selected').each(function(){
+				looking.push($(this).text());
+		});
+		looking = looking.join(); 
 		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
@@ -554,7 +569,7 @@ myApp.onPageInit('profile', function (page) {
 		
 		
 		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, idade, faculdade, tags, user_id);
+		setProfile(descricao, profissao, idade, faculdade, tags, looking, user_id);
 		
 		mainView.router.loadPage('index.html');
 	})
@@ -564,28 +579,41 @@ myApp.onPageInit('profile', function (page) {
 
 
 //SHOWN USER
-/*
+
 myApp.onPageInit('user', function (page) {
 	var suid = localStorage.getItem("shown_user_id");
-	var d = {shown_user_id: suid};
+	var dado = {
+		shown_user_id: suid
+	};
 	
-	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
 								type: 'post',
+								data: dado,
 								dataType: 'json',
-								data: d,
 								success: function (data) {
 									
-									$$("#nome").html(data[0].name);
-									$$("#description").html(data[0].description);
-									$$("#idade").html(data[0].age);
-									$$("#college").html(data[0].college);
-									$$("#occupation").html(data[0].occupation);
-									$$("#picture").attr("src", data[0].picture);
+									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
+									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
+									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
+									var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
+									
+									$$("#user-view-img").attr("src", data[0].picture);
+									$$("#user-view-name").html(data[0].name);
+									$$("#user-view-age").html(data[0].age);
+									$$("#user-view-occupation").html(data[0].occupation);
+									$(".skss").append(skill1, skill2, skill3, skill4, skill5);
+									$$("#user-view-college").html(data[0].college);
+									$$("#user-view-description").html(data[0].description);
+									$$("#l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
+									$$("#l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
+									$$("#l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
 									
 								}
-							});
+								
+	});
+	/*
 	$$('.but-info').on('click', function () {
 		myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
 		    localStorage.setItem("message", value);
@@ -601,8 +629,9 @@ myApp.onPageInit('user', function (page) {
 		$("#tinderslide").jTinder('like');
 		mainView.router.back();
 	});
+	*/
 });
-*/
+
 
 myApp.onPageBeforeInit('settings', function (page) {
 	
@@ -975,7 +1004,7 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 }
 
 //Seta informações do perfil (somente descrição por enquanto)
-function setProfile(description, occupation, nascimento, college, tags, user_id){
+function setProfile(description, occupation, nascimento, college, tags, looking, user_id){
 	
 	var info = {
 		description: description, 
@@ -983,6 +1012,7 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 		nascimento: nascimento,
 		college: college,
 		tags: tags,
+		looking: looking,
 		user_id: user_id
 		}
 	$.ajax({
@@ -996,12 +1026,11 @@ function setProfile(description, occupation, nascimento, college, tags, user_id)
 										
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("description", description);
-										//myApp.alert("Bem vindo ao Coffee Match!", "");
 										//mainView.router.loadPage('index.html');
 									}
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									alert(error);
 								}
 							});
 }
