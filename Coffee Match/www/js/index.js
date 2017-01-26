@@ -108,7 +108,7 @@ var app = {
 			myApp.prompt('Send a message:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				if(value.length == 0){
-					localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				}
 				$("#tinderslide").jTinder('like');
 			});

@@ -46,8 +46,7 @@
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				var message = localStorage.getItem("message");
-				
-				
+					
 				if(!message){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				} 
@@ -77,7 +76,7 @@
 									localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									//alert(error);
 								}
 								
 							});
