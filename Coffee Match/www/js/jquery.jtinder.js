@@ -49,7 +49,7 @@
 				
 				
 				if(!message){
-					localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				} 
 								
 				localStorage.setItem("shown_user_id", shown_user_id);
@@ -66,7 +66,7 @@
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-									alert(data)
+									
 									if(data.message === "match")	{		
 										localStorage.setItem("match", data.combinacao);
 										mainView.router.loadPage('match.html');
@@ -74,7 +74,7 @@
 										var shown_user_id = panes.eq(current_pane).attr("id");
 										localStorage.setItem("shown_user_id", shown_user_id);		
 									}
-									localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
+									localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 								},
 								error: function (request, status, error) {
 									alert(request.responseText);
