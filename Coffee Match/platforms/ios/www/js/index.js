@@ -493,15 +493,7 @@ var app = {
 			});
 			
 				
-		myApp.onPageInit('user', function() {
-			    StatusBar.overlaysWebView(true);
-				
-			});
-		
-		myApp.onPageBeforeRemove('user', function() {
-			    StatusBar.overlaysWebView(false);		
-			});
-			
+					
 			myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
 	
