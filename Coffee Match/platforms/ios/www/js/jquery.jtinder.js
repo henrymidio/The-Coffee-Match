@@ -16,6 +16,7 @@
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				
 				localStorage.setItem("shown_user_id", shown_user_id);
+				
 				var dados = {
 					user_id: user_id,
 					shown_user_id: shown_user_id,
@@ -46,12 +47,11 @@
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				var message = localStorage.getItem("message");
-					
+				
 				if(!message){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				} 
 								
-				localStorage.setItem("shown_user_id", shown_user_id);
 				var dados = {
 					user_id: user_id,
 					shown_user_id: shown_user_id,
@@ -76,13 +76,16 @@
 									localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 								},
 								error: function (request, status, error) {
-									//alert(error);
+									//alert(JSON.stringify(request));
+									var shown_user_id = panes.eq(current_pane).attr("id");
+									localStorage.setItem("shown_user_id", shown_user_id);
 								}
 								
 							});
 				
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
+				
 				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
 				if(current_pane <= 0){
 					$$(".invite").toggleClass("visivel none");	

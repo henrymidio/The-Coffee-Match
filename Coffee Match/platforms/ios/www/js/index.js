@@ -204,7 +204,7 @@ var app = {
 									var skill5 = data[i].skill5 ? "<span class='tag'>"+data[i].skill5+"</span>" : "";
 																	
 								    //Monta o DOM
-									var line1 = "<li class="+classe+" id="+data[i].id+">"
+									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html'>"
 												+ "<div class='row'>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
@@ -217,12 +217,15 @@ var app = {
 												+ "<p class='friends' style='margin-top: -20px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
-												+ "</li>";		
+												+ "</a></li>";		
 									$("#user-list").append(line1);
 									}
-									$$(".invite").toggleClass("none visivel");
+									$$(".buttons-row").toggleClass("none visivel");
 									/*
-									$$(".current").on("click", function(){
+									$(".current").on("click", function(){
+										mainView.router.loadPage({url: "user.html", animatePages: false});
+									})
+									$(".next").on("click", function(){
 										mainView.router.loadPage({url: "user.html", animatePages: false});
 									})
 									*/

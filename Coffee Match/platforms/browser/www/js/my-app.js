@@ -207,7 +207,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>Este convite expira em 3 dias</span>"
+												+ "<span class='subtitle'>This invitation expires in 3 days</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
