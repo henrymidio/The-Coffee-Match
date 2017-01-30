@@ -108,7 +108,11 @@ select.rounded {
 }
 
 .message-sent .message-text {
-	background-color: #2f3a41 !important;
+	background-color: #00d173 !important;
+}
+
+.layout-white .toolbar:before, .toolbar.layout-white:before {
+    background-color: #ddd !important;
 }
 
 .btn {
@@ -147,9 +151,9 @@ select.rounded {
   -moz-border-radius: 28;
   border-radius: 28px;
   font-family: Arial;
-  color: #ffffff;
+  color: white;
   font-size: 15px;
-  background: #d6616a;
+  background: #00d173;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
@@ -215,11 +219,40 @@ letter-spacing:0.09em;
 }
 
 .page {
-	background-color: #2f3a41 !important;
+	background-color: white !important;
 }
 
 .blue-page {
 	background-color: #2f3a41 !important;
+}
+
+.layout-white .content-block-inner {
+	background: white !important;
+}
+
+.layout-white .list-block #calendario {
+	background: white !important;
+	border: none !important;
+}
+
+.layout-white .list-block #calendario:before {
+	background-color: white !important;
+}
+
+.layout-white .list-block #calendario:after {
+	background-color: white !important;
+}
+
+.toolbar~.picker-modal-inner .picker-calendar-months:before {
+    background-color: white !important;
+}
+
+.layout-white .content-block-inner:after {
+    background-color: white !important;
+}
+
+.layout-white .picker-modal.picker-modal-inline .picker-calendar-row:after, .layout-white .picker-modal.picker-modal-inline .picker-calendar-week-days:after, .layout-white .popover .picker-modal .picker-calendar-row:after, .layout-white .popover .picker-modal .picker-calendar-week-days:after {
+    background-color: white !important;
 }
 
 .navigation-drawer {
@@ -353,6 +386,7 @@ letter-spacing:0.09em;
     -webkit-border-radius: 80px;
     -moz-border-radius: 80px;    
     border-radius: 40px;
+	
 }
 
 #pic-confirm {
@@ -511,7 +545,7 @@ display: inline-block;
 }
 
 .picker-calendar-day.picker-calendar-day-selected span {
-	background: #d6616a !important;
+	background: #00d173 !important;
 }
 
 .LogotipoFacebook

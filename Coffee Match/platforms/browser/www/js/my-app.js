@@ -901,7 +901,7 @@ myApp.onPageInit('match', function (page) {
 });		
 
 myApp.onPageInit('calendario', function(page){
-	var monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto' , 'Setembro' , 'Outubro', 'Novembro', 'Dezembro'];
+	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'];
  
 var calendarInline = myApp.calendar({
     container: '#calendar-inline-container',
@@ -909,7 +909,7 @@ var calendarInline = myApp.calendar({
     weekHeader: false,
 	input: '#picker-data',
     toolbarTemplate: 
-        '<div class="toolbar calendar-custom-toolbar" style="background: #f2efe9">' +
+        '<div class="toolbar calendar-custom-toolbar" style="background: white">' +
             '<div class="toolbar-inner">' +
                 '<div class="left">' +
                     '<p style="color: grey"></p>' +
