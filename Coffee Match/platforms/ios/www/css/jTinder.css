@@ -20,8 +20,8 @@
 
 #tinderslide .username {
 	margin-top: -2px;
-	font-size: 30px;
-	color: #775952;
+	font-size: 28px;
+	color: white;
 }
 
 #tinderslide li {
@@ -35,7 +35,7 @@
     left: 0;
     box-shadow: 4px 4px 8px -4px rgba(0, 0, 0, .75);
     overflow: hidden;
-    text-align: center;
+    //text-align: center;
     padding: 10px;
     background: #f2efe9;
     font-size: 24px;
@@ -107,19 +107,19 @@
 }
 
 .tag {
-	margin: 3px;
-	color: #ed7b83;
-	padding: 3px;
-	padding-left: 12px;
-	padding-right: 12px;
-	border: 2px solid #ed7b83;
+	margin: 2px;
+	color: #00d173;
+	padding: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 2px solid #00d173;
 	border-radius: 33px;
-	font-size: 15px;
+	font-size: 13px;
 	display: inline-block;
 }
 
 .subcol {
-	color: #775952;
+	color: white;
 	font-size: 13px;
 	margin-top: 2px;
 }
@@ -129,6 +129,7 @@
     height: 120px;
     width: 120px;
 	border-radius: 60px;
+	border: 2px solid white;
 	//margin-left: 23px;
 	//margin-right: 23px;
     margin-bottom: 5px;

@@ -14,6 +14,12 @@ var mainView = myApp.addView('.view-main', {
   swipeBackPage: false
 });  
 
+myApp.onPageInit('login2', function (page) {
+	var mySwiper = myApp.swiper('.swiper-container', {
+		speed: 400,
+		pagination: '.swiper-pagination'
+	}); 
+});
 myApp.onPageInit('passo2', function (page) {
 	
 	$.ajax({

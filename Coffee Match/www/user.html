@@ -1,42 +1,41 @@
 <!-- Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">	    
-			<div class="left sliding">
-				<a href="#" class="link back color-white no-animation"><i class="icon icon-back color-white"></i><span style="margin-left: 8px"></span></a>
-			</div>
-            <div class="sliding center color-white">
-				Profile
-			</div>
+        <div class="navbar" style="background-color: #8D7A4B">
+          <div class="navbar-inner">
+		    <div class="left">
+              <a href="#" class="link icon-only open-panel color-white" id="finalizar"><i class="icon icon-bars color-white"></i></a>
+            </div>
+            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+            <div class="sliding center logo">COFFEE MATCH</div>
           </div>
         </div>
 		
 <div class="pages">
-	<div data-page="user" class="page" style="background: #f2efe9;">
-		<div class="page-content">
-		 	<div class='text-center' style="margin-top: 50px">
-				<div class='row'>
-					<div class='col-30' style='padding-top: 55px'><span style='color: #04a6a0; font-size: 20px'>00</span><br><p class='subcol'>Km</p></div>
-					<div class='col-40'><img class='img' id="user-view-img" src="img/anonimo.jpg" /></div>
-					<div class='col-30' style='padding-top: 55px'><span style='color: #04a6a0; font-size: 20px'><span id="user-view-age">00</span><br><p class='subcol'>Age</span></p></div>
-				</div>
-				<p style="font-size: 30px; color: #775952; margin-top: 0px" id="user-view-name"></p>
-				<p class='college' id="user-view-occupation"></p>
-				<p class='college' id="user-view-college" style="margin-top: -15px; font-size: 14px"></p>
-				<div class='skss text-center' style="margin-top: -8px; margin-left: 10px; margin-right: 10px"></div><br>
-				<p class='friends' id="user-view-description" style='margin-top: -10px; margin-left: 10px; margin-right: 10px'></p>
-				<br>
-				<div class='row no-gutter' style="margin-left: 30px; margin-right: 110px; color: #775952;">
-					<div class='col-50'>
-						<p>What I'm<br> looking for?</p>
+	<div data-page="user" class="page no-navbar">
+		<div class="page-content" style="background-color: white">
+			<a href="" class="link back color-white" data-animate-pages="false" style="position: fixed; top: 3%; left: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_cancel.png" /></a>
+		 	<div>
+				<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; padding-top: 30px'>
+					<div class='row'>
+						<div class='col-30' style='padding-top: 55px'><span style='color: #00d173; font-size: 20px'>00</span><br><p class='subcol'>Km</p></div>
+						<div class='col-40'><img class='img' id="user-view-img" src="img/anonimo.jpg" /></div>
+						<div class='col-30' style='padding-top: 55px'><span style='color: #00d173; font-size: 20px'><span id="user-view-age">00</span><br><p class='subcol'>Age</span></p></div>
 					</div>
-					<div class='col-50'>
-						<ul style="list-style-type: none;">
-							<li id="l1"></li>
-							<li id="l2"></li>
-							<li id="l3"></li>
-						</ul>
-					</div>
+					<p style="font-size: 30px; color: white; margin-top: 0px" id="user-view-name">...</p>
+					<p class='college' id="user-view-occupation">...</p>
+					<p class='college' id="user-view-college" style="margin-top: -15px; font-size: 14px">...</p>
 				</div>
+				<div style="background: #00d173; padding-top: 1px; padding-bottom: 1px">
+					<p class='friends' style='color: white; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/profile_looking.png' /> <span style='line-height:22px;'>What I'm looking for?</span></p>
+					<ul style="list-style-type: none; color: white; margin-top: -15px; margin-left: 8px; font-size: 13px">
+						<li id="l1">...</li>
+						<li id="l2">...</li>
+						<li id="l3">...</li>
+					</ul>
+				</div>
+				<p class='friends' style='color: #2f3a41; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>
+				<div class='skss' style="margin-top: -10px; margin-left: 40px; margin-right: 10px"></div><br>
+				<p class='friends' style='color: #2f3a41; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About My Projects & Ideas</b></span></p>
+				<p class='friends' id="user-view-description" style='margin-top: -10px; margin-left: 45px; margin-right: 10px; color: #2f3a41'></p>
 				
 			</div>	
 		</div>

@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -63,7 +63,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
 		
     },
     // Update DOM on a Received Event
@@ -105,7 +105,7 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt('Send a message:', "The Coffee Match", function (value) {
+			myApp.prompt('Send your message:', "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				if(value.length == 0){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
@@ -124,7 +124,7 @@ var app = {
 		//Configura barra de navegação
 		StatusBar.overlaysWebView(false);
 		StatusBar.styleLightContent();
-		StatusBar.backgroundColorByHexString("#04a6a0");
+		StatusBar.backgroundColorByHexString("#2f3a41");
 		
 		var pic = localStorage.getItem("picture");
 			
@@ -204,31 +204,28 @@ var app = {
 									var skill5 = data[i].skill5 ? "<span class='tag'>"+data[i].skill5+"</span>" : "";
 																	
 								    //Monta o DOM
-									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html'>"
+									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
+												+ "<div class='text-center' style='background: url(img/background_profile.png); margin: -10px; padding-bottom: 1px'>"
 												+ "<div class='row'>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
 												+ "</div>"
 												+ "<p class='username'>"+data[i].name+"</p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-												+ "<div class='skills text-center'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
-												+ "<p class='friends' style='margin-top: -20px'>"+data[i].description+"</p>"
+												+ "</div><br>"
+												+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
+												+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
+												+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About My Projects & Ideas</b></span></p>"
+												+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
 												+ "</a></li>";		
 									$("#user-list").append(line1);
 									}
 									$$(".buttons-row").toggleClass("none visivel");
-									/*
-									$(".current").on("click", function(){
-										mainView.router.loadPage({url: "user.html", animatePages: false});
-									})
-									$(".next").on("click", function(){
-										mainView.router.loadPage({url: "user.html", animatePages: false});
-									})
-									*/
+									
 									/**
 									 * jTinder initialization
 									 */
@@ -406,16 +403,16 @@ var app = {
 		
 		myApp.onPageInit('login', function() {
 			 
-			    //facebookConnectPlugin.browserInit("1647443792236383");
+			    facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
-				
+				*/
 				
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
@@ -538,7 +535,15 @@ var app = {
 			myApp.onPageBeforeRemove('presentation3', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
+			
+			myApp.onPageInit('user', function() {
+			    StatusBar.overlaysWebView(true);
+				
+			});
 		
+			myApp.onPageBeforeRemove('user', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
 		
 		}
 		
