@@ -9,9 +9,46 @@ html, body {
 
 body {
     overflow: hidden;
+	background: #2f3a41;
 }
 
 .layout-white .list-block ul {
+	background: white;
+}
+
+.list-block {
+	margin-top: 0px;
+}
+
+.layout-white .list-block #ul-menu-lateral:before, .list-block.layout-white #ul-menu-lateral:before {
+    background-color: #2f3a41;
+}
+
+.layout-white .list-block #ul-menu-lateral:after, .list-block.layout-white #ul-menu-lateral:after {
+    background-color: #2f3a41;
+}
+
+.layout-white .list-block ul:before, .list-block.layout-white ul:before {
+    background-color: white;
+}
+
+.layout-white .list-block ul:after, .list-block.layout-white ul:after {
+    background-color: white;
+}
+
+.layout-white .item-inner:after, .layout-white .list-block ul ul li:last-child .item-inner:after {
+	background-color: #eaf0f3;
+	}
+
+.layout-white .searchbar {
+    background: #eaf0f3;
+}	
+
+label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkbox {
+	background-color: #00d173;
+}
+
+.layout-white .list-block #ul-menu-lateral {
 	background: #2f3a41;
 }
 
@@ -23,7 +60,7 @@ input.rounded {
 	padding-left: 45px;
 	width: 265px;
 	background: #e6e2dc;
-	color: #775952;
+	color: #596872;
 }
 
 
@@ -91,7 +128,7 @@ select.rounded {
 }
 
 .label-switch input[type=checkbox]:checked+.checkbox {
-	background-color: #F4727A;
+	background-color: #00d173;
 }
 
 .message-text {
@@ -99,7 +136,7 @@ select.rounded {
 }
 
 ::-webkit-input-placeholder {
-   color: #775952 !important;
+   color: rgba(89, 104, 114, 0.6) !important;
 }
 
 
@@ -124,10 +161,10 @@ select.rounded {
   text-decoration: none;
 }
 
-.btn-pink {
+.btn-green {
   border-radius: 28px;
   font-size: 15px;
-  background: #d6616a;
+  background: #00d173;
   color: white;
   padding: 10px 20px 10px 20px;
   margin-left: 90px;
@@ -135,10 +172,10 @@ select.rounded {
   text-decoration: none;
 }
 
-.btn-yellow {
+.btn-green2 {
   border-radius: 28px;
   font-size: 15px;
-  background: #feb93b;
+  background: #00d173;
   color: white;
   padding: 10px 20px 10px 20px;
   margin-left: 55px;
@@ -280,14 +317,23 @@ letter-spacing:0.09em;
 
 .item-title {
 	font-size: 15px !important;
-	color: #775952 !important;
+	color: #596872 !important;
 }
 
 .layout-white .panel {
 	background: #2f3a41;
 }
 
+.list-block .item-content {
+	padding-left: 10px;
+}
+
 .subtitle {
+	font-size: 15px;
+	color: #596872;
+}
+
+.subtitle2 {
 	font-size: 15px;
 	color: white;
 }
@@ -306,27 +352,39 @@ letter-spacing:0.09em;
 }
 
 #graduation, #passo2-faculdade {
-	background: url('../img/school.png') no-repeat #e6e2dc 10px 10px !important;
+	background: url('../img/school.png') no-repeat #eaf0f3 10px 10px !important;
 	margin-left: 0px;
 	margin-right: 0px;
 	width: 220px;
 }
 
 #occupation, #passo2-profissao, #passo2-nascimento {
-	background: url('../img/icon_business.png') no-repeat #e6e2dc 10px 10px !important;
+	background: url('../img/icon_business.png') no-repeat #eaf0f3 10px 10px !important;
 	margin-left: 0px;
 	margin-right: 0px;
 	width: 220px;
 }
 
 #description, #passo2-description {
-	background: url('../img/description.png') no-repeat #e6e2dc 10px 10px !important;
+	background: url('../img/description.png') no-repeat #eaf0f3 10px 10px !important;
 	margin-left: 0px;
 	margin-right: 0px;
 	width: 220px;
 }
 
+.smart-ul {
+	border: none; 
+	border-radius: 15px; 
+	background: #eaf0f3 !important;
+}
 
+.layout-white .list-block .smart-ul:before, .list-block.layout-white .smart-ul:before {
+    background-color: white !important;
+}
+
+.layout-white .list-block .smart-ul:after, .list-block.layout-white .smart-ul:after {
+    background-color: white !important;
+}
 
 .skills {
 	margin-top: -10;
@@ -368,7 +426,7 @@ letter-spacing:0.09em;
 }
 
 .profile-div {
-	color: #775952;
+	color: #596872;
 }
 
 .img-circle-plus {

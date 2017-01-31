@@ -275,7 +275,7 @@ var app = {
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #ed7b83'> - "+data[i].distance+ " " + metrica + " </span></span><br>"
+												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #00d173'> - "+data[i].distance+ " " + metrica + " </span></span><br>"
 												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
 										$("#proximas-ul").append(line1);
 									
@@ -541,7 +541,7 @@ var app = {
 				
 			});
 		
-			myApp.onPageBeforeRemove('user', function() {
+			myApp.onPageBack('user', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
 		
