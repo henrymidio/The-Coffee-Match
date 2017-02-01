@@ -37,7 +37,7 @@
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
 				if(current_pane <= 0){
-					$$(".invite").toggleClass("visivel none");	
+					$$(".buttons-row").toggleClass("visivel none");	
 				}
 				
 			},
@@ -88,7 +88,7 @@
 				
 				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
 				if(current_pane <= 0){
-					$$(".invite").toggleClass("visivel none");	
+					$$(".buttons-row").toggleClass("visivel none");	
 				}
 				
 			},
