@@ -22,7 +22,7 @@
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
     <content src="index.html" />
     <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="^2.0.10" />
-    <icon src="icon.png" />
+    <icon src="img/logotipo.png" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

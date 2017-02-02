@@ -144,14 +144,13 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									var skill4 = data.skill4 ? "<span class='tag'>"+data.skill4+"</span>" : "";
 									var skill5 = data.skill5 ? "<span class='tag'>"+data.skill5+"</span>" : "";
 									
-									$$(".toolbar-image").attr("src", data.picture);
 									$$("#name-confirm").html(data.name);
 									$$("#invite-age").html(data.age);
 									$$("#invite-college").html(data.college);
 									$$("#occupation-confirm").html(data.occupation);
 									$$("#pic-confirm").attr("src", data.picture);
 									$(".skills").append(skill1, skill2, skill3, skill4, skill5);
-									$$("#message").html("<b>My message is:</b><br> " + data.message);
+									$$("#message").html(data.message);
 								}
 							});
 	
@@ -331,7 +330,7 @@ myApp.onPageInit('combinacoes', function (page) {
 
 myApp.onPageInit('detail-calendar', function(page){
 	
-	$$(".btn-pink").on("click", function(){
+	$$(".btn-green").on("click", function(){
 		mainView.router.loadPage("chat.html");
 	});
 	
@@ -577,7 +576,7 @@ myApp.onPageInit('profile', function (page) {
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, idade, faculdade, tags, looking, user_id);
 		
-		mainView.router.loadPage('index.html');
+		mainView.router.loadPage('profile-preview.html');
 	})
 	
 	

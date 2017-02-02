@@ -105,7 +105,7 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt('Send your message:', "The Coffee Match", function (value) {
+			myApp.prompt("Hi, Let's have a coffee to talk about...", function (value) {
 				localStorage.setItem("message", value);
 				if(value.length == 0){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
@@ -401,7 +401,7 @@ var app = {
 		
 
 		
-		myApp.onPageInit('login', function() {
+		myApp.onPageInit('login2', function() {
 			 
 			    //facebookConnectPlugin.browserInit("1647443792236383");
 				

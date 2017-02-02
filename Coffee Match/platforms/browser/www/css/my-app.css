@@ -155,7 +155,7 @@ select.rounded {
 .btn {
   border-radius: 28px;
   font-size: 19px;
-  background: ;
+  background: #3B5998;
   padding: 10px 20px 10px 20px;
   border: solid #3B5998 2px;
   text-decoration: none;
@@ -313,6 +313,11 @@ letter-spacing:0.09em;
 	display: flex;
   justify-content: center;
   margin-bottom: 0px;
+}
+
+input:focus {
+    border:1px solid #00d173;
+    box-shadow: 0 0 10px #00d173;
 }
 
 .item-title {

@@ -2,34 +2,45 @@
         <div class="navbar">
           <div class="navbar-inner">	    
 			<div class="left sliding">
-				<a href="#" class="link back color-white"><i class="icon icon-back color-white"></i><span style="margin-left: 8px"></span></a>
+				<a href="index.html" class="link color-white"><i class="icon icon-back color-white"></i><span style="margin-left: 8px"></span></a>
 			</div>
             <div class="sliding center color-white">
-				New Invite
+				Invite
+			</div>
+			<div class="right">
+				<a href="#" id="confirmar-cafe" class="link icon-only color-white">
+				  <img class="icon" width="22" height="22" src="img/ic_action_accept.png" />
+				 </a>
 			</div>
           </div>
         </div>
 		
 <div class="pages">
-	<div data-page="confirmacao-convite" class="page" style="background: #f2efe9;">
-		<div class="page-content">
-		 	<div class='text-center' style="margin-top: 50px">
-				<div class='row'>
-					<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0; font-size: 20px'>10</span><br><p class='subcol'>Km</p></div>
-					<div class='col-50'><img class='img' id="pic-confirm" src="img/anonimo.jpg" /></div>
-					<div class='col-25' style='padding-top: 55px'><span style='color: #04a6a0; font-size: 20px'><span id="invite-age">00</span><br><p class='subcol'>Age</span></p></div>
+	<div data-page="confirmacao-convite" class="page">
+		<div class="page-content" style="background-color: white">
+			<div>
+				<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; padding-top: 45px'>
+					<div class='row'>
+						<div class='col-30' style='padding-top: 55px'><span style='color: #00d173; font-size: 20px'>00</span><br><p class='subcol'>Km</p></div>
+						<div class='col-40'><img class='img' id="pic-confirm" src="img/anonimo.jpg" /></div>
+						<div class='col-30' style='padding-top: 55px'><span style='color: #00d173; font-size: 20px'><span id="invite-age">00</span><br><p class='subcol'>Age</span></p></div>
+					</div>
+					<p style="font-size: 30px; color: white; margin-top: 0px" id="name-confirm">...</p>
+					<p class='college' id="occupation-confirm">...</p>
+					<p class='college' id="invite-college" style="margin-top: -15px; font-size: 14px">...</p>
 				</div>
-				<p style="font-size: 30px; color: #775952; margin-top: -2px" id='name-confirm'></p>
-				<p class='college' id="invite-college"></p>
-				<p class='college' id="occupation-confirm" style="margin-top: -15px; font-size: 14px"></p>
-				<div class='skills text-center'></div><br>
-				<p class='friends' style='margin-top: -10px; margin-left: 10px; margin-right: 10px' id="message"></p>
+				<div style="background: #67D5FA; padding-top: 1px; padding-bottom: 1px">
+					<p class='friends' style='color: white; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/profile_looking.png' /> <span style='line-height:22px;'><b>My message is:</b></span></p>
+					<p id="message" style="color: white; margin-top: -15px; margin-left: 45px; font-size: 13px">
+						
+					</p>
+				</div>
+				<p class='friends' style='color: #2f3a41; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>
+				<div class='skills' style="margin-top: -10px; margin-left: 40px; margin-right: 10px"></div><br>
+				<p class='friends' style='color: #2f3a41; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About My Projects & Ideas</b></span></p>
+				<p class='friends' style='margin-top: -10px; margin-left: 45px; margin-right: 10px; color: #2f3a41'></p>
+				
 			</div>	
 		</div>
-		
-		<div class="text-center" id="confirmar-cafe" style="position: absolute; left: 0; right:0; margin: 0 auto; bottom: 5%; z-index: 10">
-					<div class="btn-yellow" style="margin-left: 90px; margin-right: 90px">Accept</div>
-		</div>
-			
 	</div>
-</div>  
+</div>
