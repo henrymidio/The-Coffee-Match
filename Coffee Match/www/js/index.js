@@ -409,7 +409,6 @@ var app = {
 				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
-					//alert("Notification key: " + ids.userId);
 					notification_key = ids.userId;
 				});
 				
