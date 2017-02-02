@@ -86,7 +86,7 @@ var app = {
 		if(logged == null){
 			
 			myApp.onPageInit('index', function() {
-				mainView.router.loadPage('login.html');
+				mainView.router.loadPage('login2.html');
 			}).trigger();
 		} 
 		
