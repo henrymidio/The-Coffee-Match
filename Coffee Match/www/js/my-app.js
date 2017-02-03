@@ -46,22 +46,22 @@ myApp.onPageInit('passo2', function (page) {
 		var nascimento = $$("#passo2-nascimento").val();
 		
 		if (descricao.length == 0) {
-			alert("Set description field");
+			document.getElementById("passo2-description").focus();
 			return false;
 		}
 		
 		if (profissao.length == 0) {
-			alert("Set occupation field");
+			document.getElementById("passo2-profissao").focus();
 			return false;
 		}
 		
 		if (faculdade.length == 0) {
-			alert("Set college field");
+			document.getElementById("passo2-faculdade").focus();
 			return false;
 		}
 		
 		if (nascimento.length == 0) {
-			alert("Set birthday field");
+			document.getElementById("passo2-nascimento").focus();
 			return false;
 		}
 		
@@ -522,6 +522,8 @@ myApp.onPageInit('profile', function (page) {
 									$("#looking-for select option:contains("+data[1].l1+")").prop('selected', true)
 									$("#looking-for select option:contains("+data[1].l2+")").prop('selected', true)
 									$("#looking-for select option:contains("+data[1].l3+")").prop('selected', true)
+									
+									$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
 								}
 	});
 	var birthday = localStorage.getItem("age");
@@ -542,17 +544,17 @@ myApp.onPageInit('profile', function (page) {
 		var idade     = null;
 		
 		if (descricao.length == 0) {
-			alert("Set description field");
+			document.getElementById("description").focus();
 			return false;
 		}
 		
 		if (profissao.length == 0) {
-			alert("Set occupation field");
+			document.getElementById("occupation").focus();
 			return false;
 		}
 		
 		if (faculdade.length == 0) {
-			alert("Set college field");
+			document.getElementById("graduation").focus();
 			return false;
 		}
 		

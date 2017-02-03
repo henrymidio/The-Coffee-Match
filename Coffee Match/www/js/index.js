@@ -105,7 +105,7 @@ var app = {
 			//Evento de envio do convite
 		$$('.invite').on('click', function () {
 			
-			myApp.prompt("Hi, Let's have a coffee to talk about...", function (value) {
+			myApp.prompt("Hi, Let's have a coffee to talk about...", "The Coffee Match", function (value) {
 				localStorage.setItem("message", value);
 				if(value.length == 0){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
@@ -482,7 +482,7 @@ var app = {
 				};		
 				
 				$$('#loginFB').on('click', function(){		
-					facebookConnectPlugin.login(["public_profile", "email", "user_friends"], fbLoginSuccess,
+					facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
 						myApp.alert(error);
@@ -504,34 +504,12 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
-			myApp.onPageInit('login', function() {
+			myApp.onPageInit('login2', function() {
 			    StatusBar.overlaysWebView(true);
 	
 			});
 		
-		myApp.onPageBeforeRemove('login', function() {
-			    StatusBar.overlaysWebView(false);		
-			});
-			
-			myApp.onPageInit('presentation1', function() {
-			    StatusBar.overlaysWebView(true);
-			});
-			myApp.onPageBeforeRemove('presentation1', function() {
-			    StatusBar.overlaysWebView(false);		
-			});
-			
-			myApp.onPageInit('presentation2', function() {
-			    StatusBar.overlaysWebView(true);
-			});
-			myApp.onPageBeforeRemove('presentation2', function() {
-			    StatusBar.overlaysWebView(false);		
-			});
-			
-			myApp.onPageInit('presentation3', function() {
-			    StatusBar.overlaysWebView(true);
-	
-			});
-			myApp.onPageBeforeRemove('presentation3', function() {
+		myApp.onPageBeforeRemove('login2', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
