@@ -495,7 +495,7 @@ var app = {
 			
 				
 					
-			myApp.onPageInit('match', function() {
+		myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
 	
 			});
@@ -504,7 +504,7 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
-			myApp.onPageInit('login2', function() {
+		myApp.onPageInit('login2', function() {
 			    StatusBar.overlaysWebView(true);
 	
 			});
@@ -513,12 +513,16 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
-			myApp.onPageInit('user', function() {
+		myApp.onPageInit('user', function() {
 			    StatusBar.overlaysWebView(true);
 				
 			});
 		
-			myApp.onPageBack('user', function() {
+		myApp.onPageAfterBack('user', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+		
+		myApp.onPageBack('user', function() {
 			    StatusBar.overlaysWebView(false);		
 			});
 		
