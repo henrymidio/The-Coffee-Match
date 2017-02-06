@@ -515,14 +515,10 @@ var app = {
 			
 		myApp.onPageInit('user', function() {
 			    StatusBar.overlaysWebView(true);
-				
-			});
-		
-		myApp.onPageAfterBack('user', function() {
-			    StatusBar.overlaysWebView(false);		
 			});
 		
 		myApp.onPageBack('user', function() {
+				alert("back")
 			    StatusBar.overlaysWebView(false);		
 			});
 		
