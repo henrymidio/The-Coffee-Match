@@ -518,8 +518,8 @@ var app = {
 			});
 		
 		myApp.onPageBack('user', function() {
-				alert("back")
-			    StatusBar.overlaysWebView(false);		
+			    StatusBar.overlaysWebView(false);
+				alert("back")				
 			});
 		
 		}
