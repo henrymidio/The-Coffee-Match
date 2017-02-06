@@ -45,11 +45,6 @@ myApp.onPageInit('passo2', function (page) {
 		var faculdade = $$("#passo2-faculdade").val();
 		var nascimento = $$("#passo2-nascimento").val();
 		
-		if (descricao.length == 0) {
-			document.getElementById("passo2-description").focus();
-			return false;
-		}
-		
 		if (profissao.length == 0) {
 			document.getElementById("passo2-profissao").focus();
 			return false;
@@ -516,7 +511,12 @@ myApp.onPageInit('profile', function (page) {
 										if(data[i].nome == data[0].skill1 || data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3 || data[i].nome == data[0].skill4 || data[i].nome == data[0].skill5){
 												myApp.smartSelectAddOption('#skills select', "<option selected>"+data[i].nome+"</option>");
 										} else {
-											myApp.smartSelectAddOption('#skills select', "<option>"+data[i].nome+"</option>");
+											if (typeof data[i].nome === 'undefined'){
+												//Não faz nada
+											}else {
+												myApp.smartSelectAddOption('#skills select', "<option>"+data[i].nome+"</option>");
+											}
+											
 										}
 									}
 									$("#looking-for select option:contains("+data[1].l1+")").prop('selected', true)
@@ -542,11 +542,6 @@ myApp.onPageInit('profile', function (page) {
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
 		var idade     = null;
-		
-		if (descricao.length == 0) {
-			document.getElementById("description").focus();
-			return false;
-		}
 		
 		if (profissao.length == 0) {
 			document.getElementById("occupation").focus();
@@ -710,6 +705,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 			emails= 1;
 		};
 		var metrica = 'k';
+		localStorage.setItem("metrica", "Km");
 		if($('#check-mile').is(":checked")){
 			metrica = 'm';
 			localStorage.setItem("metrica", "Mi");
@@ -981,6 +977,12 @@ $("#confirmar-data").one("click", function(e){
 									
 								}
 	});
+	 myApp.addNotification({
+        title: 'The Coffee Match',
+        subtitle: 'Horário agendado',
+        message: 'Você pode alterar a data do café a qualquer momento',
+        media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
+    });
 	//e.stopPropagation(); //stops propagation
 });
 
@@ -1033,7 +1035,7 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 										
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("description", description);
-										//mainView.router.loadPage('index.html');
+										
 									}
 								},
 								error: function (request, status, error) {

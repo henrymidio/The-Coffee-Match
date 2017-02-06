@@ -448,8 +448,8 @@ var app = {
 										localStorage.setItem("metrica", "Km");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage("index.html");
-										
+										//mainView.router.loadPage("index.html");
+										window.location = "index.html";
 									} 
 									
 									//CADASTRA USUÁRIO
@@ -495,7 +495,7 @@ var app = {
 			
 				
 					
-			myApp.onPageInit('match', function() {
+		myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
 	
 			});
@@ -504,7 +504,7 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
-			myApp.onPageInit('login2', function() {
+		myApp.onPageInit('login2', function() {
 			    StatusBar.overlaysWebView(true);
 	
 			});
@@ -513,13 +513,12 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
-			myApp.onPageInit('user', function() {
+		myApp.onPageInit('user', function() {
 			    StatusBar.overlaysWebView(true);
-				
 			});
 		
-			myApp.onPageBack('user', function() {
-			    StatusBar.overlaysWebView(false);		
+		myApp.onPageBack('user', function() {
+			    StatusBar.overlaysWebView(false);				
 			});
 		
 		}
