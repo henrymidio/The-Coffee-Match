@@ -70,6 +70,7 @@ var app = {
     receivedEvent: function(id) {
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
+		localStorage.setItem("first_time", true);
 		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
@@ -201,8 +202,6 @@ var app = {
 									var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
 									var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
 									var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
-									var skill4 = data[i].skill4 ? "<span class='tag'>"+data[i].skill4+"</span>" : "";
-									var skill5 = data[i].skill5 ? "<span class='tag'>"+data[i].skill5+"</span>" : "";
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
@@ -217,7 +216,7 @@ var app = {
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
 												+ "</div><br>"
 												+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
-												+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+skill4+skill5+"</div><br>"
+												+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+"</div><br>"
 												+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About My Projects & Ideas</b></span></p>"
 												+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
@@ -270,14 +269,17 @@ var app = {
 									for(i in data) {
 										
 																				
-										var line1 = "<li class='item-content' style='padding-left: 8px'>"
-												+ "<div class='item-media'>"
-												+ "<img class='icon icons8-Settings-Filled' src='img/starbucks-logo.png'  style='margin-top: 5px; width: 60px; height: 60px'>"
-												+ "</div>"
+										var line1 = "<li>"
+												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
+												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='#' class='item-link starbucks'  style='text-overflow: ellipsis' id="+data[i].id+">"
-												+ "<div class='item-title'><span id='proximas-name'><b>"+data[i].name+"</b><span id='proximas-distance' style='color: #00d173'> - "+data[i].distance+ " " + metrica + " </span></span><br>"
-												+ "<span class='subtitle'><span id='proximas-street'>"+data[i].street+"</span>, <span id='proximas-num'>"+data[i].num+"</span></span></div></div></a></li>";		
+												+ "<div class='item-title-row'>"
+												+ "<div class='item-title'>"+data[i].name+"</div>"
+												+ "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " " + metrica + "</div>"
+												+ "</div>"
+												+ "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
+												+ "</div>"
+												+ "</a>";
 										$("#proximas-ul").append(line1);
 									
 										var pin = data[i];		

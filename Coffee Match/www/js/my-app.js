@@ -136,16 +136,17 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
 									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
 									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
-									var skill4 = data.skill4 ? "<span class='tag'>"+data.skill4+"</span>" : "";
-									var skill5 = data.skill5 ? "<span class='tag'>"+data.skill5+"</span>" : "";
 									
 									$$("#name-confirm").html(data.name);
 									$$("#invite-age").html(data.age);
 									$$("#invite-college").html(data.college);
 									$$("#occupation-confirm").html(data.occupation);
 									$$("#pic-confirm").attr("src", data.picture);
-									$(".skills").append(skill1, skill2, skill3, skill4, skill5);
+									$(".skills").append(skill1, skill2, skill3);
 									$$("#message").html(data.message);
+									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data.l1);
+									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data.l2);
+									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
 								}
 							});
 	
@@ -379,14 +380,12 @@ myApp.onPageInit('profile-preview', function (page) {
 									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
-									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
-									//var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
 									
 									$$("#preview-img").attr("src", data[0].picture);
 									$$("#preview-name").html(data[0].name);
 									$$("#preview-age").html(data[0].age);
 									$$("#preview-occupation").html(data[0].occupation);
-									$(".habilidades").append(skill1, skill2, skill3, skill4);
+									$(".habilidades").append(skill1, skill2, skill3);
 									$$("#preview-college").html(data[0].college);
 									$$("#preview-description").html(data[0].description);
 									$$("#profile-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
@@ -421,14 +420,12 @@ myApp.onPageInit('profile-view', function (page) {
 									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
-									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
-									var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
 									
 									$$("#profile-view-img").attr("src", data[0].picture);
 									$$("#profile-view-name").html(data[0].name);
 									$$("#profile-view-age").html(data[0].age);
 									$$("#profile-view-occupation").html(data[0].occupation);
-									$(".sks").append(skill1, skill2, skill3, skill4, skill5);
+									$(".sks").append(skill1, skill2, skill3);
 									$$("#profile-view-college").html(data[0].college);
 									$$("#profile-view-description").html(data[0].description);
 									$$("#view-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
@@ -508,7 +505,7 @@ myApp.onPageInit('profile', function (page) {
 								success: function (data) {
 									
 									for(i = 1; i < data.length; i++){
-										if(data[i].nome == data[0].skill1 || data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3 || data[i].nome == data[0].skill4 || data[i].nome == data[0].skill5){
+										if(data[i].nome == data[0].skill1 || data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3){
 												myApp.smartSelectAddOption('#skills select', "<option selected>"+data[i].nome+"</option>");
 										} else {
 											if (typeof data[i].nome === 'undefined'){
@@ -598,14 +595,12 @@ myApp.onPageInit('user', function (page) {
 									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
-									var skill4 = data[0].skill4 ? "<span class='tag'>"+data[0].skill4+"</span>" : "";
-									var skill5 = data[0].skill5 ? "<span class='tag'>"+data[0].skill5+"</span>" : "";
 									
 									$$("#user-view-img").attr("src", data[0].picture);
 									$$("#user-view-name").html(data[0].name);
 									$$("#user-view-age").html(data[0].age);
 									$$("#user-view-occupation").html(data[0].occupation);
-									$(".skss").append(skill1, skill2, skill3, skill4, skill5);
+									$(".skss").append(skill1, skill2, skill3);
 									$$("#user-view-college").html(data[0].college);
 									$$("#user-view-description").html(data[0].description);
 									$$("#l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);

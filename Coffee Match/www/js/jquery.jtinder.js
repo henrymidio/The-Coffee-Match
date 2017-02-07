@@ -42,7 +42,11 @@
 				
 			},
 			onLike: function(){ 
-				
+				var ft = localStorage.getItem("first_time");
+				if(tf){
+					alert("Este alert aparece somente no primeiro like")
+					localStorage.setItem("first_time", false);
+				}
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
