@@ -43,7 +43,7 @@
 			},
 			onLike: function(){ 
 				var ft = localStorage.getItem("first_time");
-				if(tf){
+				if(ft){
 					alert("Este alert aparece somente no primeiro like")
 					localStorage.setItem("first_time", false);
 				}
