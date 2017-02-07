@@ -43,9 +43,9 @@
 			},
 			onLike: function(){ 
 				var ft = localStorage.getItem("first_time");
-				if(ft){
+				if(ft > 0){
 					alert("Este alert aparece somente no primeiro like")
-					localStorage.setItem("first_time", false);
+					localStorage.setItem("first_time", 0);
 				}
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");

@@ -42,13 +42,17 @@
 				
 			},
 			onLike: function(){ 
-				
+				var ft = localStorage.getItem("first_time");
+				if(ft > 0){
+					alert("Este alert aparece somente no primeiro like")
+					localStorage.setItem("first_time", 0);
+				}
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				var message = localStorage.getItem("message");
 				
-				if(!message){
+				if(message.length < 2){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				} 
 								

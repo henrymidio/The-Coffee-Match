@@ -70,7 +70,7 @@ var app = {
     receivedEvent: function(id) {
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
-		localStorage.setItem("first_time", true);
+		localStorage.setItem("first_time", 1);
 		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
