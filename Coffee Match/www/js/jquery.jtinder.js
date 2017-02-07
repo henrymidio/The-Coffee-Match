@@ -48,7 +48,7 @@
 				var shown_user_id = panes.eq(current_pane).attr("id");
 				var message = localStorage.getItem("message");
 				
-				if(!message){
+				if(message.length < 2){
 					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 				} 
 								
