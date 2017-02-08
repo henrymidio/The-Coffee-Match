@@ -671,9 +671,17 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-km').prop('checked', false);
 			$$("#valBox").html(dst + " Mi");
+			
+			$$("#ranger").on("change", function(){
+				showVal(this.value, "Mi");
+			})
 		} else {
 			$('#check-km').prop('checked', true);
 			$$("#valBox").html(dst + " km");
+			
+			$$("#ranger").on("change", function(){
+				showVal(this.value, "Km");
+			})
 		}
 	});
 	
@@ -682,9 +690,17 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-mile').prop('checked', false);
 			$$("#valBox").html(dst + " km");
+			
+			$$("#ranger").on("change", function(){
+				showVal(this.value, "Km");
+			})
 		} else {
 			$('#check-mile').prop('checked', true);
 			$$("#valBox").html(dst + " Mi");
+			
+			$$("#ranger").on("change", function(){
+				showVal(this.value, "Mi");
+			})
 		}
 		
 	});
@@ -977,14 +993,14 @@ $("#confirmar-data").one("click", function(e){
         message: 'Você pode alterar a data do café a qualquer momento',
         media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
     });
-	//e.stopPropagation(); //stops propagation
+	
 });
 
 });
 
 //Mudança do slider de distância
-function showVal(newVal){
-  document.getElementById("valBox").innerHTML=newVal + " Mi/Km";
+function showVal(newVal, met){
+  document.getElementById("valBox").innerHTML=newVal + " " + met;
 }
 
 //Seta preferências
