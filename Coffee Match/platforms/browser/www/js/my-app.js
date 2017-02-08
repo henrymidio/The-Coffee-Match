@@ -654,12 +654,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 									if(data.metrica == 'k'){
 										$('#check-km').prop('checked', true);
 										$('#check-mile').prop('checked', false);
-										$$("#valBox").html(data.distance + " km");
+										$$("#valBox").html(data.distance + " Km");
 									} else {
 										$('#check-km').prop('checked', false);
 										$('#check-mile').prop('checked', true);
 										$$("#valBox").html(data.distance + " Mi")
-										//localStorage.setItem("metrica", "Mi");
 									}
 									
 								},
@@ -672,9 +671,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-km').prop('checked', false);
 			$$("#valBox").html(dst + " Mi");
+			localStorage.setItem("medida", "Mi")
 		} else {
 			$('#check-km').prop('checked', true);
 			$$("#valBox").html(dst + " km");
+			localStorage.setItem("medida", "Km")
 		}
 	});
 	
@@ -683,9 +684,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-mile').prop('checked', false);
 			$$("#valBox").html(dst + " km");
+			localStorage.setItem("medida", "Km")
 		} else {
 			$('#check-mile').prop('checked', true);
 			$$("#valBox").html(dst + " Mi");
+			localStorage.setItem("medida", "Mi")
 		}
 		
 	});
@@ -714,7 +717,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
-	//myApp.showPreloader();
+	myApp.showPreloader();
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
@@ -811,7 +814,7 @@ $$('.messagebar').on('click', function () {
 											}
 										}
 										
-										//myApp.hidePreloader();
+										myApp.hidePreloader();
 									
 									}
 								
@@ -844,14 +847,19 @@ $$('.messagebar').on('click', function () {
 								dataType: 'json',
 								data: lm,
 								success: function (data) {
-									
-									var line1 = "<div class='message message-with-avatar message-received' id="+data.message_id+">"
+									try {
+										var line1 = "<div class='message message-with-avatar message-received' id="+data.message_id+">"
 															+ "<div class='message-name'>"+data.name+"</div>"
 															+ "<div class='message-text'>"+data.message+"</div>"
 															+ "<div style='background-image:url("+data.picture+")' class='message-avatar'></div>"
 															+ "</div>";
 											$(".messages").append(line1);
-									$('.messagebar').trigger('click');
+									} catch(err) {
+										
+									} finally {
+										$('.messagebar').trigger('click');
+									}
+									
 								}
 		});
 	}
@@ -861,12 +869,13 @@ $$('.messagebar').on('click', function () {
 
 
 myApp.onPageBack('chat', function (page) {
+	
 	$$("#toolbar").toggleClass("visivel none");
 	try {
 		clearInterval(myInterval);
 	}
 	catch(err) {
-		
+		alert('chat onBack error')
 	}
 	
 });
@@ -978,14 +987,20 @@ $("#confirmar-data").one("click", function(e){
         message: 'Você pode alterar a data do café a qualquer momento',
         media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
     });
-	//e.stopPropagation(); //stops propagation
+	
 });
 
 });
 
 //Mudança do slider de distância
 function showVal(newVal){
-  document.getElementById("valBox").innerHTML=newVal + "km";
+  var medida = localStorage.getItem("medida");
+  
+  if(!medida){
+	  medida = localStorage.getItem("metrica");
+  }
+  
+  document.getElementById("valBox").innerHTML=newVal + " " + medida;
 }
 
 //Seta preferências
@@ -1002,7 +1017,7 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
 										//myApp.hidePreloader();
-										//myApp.alert('Settings updated!', 'The Coffee match');
+										
 								}
 							});
 }
