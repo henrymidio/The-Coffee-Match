@@ -671,19 +671,9 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-km').prop('checked', false);
 			$$("#valBox").html(dst + " Mi");
-			
-			//Mudança do slider de distância
-			function showVal(newVal){
-			  document.getElementById("valBox").innerHTML=newVal + " Mi";
-			}
 		} else {
 			$('#check-km').prop('checked', true);
 			$$("#valBox").html(dst + " km");
-			
-			//Mudança do slider de distância
-			function showVal(newVal){
-			  document.getElementById("valBox").innerHTML=newVal + " Km";
-			}
 		}
 	});
 	
@@ -692,19 +682,9 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-mile').prop('checked', false);
 			$$("#valBox").html(dst + " km");
-			
-			//Mudança do slider de distância
-			function showVal(newVal){
-			  document.getElementById("valBox").innerHTML=newVal + " Km";
-			}
 		} else {
 			$('#check-mile').prop('checked', true);
 			$$("#valBox").html(dst + " Mi");
-			
-			//Mudança do slider de distância
-			function showVal(newVal){
-			  document.getElementById("valBox").innerHTML=newVal + " Mi";
-			}
 		}
 		
 	});
@@ -1002,12 +982,10 @@ $("#confirmar-data").one("click", function(e){
 
 });
 
-/*
 //Mudança do slider de distância
 function showVal(newVal){
-  document.getElementById("valBox").innerHTML=newVal + " km";
+  document.getElementById("valBox").innerHTML=newVal + " Mi/Km";
 }
-*/
 
 //Seta preferências
 function setPreferences(metrica, distance, convites, emails, user_id){
