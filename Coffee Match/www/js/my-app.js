@@ -671,17 +671,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-km').prop('checked', false);
 			$$("#valBox").html(dst + " Mi");
-			
-			$$("#ranger").on("change", function(){
-				showVal(this.value, "Mi");
-			})
+			localStorage.setItem("medida", "Mi")
 		} else {
 			$('#check-km').prop('checked', true);
 			$$("#valBox").html(dst + " km");
-			
-			$$("#ranger").on("change", function(){
-				showVal(this.value, "Km");
-			})
+			localStorage.setItem("medida", "Km")
 		}
 	});
 	
@@ -690,17 +684,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($(this).is(":checked")) {
 			$('#check-mile').prop('checked', false);
 			$$("#valBox").html(dst + " km");
-			
-			$$("#ranger").on("change", function(){
-				showVal(this.value, "Km");
-			})
+			localStorage.setItem("medida", "Km")
 		} else {
 			$('#check-mile').prop('checked', true);
 			$$("#valBox").html(dst + " Mi");
-			
-			$$("#ranger").on("change", function(){
-				showVal(this.value, "Mi");
-			})
+			localStorage.setItem("medida", "Mi")
 		}
 		
 	});
@@ -999,8 +987,14 @@ $("#confirmar-data").one("click", function(e){
 });
 
 //Mudança do slider de distância
-function showVal(newVal, met){
-  document.getElementById("valBox").innerHTML=newVal + " " + met;
+function showVal(newVal){
+  var medida = localStorage.getItem("medida");
+  /*
+  if(!medida){
+	  medida = localStorage.getItem("metrica");
+  }
+  */
+  document.getElementById("valBox").innerHTML=newVal + " " + medida;
 }
 
 //Seta preferências
@@ -1017,7 +1011,7 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
 										//myApp.hidePreloader();
-										//myApp.alert('Settings updated!', 'The Coffee match');
+										
 								}
 							});
 }
