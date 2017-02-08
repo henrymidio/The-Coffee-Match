@@ -863,7 +863,7 @@ $$('.messagebar').on('click', function () {
 
 
 
-myApp.onPageBack('chat', function (page) {
+myApp.onPageBeforeRemove('chat', function (page) {
 	$$("#toolbar").toggleClass("visivel none");
 	try {
 		clearInterval(myInterval);
