@@ -47,13 +47,19 @@ var app = {
 		
 		var notificationReceivedCallback = function(json) {
 			if(json.payload.rawPayload.custom.a.type == "invite") {
-				$$("#icon-invite").attr("src", "img/sino02.PNG");
+				$$("#icon-invite").attr("src", "img/sino02.png");
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
 				$$("#icon-message").attr("src", "img/message_notification.png");
+				$$("#icon-message").on("click", function(){
+					$$(this).attr("src", "img/message_icon.png");
+				})
 			}
 			if(json.payload.rawPayload.custom.a.type == "booking") {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
+				$$("#icon-agenda").on("click", function(){
+					$$(this).attr("src", "img/agenda_icon.png");
+				})
 			}
  		};
 		
