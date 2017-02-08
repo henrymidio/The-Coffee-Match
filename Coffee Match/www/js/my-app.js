@@ -442,7 +442,7 @@ myApp.onPageInit('messages', function (page) {
 	
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
-	//myApp.showPreloader();
+	myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-last-message.php',
@@ -478,7 +478,7 @@ myApp.onPageInit('messages', function (page) {
 									}
 									
 									
-									//myApp.hidePreloader();
+									myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
 									alert(request.responseText);
@@ -869,7 +869,7 @@ myApp.onPageBack('chat', function (page) {
 		clearInterval(myInterval);
 	}
 	catch(err) {
-		
+		alert('chat onBack error')
 	}
 	
 });
