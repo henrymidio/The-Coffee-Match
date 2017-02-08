@@ -847,14 +847,19 @@ $$('.messagebar').on('click', function () {
 								dataType: 'json',
 								data: lm,
 								success: function (data) {
-									
-									var line1 = "<div class='message message-with-avatar message-received' id="+data.message_id+">"
+									try {
+										var line1 = "<div class='message message-with-avatar message-received' id="+data.message_id+">"
 															+ "<div class='message-name'>"+data.name+"</div>"
 															+ "<div class='message-text'>"+data.message+"</div>"
 															+ "<div style='background-image:url("+data.picture+")' class='message-avatar'></div>"
 															+ "</div>";
 											$(".messages").append(line1);
-									$('.messagebar').trigger('click');
+									} catch(err) {
+										
+									} finally {
+										$('.messagebar').trigger('click');
+									}
+									
 								}
 		});
 	}
@@ -863,7 +868,8 @@ $$('.messagebar').on('click', function () {
 
 
 
-myApp.onPageBeforeRemove('chat', function (page) {
+myApp.onPageBack('chat', function (page) {
+	
 	$$("#toolbar").toggleClass("visivel none");
 	try {
 		clearInterval(myInterval);
