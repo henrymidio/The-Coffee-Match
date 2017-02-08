@@ -654,7 +654,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 									if(data.metrica == 'k'){
 										$('#check-km').prop('checked', true);
 										$('#check-mile').prop('checked', false);
-										$$("#valBox").html(data.distance + " km");
+										$$("#valBox").html(data.distance + " Km");
 									} else {
 										$('#check-km').prop('checked', false);
 										$('#check-mile').prop('checked', true);
@@ -717,7 +717,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
-	//myApp.showPreloader();
+	myApp.showPreloader();
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
@@ -814,7 +814,7 @@ $$('.messagebar').on('click', function () {
 											}
 										}
 										
-										//myApp.hidePreloader();
+										myApp.hidePreloader();
 									
 									}
 								
@@ -989,11 +989,11 @@ $("#confirmar-data").one("click", function(e){
 //Mudança do slider de distância
 function showVal(newVal){
   var medida = localStorage.getItem("medida");
-  /*
+  
   if(!medida){
 	  medida = localStorage.getItem("metrica");
   }
-  */
+  
   document.getElementById("valBox").innerHTML=newVal + " " + medida;
 }
 
