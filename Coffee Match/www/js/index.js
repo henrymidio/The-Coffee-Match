@@ -82,8 +82,6 @@ var app = {
 		localStorage.setItem("first_time", 1);
 		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 		
-		setInterval(alert('intervalo'), 4000);
-		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
 		
@@ -249,7 +247,7 @@ var app = {
 						
 		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
-			 
+			 setInterval(alert('intervalo'), 4000);
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
 			var mapOptions = {
