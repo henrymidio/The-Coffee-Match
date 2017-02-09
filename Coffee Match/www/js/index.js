@@ -192,7 +192,7 @@ var app = {
 								data: dados,
 								crossDomain: true,
 								success: function (data) {		
-									
+									setInterval(alert('intervalo'), 4000);
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									
@@ -247,7 +247,7 @@ var app = {
 						
 		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
-			 setInterval(alert('intervalo'), 4000);
+			 
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
 			var mapOptions = {
@@ -486,7 +486,6 @@ var app = {
 								
 							});
 						  
-						
 					  }, function onError (error) {
 						alert(error);
 					  }
