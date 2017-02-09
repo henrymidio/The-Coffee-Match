@@ -241,12 +241,9 @@ var app = {
 									$("#tinderslide").jTinder({
 										
 									});
+									setInterval(alert('intervalo'), 4000);
 								}								
 							});
-							
-		if(localStorage.getItem("starCount") <= 0){
-				setInterval(alert('intervalo'), 4000);
-		}
 						
 		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
