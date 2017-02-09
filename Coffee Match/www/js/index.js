@@ -43,6 +43,9 @@ var app = {
 			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
 				mainView.router.loadPage('combinacoes.html');
 			}
+			if(jsonData.notification.payload.additionalData.type == "message") {
+				mainView.router.loadPage('messages.html');
+			}
  		};
 		
 		var notificationReceivedCallback = function(json) {
@@ -240,6 +243,10 @@ var app = {
 									});
 								}								
 							});
+							
+		if(localStorage.getItem("starCount") <= 0){
+				setInterval(alert('intervalo'), 4000);
+		}
 						
 		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
