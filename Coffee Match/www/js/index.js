@@ -50,7 +50,7 @@ var app = {
 		
 		var notificationReceivedCallback = function(json) {
 			if(json.payload.rawPayload.custom.a.type == "invite") {
-				$$("#icon-invite").attr("src", "img/sino02.png");
+				$$("#icon-invite").attr("src", "img/sino_notification.png");
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
 				$$("#icon-message").attr("src", "img/message_notification.png");
