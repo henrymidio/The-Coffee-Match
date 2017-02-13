@@ -186,6 +186,8 @@
 			}
 			
 			$that.next();
+			
+			//Ajax que faz a inclusão do perfil entre os favoritos
 		},
 
 		handler: function (ev) {
