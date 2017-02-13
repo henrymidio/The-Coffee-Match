@@ -523,7 +523,7 @@ var app = {
 			    StatusBar.overlaysWebView(false);				
 			});
 		
-		myApp.onPageBack('passo2', function() {
+		myApp.onPageInit('passo2', function() {
 			    StatusBar.overlaysWebView(false);				
 			});
 		
