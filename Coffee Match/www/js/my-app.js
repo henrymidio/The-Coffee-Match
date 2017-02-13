@@ -610,23 +610,7 @@ myApp.onPageInit('user', function (page) {
 								}
 								
 	});
-	/*
-	$$('.but-info').on('click', function () {
-		myApp.prompt('My coffee message is:', "The Coffee Match", function (value) {
-		    localStorage.setItem("message", value);
-			$("#tinderslide").jTinder('like');
-			mainView.router.back();
-		});
-	});
-	$$('.but-nope').on('click', function () {
-		$("#tinderslide").jTinder('dislike');
-		mainView.router.back();
-	});
-	$$('.but-yay').on('click', function () {
-		$("#tinderslide").jTinder('like');
-		mainView.router.back();
-	});
-	*/
+	
 });
 
 
@@ -1049,7 +1033,7 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 									}
 								},
 								error: function (request, status, error) {
-									alert(error);
+									//alert(error);
 								}
 							});
 }

@@ -41,7 +41,7 @@ var app = {
 				mainView.router.loadPage('convites.html');
 			}
 			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
-				mainView.router.loadPage('combinacoes.html');
+				mainView.router.loadPage('messages.html');
 			}
 			if(jsonData.notification.payload.additionalData.type == "message") {
 				mainView.router.loadPage('messages.html');
@@ -72,7 +72,6 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
 		
     },
     // Update DOM on a Received Event
@@ -113,17 +112,9 @@ var app = {
 				localStorage.setItem("lastLog", curDate);
 			} 
 			localStorage.setItem("contador", 8);
-			//Evento de envio do convite
+			//Evento de salvar perfil nos favoritos
 		$$('.invite').on('click', function () {
-			
-			myApp.prompt("Hi, Let's have a coffee to talk about...", "The Coffee Match", function (value) {
-				localStorage.setItem("message", value);
-				if(value.length == 0){
-					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
-				}
-				$("#tinderslide").jTinder('like');
-			});
-			
+			$("#tinderslide").jTinder('fav');
 		});
 		$$('.nope').on('click', function () {
 				$("#tinderslide").jTinder('dislike');
@@ -192,7 +183,7 @@ var app = {
 								data: dados,
 								crossDomain: true,
 								success: function (data) {		
-									setInterval(alert('intervalo'), 4000);
+									
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									
@@ -424,7 +415,7 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-								
+							
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
 					  function onSuccess (result) {
@@ -529,6 +520,10 @@ var app = {
 			});
 		
 		myApp.onPageBack('user', function() {
+			    StatusBar.overlaysWebView(false);				
+			});
+		
+		myApp.onPageBack('passo2', function() {
 			    StatusBar.overlaysWebView(false);				
 			});
 		
