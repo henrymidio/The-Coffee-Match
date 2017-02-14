@@ -41,19 +41,28 @@ var app = {
 				mainView.router.loadPage('convites.html');
 			}
 			if(jsonData.notification.payload.additionalData.type == "message" || jsonData.notification.payload.additionalData.type == "match") {
-				mainView.router.loadPage('combinacoes.html');
+				mainView.router.loadPage('messages.html');
+			}
+			if(jsonData.notification.payload.additionalData.type == "message") {
+				mainView.router.loadPage('messages.html');
 			}
  		};
 		
 		var notificationReceivedCallback = function(json) {
 			if(json.payload.rawPayload.custom.a.type == "invite") {
-				$$("#icon-invite").attr("src", "img/sino02.PNG");
+				$$("#icon-invite").attr("src", "img/sino_notification.png");
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
 				$$("#icon-message").attr("src", "img/message_notification.png");
+				$$("#icon-message").on("click", function(){
+					$$(this).attr("src", "img/message_icon.png");
+				})
 			}
 			if(json.payload.rawPayload.custom.a.type == "booking") {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
+				$$("#icon-agenda").on("click", function(){
+					$$(this).attr("src", "img/agenda_icon.png");
+				})
 			}
  		};
 		
@@ -64,7 +73,6 @@ var app = {
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
 		*/
-		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -104,17 +112,9 @@ var app = {
 				localStorage.setItem("lastLog", curDate);
 			} 
 			localStorage.setItem("contador", 8);
-			//Evento de envio do convite
+			//Evento de salvar perfil nos favoritos
 		$$('.invite').on('click', function () {
-			
-			myApp.prompt("Hi, Let's have a coffee to talk about...", "The Coffee Match", function (value) {
-				localStorage.setItem("message", value);
-				if(value.length == 0){
-					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
-				}
-				$("#tinderslide").jTinder('like');
-			});
-			
+			$("#tinderslide").jTinder('fav');
 		});
 		$$('.nope').on('click', function () {
 				$("#tinderslide").jTinder('dislike');
@@ -232,6 +232,7 @@ var app = {
 									$("#tinderslide").jTinder({
 										
 									});
+									
 								}								
 							});
 						
@@ -414,7 +415,7 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				*/				
+				*/			
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
 					  function onSuccess (result) {
@@ -476,7 +477,6 @@ var app = {
 								
 							});
 						  
-						
 					  }, function onError (error) {
 						alert(error);
 					  }
@@ -520,6 +520,10 @@ var app = {
 			});
 		
 		myApp.onPageBack('user', function() {
+			    StatusBar.overlaysWebView(false);				
+			});
+		
+		myApp.onPageInit('passo2', function() {
 			    StatusBar.overlaysWebView(false);				
 			});
 		

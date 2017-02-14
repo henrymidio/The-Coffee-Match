@@ -258,6 +258,49 @@ myApp.onPageInit('convites', function (page) {
 							
 });
 
+myApp.onPageInit('favorites', function (page) {
+	var user_id = localStorage.getItem("user_id");
+	var x = {user_id: user_id}
+	
+	//Ajax request to get user
+	$.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-favorites.php',
+								type: 'post',
+								dataType: 'json',
+								data: x,
+								success: function (data) {
+									
+									for(i = 0; i < data.length; i++){
+										
+										//Monta o DOM
+									    var line1 = "<li class='item-link item-content'>"
+												+ "<div class='item-media profile'>"
+												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+												+ "</div>"
+												+ "<div class='item-inner fav' id="+data[i].shown_user_id+">"
+												+ "<a href='#' class='item-link'>"
+												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
+												+ "<span class='subtitle'></span></div></div></a></li>";		
+									    $("#favorites-ul").append(line1);
+										
+										
+									}
+									
+									$(".fav").on("click", function(){
+										var idp = $(this).attr("id");
+										localStorage.setItem("shown_user_id", idp);
+										mainView.router.loadPage("user.html");
+									});
+								},
+								error: function (request, status, error) {
+									alert(error);
+								}
+								
+								
+														
+							});
+});
+
 myApp.onPageInit('combinacoes', function (page) {
 	
 	var user_id = localStorage.getItem("user_id");

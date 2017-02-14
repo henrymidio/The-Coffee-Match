@@ -177,6 +177,36 @@
 		},
 		
 		fav: function() {
+						
+			/*
+				Trecho de inclusão nos favoritos
+			*/
+			var user_id       = localStorage.getItem("user_id");
+			var shown_user_id = panes.eq(current_pane).attr("id");
+			localStorage.setItem("shown_user_id", shown_user_id);
+			
+			var dataFav = {
+					user_id: user_id,
+					shown_user_id: shown_user_id,
+					message: "",
+					liked: 2
+				}
+			
+			//Ajax que faz a inclusão do perfil entre os favoritos
+			$.ajax({
+								url: 'http://thecoffeematch.com/webservice/put-like.php',
+								type: 'post',
+								data: dataFav,
+								dataType: 'json',
+								success: function (data) {
+									//alert(data)									
+								},
+								error: function (request, status, error) {
+									var shown_user_id = panes.eq(current_pane).attr("id");
+									localStorage.setItem("shown_user_id", shown_user_id);
+								}
+								
+			});
 			
 			//INVERTE NEXT COM CURRENT
 			panes.eq(current_pane - 1).toggleClass("next current");
@@ -187,7 +217,6 @@
 			
 			$that.next();
 			
-			//Ajax que faz a inclusão do perfil entre os favoritos
 		},
 
 		handler: function (ev) {

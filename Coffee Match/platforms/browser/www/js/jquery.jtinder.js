@@ -42,19 +42,22 @@
 				
 			},
 			onLike: function(){ 
-				var ft = localStorage.getItem("first_time");
-				if(ft > 0){
-					alert("Este alert aparece somente no primeiro like")
-					localStorage.setItem("first_time", 0);
-				}
+				
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
-				var message = localStorage.getItem("message");
-				
-				if(message.length < 2){
-					localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
-				} 
+				var message = "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!";
+								
+				var ft = localStorage.getItem("first_time");
+				if(ft > 0){
+					myApp.addNotification({
+						title: 'The Coffee Match',
+						subtitle: 'Convite enviado com sucesso!',
+						message: '',
+						media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
+					});
+					localStorage.setItem("first_time", 0);
+				}
 								
 				var dados = {
 					user_id: user_id,
@@ -77,7 +80,7 @@
 										var shown_user_id = panes.eq(current_pane).attr("id");
 										localStorage.setItem("shown_user_id", shown_user_id);		
 									}
-									localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
+									
 								},
 								error: function (request, status, error) {
 									//alert(JSON.stringify(request));
@@ -94,6 +97,9 @@
 				if(current_pane <= 0){
 					$$(".buttons-row").toggleClass("visivel none");	
 				}
+				
+			},
+			onFav: function(){
 				
 			},
 			animationRevertSpeed: 200,
@@ -168,6 +174,49 @@
 				}
 				$that.next();
 			});
+		},
+		
+		fav: function() {
+						
+			/*
+				Trecho de inclusão nos favoritos
+			*/
+			var user_id       = localStorage.getItem("user_id");
+			var shown_user_id = panes.eq(current_pane).attr("id");
+			localStorage.setItem("shown_user_id", shown_user_id);
+			
+			var dataFav = {
+					user_id: user_id,
+					shown_user_id: shown_user_id,
+					message: "",
+					liked: 2
+				}
+			
+			//Ajax que faz a inclusão do perfil entre os favoritos
+			$.ajax({
+								url: 'http://thecoffeematch.com/webservice/put-like.php',
+								type: 'post',
+								data: dataFav,
+								dataType: 'json',
+								success: function (data) {
+									//alert(data)									
+								},
+								error: function (request, status, error) {
+									var shown_user_id = panes.eq(current_pane).attr("id");
+									localStorage.setItem("shown_user_id", shown_user_id);
+								}
+								
+			});
+			
+			//INVERTE NEXT COM CURRENT
+			panes.eq(current_pane - 1).toggleClass("next current");
+			
+			if(current_pane <= 0){
+				$$(".buttons-row").toggleClass("visivel none");	
+			}
+			
+			$that.next();
+			
 		},
 
 		handler: function (ev) {
