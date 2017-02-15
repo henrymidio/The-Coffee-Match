@@ -288,8 +288,8 @@ myApp.onPageInit('favorites', function (page) {
 									
 									$(".fav").on("click", function(){
 										var idp = $(this).attr("id");
-										localStorage.setItem("shown_user_id", idp);
-										mainView.router.loadPage("user.html");
+										localStorage.setItem("preview", idp);
+										mainView.router.loadPage("profile-view.html");
 									});
 								},
 								error: function (request, status, error) {
@@ -334,7 +334,7 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-link item-content'>"
-												+ "<div class='item-media profile' id="+data[i].preview_id+">"
+												+ "<div class='item-media'>"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -351,13 +351,13 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
 									});
-									
+									/*
 									$(".profile").on("click", function(){
 										var idp = $(this).attr("id");
 										localStorage.setItem("preview", idp);
 										mainView.router.loadPage("profile-view.html");
 									});
-									
+									*/
 									//myApp.hidePreloader();
 									
 								}
@@ -479,6 +479,51 @@ myApp.onPageInit('profile-view', function (page) {
 								
 	});
 	
+		$$('.nope').on('click', function () {
+			var abc = {
+				user_id: localStorage.getItem("user_id"),
+				shown_user_id: preview,
+				liked: 0
+			}
+			$.ajax({
+									url: 'http://thecoffeematch.com/webservice/update-like.php',
+									type: 'post',
+									data: abc
+			});
+			
+			 myApp.addNotification({
+				title: 'The Coffee Match',
+				subtitle: 'Convite enviado!',
+				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
+				onClose: function () {
+					mainView.router.loadPage('index.html');
+				}
+			});
+			
+		});
+		$$('.yep').on('click', function () {
+			var abc = {
+				user_id: localStorage.getItem("user_id"),
+				shown_user_id: preview,
+				liked: 1
+			}
+			$.ajax({
+									url: 'http://thecoffeematch.com/webservice/update-like.php',
+									type: 'post',
+									data: abc
+			});
+			
+			 myApp.addNotification({
+				title: 'The Coffee Match',
+				subtitle: 'Convite enviado!',
+				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
+				onClose: function () {
+					mainView.router.loadPage('index.html');
+				}
+			});
+			
+		});
+	
 });
 
 myApp.onPageInit('messages', function (page) {
@@ -497,7 +542,7 @@ myApp.onPageInit('messages', function (page) {
 									for(i = 0; i < data.length; i++){
 										var replyArrow = "";
 										if(data[i].last_message === null){
-											data[i].last_message = "Combinado em "+data[i].date;
+											data[i].last_message = "Matched in "+data[i].date;
 										}
 										
 										if(data[i].user == x.user_id) {

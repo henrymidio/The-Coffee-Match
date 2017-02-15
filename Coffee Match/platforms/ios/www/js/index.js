@@ -115,6 +115,11 @@ var app = {
 			//Evento de salvar perfil nos favoritos
 		$$('.invite').on('click', function () {
 			$("#tinderslide").jTinder('fav');
+			 myApp.addNotification({
+				title: 'The Coffee Match',
+				subtitle: 'Perfil favoritado!',
+				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
+			});
 		});
 		$$('.nope').on('click', function () {
 				$("#tinderslide").jTinder('dislike');
