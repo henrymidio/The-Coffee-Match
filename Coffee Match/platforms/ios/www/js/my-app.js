@@ -280,7 +280,7 @@ myApp.onPageInit('favorites', function (page) {
 												+ "<div class='item-inner fav' id="+data[i].shown_user_id+">"
 												+ "<a href='#' class='item-link'>"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'></span></div></div></a></li>";		
+												+ "<span class='subtitle'>Favorited in "+data[i].date+"</span></div></div></a></li>";		
 									    $("#favorites-ul").append(line1);
 										
 										
@@ -496,7 +496,7 @@ myApp.onPageInit('profile-view', function (page) {
 				subtitle: 'Convite enviado!',
 				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
 				onClose: function () {
-					mainView.router.loadPage('index.html');
+					mainView.router.loadPage('favorites.html');
 				}
 			});
 			
@@ -518,7 +518,7 @@ myApp.onPageInit('profile-view', function (page) {
 				subtitle: 'Convite enviado!',
 				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
 				onClose: function () {
-					mainView.router.loadPage('index.html');
+					mainView.router.loadPage('favorites.html');
 				}
 			});
 			
@@ -593,7 +593,7 @@ myApp.onPageInit('profile', function (page) {
 								success: function (data) {
 									
 									for(i = 1; i < data.length; i++){
-										if(data[i].nome == data[0].skill1 || data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3){
+										if(data[i].nome === data[0].skill1 || data[i].nome === data[0].skill2 || data[i].nome === data[0].skill3){
 												myApp.smartSelectAddOption('#skills select', "<option selected>"+data[i].nome+"</option>");
 										} else {
 											if (typeof data[i].nome === 'undefined'){
@@ -604,9 +604,12 @@ myApp.onPageInit('profile', function (page) {
 											
 										}
 									}
-									$("#looking-for select option:contains("+data[1].l1+")").prop('selected', true)
-									$("#looking-for select option:contains("+data[1].l2+")").prop('selected', true)
-									$("#looking-for select option:contains("+data[1].l3+")").prop('selected', true)
+									/*
+										INSERIR CONDIÇÃO PARA VERIFICAR SE OS LOOKING-FOR ESTÃO SETADOS
+									*/
+									if(data[1].l1.length > 0){ $("#looking-for select option:contains("+data[1].l1+")").prop('selected', true) }
+									if(data[1].l2.length > 0){ $("#looking-for select option:contains("+data[1].l2+")").prop('selected', true) }
+									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
 									
 									$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
 								}
@@ -929,7 +932,7 @@ $$('.messagebar').on('click', function () {
 									} catch(err) {
 										
 									} finally {
-										$('.messagebar').trigger('click');
+										//$('.messagebar').trigger('click');
 									}
 									
 								}

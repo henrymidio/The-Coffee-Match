@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -72,13 +72,14 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
+		
 		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
@@ -103,50 +104,53 @@ var app = {
 		
 		myApp.onPageInit('index', function() {
 			
+			//Configura barra de navegação
+			StatusBar.overlaysWebView(false);
+			StatusBar.styleLightContent();
+			StatusBar.backgroundColorByHexString("#2f3a41");
+			
 			//Verifica quando foi o último login para limitar número de usuários na listagem
 			var curDate  = new Date();
 			var lastLog  = localStorage.getItem("lastLog");
-			
 			if(curDate > lastLog){
 				localStorage.setItem("contador", 8);
 				localStorage.setItem("lastLog", curDate);
 			} 
-			localStorage.setItem("contador", 8);
-			//Evento de salvar perfil nos favoritos
-		$$('.invite').on('click', function () {
-			$("#tinderslide").jTinder('fav');
-			 myApp.addNotification({
-				title: 'The Coffee Match',
-				subtitle: 'Perfil favoritado!',
-				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
-			});
-		});
-		$$('.nope').on('click', function () {
-				$("#tinderslide").jTinder('dislike');
-		});
-		$$('.yep').on('click', function () {
-				$("#tinderslide").jTinder('like');
-		});
-		
-		//Configura barra de navegação
-		StatusBar.overlaysWebView(false);
-		StatusBar.styleLightContent();
-		StatusBar.backgroundColorByHexString("#2f3a41");
-		
-		var pic = localStorage.getItem("picture");
 			
-		$$(".search-effect").attr("src", pic);
-		$$(".profile-photo").attr("src", pic);
+			localStorage.setItem("contador", 8);
+			
+			//Evento de salvar perfil nos favoritos
+			$$('.invite').on('click', function () {
+				$("#tinderslide").jTinder('fav');
+				 myApp.addNotification({
+					title: 'The Coffee Match',
+					subtitle: 'Perfil favoritado!',
+					media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
+				});
+			});
 		
-		$$("#name").html(localStorage.getItem("name"));
-		$$("#age").html(localStorage.getItem("age"));
-		
-		$$("#invisible-container").removeClass("none");
-		$$("#invisible-nav").removeClass("navbar-hidden");
-		
-		//Pega localização do usuário
-		var latitude;
-		var longitude;
+			//Dispara invite e nope
+			$$('.nope').on('click', function () {
+					$("#tinderslide").jTinder('dislike');
+			});
+			$$('.yep').on('click', function () {
+					$("#tinderslide").jTinder('like');
+			});
+			
+			var pic = localStorage.getItem("picture");
+				
+			$$(".search-effect").attr("src", pic);
+			$$(".profile-photo").attr("src", pic);
+			
+			$$("#name").html(localStorage.getItem("name"));
+			$$("#age").html(localStorage.getItem("age"));
+			
+			$$("#invisible-container").removeClass("none");
+			$$("#invisible-nav").removeClass("navbar-hidden");
+			
+			//Pega localização do usuário
+			var latitude;
+			var longitude;
 		
 		navigator.geolocation.getCurrentPosition(function(position){
 			latitude  = position.coords.latitude;
@@ -412,15 +416,15 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    //facebookConnectPlugin.browserInit("1647443792236383");
+			    facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-							
+				*/			
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
 					  function onSuccess (result) {
