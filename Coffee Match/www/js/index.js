@@ -479,13 +479,13 @@ var app = {
 									
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									//alert(request.responseText);
 								}
 								
 							});
 						  
 					  }, function onError (error) {
-						alert(error);
+						//alert(error);
 					  }
 					);
 				};		
