@@ -20,7 +20,9 @@ myApp.onPageInit('login2', function (page) {
 		pagination: '.swiper-pagination'
 	}); 
 });
+
 myApp.onPageInit('passo2', function (page) {
+	
 	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-tags.php',
@@ -36,6 +38,13 @@ myApp.onPageInit('passo2', function (page) {
 	var name    = localStorage.getItem("name");
 	document.getElementById('picture').src = picture;
 	$$("#passo2-name").html(name);
+	
+	$("#call-smart-select").on("click", function(){
+		myApp.smartSelectOpen("#skills")
+	});
+	$("#call-smart-select2").on("click", function(){
+		myApp.smartSelectOpen("#looking-for")
+	});
 	
 	$$("#finalizar").on("click", function(){
 		var tags = [];
@@ -167,12 +176,15 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-							
+									
 									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
+								},
+								error: function (request, status, error) {
+									alert(error);
 								}
 								
-							});
+				});
 	})
 	
 });
@@ -464,6 +476,10 @@ myApp.onPageInit('profile-view', function (page) {
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
 									
+									var l1 = data[0].l1 ? '<span style="margin-right: 10px">●</span>' + data[0].l1 : "";
+									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
+									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
+									
 									$$("#profile-view-img").attr("src", data[0].picture);
 									$$("#profile-view-name").html(data[0].name);
 									$$("#profile-view-age").html(data[0].age);
@@ -471,9 +487,9 @@ myApp.onPageInit('profile-view', function (page) {
 									$(".sks").append(skill1, skill2, skill3);
 									$$("#profile-view-college").html(data[0].college);
 									$$("#profile-view-description").html(data[0].description);
-									$$("#view-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
-									$$("#view-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
-									$$("#view-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
+									$$("#view-l1").html(l1);
+									$$("#view-l2").html(l2);
+									$$("#view-l3").html(l3);
 									
 								}
 								
@@ -493,7 +509,7 @@ myApp.onPageInit('profile-view', function (page) {
 			
 			 myApp.addNotification({
 				title: 'The Coffee Match',
-				subtitle: 'Convite enviado!',
+				subtitle: 'Your invite is on its way!',
 				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
 				onClose: function () {
 					mainView.router.loadPage('favorites.html');
@@ -515,7 +531,7 @@ myApp.onPageInit('profile-view', function (page) {
 			
 			 myApp.addNotification({
 				title: 'The Coffee Match',
-				subtitle: 'Convite enviado!',
+				subtitle: 'Your invite is on its way!',
 				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
 				onClose: function () {
 					mainView.router.loadPage('favorites.html');
@@ -580,6 +596,12 @@ myApp.onPageInit('messages', function (page) {
 
 
 myApp.onPageInit('profile', function (page) {
+	$("#call-smart-select").on("click", function(){
+		myApp.smartSelectOpen("#skills")
+	});
+	$("#call-smart-select2").on("click", function(){
+		myApp.smartSelectOpen("#looking-for")
+	});
 	
 	var user = {
 		user: localStorage.getItem("user_id")
@@ -612,6 +634,9 @@ myApp.onPageInit('profile', function (page) {
 									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
 									
 									$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
+									
+									$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
+									$("#call-smart-select2").val(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3)
 								}
 	});
 	var birthday = localStorage.getItem("age");
@@ -687,6 +712,10 @@ myApp.onPageInit('user', function (page) {
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
 									
+									var l1 = data[0].l1 ? '<span style="margin-right: 10px">●</span>' + data[0].l1 : "";
+									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
+									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
+									
 									$$("#user-view-img").attr("src", data[0].picture);
 									$$("#user-view-name").html(data[0].name);
 									$$("#user-view-age").html(data[0].age);
@@ -694,9 +723,9 @@ myApp.onPageInit('user', function (page) {
 									$(".skss").append(skill1, skill2, skill3);
 									$$("#user-view-college").html(data[0].college);
 									$$("#user-view-description").html(data[0].description);
-									$$("#l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
-									$$("#l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
-									$$("#l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
+									$$("#l1").html(l1);
+									$$("#l2").html(l2);
+									$$("#l3").html(l3);
 									
 								}
 								
@@ -894,7 +923,9 @@ $$('.messagebar').on('click', function () {
 									}
 								
 									$('.messagebar').trigger('click');
-																
+									
+									updateStatusUser(1);	
+									
 									myInterval = setInterval(function(){ 
 										getLastMessage(user, match); 
 									}, 3000);
@@ -946,6 +977,7 @@ $$('.messagebar').on('click', function () {
 myApp.onPageBack('chat', function (page) {
 	
 	$$("#toolbar").toggleClass("visivel none");
+	updateStatusUser(0)
 	try {
 		clearInterval(myInterval);
 	}
@@ -1058,8 +1090,8 @@ $("#confirmar-data").one("click", function(e){
 	});
 	 myApp.addNotification({
         title: 'The Coffee Match',
-        subtitle: 'Horário agendado',
-        message: 'Você pode alterar a data do café a qualquer momento',
+        subtitle: 'You’re all set',
+        message: 'Feel free to reschedule at any time',
         media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
     });
 	
@@ -1150,4 +1182,21 @@ function getAge(dateString) {
     }
     return age;
 }
+
+function updateStatusUser(status){
+		var usid = localStorage.getItem("user_id");
+		var statusData = {
+			online: status
+		}
+		$.ajax({
+			url: 'http://thecoffeematch.com/webservice/update-status.php?user=' + usid,
+			type: 'post',
+			data: statusData,
+			success: function (data) {
+			},
+			error: function (request, status, error) {
+				alert(error);
+			}
+		});
+	}
 

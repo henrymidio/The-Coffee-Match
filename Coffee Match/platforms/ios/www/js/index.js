@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+					
 		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
@@ -54,15 +55,11 @@ var app = {
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
 				$$("#icon-message").attr("src", "img/message_notification.png");
-				$$("#icon-message").on("click", function(){
-					$$(this).attr("src", "img/message_icon.png");
-				})
+				
 			}
 			if(json.payload.rawPayload.custom.a.type == "booking") {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
-				$$("#icon-agenda").on("click", function(){
-					$$(this).attr("src", "img/agenda_icon.png");
-				})
+				
 			}
  		};
 		
@@ -76,6 +73,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+		
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
@@ -124,7 +122,7 @@ var app = {
 				$("#tinderslide").jTinder('fav');
 				 myApp.addNotification({
 					title: 'The Coffee Match',
-					subtitle: 'Perfil favoritado!',
+					subtitle: 'Added to favorites',
 					media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
 				});
 			});
@@ -241,7 +239,7 @@ var app = {
 									$("#tinderslide").jTinder({
 										
 									});
-									
+									getPendingNotifications();
 								}								
 							});
 						
@@ -504,7 +502,76 @@ var app = {
 				
 			});
 			
-				
+		function getPendingNotifications(){
+			var usid = localStorage.getItem("user_id");
+			var pnss = {
+				user: usid
+			};
+			$.ajax({
+					url: 'http://thecoffeematch.com/webservice/get-pending-notifications.php',
+					type: 'post',
+					dataType: 'json',
+					data: pnss,
+					success: function (data) {
+						if(data.invite == 1){
+							$$("#icon-invite").attr("src", "img/sino_notification.png");
+							$$("#icon-invite").on("click", function(){
+								var ndata = {
+									invite: 0
+								};
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+											
+										}
+								});
+							});
+							
+						}
+						if(data.message == 1){
+							$$("#icon-message").attr("src", "img/message_notification.png");
+							$$("#icon-message").on("click", function(){
+								$$(this).attr("src", "img/message_icon.png");
+								var ndata = {
+									message: 0
+								};
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+										}
+								});
+								
+							})
+						}
+						if(data.booking == 1){
+							$$("#icon-agenda").attr("src", "img/agenda_notification.png");
+							$$("#icon-agenda").on("click", function(){
+								$$(this).attr("src", "img/agenda_icon.png");
+								var ndata = {
+									booking: 0
+								};
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+											
+										}
+								});
+								
+							})
+						}
+					},
+					error: function (request, status, error) {
+					 alert(error)
+					}
+				});
+		}
+
 					
 		myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
