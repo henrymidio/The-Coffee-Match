@@ -596,12 +596,10 @@ myApp.onPageInit('messages', function (page) {
 
 
 myApp.onPageInit('profile', function (page) {
-	$("#call-smart-select").on("focus", function(event){
-		event.preventDefault()
+	$("#call-smart-select").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
 	});
-	$("#call-smart-select2").on("focus", function(event){
-		event.preventDefault()
+	$("#call-smart-select2").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#looking-for")
 	});
 	
