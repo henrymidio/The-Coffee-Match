@@ -494,7 +494,7 @@ var app = {
 					facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
-						myApp.alert(error);
+						//myApp.alert(error);
 					  }
 					);
 				});
