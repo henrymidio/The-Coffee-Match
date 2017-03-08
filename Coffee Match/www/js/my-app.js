@@ -596,10 +596,10 @@ myApp.onPageInit('messages', function (page) {
 
 
 myApp.onPageInit('profile', function (page) {
-	$("#call-smart-select").on("click touchstart", function(event){
+	$(".cms").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
 	});
-	$("#call-smart-select2").on("click touchstart", function(event){
+	$(".cms2").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#looking-for")
 	});
 	
@@ -1090,7 +1090,7 @@ $("#confirmar-data").one("click", function(e){
 	});
 	 myApp.addNotification({
         title: 'The Coffee Match',
-        subtitle: 'You’re all set',
+        subtitle: "You are all set",
         message: 'Feel free to reschedule at any time',
         media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
     });
