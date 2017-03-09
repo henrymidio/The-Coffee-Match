@@ -3817,7 +3817,7 @@
             }
         
             modal.trigger('close');
-        
+           
             // Picker modal body class
             if (isPickerModal) {
                 $('body').removeClass('with-picker-modal');

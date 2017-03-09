@@ -594,12 +594,12 @@ myApp.onPageInit('messages', function (page) {
 });
 
 
-
 myApp.onPageInit('profile', function (page) {
-	$("#call-smart-select").on("click", function(){
+	
+	$(".cms").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
 	});
-	$("#call-smart-select2").on("click", function(){
+	$(".cms2").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#looking-for")
 	});
 	
@@ -633,10 +633,10 @@ myApp.onPageInit('profile', function (page) {
 									if(data[1].l2.length > 0){ $("#looking-for select option:contains("+data[1].l2+")").prop('selected', true) }
 									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
 									
-									$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
+									//$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
 									
-									$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
-									$("#call-smart-select2").val(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3)
+									//$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
+									//$("#call-smart-select2").val(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3)
 								}
 	});
 	var birthday = localStorage.getItem("age");
@@ -688,6 +688,7 @@ myApp.onPageInit('profile', function (page) {
 		
 		mainView.router.loadPage('profile-preview.html');
 	})
+	
 	
 	
 });
@@ -1090,7 +1091,7 @@ $("#confirmar-data").one("click", function(e){
 	});
 	 myApp.addNotification({
         title: 'The Coffee Match',
-        subtitle: 'You’re all set',
+        subtitle: "You are all set",
         message: 'Feel free to reschedule at any time',
         media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
     });

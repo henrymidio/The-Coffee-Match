@@ -67,8 +67,8 @@ input.rounded {
 
 .close-popup i.icon.icon-back {
 	background-image: url('../img/ic_action_previous_item.png');
-	width: 22px;
-	height: 22px;
+	width: 32px;
+	height: 32px;
 	margin-left: 0px !important;
 }
 
@@ -358,37 +358,27 @@ input:focus {
 }
 
 #graduation, #passo2-faculdade {
-	background: url('../img/school.png') no-repeat #eaf0f3 10px 10px !important;
-	margin-left: 0px;
-	margin-right: 0px;
+	background: url('../img/school.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
 }
 
 #occupation, #passo2-profissao, #passo2-nascimento {
-	background: url('../img/icon_business.png') no-repeat #eaf0f3 10px 10px !important;
-	margin-left: 0px;
-	margin-right: 0px;
+	background: url('../img/icon_business.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
 }
 
 #description, #passo2-description {
-	background: url('../img/description.png') no-repeat #eaf0f3 10px 10px !important;
-	margin-left: 0px;
-	margin-right: 0px;
+	background: url('../img/description.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
 }
 
 #call-smart-select {
-	background: url('../img/skills.png') no-repeat #eaf0f3 10px 10px !important;
-	margin-left: 0px;
-	margin-right: 0px;
+	background: url('../img/skills.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
 }
 
 #call-smart-select2 {
-	background: url('../img/tellme.png') no-repeat #eaf0f3 10px 10px !important;
-	margin-left: 0px;
-	margin-right: 0px;
+	background: url('../img/tellme.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
 }
 
@@ -503,7 +493,7 @@ input:focus {
     border-radius: 80px;
 }
 
-.search-effect {
+.search-img {
     display: block;
     width: 120px;
     height: 120px;
@@ -519,6 +509,9 @@ input:focus {
     left: 51%;
     z-index: 1;
     overflow: hidden;
+}
+
+.search-effect {
 	-webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
 	-moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
 	-ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);

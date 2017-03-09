@@ -38,6 +38,8 @@
 				panes.eq(current_pane - 1).toggleClass("next current");
 				if(current_pane <= 0){
 					$$(".buttons-row").toggleClass("visivel none");	
+					$$(".search-text").text("Thank You! Come back tomorrow.")
+					$$(".search-img").removeClass("search-effect");
 				}
 				
 			},
@@ -96,6 +98,8 @@
 				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
 				if(current_pane <= 0){
 					$$(".buttons-row").toggleClass("visivel none");	
+					$$(".search-text").text("Thank You! Come back tomorrow.")
+					$(".search-box").removeClass("search-effect");
 				}
 				
 			},
@@ -213,6 +217,8 @@
 			
 			if(current_pane <= 0){
 				$$(".buttons-row").toggleClass("visivel none");	
+				$$(".search-text").text("Thank You! Come back tomorrow.")
+				$(".search-box").removeClass("search-effect");
 			}
 			
 			$that.next();

@@ -137,7 +137,7 @@ var app = {
 			
 			var pic = localStorage.getItem("picture");
 				
-			$$(".search-effect").attr("src", pic);
+			$$(".search-img").attr("src", pic);
 			$$(".profile-photo").attr("src", pic);
 			
 			$$("#name").html(localStorage.getItem("name"));
@@ -190,7 +190,11 @@ var app = {
 								data: dados,
 								crossDomain: true,
 								success: function (data) {		
-									
+									if(data == null){
+										$$(".search-text").text("Thank You! Come back tomorrow.")
+										$$(".search-img").removeClass("search-effect");
+										return false;
+									}
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									

@@ -137,7 +137,7 @@ var app = {
 			
 			var pic = localStorage.getItem("picture");
 				
-			$$(".search-effect").attr("src", pic);
+			$$(".search-img").attr("src", pic);
 			$$(".profile-photo").attr("src", pic);
 			
 			$$("#name").html(localStorage.getItem("name"));
@@ -190,7 +190,11 @@ var app = {
 								data: dados,
 								crossDomain: true,
 								success: function (data) {		
-									
+									if(data == null){
+										$$(".search-text").text("Thank You! Come back tomorrow.")
+										$$(".search-img").removeClass("search-effect");
+										return false;
+									}
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									
@@ -479,13 +483,13 @@ var app = {
 									
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									//alert(request.responseText);
 								}
 								
 							});
 						  
 					  }, function onError (error) {
-						alert(error);
+						//alert(error);
 					  }
 					);
 				};		
@@ -494,7 +498,7 @@ var app = {
 					facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
-						myApp.alert(error);
+						//myApp.alert(error);
 					  }
 					);
 				});
@@ -567,7 +571,7 @@ var app = {
 						}
 					},
 					error: function (request, status, error) {
-					 alert(error)
+					 //alert(error)
 					}
 				});
 		}
