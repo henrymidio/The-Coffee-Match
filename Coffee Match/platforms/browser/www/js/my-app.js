@@ -346,11 +346,11 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-link item-content'>"
-												+ "<div class='item-media'>"
+												+ "<div class='item-media profile' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
-												+ "<div class='item-inner'>"
-												+ "<a href='#' class='item-link match' id="+data[i].id+">"
+												+ "<div class='item-inner match' id="+data[i].id+">"
+												+ "<a href='#' class='item-link'>"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a></li>";		
@@ -363,13 +363,13 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
 									});
-									/*
+									
 									$(".profile").on("click", function(){
 										var idp = $(this).attr("id");
-										localStorage.setItem("preview", idp);
-										mainView.router.loadPage("profile-view.html");
+										localStorage.setItem("shown_user_id", idp);
+										mainView.router.loadPage("user.html");
 									});
-									*/
+									
 									//myApp.hidePreloader();
 									
 								}
@@ -526,17 +526,30 @@ myApp.onPageInit('profile-view', function (page) {
 			$.ajax({
 									url: 'http://thecoffeematch.com/webservice/update-like.php',
 									type: 'post',
-									data: abc
+									data: abc,
+									success: function (data) {
+											if(data === "match"){
+												myApp.addNotification({
+													title: 'The Coffee Match',
+													subtitle: "WOW... it's a Coffee Match! Check it out!",
+													media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
+													onClose: function () {
+														mainView.router.loadPage('combinacoes.html');
+													}
+												});
+											} else {
+												myApp.addNotification({
+													title: 'The Coffee Match',
+													subtitle: 'Your invite is on its way!',
+													media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
+													onClose: function () {
+														mainView.router.loadPage('favorites.html');
+													}
+												});
+											}
+									}
 			});
 			
-			 myApp.addNotification({
-				title: 'The Coffee Match',
-				subtitle: 'Your invite is on its way!',
-				media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">',
-				onClose: function () {
-					mainView.router.loadPage('favorites.html');
-				}
-			});
 			
 		});
 	
