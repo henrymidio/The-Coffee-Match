@@ -54,13 +54,13 @@ myApp.onPageInit('passo2', function (page) {
 		var faculdade = $$("#passo2-faculdade").val();
 		var nascimento = $$("#passo2-nascimento").val();
 		
-		if (profissao.length == 0) {
-			document.getElementById("passo2-profissao").focus();
+		if (faculdade.length < 2) {
+			document.getElementById("passo2-faculdade").focus();
 			return false;
 		}
 		
-		if (faculdade.length == 0) {
-			document.getElementById("passo2-faculdade").focus();
+		if (profissao.length == 0) {
+			document.getElementById("passo2-profissao").focus();
 			return false;
 		}
 		
@@ -689,15 +689,13 @@ myApp.onPageInit('profile', function (page) {
 		});
 		looking = looking.join(); 
 		
+		var user_id = localStorage.getItem("user_id");
+		//Chamada ao servidor para atualização de informações de perfil
+		setProfile(descricao, profissao, idade, faculdade, tags, looking, user_id);
+		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
-		
-		var user_id = localStorage.getItem("user_id");
-		
-		
-		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, idade, faculdade, tags, looking, user_id);
 		
 		mainView.router.loadPage('profile-preview.html');
 	})

@@ -216,7 +216,7 @@ var app = {
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
-												+ "<div class='text-center' style='background: url(img/background_profile.png); margin: -10px; padding-bottom: 1px'>"
+												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px'>"
 												+ "<div class='row'>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
@@ -418,7 +418,7 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    //facebookConnectPlugin.browserInit("1647443792236383");
+			   //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
 				
