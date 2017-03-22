@@ -438,12 +438,13 @@ var app = {
 				 facebookConnectPlugin.api("/me?fields=id, name, email, birthday, work, education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
+						  /*
 						  try {
 							  var dd = new Date(result.birthday);
 							  var birthday = dd.getFullYear() + "-" + dd.getMonth() + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
 						  } catch(err) { }
-						  
+						  */
 						  try {
 							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
 						  } catch(err) { }
