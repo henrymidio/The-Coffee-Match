@@ -62,10 +62,16 @@ myApp.onPageInit('passo2', function (page) {
 								}
 	});
 	
+	var birthday = localStorage.getItem("birthday");
 	var picture = localStorage.getItem("picture");
 	var name    = localStorage.getItem("name");
+	var work = localStorage.getItem("occupation");
+	var education = localStorage.getItem("college");
 	document.getElementById('picture').src = picture;
 	$$("#passo2-name").html(name);
+	$$("#passo2-profissao").val(work);
+	$$("#passo2-faculdade").val(education);
+	$$("#passo2-nascimento").val(birthday);
 	
 	$("#call-smart-select").on("click", function(){
 		myApp.smartSelectOpen("#skills")

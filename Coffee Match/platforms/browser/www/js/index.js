@@ -61,6 +61,9 @@ var app = {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
 				
 			}
+			if(json.payload.rawPayload.custom.a.type == "rewards") {
+				mainView.router.loadPage('congratulations.html');			
+			}
  		};
 		
  		window.plugins.OneSignal
@@ -216,7 +219,7 @@ var app = {
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
-												+ "<div class='text-center' style='background: url(img/background_profile.png); margin: -10px; padding-bottom: 1px'>"
+												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px'>"
 												+ "<div class='row'>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
@@ -276,6 +279,10 @@ var app = {
 								dataType: 'json',
 								data: latLngUser,
 								success: function (data) {
+									
+									if (data.length < 2) {
+									  alert("We are sorry! There’s no Starbucks stores registered near you.")
+									}
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
@@ -418,7 +425,7 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    facebookConnectPlugin.browserInit("1647443792236383");
+			   facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
 				/*
@@ -428,9 +435,23 @@ var app = {
 				});
 				*/			
 				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
+				 facebookConnectPlugin.api("/me?fields=id, name, email, birthday, work, education", 
+				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
+						  try {
+							  var dd = new Date(result.birthday);
+							  var birthday = dd.getFullYear() + "-" + dd.getMonth() + "-" + dd.getDate();
+							localStorage.setItem("birthday", birthday);
+						  } catch(err) { }
 						  
+						  try {
+							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
+						  } catch(err) { }
+						  
+						  try {
+							localStorage("college", result.education[0].school.name);
+						  } catch(err) { }
+
 						  var person = {
 								fbid: result.id,
 								notification_key: notification_key,
@@ -495,7 +516,7 @@ var app = {
 				};		
 				
 				$$('#loginFB').on('click', function(){		
-					facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
+					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
 						//myApp.alert(error);
@@ -586,6 +607,15 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
+		myApp.onPageInit('congratulations', function() {
+			    StatusBar.overlaysWebView(true);
+	
+			});
+		
+		myApp.onPageBeforeRemove('congratulations', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+		
 		myApp.onPageInit('login2', function() {
 			    StatusBar.overlaysWebView(true);
 	

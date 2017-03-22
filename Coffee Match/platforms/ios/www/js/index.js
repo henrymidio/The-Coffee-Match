@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -72,7 +72,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -425,22 +425,33 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			   //facebookConnectPlugin.browserInit("1647443792236383");
+			   facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-							
+				*/			
 				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id, name, email, user_birthday", 
-				 ["public_profile", "email", "user_birthday"],
+				 facebookConnectPlugin.api("/me?fields=id, name, email, birthday, work, education", 
+				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
-						  alert(result.user_birthday);
-						  //alert(result.user_education_history);
-						  //alert(result.user_work_history);
+						  try {
+							  var dd = new Date(result.birthday);
+							  var birthday = dd.getFullYear() + "-" + dd.getMonth() + "-" + dd.getDate();
+							localStorage.setItem("birthday", birthday);
+						  } catch(err) { }
+						  
+						  try {
+							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
+						  } catch(err) { }
+						  
+						  try {
+							localStorage("college", result.education[0].school.name);
+						  } catch(err) { }
+
 						  var person = {
 								fbid: result.id,
 								notification_key: notification_key,
@@ -505,7 +516,7 @@ var app = {
 				};		
 				
 				$$('#loginFB').on('click', function(){		
-					facebookConnectPlugin.login(["public_profile", "email"], fbLoginSuccess,
+					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
 						//myApp.alert(error);
