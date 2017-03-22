@@ -61,6 +61,9 @@ var app = {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
 				
 			}
+			if(json.payload.rawPayload.custom.a.type == "rewards") {
+				mainView.router.loadPage('congratulations.html');			
+			}
  		};
 		
  		window.plugins.OneSignal
@@ -276,6 +279,10 @@ var app = {
 								dataType: 'json',
 								data: latLngUser,
 								success: function (data) {
+									
+									if (data.length < 2) {
+									  alert("We are sorry! There’s no Starbucks stores registered near you.")
+									}
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
@@ -428,9 +435,12 @@ var app = {
 				});
 							
 				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id,name,email", ["public_profile","email"],
+				 facebookConnectPlugin.api("/me?fields=id, name, email, user_birthday", 
+				 ["public_profile", "email", "user_birthday"],
 					  function onSuccess (result) {
-						  
+						  alert(result.user_birthday);
+						  //alert(result.user_education_history);
+						  //alert(result.user_work_history);
 						  var person = {
 								fbid: result.id,
 								notification_key: notification_key,
@@ -586,6 +596,15 @@ var app = {
 			    StatusBar.overlaysWebView(false);		
 			});
 			
+		myApp.onPageInit('congratulations', function() {
+			    StatusBar.overlaysWebView(true);
+	
+			});
+		
+		myApp.onPageBeforeRemove('congratulations', function() {
+			    StatusBar.overlaysWebView(false);		
+			});
+		
 		myApp.onPageInit('login2', function() {
 			    StatusBar.overlaysWebView(true);
 	

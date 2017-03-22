@@ -38,7 +38,7 @@
 				panes.eq(current_pane - 1).toggleClass("next current");
 				if(current_pane <= 0){
 					$$(".buttons-row").toggleClass("visivel none");	
-					$$(".search-text").text("Thank You! Come back tomorrow.")
+					$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 					$$(".search-img").removeClass("search-effect");
 				}
 				
@@ -98,7 +98,7 @@
 				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
 				if(current_pane <= 0){
 					$$(".buttons-row").toggleClass("visivel none");	
-					$$(".search-text").text("Thank You! Come back tomorrow.")
+					$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 					$(".search-box").removeClass("search-effect");
 				}
 				
@@ -217,7 +217,7 @@
 			
 			if(current_pane <= 0){
 				$$(".buttons-row").toggleClass("visivel none");	
-				$$(".search-text").text("Thank You! Come back tomorrow.")
+				$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 				$(".search-box").removeClass("search-effect");
 			}
 			

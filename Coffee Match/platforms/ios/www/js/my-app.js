@@ -21,6 +21,34 @@ myApp.onPageInit('login2', function (page) {
 	}); 
 });
 
+myApp.onPageInit('address', function (page) {
+	$$("#submit-address").on("click", function(){
+		var number = $$("#street_number").val();
+		var street = $$("#street_address").val();
+		var city   = $$("#user_city").val();
+		var neighborhood = $$("#user_neighborhood").val();
+		var zip    = $$("#zip").val();
+		var user_id = localStorage.getItem("user_id");
+		var address_data = {
+			number: number,
+			street: street,
+			city: city,
+			neighborhood: neighborhood,
+			cep: zip,
+			user: user_id
+		}
+		$.ajax({
+								url: 'http://thecoffeematch.com/webservice/save-address-user.php?user=',
+								type: 'post',
+								data: address_data,
+								success: function (data) {
+									//Alert com callback que volta pra Home
+									alert(data);
+								}
+		});
+	}) 
+});
+
 myApp.onPageInit('passo2', function (page) {
 	
 	
@@ -54,12 +82,12 @@ myApp.onPageInit('passo2', function (page) {
 		var faculdade = $$("#passo2-faculdade").val();
 		var nascimento = $$("#passo2-nascimento").val();
 		
-		if (faculdade.length < 2) {
+		if (faculdade.length < 3) {
 			document.getElementById("passo2-faculdade").focus();
 			return false;
 		}
 		
-		if (profissao.length == 0) {
+		if (profissao.length < 3) {
 			document.getElementById("passo2-profissao").focus();
 			return false;
 		}
@@ -697,7 +725,9 @@ myApp.onPageInit('profile', function (page) {
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
-		mainView.router.loadPage('profile-preview.html');
+		//Para dar tempo de atuaizar antes de exibir novamete o preview do perfil
+		setTimeout(function(){ mainView.router.loadPage('profile-preview.html'); }, 1000);
+		
 	})
 	
 	

@@ -357,6 +357,31 @@ input:focus {
 	color: white;
 }
 
+#street_number {
+	background: url('../img/country_region.png') no-repeat #eaf0f3 10px 8px !important;
+	width: 220px;
+}
+
+#street_address {
+	background: url('../img/street_address.png') no-repeat #eaf0f3 10px 8px !important;
+	width: 220px;
+}
+
+#user_city {
+	background: url('../img/city.png') no-repeat #eaf0f3 10px 8px !important;
+	width: 220px;
+}
+
+#user_neighborhood {
+	background: url('../img/state.png') no-repeat #eaf0f3 10px 8px !important;
+	width: 220px;
+}
+
+#zip {
+	background: url('../img/zip_code.png') no-repeat #eaf0f3 10px 8px !important;
+	width: 220px;
+}
+
 #graduation, #passo2-faculdade {
 	background: url('../img/school.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
