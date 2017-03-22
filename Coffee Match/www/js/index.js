@@ -511,7 +511,7 @@ var app = {
 							});
 						  
 					  }, function onError (error) {
-						alert(error);
+						alert("first" + "-" + error);
 					  }
 					);
 				};		
@@ -520,7 +520,7 @@ var app = {
 					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
-						myApp.alert(error);
+						myApp.alert("second" + "-" + error);
 					  }
 					);
 				});
