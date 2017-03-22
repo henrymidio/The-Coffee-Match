@@ -444,7 +444,7 @@ var app = {
 							  var birthday = dd.getFullYear() + "-" + dd.getMonth() + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
 						  } catch(err) { }
-						  */
+						  
 						  try {
 							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
 						  } catch(err) { }
@@ -452,7 +452,7 @@ var app = {
 						  try {
 							localStorage("college", result.education[0].school.name);
 						  } catch(err) { }
-
+						*/
 						  var person = {
 								fbid: result.id,
 								notification_key: notification_key,
