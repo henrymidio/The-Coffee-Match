@@ -611,7 +611,6 @@ var app = {
 			
 		myApp.onPageInit('congratulations', function() {
 			    StatusBar.overlaysWebView(true);
-	
 			});
 		
 		myApp.onPageBeforeRemove('congratulations', function() {

@@ -22,6 +22,7 @@ myApp.onPageInit('login2', function (page) {
 });
 
 myApp.onPageInit('address', function (page) {
+	StatusBar.overlaysWebView(false);
 	$$("#submit-address").on("click", function(){
 		var number = $$("#street_number").val();
 		var street = $$("#street_address").val();
