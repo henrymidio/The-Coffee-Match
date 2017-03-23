@@ -47,6 +47,9 @@ var app = {
 			if(jsonData.notification.payload.additionalData.type == "message") {
 				mainView.router.loadPage('messages.html');
 			}
+			if(jsonData.notification.payload.additionalData.type == "rewards") {
+				mainView.router.loadPage('congratulations.html');
+			}
  		};
 		
 		var notificationReceivedCallback = function(json) {
@@ -61,9 +64,7 @@ var app = {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
 				
 			}
-			if(json.payload.rawPayload.custom.a.type == "rewards") {
-				mainView.router.loadPage('congratulations.html');			
-			}
+			
  		};
 		
  		window.plugins.OneSignal
@@ -441,7 +442,7 @@ var app = {
 						  
 						  try {
 							  var dd = new Date(result.birthday);
-							  var birthday = dd.getFullYear() + "-" + dd.getMonth() + "-" + dd.getDate();
+							  var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
 						  } catch(err) { }
 						  
