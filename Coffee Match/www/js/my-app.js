@@ -48,11 +48,11 @@ myApp.onPageInit('address', function (page) {
 								url: "https://viacep.com.br/ws/"+ cep +"/json/?callback=?",
 								dataType: 'json',
 								success: function (data) {
-									if (!("erro" in dados)) {
+									if (!("erro" in data)) {
 										//Atualiza os campos com os valores da consulta.
-										$("#street_address").val(dados.logradouro);
-										$("#user_neighborhood").val(dados.bairro);
-										$("#user_city").val(dados.localidade);
+										$("#street_address").val(data.logradouro);
+										$("#user_neighborhood").val(data.bairro);
+										$("#user_city").val(data.localidade);
 									} //end if.
 									else {
 										//CEP pesquisado não foi encontrado.
