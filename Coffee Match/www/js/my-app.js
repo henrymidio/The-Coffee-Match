@@ -23,6 +23,55 @@ myApp.onPageInit('login2', function (page) {
 
 myApp.onPageInit('address', function (page) {
 	StatusBar.overlaysWebView(false);
+	
+	//Quando o campo cep perde o foco.
+            $("#zip").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#street_address").val("...");
+                        $("#user_neighborhood").val("...");
+                        $("#user_city").val("...");
+                        
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#street_address").val(dados.logradouro);
+								$("#user_neighborhood").val(dados.bairro);
+								$("#user_city").val(dados.localidade);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+	
 	$$("#submit-address").on("click", function(){
 		var number = $$("#street_number").val();
 		var street = $$("#street_address").val();
@@ -43,11 +92,19 @@ myApp.onPageInit('address', function (page) {
 								type: 'post',
 								data: address_data,
 								success: function (data) {
-									//Alert com callback que volta pra Home
-									alert(data);
+									myApp.alert('You will receive a Starbucks Gift Card at your house!', 'Congratulations!', function () {
+										mainView.router.loadPage('index.html');
+									});
 								}
 		});
 	}) 
+	
+	function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#street_address").val("");
+                $("#user_neighborhood").val("");
+                $("#user_city").val("");
+            }
 });
 
 myApp.onPageInit('passo2', function (page) {
