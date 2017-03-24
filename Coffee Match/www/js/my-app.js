@@ -45,7 +45,7 @@ myApp.onPageInit('address', function (page) {
                         $("#user_city").val("...");
                         
 						$.ajax({
-								url: "//viacep.com.br/ws/"+ cep +"/json/?callback=?",
+								url: "https://viacep.com.br/ws/"+ cep +"/json/?callback=?",
 								dataType: 'json',
 								success: function (data) {
 									if (!("erro" in dados)) {
