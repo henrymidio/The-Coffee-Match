@@ -221,7 +221,7 @@ var app = {
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
 												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; height: 45vh'>"
-												+ "<div class='row'>"
+												+ "<div class='row card-top'>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
@@ -282,7 +282,7 @@ var app = {
 								success: function (data) {
 									
 									if (data.length < 2) {
-									  alert("We are sorry! There’s no Starbucks stores registered near you.")
+									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa

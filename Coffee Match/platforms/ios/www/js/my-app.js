@@ -44,6 +44,27 @@ myApp.onPageInit('address', function (page) {
                         $("#user_neighborhood").val("...");
                         $("#user_city").val("...");
                         
+						$.ajax({
+								url: "https://viacep.com.br/ws/"+ cep +"/json/?callback=?",
+								dataType: 'json',
+								success: function (data) {
+									if (!("erro" in data)) {
+										//Atualiza os campos com os valores da consulta.
+										$("#street_address").val(data.logradouro);
+										$("#user_neighborhood").val(data.bairro);
+										$("#user_city").val(data.localidade);
+									} //end if.
+									else {
+										//CEP pesquisado não foi encontrado.
+										limpa_formulário_cep();
+										alert("CEP não encontrado.");
+									}
+								},
+								error: function (request, status, error) {
+									alert(error);
+								}
+						});
+						/*
                         //Consulta o webservice viacep.com.br/
                         $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
@@ -59,6 +80,7 @@ myApp.onPageInit('address', function (page) {
                                 alert("CEP não encontrado.");
                             }
                         });
+						*/
                     } //end if.
                     else {
                         //cep é inválido.
