@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		/*
+		
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -46,6 +46,9 @@ var app = {
 			}
 			if(jsonData.notification.payload.additionalData.type == "message") {
 				mainView.router.loadPage('messages.html');
+			}
+			if(jsonData.notification.payload.additionalData.type == "rewards") {
+				mainView.router.loadPage('congratulations.html');
 			}
  		};
 		
@@ -61,9 +64,7 @@ var app = {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
 				
 			}
-			if(json.payload.rawPayload.custom.a.type == "rewards") {
-				mainView.router.loadPage('congratulations.html');			
-			}
+			
  		};
 		
  		window.plugins.OneSignal
@@ -72,7 +73,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		*/
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -219,8 +220,8 @@ var app = {
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
-												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px'>"
-												+ "<div class='row'>"
+												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; height: 45vh'>"
+												+ "<div class='row card-top'>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
@@ -281,7 +282,7 @@ var app = {
 								success: function (data) {
 									
 									if (data.length < 2) {
-									  alert("We are sorry! There’s no Starbucks stores registered near you.")
+									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
@@ -425,22 +426,23 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			   facebookConnectPlugin.browserInit("1647443792236383");
+			    //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				/*
+				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				*/			
+							
 				var fbLoginSuccess = function (userData) {
-				 facebookConnectPlugin.api("/me?fields=id, name, email, birthday, work, education", 
+				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
+						  
 						  try {
 							  var dd = new Date(result.birthday);
-							  var birthday = dd.getFullYear() + "-" + dd.getMonth() + "-" + dd.getDate();
+							  var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
 						  } catch(err) { }
 						  
@@ -451,7 +453,7 @@ var app = {
 						  try {
 							localStorage("college", result.education[0].school.name);
 						  } catch(err) { }
-
+						
 						  var person = {
 								fbid: result.id,
 								notification_key: notification_key,
@@ -510,7 +512,7 @@ var app = {
 							});
 						  
 					  }, function onError (error) {
-						//alert(error);
+						//alert("first" + "-" + error);
 					  }
 					);
 				};		
@@ -519,7 +521,7 @@ var app = {
 					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
 					  function loginError (error) {
 					  	
-						//myApp.alert(error);
+						//myApp.alert("second" + "-" + error);
 					  }
 					);
 				});
@@ -609,7 +611,6 @@ var app = {
 			
 		myApp.onPageInit('congratulations', function() {
 			    StatusBar.overlaysWebView(true);
-	
 			});
 		
 		myApp.onPageBeforeRemove('congratulations', function() {

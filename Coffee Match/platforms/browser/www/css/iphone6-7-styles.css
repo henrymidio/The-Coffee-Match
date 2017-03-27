@@ -7,6 +7,10 @@
 	font-size: 15px;
   }
   
+  .congrats {
+	margin-top: 40px;
+  }
+  
 	#user-one-img {
 		position: absolute;
 		width: 65px;
