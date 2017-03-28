@@ -232,7 +232,7 @@ var app = {
 												+ "</div><br>"
 												+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
 												+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+"</div><br>"
-												+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About My Projects & Ideas</b></span></p>"
+												+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About Me</b></span></p>"
 												+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
@@ -283,6 +283,9 @@ var app = {
 									
 									if (data.length < 2) {
 									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
+									}
+									if(data[i].distance < 1){
+										data[i].distance = 1;
 									}
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
@@ -434,7 +437,7 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-							
+						
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
@@ -555,10 +558,12 @@ var app = {
 										}
 								});
 							});
-							
+						} else {
+							$$("#icon-invite").attr("src", "img/sino.PNG");
 						}
+						
 						if(data.message == 1){
-							$$("#icon-message").attr("src", "img/message_notification.png");
+							$$("#icon-message img").attr("src", "img/message_notification.png");
 							$$("#icon-message").on("click", function(){
 								$$(this).attr("src", "img/message_icon.png");
 								var ndata = {
@@ -573,9 +578,12 @@ var app = {
 								});
 								
 							})
+						}else {
+							$$("#icon-message img").attr("src", "img/message_icon.png");
 						}
+						
 						if(data.booking == 1){
-							$$("#icon-agenda").attr("src", "img/agenda_notification.png");
+							$$("#icon-agenda img").attr("src", "img/agenda_notification.png");
 							$$("#icon-agenda").on("click", function(){
 								$$(this).attr("src", "img/agenda_icon.png");
 								var ndata = {
@@ -591,6 +599,8 @@ var app = {
 								});
 								
 							})
+						} else {
+							$$("#icon-agenda img").attr("src", "img/agenda_icon.png");
 						}
 					},
 					error: function (request, status, error) {

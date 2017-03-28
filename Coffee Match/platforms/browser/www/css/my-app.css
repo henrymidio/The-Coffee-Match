@@ -562,6 +562,8 @@ input:focus {
     margin-top: -100px;
     //margin-left: -60px;
     position: relative;
+	margin-left: 15px;
+	margin-right: 15px;
     bottom: 10%;
     //left: 40%;
     z-index: 1;

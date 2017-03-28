@@ -284,6 +284,9 @@ var app = {
 									if (data.length < 2) {
 									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
+									if(data[i].distance < 1){
+										data[i].distance = 1;
+									}
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
@@ -434,7 +437,7 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-							
+						
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],

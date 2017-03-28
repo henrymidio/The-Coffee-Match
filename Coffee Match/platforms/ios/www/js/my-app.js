@@ -295,7 +295,8 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									mainView.router.loadPage("match.html");	
 								},
 								error: function (request, status, error) {
-									alert(error);
+									mainView.router.loadPage("combinacoes.html");	
+									//alert(error);
 								}
 								
 				});
