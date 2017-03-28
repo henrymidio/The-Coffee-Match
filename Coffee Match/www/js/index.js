@@ -445,8 +445,8 @@ var app = {
 					  function onSuccess (result) {
 						  
 						  try {
-							  var dd = new Date(result.birthday);
-							  var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
+							var dd = new Date(result.birthday);
+							var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
 						  } catch(err) { 
 							localStorage.setItem("birthday", "");
@@ -553,7 +553,7 @@ var app = {
 					data: pnss,
 					success: function (data) {
 						if(data.invite == 1){
-							$$("#icon-invite").attr("src", "img/sino_notification.png");
+							$$("#icon-invite img").attr("src", "img/sino_notification.png");
 							$$("#icon-invite").on("click", function(){
 								var ndata = {
 									invite: 0
@@ -568,7 +568,7 @@ var app = {
 								});
 							});
 						} else {
-							$$("#icon-invite").attr("src", "img/sino.PNG");
+							$$("#icon-invite img").attr("src", "img/sino.PNG");
 						}
 						
 						if(data.message == 1){
