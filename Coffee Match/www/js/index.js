@@ -438,7 +438,7 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-						
+					
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
@@ -455,7 +455,8 @@ var app = {
 						  } catch(err) { }
 						  
 						  try {
-							localStorage("college", result.education[0].school.name);
+							var college = result.education[0].school.name;
+							localStorage.setItem("college", college);
 						  } catch(err) { }
 						
 						  var person = {

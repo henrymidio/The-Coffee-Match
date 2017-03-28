@@ -82,7 +82,7 @@ var app = {
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
 		
-		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
+		localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
@@ -284,13 +284,14 @@ var app = {
 									if (data.length < 2) {
 									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
-									if(data[i].distance < 1){
-										data[i].distance = 1;
-									}
+									
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
 										
+										if(data[i].distance < 1){
+											data[i].distance = 1;
+										}
 																				
 										var line1 = "<li>"
 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
@@ -454,7 +455,8 @@ var app = {
 						  } catch(err) { }
 						  
 						  try {
-							localStorage("college", result.education[0].school.name);
+							var college = result.education[0].school.name;
+							localStorage.setItem("college", college);
 						  } catch(err) { }
 						
 						  var person = {
@@ -485,7 +487,7 @@ var app = {
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
-										localStorage.setItem("metrica", "Km");
+										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										//mainView.router.loadPage("index.html");
@@ -498,7 +500,7 @@ var app = {
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("metrica", "Km");
+										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage('passo2.html');
