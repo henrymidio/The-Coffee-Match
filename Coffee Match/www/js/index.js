@@ -455,7 +455,8 @@ var app = {
 						  } catch(err) { }
 						  
 						  try {
-							var college = result.education[0].school.name;
+							var lnt = result.education.length;
+							var college = result.education[lnt - 1].school.name;
 							localStorage.setItem("college", college);
 						  } catch(err) { }
 						
