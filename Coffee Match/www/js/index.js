@@ -82,7 +82,7 @@ var app = {
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
 		
-		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
+		localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
@@ -195,7 +195,7 @@ var app = {
 								crossDomain: true,
 								success: function (data) {		
 									if(data == null){
-										$$(".search-text").text("Thank You! Come back tomorrow.")
+										$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 										$$(".search-img").removeClass("search-effect");
 										return false;
 									}
@@ -485,7 +485,7 @@ var app = {
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
-										localStorage.setItem("metrica", "Km");
+										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										//mainView.router.loadPage("index.html");
@@ -498,7 +498,7 @@ var app = {
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("metrica", "Km");
+										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage('passo2.html');
