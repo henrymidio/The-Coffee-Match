@@ -555,8 +555,10 @@ var app = {
 										}
 								});
 							});
-							
+						} else {
+							$$("#icon-invite").attr("src", "img/sino.PNG");
 						}
+						
 						if(data.message == 1){
 							$$("#icon-message img").attr("src", "img/message_notification.png");
 							$$("#icon-message").on("click", function(){
@@ -573,7 +575,10 @@ var app = {
 								});
 								
 							})
+						}else {
+							$$("#icon-message img").attr("src", "img/message_icon.png");
 						}
+						
 						if(data.booking == 1){
 							$$("#icon-agenda img").attr("src", "img/agenda_notification.png");
 							$$("#icon-agenda").on("click", function(){
@@ -591,6 +596,8 @@ var app = {
 								});
 								
 							})
+						} else {
+							$$("#icon-agenda img").attr("src", "img/agenda_icon.png");
 						}
 					},
 					error: function (request, status, error) {
