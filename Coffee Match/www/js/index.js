@@ -284,13 +284,14 @@ var app = {
 									if (data.length < 2) {
 									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
-									if(data[i].distance < 1){
-										data[i].distance = 1;
-									}
+									
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
 										
+										if(data[i].distance < 1){
+											data[i].distance = 1;
+										}
 																				
 										var line1 = "<li>"
 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
