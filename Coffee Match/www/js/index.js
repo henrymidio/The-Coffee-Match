@@ -448,17 +448,23 @@ var app = {
 							  var dd = new Date(result.birthday);
 							  var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("birthday", "");
+						  }
 						  
 						  try {
 							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("occupation", "");
+						  }
 						  
 						  try {
 							var lnt = result.education.length;
 							var college = result.education[lnt - 1].school.name;
 							localStorage.setItem("college", college);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("college", "");
+						  }
 						
 						  var person = {
 								fbid: result.id,
