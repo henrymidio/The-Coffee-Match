@@ -275,7 +275,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	
 	
 	$('#confirmar-cafe').on("click", function(){
-		$(this).prop("disabled", true);
+		myApp.showPreloader();
 		//Faz o PUT LIKE
 				var user_id  = localStorage.getItem("user_id");
 				var other_id = localStorage.getItem("idc");
@@ -291,11 +291,12 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-									
+									myApp.hidePreloader();
 									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
 								},
 								error: function (request, status, error) {
+									myApp.hidePreloader();
 									mainView.router.loadPage("combinacoes.html");	
 									//alert(error);
 								}
