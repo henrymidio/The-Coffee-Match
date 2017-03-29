@@ -275,6 +275,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	
 	
 	$('#confirmar-cafe').on("click", function(){
+		$(this).prop("disabled", true);
 		//Faz o PUT LIKE
 				var user_id  = localStorage.getItem("user_id");
 				var other_id = localStorage.getItem("idc");
