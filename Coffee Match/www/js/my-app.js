@@ -880,6 +880,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 								success: function (data) {
 									$$("#ranger").val(data.distance);
 									dst = data.distance;
+									localStorage.setItem("distance", data.distance);
 									if(data.notification_invites == false){
 										$('#check-convites').prop('checked', false);
 									}
@@ -945,6 +946,8 @@ myApp.onPageBeforeInit('settings', function (page) {
 		};
 		
 		var distance = $$("#ranger").val();
+		localStorage.setItem("distance", distance);
+		
 		var user_id = localStorage.getItem("user_id");
 		setPreferences(metrica, distance, convites, emails, user_id);
 		mainView.router.loadPage('index.html');
