@@ -712,7 +712,7 @@ display: inline-block;
 }
 
 .float-button-wrapper {
-	//position: absolute; bottom: 8%; left: 0; right: 0; margin: 0 auto; padding-left: 35px; padding-right: 35px; color: white;
+	position: absolute; bottom: 8%; left: 0; right: 0; margin: 0 auto; padding-left: 35px; padding-right: 35px; color: white;
 }
 
 
