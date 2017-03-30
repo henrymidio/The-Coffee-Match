@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		/*
+		
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -73,7 +73,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		*/
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -82,7 +82,7 @@ var app = {
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
 		
-		localStorage.setItem("message", "Hey! It seems we have similar interests. Lets have a coffee at Starbucks?!");
+		localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
@@ -284,13 +284,14 @@ var app = {
 									if (data.length < 2) {
 									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
-									if(data[i].distance < 1){
-										data[i].distance = 1;
-									}
+									
 									var metrica = localStorage.getItem("metrica");
 									//Renderiza markers no mapa
 									for(i in data) {
 										
+										if(data[i].distance < 1){
+											data[i].distance = 1;
+										}
 																				
 										var line1 = "<li>"
 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
@@ -429,33 +430,41 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    facebookConnectPlugin.browserInit("1647443792236383");
+			    //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				/*
+				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				*/		
+					
 				var fbLoginSuccess = function (userData) {
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
 						  
 						  try {
-							  var dd = new Date(result.birthday);
-							  var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
+							var dd = new Date(result.birthday);
+							var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("birthday", "");
+						  }
 						  
 						  try {
 							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("occupation", "");
+						  }
 						  
 						  try {
-							localStorage("college", result.education[0].school.name);
-						  } catch(err) { }
+							var lnt = result.education.length;
+							var college = result.education[lnt - 1].school.name;
+							localStorage.setItem("college", college);
+						  } catch(err) { 
+							localStorage.setItem("college", "");
+						  }
 						
 						  var person = {
 								fbid: result.id,
@@ -485,7 +494,7 @@ var app = {
 										localStorage.setItem("description", data.description);
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
-										localStorage.setItem("metrica", "Km");
+										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										//mainView.router.loadPage("index.html");
@@ -498,7 +507,7 @@ var app = {
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("user_id", data.user_id);
 										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("metrica", "Km");
+										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage('passo2.html');
@@ -544,7 +553,7 @@ var app = {
 					data: pnss,
 					success: function (data) {
 						if(data.invite == 1){
-							$$("#icon-invite").attr("src", "img/sino_notification.png");
+							$$("#icon-invite img").attr("src", "img/sino_notification.png");
 							$$("#icon-invite").on("click", function(){
 								var ndata = {
 									invite: 0
@@ -559,7 +568,7 @@ var app = {
 								});
 							});
 						} else {
-							$$("#icon-invite").attr("src", "img/sino.PNG");
+							$$("#icon-invite img").attr("src", "img/sino.PNG");
 						}
 						
 						if(data.message == 1){

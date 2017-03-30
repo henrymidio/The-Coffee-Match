@@ -445,20 +445,26 @@ var app = {
 					  function onSuccess (result) {
 						  
 						  try {
-							  var dd = new Date(result.birthday);
-							  var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
+							var dd = new Date(result.birthday);
+							var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
 							localStorage.setItem("birthday", birthday);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("birthday", "");
+						  }
 						  
 						  try {
 							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("occupation", "");
+						  }
 						  
 						  try {
 							var lnt = result.education.length;
 							var college = result.education[lnt - 1].school.name;
 							localStorage.setItem("college", college);
-						  } catch(err) { }
+						  } catch(err) { 
+							localStorage.setItem("college", "");
+						  }
 						
 						  var person = {
 								fbid: result.id,
@@ -547,7 +553,7 @@ var app = {
 					data: pnss,
 					success: function (data) {
 						if(data.invite == 1){
-							$$("#icon-invite").attr("src", "img/sino_notification.png");
+							$$("#icon-invite img").attr("src", "img/sino_notification.png");
 							$$("#icon-invite").on("click", function(){
 								var ndata = {
 									invite: 0
@@ -562,7 +568,7 @@ var app = {
 								});
 							});
 						} else {
-							$$("#icon-invite").attr("src", "img/sino.PNG");
+							$$("#icon-invite img").attr("src", "img/sino.PNG");
 						}
 						
 						if(data.message == 1){

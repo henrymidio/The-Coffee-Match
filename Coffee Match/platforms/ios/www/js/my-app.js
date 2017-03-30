@@ -275,6 +275,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	
 	
 	$('#confirmar-cafe').on("click", function(){
+		myApp.showPreloader();
 		//Faz o PUT LIKE
 				var user_id  = localStorage.getItem("user_id");
 				var other_id = localStorage.getItem("idc");
@@ -290,11 +291,12 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-									
+									myApp.hidePreloader();
 									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
 								},
 								error: function (request, status, error) {
+									myApp.hidePreloader();
 									mainView.router.loadPage("combinacoes.html");	
 									//alert(error);
 								}
@@ -878,6 +880,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 								success: function (data) {
 									$$("#ranger").val(data.distance);
 									dst = data.distance;
+									localStorage.setItem("distance", data.distance);
 									if(data.notification_invites == false){
 										$('#check-convites').prop('checked', false);
 									}
@@ -943,6 +946,8 @@ myApp.onPageBeforeInit('settings', function (page) {
 		};
 		
 		var distance = $$("#ranger").val();
+		localStorage.setItem("distance", distance);
+		
 		var user_id = localStorage.getItem("user_id");
 		setPreferences(metrica, distance, convites, emails, user_id);
 		mainView.router.loadPage('index.html');
