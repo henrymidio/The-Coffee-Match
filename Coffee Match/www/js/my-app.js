@@ -319,7 +319,7 @@ myApp.onPageInit('convites', function (page) {
 								data: y,
 								success: function (data) {
 									if(data == null){
-										myApp.hidePreloader();
+										//myApp.hidePreloader();
 										return false;
 									}
 									for(i = 0; i < data.length; i++){

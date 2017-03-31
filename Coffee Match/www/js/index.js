@@ -199,6 +199,7 @@ var app = {
 										$$(".search-img").removeClass("search-effect");
 										return false;
 									}
+									
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									
@@ -213,6 +214,10 @@ var app = {
 										} else {
 											classe = "next";
 										}
+										
+										if(data[i].distance < 1) {
+											data[i].distance = 0.5;
+										}
 									
 									var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
 									var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
@@ -222,7 +227,7 @@ var app = {
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
 												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; height: 45vh'>"
 												+ "<div class='row card-top'>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>10</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
+												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>"+data[i].distance+"</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
 												+ "</div>"
@@ -497,8 +502,8 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										//mainView.router.loadPage("index.html");
-										window.location = "index.html";
+										mainView.router.loadPage("index.html");
+										//window.location = "index.html";
 									} 
 									
 									//CADASTRA USUÁRIO
@@ -518,7 +523,7 @@ var app = {
 									
 								},
 								error: function (request, status, error) {
-									//alert(request.responseText);
+									alert(request.responseText);
 								}
 								
 							});
