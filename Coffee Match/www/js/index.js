@@ -515,7 +515,10 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage('passo2.html');
+										mainView.router.loadPage({
+											url: 'passo2.html',
+											ignoreCache: true
+										});
 									}
 									
 								
