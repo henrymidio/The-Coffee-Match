@@ -201,11 +201,12 @@ myApp.onPageInit('passo2', function (page) {
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
-		
+		/*
 		mainView.router.loadPage({
 			url: 'index.html',
 			ignoreCache: true
 		});
+		*/
 	})
 	
 	var today = new Date();
