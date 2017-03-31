@@ -504,7 +504,6 @@ var app = {
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										mainView.router.loadPage("index.html");
-										//window.location = "index.html";
 									} 
 									
 									//CADASTRA USUÁRIO
