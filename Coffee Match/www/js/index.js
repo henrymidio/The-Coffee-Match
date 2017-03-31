@@ -256,7 +256,7 @@ var app = {
 									getPendingNotifications();
 								},
 								error: function (request, status, error) {
-									alert(error);
+									alert(request.responseText);
 								}								
 							});
 						
