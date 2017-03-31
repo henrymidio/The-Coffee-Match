@@ -154,38 +154,38 @@ var app = {
 			var latitude;
 			var longitude;
 		
-		navigator.geolocation.getCurrentPosition(function(position){
-			latitude  = position.coords.latitude;
-			longitude = position.coords.longitude;
-			
-			var locs = {
-					lat: latitude,
-					lng: longitude,
-					user_id: localStorage.getItem('user_id')
+			navigator.geolocation.getCurrentPosition(function(position){
+				latitude  = position.coords.latitude;
+				longitude = position.coords.longitude;
+				
+				var locs = {
+						lat: latitude,
+						lng: longitude,
+						user_id: localStorage.getItem('user_id')
+						}
+											  
+				$.ajax({
+					url: 'http://thecoffeematch.com/webservice/set-location.php',
+					type: 'post',
+					data: locs,
+					success: function (data) {
+						getUserList();
 					}
-										  
-			$.ajax({
-				url: 'http://thecoffeematch.com/webservice/set-location.php',
-				type: 'post',
-				data: locs,
-				success: function (data) {
-					
-				}
+				});
+			}, function(){
+				alert('Não foi possível encontrar a sua localização');
 			});
-		}, function(){
-			alert('Não foi possível encontrar a sua localização');
-		});
 		
 		/* INÍCIO DA BUSCA PROS OUTROS USER */
 		
 		//Armazena as preferencias em variaveis
 		
-		
-		//Faz request das informações dos users compatíveis
-		var dados = {
-				user_id: localStorage.getItem('user_id'),
-				distance: localStorage.getItem('distance')
-			}
+		function getUserList() {
+			//Faz request das informações dos users compatíveis
+			var dados = {
+					user_id: localStorage.getItem('user_id'),
+					distance: localStorage.getItem('distance')
+				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));
 			$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
@@ -259,6 +259,7 @@ var app = {
 									alert(request.responseText);
 								}								
 							});
+		}
 						
 		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
