@@ -194,7 +194,7 @@ var app = {
 								data: dados,
 								crossDomain: true,
 								success: function (data) {	
-									alert(data)
+									
 									if(data == null){
 										$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 										$$(".search-img").removeClass("search-effect");

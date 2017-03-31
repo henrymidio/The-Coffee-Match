@@ -202,7 +202,8 @@ myApp.onPageInit('passo2', function (page) {
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
 		
-		mainView.router.loadPage('index.html');
+		//mainView.router.loadPage('index.html');
+		window.location = "index.html";
 	})
 	
 	var today = new Date();
