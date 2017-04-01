@@ -198,15 +198,15 @@ myApp.onPageInit('passo2', function (page) {
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
+		//BREAKPOINT 1: Verifica se idade ta correta						
+		alert(nascimento);
+		
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
-		/*
-		mainView.router.loadPage({
-			url: 'index.html',
-			ignoreCache: true
-		});
-		*/
+		
+		mainView.router.loadPage("index.html");
+		
 	})
 	
 	var today = new Date();
@@ -1285,6 +1285,8 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 								dataType: 'json',
 								data: info,
 								success: function (data) {
+									//BREAKPOINT 1: Verifica retorno					
+									alert(JSON.stringify(data));
 									
 									if(data.code == 1){
 										
@@ -1294,7 +1296,7 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 									}
 								},
 								error: function (request, status, error) {
-									//alert(error);
+									alert(error);
 								}
 							});
 }

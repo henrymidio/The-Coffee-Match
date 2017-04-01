@@ -498,8 +498,8 @@ var app = {
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
-						 							
-							
+						 	//BREAKPOINT 1: Verifica se email foi puxado						
+							alert(person.email);
 							
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
@@ -534,10 +534,7 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage({
-											url: 'passo2.html',
-											ignoreCache: true
-										});
+										mainView.router.loadPage("passo2.html");
 									}
 									
 								
@@ -545,7 +542,7 @@ var app = {
 									
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									//alert(request.responseText);
 								}
 								
 							});
