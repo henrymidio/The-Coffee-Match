@@ -48,7 +48,18 @@ var app = {
 				mainView.router.loadPage('messages.html');
 			}
 			if(jsonData.notification.payload.additionalData.type == "rewards") {
-				mainView.router.loadPage('congratulations.html');
+				var usid = localStorage.getItem("user_id");
+				var ndata = {
+								rewards: 0
+							};
+				$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+											mainView.router.loadPage("congratulations.html");
+										}
+								});
 			}
  		};
 		
@@ -568,19 +579,7 @@ var app = {
 					dataType: 'json',
 					data: pnss,
 					success: function (data) {
-						if(data.rewards == 1){							
-							var ndata = {
-									rewards: 0
-								};
-							$.ajax({
-										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
-										type: 'post',
-										data: ndata,
-										success: function (data) {
-											mainView.router.loadPage("congratulations.html");
-										}
-								});
-						}
+						
 						if(data.invite == 1){
 							$$("#icon-invite img").attr("src", "img/sino_notification.png");
 							$$("#icon-invite").on("click", function(){
@@ -639,6 +638,20 @@ var app = {
 							})
 						} else {
 							$$("#icon-agenda img").attr("src", "img/agenda_icon.png");
+						}
+						
+						if(data.rewards == 1){							
+							var ndata = {
+									rewards: 0
+								};
+							$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+											mainView.router.loadPage("congratulations.html");
+										}
+								});
 						}
 					},
 					error: function (request, status, error) {
