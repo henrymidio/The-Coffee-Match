@@ -65,6 +65,7 @@ var app = {
 				
 			}
 			
+			
  		};
 		
  		window.plugins.OneSignal
@@ -170,6 +171,9 @@ var app = {
 					data: locs,
 					success: function (data) {
 						getUserList();
+					},
+					error: function (request, status, error) {
+						getUserList();
 					}
 				});
 			}, function(){
@@ -256,7 +260,7 @@ var app = {
 									getPendingNotifications();
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									//alert(request.responseText);
 								}								
 							});
 		}
@@ -564,6 +568,9 @@ var app = {
 					dataType: 'json',
 					data: pnss,
 					success: function (data) {
+						if(data.rewards == 1){
+							mainView.router.loadPage("congratulations.html");
+						}
 						if(data.invite == 1){
 							$$("#icon-invite img").attr("src", "img/sino_notification.png");
 							$$("#icon-invite").on("click", function(){
