@@ -465,6 +465,7 @@ var app = {
 				});
 					
 				var fbLoginSuccess = function (userData) {
+				myApp.showIndicator()
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
@@ -520,6 +521,7 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
+										myApp.hideIndicator()
 										mainView.router.loadPage("index.html");
 									} 
 									
@@ -532,6 +534,7 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
+										myApp.hideIndicator()
 										mainView.router.loadPage("passo2.html");
 									}
 									
@@ -554,7 +557,6 @@ var app = {
 				$$('#loginFB').on('click', function(){		
 					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
 					  function loginError (error) {
-					  	
 						//myApp.alert("second" + "-" + error);
 					  }
 					);
