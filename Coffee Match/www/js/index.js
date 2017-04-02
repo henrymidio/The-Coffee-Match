@@ -498,9 +498,7 @@ var app = {
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
-						 	//BREAKPOINT 1: Verifica se email foi puxado						
-							alert(person.email);
-							
+						 								
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
 								url: 'http://thecoffeematch.com/webservice/register.php',

@@ -198,9 +198,6 @@ myApp.onPageInit('passo2', function (page) {
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
-		//BREAKPOINT 1: Verifica se idade ta correta						
-		alert(nascimento);
-		
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
@@ -279,7 +276,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	
 	
 	$('#confirmar-cafe').on("click", function(){
-		myApp.showPreloader();
+		myApp.showIndicator()
 		//Faz o PUT LIKE
 				var user_id  = localStorage.getItem("user_id");
 				var other_id = localStorage.getItem("idc");
@@ -300,7 +297,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									mainView.router.loadPage("match.html");	
 								},
 								error: function (request, status, error) {
-									myApp.hidePreloader();
+									myApp.hideIndicator();
 									mainView.router.loadPage("combinacoes.html");	
 									//alert(error);
 								}
@@ -1285,8 +1282,6 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 								dataType: 'json',
 								data: info,
 								success: function (data) {
-									//BREAKPOINT 1: Verifica retorno					
-									alert(JSON.stringify(data));
 									
 									if(data.code == 1){
 										
@@ -1296,7 +1291,7 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 									}
 								},
 								error: function (request, status, error) {
-									alert(error);
+									//alert(error);
 								}
 							});
 }
