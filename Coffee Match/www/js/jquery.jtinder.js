@@ -8,7 +8,6 @@
  * https://github.com/do-web/jTinder/blob/master/LICENSE
  */
 ;(function ($, window, document, undefined) {
-	var limit = localStorage.getItem("limit");
 	
 	var pluginName = "jTinder",
 		defaults = {
@@ -46,6 +45,7 @@
 				}
 				
 				//Diminui o limit de visualições diário
+				var limit = localStorage.getItem("limit");
 				localStorage.setItem("limit", limit - 1);
 				
 			},
@@ -106,6 +106,7 @@
 				panes.eq(current_pane - 1).toggleClass("next current");
 				
 				//Diminui o limit de visualições diário
+				var limit = localStorage.getItem("limit");
 				localStorage.setItem("limit", limit - 1);
 				
 			},
@@ -162,6 +163,7 @@
 		},
 
 		dislike: function() {
+			var limit = localStorage.getItem("limit");
 			alert(limit);
 			if(limit <= 0){
 					alert("Limite atingido");
@@ -233,6 +235,7 @@
 			}
 			
 			//Diminui o limit de visualições diário
+			var limit = localStorage.getItem("limit");
 			localStorage.setItem("limit", limit - 1);
 			
 			$that.next();
