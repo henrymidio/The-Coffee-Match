@@ -165,7 +165,7 @@
 		dislike: function() {
 			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
-					alert("Limite atingido");
+					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
 			} else {
 				panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
 				panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
@@ -178,67 +178,67 @@
 		},
 
 		like: function() {
-		
-			panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
-			panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
-				if($that.settings.onLike) {
-					$that.settings.onLike(panes.eq(current_pane));
-				}
-				$that.next();
-			});
+			var limit = localStorage.getItem("limit");
+			if(limi <= 0){
+				alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+			} else {
+				panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
+				panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
+					if($that.settings.onLike) {
+						$that.settings.onLike(panes.eq(current_pane));
+					}
+					$that.next();
+				});
+			}
 		},
 		
 		fav: function() {
-			if(limit <= 0){
-					alert("Limite atingido");
-					return false;
-				}
-				
-			/*
-				Trecho de inclusão nos favoritos
-			*/
-			var user_id       = localStorage.getItem("user_id");
-			var shown_user_id = panes.eq(current_pane).attr("id");
-			localStorage.setItem("shown_user_id", shown_user_id);
-			
-			var dataFav = {
-					user_id: user_id,
-					shown_user_id: shown_user_id,
-					message: "",
-					liked: 2
-				}
-			
-			//Ajax que faz a inclusão do perfil entre os favoritos
-			$.ajax({
-								url: 'http://thecoffeematch.com/webservice/put-like.php',
-								type: 'post',
-								data: dataFav,
-								dataType: 'json',
-								success: function (data) {
-									//alert(data)									
-								},
-								error: function (request, status, error) {
-									var shown_user_id = panes.eq(current_pane).attr("id");
-									localStorage.setItem("shown_user_id", shown_user_id);
-								}
-								
-			});
-			
-			//INVERTE NEXT COM CURRENT
-			panes.eq(current_pane - 1).toggleClass("next current");
-			
-			if(current_pane <= 0){
-				$$(".buttons-row").toggleClass("visivel none");	
-				$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-				$(".search-box").removeClass("search-effect");
-			}
-			
-			//Diminui o limit de visualições diário
 			var limit = localStorage.getItem("limit");
-			localStorage.setItem("limit", limit - 1);
-			
-			$that.next();
-			
+			if(limit <= 0){
+					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+				} else {
+					var user_id       = localStorage.getItem("user_id");
+					var shown_user_id = panes.eq(current_pane).attr("id");
+					localStorage.setItem("shown_user_id", shown_user_id);
+					
+					var dataFav = {
+							user_id: user_id,
+							shown_user_id: shown_user_id,
+							message: "",
+							liked: 2
+						}
+					
+					//Ajax que faz a inclusão do perfil entre os favoritos
+					$.ajax({
+										url: 'http://thecoffeematch.com/webservice/put-like.php',
+										type: 'post',
+										data: dataFav,
+										dataType: 'json',
+										success: function (data) {
+											//alert(data)									
+										},
+										error: function (request, status, error) {
+											var shown_user_id = panes.eq(current_pane).attr("id");
+											localStorage.setItem("shown_user_id", shown_user_id);
+										}
+										
+					});
+					
+					//INVERTE NEXT COM CURRENT
+					panes.eq(current_pane - 1).toggleClass("next current");
+					
+					if(current_pane <= 0){
+						$$(".buttons-row").toggleClass("visivel none");	
+						$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
+						$(".search-box").removeClass("search-effect");
+					}
+					
+					//Diminui o limit de visualições diário
+					var limit = localStorage.getItem("limit");
+					localStorage.setItem("limit", limit - 1);
+					
+					$that.next();
+				}
 		},
 
 		handler: function (ev) {
