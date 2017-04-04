@@ -690,13 +690,11 @@ var app = {
 			if(!currentDate) {
 				localStorage.setItem("savedDate", new Date().getMonth());
 				localStorage.setItem("limit", 8);
-				alert(localStorage.getItem("limit"));
 				return true;
 			}
 			var currentDate = new Date().getMonth();
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
-				alert("diferença data")
 				return true;
 			}
 		}
