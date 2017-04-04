@@ -89,6 +89,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+		getLimitInvites();
 		
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
@@ -543,7 +544,8 @@ var app = {
 									
 								},
 								error: function (request, status, error) {
-									//alert(request.responseText);
+									myApp.hideIndicator();
+									myApp.alert("Error", "The Coffee Match");
 								}
 								
 							});
@@ -695,6 +697,23 @@ var app = {
 		myApp.onPageInit('passo2', function() {
 			    StatusBar.overlaysWebView(false);				
 			});
+			
+		//Função que verifica se o usuário atingiu o limite de usuários visualizados por dia	
+		function getLimitInvites(){
+			var savedDate = localStorage.getItem("savedDate");
+			if(!currentDate) {
+				localStorage.setItem("savedDate", new Date().getMonth);
+				localStorage.setItem("limit", 8);
+				alert("br 1" + localStorage.getItem("limit"));
+				return true;
+			}
+			var currentDate = new Date().getMonth;
+			if(currentDate > savedDate){
+				localStorage.setItem("limit", 8);
+				alert("br 2" + localStorage.getItem("limit"));
+				return true;
+			}
+		}
 		
 		}
 		

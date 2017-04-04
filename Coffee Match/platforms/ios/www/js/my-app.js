@@ -202,7 +202,8 @@ myApp.onPageInit('passo2', function (page) {
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
 		
-		mainView.router.loadPage('index.html');
+		mainView.router.loadPage("index.html");
+		
 	})
 	
 	var today = new Date();
@@ -275,7 +276,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	
 	
 	$('#confirmar-cafe').on("click", function(){
-		myApp.showPreloader();
+		myApp.showIndicator()
 		//Faz o PUT LIKE
 				var user_id  = localStorage.getItem("user_id");
 				var other_id = localStorage.getItem("idc");
@@ -291,12 +292,12 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-									myApp.hidePreloader();
+									myApp.hideIndicator();
 									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
 								},
 								error: function (request, status, error) {
-									myApp.hidePreloader();
+									myApp.hideIndicator();
 									mainView.router.loadPage("combinacoes.html");	
 									//alert(error);
 								}
@@ -955,7 +956,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
-	myApp.showPreloader();
+	myApp.showIndicator()
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
@@ -1052,7 +1053,7 @@ $$('.messagebar').on('click', function () {
 											}
 										}
 										
-										myApp.hidePreloader();
+										myApp.hideIndicator();
 									
 									}
 								

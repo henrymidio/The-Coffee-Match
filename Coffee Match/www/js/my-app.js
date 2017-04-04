@@ -292,7 +292,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								data: dados,
 								dataType: 'json',
 								success: function (data) {
-									myApp.hidePreloader();
+									myApp.hideIndicator();
 									localStorage.setItem("match", data.combinacao);
 									mainView.router.loadPage("match.html");	
 								},
@@ -956,7 +956,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
-	myApp.showPreloader();
+	myApp.showIndicator()
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
@@ -1053,7 +1053,7 @@ $$('.messagebar').on('click', function () {
 											}
 										}
 										
-										myApp.hidePreloader();
+										myApp.hideIndicator();
 									
 									}
 								

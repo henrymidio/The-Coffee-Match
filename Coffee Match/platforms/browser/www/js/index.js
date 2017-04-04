@@ -48,7 +48,18 @@ var app = {
 				mainView.router.loadPage('messages.html');
 			}
 			if(jsonData.notification.payload.additionalData.type == "rewards") {
-				mainView.router.loadPage('congratulations.html');
+				var usid = localStorage.getItem("user_id");
+				var ndata = {
+								rewards: 0
+							};
+				$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+											mainView.router.loadPage("congratulations.html");
+										}
+								});
 			}
  		};
 		
@@ -65,6 +76,7 @@ var app = {
 				
 			}
 			
+			
  		};
 		
  		window.plugins.OneSignal
@@ -77,6 +89,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+		getLimitInvites();
 		
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
@@ -154,38 +167,41 @@ var app = {
 			var latitude;
 			var longitude;
 		
-		navigator.geolocation.getCurrentPosition(function(position){
-			latitude  = position.coords.latitude;
-			longitude = position.coords.longitude;
-			
-			var locs = {
-					lat: latitude,
-					lng: longitude,
-					user_id: localStorage.getItem('user_id')
+			navigator.geolocation.getCurrentPosition(function(position){
+				latitude  = position.coords.latitude;
+				longitude = position.coords.longitude;
+				
+				var locs = {
+						lat: latitude,
+						lng: longitude,
+						user_id: localStorage.getItem('user_id')
+						}
+											  
+				$.ajax({
+					url: 'http://thecoffeematch.com/webservice/set-location.php',
+					type: 'post',
+					data: locs,
+					success: function (data) {
+						getUserList();
+					},
+					error: function (request, status, error) {
+						getUserList();
 					}
-										  
-			$.ajax({
-				url: 'http://thecoffeematch.com/webservice/set-location.php',
-				type: 'post',
-				data: locs,
-				success: function (data) {
-					
-				}
+				});
+			}, function(){
+				alert('Não foi possível encontrar a sua localização');
 			});
-		}, function(){
-			alert('Não foi possível encontrar a sua localização');
-		});
 		
 		/* INÍCIO DA BUSCA PROS OUTROS USER */
 		
 		//Armazena as preferencias em variaveis
 		
-		
-		//Faz request das informações dos users compatíveis
-		var dados = {
-				user_id: localStorage.getItem('user_id'),
-				distance: localStorage.getItem('distance')
-			}
+		function getUserList() {
+			//Faz request das informações dos users compatíveis
+			var dados = {
+					user_id: localStorage.getItem('user_id'),
+					distance: localStorage.getItem('distance')
+				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));
 			$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
@@ -193,7 +209,8 @@ var app = {
 								dataType: 'json',
 								data: dados,
 								crossDomain: true,
-								success: function (data) {		
+								success: function (data) {	
+									
 									if(data == null){
 										$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 										$$(".search-img").removeClass("search-effect");
@@ -253,8 +270,12 @@ var app = {
 										
 									});
 									getPendingNotifications();
+								},
+								error: function (request, status, error) {
+									//alert(request.responseText);
 								}								
 							});
+		}
 						
 		if(localStorage.getItem("starCount") <= 0){
 		 myApp.onPageInit('starbucks-proximas', function(){
@@ -445,6 +466,7 @@ var app = {
 				});
 					
 				var fbLoginSuccess = function (userData) {
+				myApp.showIndicator()
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
@@ -478,9 +500,7 @@ var app = {
 								email: result.email,
 								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
 							}
-						 							
-							
-							
+						 								
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
 								url: 'http://thecoffeematch.com/webservice/register.php',
@@ -502,8 +522,8 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
+										myApp.hideIndicator()
 										mainView.router.loadPage("index.html");
-										//window.location = "index.html";
 									} 
 									
 									//CADASTRA USUÁRIO
@@ -515,7 +535,8 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										mainView.router.loadPage('passo2.html');
+										myApp.hideIndicator()
+										mainView.router.loadPage("passo2.html");
 									}
 									
 								
@@ -523,7 +544,8 @@ var app = {
 									
 								},
 								error: function (request, status, error) {
-									alert(request.responseText);
+									myApp.hideIndicator();
+									myApp.alert("Error", "The Coffee Match");
 								}
 								
 							});
@@ -537,7 +559,6 @@ var app = {
 				$$('#loginFB').on('click', function(){		
 					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
 					  function loginError (error) {
-					  	
 						//myApp.alert("second" + "-" + error);
 					  }
 					);
@@ -557,6 +578,7 @@ var app = {
 					dataType: 'json',
 					data: pnss,
 					success: function (data) {
+						
 						if(data.invite == 1){
 							$$("#icon-invite img").attr("src", "img/sino_notification.png");
 							$$("#icon-invite").on("click", function(){
@@ -616,6 +638,20 @@ var app = {
 						} else {
 							$$("#icon-agenda img").attr("src", "img/agenda_icon.png");
 						}
+						
+						if(data.rewards == 1){							
+							var ndata = {
+									rewards: 0
+								};
+							$.ajax({
+										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
+										type: 'post',
+										data: ndata,
+										success: function (data) {
+											mainView.router.loadPage("congratulations.html");
+										}
+								});
+						}
 					},
 					error: function (request, status, error) {
 					 //alert(error)
@@ -661,6 +697,23 @@ var app = {
 		myApp.onPageInit('passo2', function() {
 			    StatusBar.overlaysWebView(false);				
 			});
+			
+		//Função que verifica se o usuário atingiu o limite de usuários visualizados por dia	
+		function getLimitInvites(){
+			var savedDate = localStorage.getItem("savedDate");
+			if(!currentDate) {
+				localStorage.setItem("savedDate", new Date().getMonth);
+				localStorage.setItem("limit", 8);
+				alert("br 1" + localStorage.getItem("limit"));
+				return true;
+			}
+			var currentDate = new Date().getMonth;
+			if(currentDate > savedDate){
+				localStorage.setItem("limit", 8);
+				alert("br 2" + localStorage.getItem("limit"));
+				return true;
+			}
+		}
 		
 		}
 		

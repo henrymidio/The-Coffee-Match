@@ -8,9 +8,15 @@
  * https://github.com/do-web/jTinder/blob/master/LICENSE
  */
 ;(function ($, window, document, undefined) {
+	var limit = localStorage.getItem("limit");
+	alert(limit)
 	var pluginName = "jTinder",
 		defaults = {
 			onDislike: function(){ 
+				if(limit <= 0){
+					alert("Limite atingido");
+					return false;
+				}
 				//Faz o PUT (DIS)LIKE
 				var user_id       = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -42,8 +48,15 @@
 					$$(".search-img").removeClass("search-effect");
 				}
 				
+				//Diminui o limit de visualições diário
+				localStorage.setItem("limit", limit - 1);
+				
 			},
 			onLike: function(){ 
+				if(limit <= 0){
+					alert("Limite atingido");
+					return false;
+				}
 				
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
@@ -101,6 +114,9 @@
 					$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 					$(".search-box").removeClass("search-effect");
 				}
+				
+				//Diminui o limit de visualições diário
+				localStorage.setItem("limit", limit - 1);
 				
 			},
 			onFav: function(){
@@ -181,7 +197,11 @@
 		},
 		
 		fav: function() {
-						
+			if(limit <= 0){
+					alert("Limite atingido");
+					return false;
+				}
+				
 			/*
 				Trecho de inclusão nos favoritos
 			*/
@@ -220,6 +240,9 @@
 				$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 				$(".search-box").removeClass("search-effect");
 			}
+			
+			//Diminui o limit de visualições diário
+			localStorage.setItem("limit", limit - 1);
 			
 			$that.next();
 			
