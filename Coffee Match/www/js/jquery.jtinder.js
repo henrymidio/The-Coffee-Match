@@ -164,7 +164,6 @@
 
 		dislike: function() {
 			var limit = localStorage.getItem("limit");
-			alert(limit);
 			if(limit <= 0){
 					alert("Limite atingido");
 					return false;
