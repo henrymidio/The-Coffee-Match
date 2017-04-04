@@ -623,7 +623,7 @@ input:focus {
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
   -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
 }
-
+/*
 #img-nope {
 	//transition: width 0.5s, height 0.5s;
 }
@@ -649,7 +649,7 @@ input:focus {
 		width: 40px;
 		height: 40px;
 	}
-
+*/
 .buts .but-nope {
   background: #ff3b30;
   width: 50px;

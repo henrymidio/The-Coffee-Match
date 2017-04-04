@@ -166,15 +166,15 @@
 			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
 					alert("Limite atingido");
-					return false;
-				}
-			panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
-			panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
-				if($that.settings.onDislike) {
-					$that.settings.onDislike(panes.eq(current_pane));
-				}
-				$that.next();
-			});
+			} else {
+				panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
+				panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
+					if($that.settings.onDislike) {
+						$that.settings.onDislike(panes.eq(current_pane));
+					}
+					$that.next();
+				});
+			}
 		},
 
 		like: function() {
@@ -298,8 +298,9 @@
 					if (opa >= 1) {
 						if (posX > 0) {
 							panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
-							/*	
-							if(contador <= 0){
+							
+							var limit = localStorage.getItem("limit");
+							if(limit <= 0){
 								alert("Número de usuários limitados!")
 								lastPosX = 0;
 								lastPosY = 0;
@@ -308,7 +309,7 @@
 								panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
 								return false;
 							}
-							*/
+							
 								if($that.settings.onLike) {
 									$that.settings.onLike(panes.eq(current_pane));
 								}
