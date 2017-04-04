@@ -679,16 +679,14 @@ var app = {
 		//Função que verifica se o usuário atingiu o limite de usuários visualizados por dia	
 		function getLimitInvites(){
 			var savedDate = localStorage.getItem("savedDate");
-			if(!currentDate) {
+			if(!savedDate) {
 				localStorage.setItem("savedDate", new Date().getMonth());
 				localStorage.setItem("limit", 8);
-				alert(localStorage.getItem("limit"));
 				return true;
 			}
 			var currentDate = new Date().getMonth();
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
-				alert(localStorage.getItem("limit"));
 				return true;
 			}
 		}

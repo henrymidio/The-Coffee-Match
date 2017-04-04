@@ -161,7 +161,7 @@
 		dislike: function() {
 			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
-					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+					myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
 			} else {
 				panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
 				panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
@@ -176,7 +176,7 @@
 		like: function() {
 			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
-				alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+				myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
 			} else {
 				panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
 				panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
@@ -191,7 +191,7 @@
 		fav: function() {
 			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
-					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+					myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
 				} else {
 					//Evento de salvar perfil nos favoritos
 					$$('.invite').on('click', function () {
