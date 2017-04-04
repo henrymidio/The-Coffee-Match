@@ -120,15 +120,7 @@ var app = {
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
 			
-			//Evento de salvar perfil nos favoritos
-			$$('.invite').on('click', function () {
-				$("#tinderslide").jTinder('fav');
-				 myApp.addNotification({
-					title: 'The Coffee Match',
-					subtitle: 'Added to favorites',
-					media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
-				});
-			});
+			
 		
 			//Dispara invite e nope
 			$$('.nope').on('click', function () {

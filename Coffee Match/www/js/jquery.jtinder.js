@@ -179,7 +179,7 @@
 
 		like: function() {
 			var limit = localStorage.getItem("limit");
-			if(limi <= 0){
+			if(limit <= 0){
 				alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
 			} else {
 				panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
@@ -197,6 +197,16 @@
 			if(limit <= 0){
 					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
 				} else {
+					//Evento de salvar perfil nos favoritos
+					$$('.invite').on('click', function () {
+						$("#tinderslide").jTinder('fav');
+						 myApp.addNotification({
+							title: 'The Coffee Match',
+							subtitle: 'Added to favorites',
+							media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
+						});
+					});
+					
 					var user_id       = localStorage.getItem("user_id");
 					var shown_user_id = panes.eq(current_pane).attr("id");
 					localStorage.setItem("shown_user_id", shown_user_id);
