@@ -105,13 +105,6 @@
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
 				
-				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
-				if(current_pane <= 0){
-					$$(".buttons-row").toggleClass("visivel none");	
-					$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-					$(".search-box").removeClass("search-effect");
-				}
-				
 				//Diminui o limit de visualições diário
 				localStorage.setItem("limit", limit - 1);
 				
@@ -168,7 +161,8 @@
 			return this.showPane(current_pane - 1);
 		},
 
-		dislike: function() {	
+		dislike: function() {
+			alert(limit);
 			if(limit <= 0){
 					alert("Limite atingido");
 					return false;
@@ -183,11 +177,7 @@
 		},
 
 		like: function() {
-			var contador = localStorage.getItem("contador");
-				if(contador <= 0){
-					alert("Número de usuários limitados!")
-					return false;
-				}
+		
 			panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
 			panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
 				if($that.settings.onLike) {
@@ -306,7 +296,7 @@
 					if (opa >= 1) {
 						if (posX > 0) {
 							panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
-								var contador = localStorage.getItem("contador");
+							/*	
 							if(contador <= 0){
 								alert("Número de usuários limitados!")
 								lastPosX = 0;
@@ -316,6 +306,7 @@
 								panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
 								return false;
 							}
+							*/
 								if($that.settings.onLike) {
 									$that.settings.onLike(panes.eq(current_pane));
 								}

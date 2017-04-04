@@ -99,10 +99,6 @@ var app = {
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
-		
-		if(localStorage.getItem("contador") == null){
-				localStorage.setItem("contador", 8);
-			}
 			
 		if(localStorage.getItem("lastLog") == null){
 				localStorage.setItem("lastLog", new Date());
@@ -123,16 +119,6 @@ var app = {
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-			
-			//Verifica quando foi o último login para limitar número de usuários na listagem
-			var curDate  = new Date();
-			var lastLog  = localStorage.getItem("lastLog");
-			if(curDate > lastLog){
-				localStorage.setItem("contador", 8);
-				localStorage.setItem("lastLog", curDate);
-			} 
-			
-			localStorage.setItem("contador", 8);
 			
 			//Evento de salvar perfil nos favoritos
 			$$('.invite').on('click', function () {
@@ -704,11 +690,13 @@ var app = {
 			if(!currentDate) {
 				localStorage.setItem("savedDate", new Date().getMonth);
 				localStorage.setItem("limit", 8);
+				alert(localStorage.getItem("savedDate"));
 				return true;
 			}
 			var currentDate = new Date().getMonth;
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
+				alert("diferença data")
 				return true;
 			}
 		}

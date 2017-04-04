@@ -625,7 +625,7 @@ input:focus {
 }
 
 #img-nope {
-	transition: width 0.5s, height 0.5s;
+	//transition: width 0.5s, height 0.5s;
 }
 
 #img-nope:active {
@@ -634,15 +634,15 @@ input:focus {
 	}
 	
 #img-fav {
-	transition: width 0.5s, height 0.5s;
+	//transition: width 0.5s, height 0.5s;
 }
 #img-fav:active {
 		width: 70px;
 		height: 70px;
 	}
 	
-	#img-yep {
-	transition: width 0.5s, height 0.5s;
+#img-yep {
+	//transition: width 0.5s, height 0.5s;
 }
 
 #img-yep:active {
