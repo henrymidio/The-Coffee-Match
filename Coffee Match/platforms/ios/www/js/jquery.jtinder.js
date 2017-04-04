@@ -8,15 +8,11 @@
  * https://github.com/do-web/jTinder/blob/master/LICENSE
  */
 ;(function ($, window, document, undefined) {
-	var limit = localStorage.getItem("limit");
-	alert(limit)
+	
 	var pluginName = "jTinder",
 		defaults = {
 			onDislike: function(){ 
-				if(limit <= 0){
-					alert("Limite atingido");
-					return false;
-				}
+				
 				//Faz o PUT (DIS)LIKE
 				var user_id       = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -49,15 +45,12 @@
 				}
 				
 				//Diminui o limit de visualições diário
+				var limit = localStorage.getItem("limit");
 				localStorage.setItem("limit", limit - 1);
 				
 			},
 			onLike: function(){ 
-				if(limit <= 0){
-					alert("Limite atingido");
-					return false;
-				}
-				
+							
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -67,7 +60,7 @@
 				if(ft > 0){
 					myApp.addNotification({
 						title: 'The Coffee Match',
-						subtitle: 'You invite is on its way!',
+						subtitle: "Your invite is on it's way!",
 						message: '',
 						media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
 					});
@@ -108,14 +101,8 @@
 				//INVERTE NEXT COM CURRENT
 				panes.eq(current_pane - 1).toggleClass("next current");
 				
-				localStorage.setItem("contador", localStorage.getItem("contador") - 1);
-				if(current_pane <= 0){
-					$$(".buttons-row").toggleClass("visivel none");	
-					$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-					$(".search-box").removeClass("search-effect");
-				}
-				
 				//Diminui o limit de visualições diário
+				var limit = localStorage.getItem("limit");
 				localStorage.setItem("limit", limit - 1);
 				
 			},
@@ -171,81 +158,93 @@
 			return this.showPane(current_pane - 1);
 		},
 
-		dislike: function() {	
-			panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
-			panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
-				if($that.settings.onDislike) {
-					$that.settings.onDislike(panes.eq(current_pane));
-				}
-				$that.next();
-			});
+		dislike: function() {
+			var limit = localStorage.getItem("limit");
+			if(limit <= 0){
+					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+			} else {
+				panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
+				panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
+					if($that.settings.onDislike) {
+						$that.settings.onDislike(panes.eq(current_pane));
+					}
+					$that.next();
+				});
+			}
 		},
 
 		like: function() {
-			var contador = localStorage.getItem("contador");
-				if(contador <= 0){
-					alert("Número de usuários limitados!")
-					return false;
-				}
-			panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
-			panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
-				if($that.settings.onLike) {
-					$that.settings.onLike(panes.eq(current_pane));
-				}
-				$that.next();
-			});
+			var limit = localStorage.getItem("limit");
+			if(limit <= 0){
+				alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+			} else {
+				panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 1);
+				panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
+					if($that.settings.onLike) {
+						$that.settings.onLike(panes.eq(current_pane));
+					}
+					$that.next();
+				});
+			}
 		},
 		
 		fav: function() {
+			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
-					alert("Limite atingido");
-					return false;
+					alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!");
+				} else {
+					//Evento de salvar perfil nos favoritos
+					$$('.invite').on('click', function () {
+						$("#tinderslide").jTinder('fav');
+						 myApp.addNotification({
+							title: 'The Coffee Match',
+							subtitle: 'Added to favorites',
+							media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
+						});
+					});
+					
+					var user_id       = localStorage.getItem("user_id");
+					var shown_user_id = panes.eq(current_pane).attr("id");
+					localStorage.setItem("shown_user_id", shown_user_id);
+					
+					var dataFav = {
+							user_id: user_id,
+							shown_user_id: shown_user_id,
+							message: "",
+							liked: 2
+						}
+					
+					//Ajax que faz a inclusão do perfil entre os favoritos
+					$.ajax({
+										url: 'http://thecoffeematch.com/webservice/put-like.php',
+										type: 'post',
+										data: dataFav,
+										dataType: 'json',
+										success: function (data) {
+											//alert(data)									
+										},
+										error: function (request, status, error) {
+											var shown_user_id = panes.eq(current_pane).attr("id");
+											localStorage.setItem("shown_user_id", shown_user_id);
+										}
+										
+					});
+					
+					//INVERTE NEXT COM CURRENT
+					panes.eq(current_pane - 1).toggleClass("next current");
+					
+					if(current_pane <= 0){
+						$$(".buttons-row").toggleClass("visivel none");	
+						$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
+						$(".search-box").removeClass("search-effect");
+					}
+					
+					//Diminui o limit de visualições diário
+					var limit = localStorage.getItem("limit");
+					localStorage.setItem("limit", limit - 1);
+					
+					$that.next();
 				}
-				
-			/*
-				Trecho de inclusão nos favoritos
-			*/
-			var user_id       = localStorage.getItem("user_id");
-			var shown_user_id = panes.eq(current_pane).attr("id");
-			localStorage.setItem("shown_user_id", shown_user_id);
-			
-			var dataFav = {
-					user_id: user_id,
-					shown_user_id: shown_user_id,
-					message: "",
-					liked: 2
-				}
-			
-			//Ajax que faz a inclusão do perfil entre os favoritos
-			$.ajax({
-								url: 'http://thecoffeematch.com/webservice/put-like.php',
-								type: 'post',
-								data: dataFav,
-								dataType: 'json',
-								success: function (data) {
-									//alert(data)									
-								},
-								error: function (request, status, error) {
-									var shown_user_id = panes.eq(current_pane).attr("id");
-									localStorage.setItem("shown_user_id", shown_user_id);
-								}
-								
-			});
-			
-			//INVERTE NEXT COM CURRENT
-			panes.eq(current_pane - 1).toggleClass("next current");
-			
-			if(current_pane <= 0){
-				$$(".buttons-row").toggleClass("visivel none");	
-				$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-				$(".search-box").removeClass("search-effect");
-			}
-			
-			//Diminui o limit de visualições diário
-			localStorage.setItem("limit", limit - 1);
-			
-			$that.next();
-			
 		},
 
 		handler: function (ev) {
@@ -305,8 +304,9 @@
 					if (opa >= 1) {
 						if (posX > 0) {
 							panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
-								var contador = localStorage.getItem("contador");
-							if(contador <= 0){
+							
+							var limit = localStorage.getItem("limit");
+							if(limit <= 0){
 								alert("Número de usuários limitados!")
 								lastPosX = 0;
 								lastPosY = 0;
@@ -315,6 +315,7 @@
 								panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
 								return false;
 							}
+							
 								if($that.settings.onLike) {
 									$that.settings.onLike(panes.eq(current_pane));
 								}
@@ -322,6 +323,16 @@
 							});
 						} else {
 							panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {
+								var limit = localStorage.getItem("limit");
+								if(limit >= 0){
+									alert("Número de usuários limitados!")
+									lastPosX = 0;
+									lastPosY = 0;
+									panes.eq(current_pane).animate({"transform": "translate(0px,0px) rotate(0deg)"}, $that.settings.animationRevertSpeed);
+									panes.eq(current_pane).find($that.settings.likeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
+									panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
+									return false;
+								}
 								if($that.settings.onDislike) {
 									$that.settings.onDislike(panes.eq(current_pane));
 								}

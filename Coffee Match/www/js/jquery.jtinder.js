@@ -50,11 +50,7 @@
 				
 			},
 			onLike: function(){ 
-				if(limit <= 0){
-					alert("Limite atingido");
-					return false;
-				}
-				
+							
 				//Faz o PUT LIKE
 				var user_id    = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -64,7 +60,7 @@
 				if(ft > 0){
 					myApp.addNotification({
 						title: 'The Coffee Match',
-						subtitle: 'You invite is on its way!',
+						subtitle: "Your invite is on it's way!",
 						message: '',
 						media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
 					});

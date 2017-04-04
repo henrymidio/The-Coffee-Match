@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -85,7 +85,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -99,10 +99,6 @@ var app = {
 		
 		//Variável que testa se o usuário está logado
 		var logged = localStorage.getItem("user_id");
-		
-		if(localStorage.getItem("contador") == null){
-				localStorage.setItem("contador", 8);
-			}
 			
 		if(localStorage.getItem("lastLog") == null){
 				localStorage.setItem("lastLog", new Date());
@@ -124,25 +120,7 @@ var app = {
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
 			
-			//Verifica quando foi o último login para limitar número de usuários na listagem
-			var curDate  = new Date();
-			var lastLog  = localStorage.getItem("lastLog");
-			if(curDate > lastLog){
-				localStorage.setItem("contador", 8);
-				localStorage.setItem("lastLog", curDate);
-			} 
 			
-			localStorage.setItem("contador", 8);
-			
-			//Evento de salvar perfil nos favoritos
-			$$('.invite').on('click', function () {
-				$("#tinderslide").jTinder('fav');
-				 myApp.addNotification({
-					title: 'The Coffee Match',
-					subtitle: 'Added to favorites',
-					media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
-				});
-			});
 		
 			//Dispara invite e nope
 			$$('.nope').on('click', function () {
@@ -456,15 +434,15 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    //facebookConnectPlugin.browserInit("1647443792236383");
+			    facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-					
+				*/	
 				var fbLoginSuccess = function (userData) {
 				myApp.showIndicator()
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
@@ -702,15 +680,15 @@ var app = {
 		function getLimitInvites(){
 			var savedDate = localStorage.getItem("savedDate");
 			if(!currentDate) {
-				localStorage.setItem("savedDate", new Date().getMonth);
+				localStorage.setItem("savedDate", new Date().getMonth());
 				localStorage.setItem("limit", 8);
-				alert("br 1" + localStorage.getItem("limit"));
+				alert(localStorage.getItem("limit"));
 				return true;
 			}
-			var currentDate = new Date().getMonth;
+			var currentDate = new Date().getMonth();
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
-				alert("br 2" + localStorage.getItem("limit"));
+				alert(localStorage.getItem("limit"));
 				return true;
 			}
 		}
