@@ -688,12 +688,12 @@ var app = {
 		function getLimitInvites(){
 			var savedDate = localStorage.getItem("savedDate");
 			if(!currentDate) {
-				localStorage.setItem("savedDate", new Date().getMonth);
+				localStorage.setItem("savedDate", new Date().getMonth());
 				localStorage.setItem("limit", 8);
 				alert(localStorage.getItem("savedDate"));
 				return true;
 			}
-			var currentDate = new Date().getMonth;
+			var currentDate = new Date().getMonth();
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
 				alert("diferença data")
