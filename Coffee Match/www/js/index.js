@@ -704,13 +704,11 @@ var app = {
 			if(!currentDate) {
 				localStorage.setItem("savedDate", new Date().getMonth);
 				localStorage.setItem("limit", 8);
-				alert("br 1" + localStorage.getItem("limit"));
 				return true;
 			}
 			var currentDate = new Date().getMonth;
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
-				alert("br 2" + localStorage.getItem("limit"));
 				return true;
 			}
 		}

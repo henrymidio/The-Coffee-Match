@@ -9,14 +9,11 @@
  */
 ;(function ($, window, document, undefined) {
 	var limit = localStorage.getItem("limit");
-	alert(limit)
+	
 	var pluginName = "jTinder",
 		defaults = {
 			onDislike: function(){ 
-				if(limit <= 0){
-					alert("Limite atingido");
-					return false;
-				}
+				
 				//Faz o PUT (DIS)LIKE
 				var user_id       = localStorage.getItem("user_id");
 				var shown_user_id = panes.eq(current_pane).attr("id");
@@ -172,6 +169,10 @@
 		},
 
 		dislike: function() {	
+			if(limit <= 0){
+					alert("Limite atingido");
+					return false;
+				}
 			panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 1);
 			panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {	
 				if($that.settings.onDislike) {
