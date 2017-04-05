@@ -685,6 +685,8 @@ var app = {
 				return true;
 			}
 			var currentDate = new Date().getMonth();
+			alert("sd - " + savedDate);
+			alert("cd - " + currentDate);
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
 				return true;
