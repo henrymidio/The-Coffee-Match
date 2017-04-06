@@ -389,6 +389,7 @@ myApp.onPageInit('convites', function (page) {
 });
 
 myApp.onPageInit('favorites', function (page) {
+					
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}
 	
@@ -536,10 +537,14 @@ myApp.onPageInit('detail-calendar', function(page){
 });
 
 myApp.onPageInit('profile-preview', function (page) {
+	var metrica = localStorage.getItem("metrica");
+	$$("#preview-metrica").html(metrica);
+	
 	//Preview é o id do usuário que irá ser visualizado
 	var preview = localStorage.getItem("preview");
-	
+	var user_id = localStorage.getItem("user_id");
 	var dado = {
+		user_id: user_id,
 		shown_user_id: preview
 	};
 	
@@ -797,7 +802,7 @@ myApp.onPageInit('profile', function (page) {
 			return false;
 		}
 		
-		$('select option:selected').each(function(){
+		$('#skills select option:selected').each(function(){
 			tags.push($(this).text());
 		});
 		tags = tags.join();
@@ -828,8 +833,13 @@ myApp.onPageInit('profile', function (page) {
 //SHOWN USER
 
 myApp.onPageInit('user', function (page) {
+	var metrica = localStorage.getItem("metrica");
+	$$("#user-metrica").html(metrica);
+	
 	var suid = localStorage.getItem("shown_user_id");
+	var user_id = localStorage.getItem("user_id");
 	var dado = {
+		user_id: user_id,
 		shown_user_id: suid
 	};
 	
@@ -848,6 +858,7 @@ myApp.onPageInit('user', function (page) {
 									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
 									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
 									
+									$$("#user-distance").html(data[0].distance);
 									$$("#user-view-img").attr("src", data[0].picture);
 									$$("#user-view-name").html(data[0].name);
 									$$("#user-view-age").html(data[0].age);

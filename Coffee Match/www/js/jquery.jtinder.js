@@ -191,17 +191,14 @@
 		fav: function() {
 			var limit = localStorage.getItem("limit");
 			if(limit <= 0){
-					myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
-				} else {
+				myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
+			} else {
 					//Evento de salvar perfil nos favoritos
-					$$('.invite').on('click', function () {
-						$("#tinderslide").jTinder('fav');
 						 myApp.addNotification({
 							title: 'The Coffee Match',
 							subtitle: 'Added to favorites',
 							media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
 						});
-					});
 					
 					var user_id       = localStorage.getItem("user_id");
 					var shown_user_id = panes.eq(current_pane).attr("id");
@@ -307,7 +304,7 @@
 							
 							var limit = localStorage.getItem("limit");
 							if(limit <= 0){
-								alert("Número de usuários limitados!")
+								myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
 								lastPosX = 0;
 								lastPosY = 0;
 								panes.eq(current_pane).animate({"transform": "translate(0px,0px) rotate(0deg)"}, $that.settings.animationRevertSpeed);
@@ -325,7 +322,7 @@
 							panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {
 								var limit = localStorage.getItem("limit");
 								if(limit >= 0){
-									alert("Número de usuários limitados!")
+									myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
 									lastPosX = 0;
 									lastPosY = 0;
 									panes.eq(current_pane).animate({"transform": "translate(0px,0px) rotate(0deg)"}, $that.settings.animationRevertSpeed);

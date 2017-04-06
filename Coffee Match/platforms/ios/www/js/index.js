@@ -169,6 +169,10 @@ var app = {
 			}, function(){
 				alert('Não foi possível encontrar a sua localização');
 			});
+			
+		$$('.invite').on('click', function () {
+			$("#tinderslide").jTinder('fav');				 
+		});
 		
 		/* INÍCIO DA BUSCA PROS OUTROS USER */
 		
@@ -209,11 +213,14 @@ var app = {
 										} else {
 											classe = "next";
 										}
-										
+																				
 										if(data[i].distance < 1) {
 											data[i].distance = 0.5;
 										}
-									
+										
+										//Grava a distancia do usuário para exibir no perfil expandido
+										localStorage.setItem("shown_user_id_distance", data[i].distance);
+									    
 									var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
 									var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
 									var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
@@ -680,14 +687,19 @@ var app = {
 		function getLimitInvites(){
 			var savedDate = localStorage.getItem("savedDate");
 			if(!savedDate) {
-				localStorage.setItem("savedDate", new Date().getMonth());
+				localStorage.setItem("savedDate", new Date().getDate());
 				localStorage.setItem("limit", 8);
 				return true;
 			}
-			var currentDate = new Date().getMonth();
+			var currentDate = new Date().getDate();
+			
 			if(currentDate > savedDate){
 				localStorage.setItem("limit", 8);
+				localStorage.setItem("savedDate", new Date().getDate());
 				return true;
+			} else if (currentDate == 1){
+				localStorage.setItem("limit", 8);
+				localStorage.setItem("savedDate", new Date().getDate());
 			}
 		}
 		
