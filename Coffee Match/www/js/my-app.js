@@ -1356,7 +1356,4 @@ function updateStatusUser(status){
 	}
 	
 
-		myApp.onPageBeforeRemove('user', function() {
-			    StatusBar.overlaysWebView(false);				
-			});
 
