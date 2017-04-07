@@ -863,6 +863,10 @@ myApp.onPageInit('user', function (page) {
 									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
 									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
 									
+									if(data[0].distance < 1) {
+											data[0].distance = 0.5;
+									}
+									
 									$$("#user-distance").html(data[0].distance);
 									$$("#user-view-img").attr("src", data[0].picture);
 									$$("#user-view-name").html(data[0].name);
