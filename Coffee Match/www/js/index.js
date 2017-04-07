@@ -680,10 +680,6 @@ var app = {
 			    StatusBar.overlaysWebView(false);				
 			});
 		
-		myApp.onPageInit('index', function() {
-			    StatusBar.overlaysWebView(false);				
-			});
-		
 		myApp.onPageInit('passo2', function() {
 			    StatusBar.overlaysWebView(false);				
 			});
