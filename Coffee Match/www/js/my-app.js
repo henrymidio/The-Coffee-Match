@@ -449,7 +449,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										
 										var agendamento = data[i].date;
 										if(data[i].date === null){
-											agendamento = "Aguardando agendamento";
+											agendamento = "Waiting to schedule";
 										} 
 										/*
 										else {
@@ -1143,8 +1143,12 @@ myApp.onPageBack('chat', function (page) {
 });
 
 myApp.onPageInit('match', function (page) {
+	var user_id = localStorage.getItem("user_id");
 	var suid = localStorage.getItem("idc");
-	var d = {shown_user_id: suid};
+	var d = {
+		user_id: user_id,
+		shown_user_id: suid
+		};
 	
 	//Ajax request to get user info
 	$.ajax({
