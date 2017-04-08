@@ -508,6 +508,10 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
+										myApp.onPageBack('user', function() {
+											StatusBar.overlaysWebView(false);				
+										});
+										
 										myApp.hideIndicator()
 										//mainView.router.loadPage("index.html");
 										window.location = "index.html";
