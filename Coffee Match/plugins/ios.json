@@ -10,9 +10,6 @@
         "cordova-plugin-battery-status": {
             "PACKAGE_NAME": "com.henrique.coffeematch"
         },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.henrique.coffeematch"
-        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.henrique.coffeematch"
         },
