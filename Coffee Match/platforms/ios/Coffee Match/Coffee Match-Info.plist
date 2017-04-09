@@ -21,11 +21,11 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>5.0.0</string>
+    <string>6.0.0</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>5.0.0</string>
+    <string>6.0.0</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSMainNibFile</key>
@@ -95,8 +95,10 @@
       <string>UIInterfaceOrientationPortraitUpsideDown</string>
     </array>
     <key>NSCameraUsageDescription</key>
-    <string>Required to take pictures for profile user</string>
+    <string/>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Reried to take pictures to profile user</string>
+    <string/>
+    <key>NSMicrophoneUsageDescription</key>
+    <string/>
   </dict>
 </plist>

@@ -43,9 +43,6 @@
         "cordova-plugin-media": {
             "PACKAGE_NAME": "com.henrique.coffeematch"
         },
-        "cordova-plugin-media-capture": {
-            "PACKAGE_NAME": "com.henrique.coffeematch"
-        },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "com.henrique.coffeematch"
         },
@@ -69,6 +66,12 @@
         "cordova-plugin-camera": {
             "CAMERA_USAGE_DESCRIPTION": "Required to take pictures for profile user",
             "PHOTOLIBRARY_USAGE_DESCRIPTION": "Reried to take pictures to profile user",
+            "PACKAGE_NAME": "com.henrique.coffeematch"
+        },
+        "cordova-plugin-media-capture": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "MICROPHONE_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.henrique.coffeematch"
         }
     },
