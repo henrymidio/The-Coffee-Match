@@ -449,7 +449,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										
 										var agendamento = data[i].date;
 										if(data[i].date === null){
-											agendamento = "Aguardando agendamento";
+											agendamento = "Waiting to schedule";
 										} 
 										/*
 										else {
@@ -581,10 +581,14 @@ myApp.onPageInit('profile-preview', function (page) {
 });
 
 myApp.onPageInit('profile-view', function (page) {
+	var metrica = localStorage.getItem("metrica");
+	$$("#view-metrica").html(metrica);
+	
 	//Preview é o id do usuário que irá ser visualizado
 	var preview = localStorage.getItem("preview");
-	
+	var user_id = localStorage.getItem("user_id");
 	var dado = {
+		user_id: user_id,
 		shown_user_id: preview
 	};
 	
@@ -603,6 +607,7 @@ myApp.onPageInit('profile-view', function (page) {
 									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
 									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
 									
+									$$("#view-distance").html(data[0].distance);
 									$$("#profile-view-img").attr("src", data[0].picture);
 									$$("#profile-view-name").html(data[0].name);
 									$$("#profile-view-age").html(data[0].age);
@@ -857,6 +862,10 @@ myApp.onPageInit('user', function (page) {
 									var l1 = data[0].l1 ? '<span style="margin-right: 10px">●</span>' + data[0].l1 : "";
 									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
 									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
+									
+									if(data[0].distance < 1) {
+											data[0].distance = 0.5;
+									}
 									
 									$$("#user-distance").html(data[0].distance);
 									$$("#user-view-img").attr("src", data[0].picture);
@@ -1134,8 +1143,12 @@ myApp.onPageBack('chat', function (page) {
 });
 
 myApp.onPageInit('match', function (page) {
+	var user_id = localStorage.getItem("user_id");
 	var suid = localStorage.getItem("idc");
-	var d = {shown_user_id: suid};
+	var d = {
+		user_id: user_id,
+		shown_user_id: suid
+		};
 	
 	//Ajax request to get user info
 	$.ajax({
@@ -1345,4 +1358,6 @@ function updateStatusUser(status){
 			}
 		});
 	}
+	
+
 

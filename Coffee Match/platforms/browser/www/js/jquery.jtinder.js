@@ -321,7 +321,7 @@
 						} else {
 							panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {
 								var limit = localStorage.getItem("limit");
-								if(limit >= 0){
+								if(limit <= 0){
 									myApp.alert("We are sorry, your daily limit to check on new users is over! Come back tomorrow for more!", "The Coffee Match");
 									lastPosX = 0;
 									lastPosY = 0;

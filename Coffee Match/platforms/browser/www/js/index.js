@@ -196,6 +196,7 @@ var app = {
 									if(data == null){
 										$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
 										$$(".search-img").removeClass("search-effect");
+										getPendingNotifications();
 										return false;
 									}
 									
@@ -449,7 +450,7 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				*/	
+				*/
 				var fbLoginSuccess = function (userData) {
 				myApp.showIndicator()
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
@@ -507,8 +508,13 @@ var app = {
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
+										myApp.onPageBack('user', function() {
+											StatusBar.overlaysWebView(false);				
+										});
+										
 										myApp.hideIndicator()
-										mainView.router.loadPage("index.html");
+										//mainView.router.loadPage("index.html");
+										window.location = "index.html";
 									} 
 									
 									//CADASTRA USUÁRIO
