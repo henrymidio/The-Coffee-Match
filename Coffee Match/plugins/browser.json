@@ -65,6 +65,9 @@
             "APP_ID": "1647443792236383",
             "APP_NAME": "Coffee Match",
             "PACKAGE_NAME": "com.henrique.coffeematch"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.henrique.coffeematch"
         }
     },
     "dependent_plugins": {

@@ -169,5 +169,16 @@
             "APP_ID": "1647443792236383",
             "APP_NAME": "Coffee Match"
         }
+    },
+    "cordova-plugin-camera": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-camera"
+        },
+        "is_top_level": true,
+        "variables": {
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": "Reried to take pictures to profile user",
+            "CAMERA_USAGE_DESCRIPTION": "Required to take pictures for profile user"
+        }
     }
 }
