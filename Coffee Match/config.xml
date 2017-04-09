@@ -1,12 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.henrique.coffeematch" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.henrique.coffeematch" version="4.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Coffee Match</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
     <content src="index.html" />
 	
 	<gap:plugin name="onesignal-cordova-plugin" spec="^2.0.10" source="npm" />
-	
+	<gap:config-file platform="ios" parent="NSCameraUsageDescription" overwrite="true">
+	   <string>We are using the Camera for capture pictures from user to profile</string>
+	</gap:config-file>
+
 	<!--Requires cli-5.1.1+ for gradle Android but we recommend using the latest version. -->
 	<preference name="phonegap-version" value="cli-6.4.0" />
 	<preference name="android-build-tool" value="gradle" />
@@ -19,7 +22,6 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
-    
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
     <plugin name="cordova-plugin-contacts" source="npm" spec="~2.0.1" />
