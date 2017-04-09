@@ -6,6 +6,9 @@
     <content src="index.html" />
 	
 	<gap:plugin name="onesignal-cordova-plugin" spec="^2.0.10" source="npm" />
+	<gap:config-file platform="ios" parent="NSCameraUsageDescription" overwrite="true">
+	   <string>We are using the Camera for capture pictures from user to profile</string>
+	</gap:config-file>
 
 	<!--Requires cli-5.1.1+ for gradle Android but we recommend using the latest version. -->
 	<preference name="phonegap-version" value="cli-6.4.0" />
