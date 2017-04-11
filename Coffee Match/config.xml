@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.henrique.coffeematch" version="6.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.henrique.coffeematch" version="7.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Coffee Match</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
@@ -20,6 +20,9 @@
 	<!-- Window Phone 8.1 builds must use cli-6.1.0+ above -->
 	<preference name="windows-appx-target" value="8.1-phone" />
 	<preference name="WindowsToastCapable" value="true" />
+	
+	<!-- Only for iphones in ios -->
+	<preference name="target-device" value="handset" />
 	
 	<preference name="orientation" value="portrait" />
     <preference name="DisallowOverscroll" value="true" />
