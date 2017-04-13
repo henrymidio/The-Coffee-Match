@@ -464,15 +464,19 @@ myApp.onPageInit('combinacoes', function (page) {
 										}
 			
 										//Monta o DOM
-									    var line1 = "<li class='item-link item-content'>"
-												+ "<div class='item-media profile' id="+data[i].preview_id+">"
+									    var line1 = "<li class='item-content swipeout'>"
+												+ "<div class='item-media profile swipeout' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner match' id="+data[i].id+">"
 												+ "<a href='#' class='item-link'>"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ starbucksLine
-												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a></li>";		
+												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a>"
+												+ "<div class='swipeout-actions-right'>"
+												+ "<a href='#' class='swipeout-delete' id='unmatch'>Unmatch</a>"
+												+ "</div>"
+												+"</li>";		
 									    $("#match-li").append(line1);
 										
 										
@@ -489,7 +493,19 @@ myApp.onPageInit('combinacoes', function (page) {
 										mainView.router.loadPage("user.html");
 									});
 									
-									//myApp.hidePreloader();
+									$("#unmatch").on("click", function(){
+										var idp = $(".match").attr("id");
+										var abc = {
+											match: idp
+										};
+										$.ajax({
+											url: 'http://thecoffeematch.com/webservice/unmatch.php',
+											type: 'post',
+											data: abc
+										});
+									});
+									
+									
 									
 								}
 															
@@ -730,7 +746,7 @@ myApp.onPageInit('messages', function (page) {
 								}
 															
 							});
-							
+				
 	
 });
 
@@ -838,6 +854,31 @@ myApp.onPageInit('profile', function (page) {
 //SHOWN USER
 
 myApp.onPageInit('user', function (page) {
+	
+	$$('#report').on('click', function () {
+				
+				var buttons1 = [
+					{
+						text: 'Report',
+						onClick: function () {
+							myApp.prompt("For what reason?", "The Coffee Match", function(){
+								myApp.alert("User has been reported", "Thank you", function(){
+									mainView.router.back();
+								})
+							})
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);		
+	});	
+	
 	var metrica = localStorage.getItem("metrica");
 	$$("#user-metrica").html(metrica);
 	
@@ -978,10 +1019,57 @@ myApp.onPageBeforeInit('settings', function (page) {
 myApp.onPageInit('chat', function (page) {
 	myApp.showIndicator()
 	
+	var match = localStorage.getItem("match");
+	
+	$$('.overflow').on('click', function () {
+				
+				var buttons1 = [
+					{
+						text: 'Report',
+						onClick: function () {
+							myApp.prompt("For what reason?", "The Coffee Match", function(){
+								myApp.alert("User has been reported", "Thank you")
+							})
+						}
+					},
+					{
+						text: 'Unmatch',
+						onClick: function () {
+							
+										var abc = {
+											match: match
+										};
+										$.ajax({
+											url: 'http://thecoffeematch.com/webservice/unmatch.php',
+											type: 'post',
+											data: abc,
+											success: function(data){
+												page.view.router.back({
+													url: 'messages.html',
+													force: true,
+													ignoreCache: true
+												})
+											}
+										});
+										
+							
+									
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);
+				
+	});			
+	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
-	
-	var match = localStorage.getItem("match");
 		
 	// Handle message
 $$('.messagebar').on('click', function () {
