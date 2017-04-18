@@ -44,10 +44,6 @@
 					$$(".search-img").removeClass("search-effect");
 				}
 				
-				//Diminui o limit de visualições diário
-				var limit = localStorage.getItem("limit");
-				localStorage.setItem("limit", limit - 1);
-				
 			},
 			onLike: function(){ 
 							

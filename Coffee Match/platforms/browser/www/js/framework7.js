@@ -5191,7 +5191,7 @@
                 for (var i = 0; i < select.length; i++) {
                     if (select[i].selected) valueText.push(select[i].textContent.trim());
                 }
-        
+				
                 var itemAfter = smartSelect.find('.item-after');
                 if (itemAfter.length === 0) {
                     smartSelect.find('.item-inner').append('<div class="item-after">' + valueText.join(', ') + '</div>');
@@ -5306,6 +5306,7 @@
                         });
                     }
                 }
+				
                 values.push({
                     value: option[0].value,
                     text: option[0].textContent.trim(),

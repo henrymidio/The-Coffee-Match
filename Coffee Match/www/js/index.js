@@ -98,7 +98,7 @@ var app = {
 		localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
 		
 		//Variável que testa se o usuário está logado
-		var logged = localStorage.getItem("user_id");
+		logged = localStorage.getItem("logged");
 			
 		if(localStorage.getItem("lastLog") == null){
 				localStorage.setItem("lastLog", new Date());
@@ -256,6 +256,7 @@ var app = {
 										
 									});
 									getPendingNotifications();
+									getLimitInvites();
 								},
 								error: function (request, status, error) {
 									//alert(request.responseText);
@@ -294,7 +295,7 @@ var app = {
 								success: function (data) {
 									
 									if (data.length < 2) {
-									  alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
+									  myApp.alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
 									
 									var metrica = localStorage.getItem("metrica");
@@ -450,7 +451,8 @@ var app = {
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-					
+				
+				
 				var fbLoginSuccess = function (userData) {
 				myApp.showIndicator()
 				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
@@ -480,11 +482,8 @@ var app = {
 						  }
 						
 						  var person = {
-								fbid: result.id,
-								notification_key: notification_key,
-								name: result.name,
-								email: result.email,
-								picture: 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350'
+								novo: 1,
+								fbid: result.id
 							}
 						 								
 						  //Chamada ajax para registrar/autenticar usuário
@@ -513,15 +512,15 @@ var app = {
 										});
 										
 										myApp.hideIndicator()
-										//mainView.router.loadPage("index.html");
+										localStorage.setItem("logged", 1);
 										window.location = "index.html";
 									} 
 									
 									//CADASTRA USUÁRIO
 									if(data.code == 2){
-										
+										localStorage.setItem("notification_key", notification_key);
 										localStorage.setItem("name", result.name);
-										localStorage.setItem("user_id", data.user_id);
+										localStorage.setItem("email", result.email);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
@@ -536,7 +535,7 @@ var app = {
 								},
 								error: function (request, status, error) {
 									myApp.hideIndicator();
-									myApp.alert("Error", "The Coffee Match");
+									myApp.alert(error, "The Coffee Match");
 								}
 								
 							});
