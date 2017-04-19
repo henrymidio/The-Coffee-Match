@@ -286,6 +286,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									$$("#name-confirm").html(data.name);
 									$$("#invite-age").html(data.age);
 									$$("#invite-college").html(data.college);
+									$$("#description-confirm").html(data.description);
 									$$("#occupation-confirm").html(data.occupation);
 									$$("#pic-confirm").attr("src", data.picture);
 									$(".skills").append(skill1, skill2, skill3);
