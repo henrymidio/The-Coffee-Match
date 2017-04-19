@@ -161,6 +161,8 @@ myApp.onPageInit('passo2', function (page) {
 	});
 	
 	$$("#finalizar").on("click", function(){
+		myApp.showIndicator()
+		
 		var tags = [];
 		var looking = [];
 		var descricao = $$("#passo2-description").val();
@@ -198,11 +200,30 @@ myApp.onPageInit('passo2', function (page) {
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
 		
-		var user_id = localStorage.getItem("user_id");
-		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, nascimento, faculdade, tags, looking, user_id);
+		//var user_id = localStorage.getItem("user_id");
 		
-		mainView.router.loadPage("index.html");
+		//Chamada ao servidor para cadastro/atualização de informações de perfil
+		var userObj = {
+			fbid: localStorage.getItem("fbid"),
+			notification_key: localStorage.getItem("notification_key"),
+			name: localStorage.getItem("name"),
+			email: localStorage.getItem("email"),
+			picture: localStorage.getItem("picture")
+		}
+		$.ajax({
+			url: 'http://thecoffeematch.com/webservice/register.php',
+			type: 'post',
+			dataType: 'json',
+			data: userObj, 
+			success: function(data) {
+				localStorage.setItem("user_id", data.user_id);
+				setProfile(descricao, profissao, nascimento, faculdade, tags, looking, data.user_id);
+				localStorage.setItem("logged", 1);
+				myApp.hideIndicator();
+				mainView.router.loadPage("index.html");
+			}
+		});
+		
 		
 	})
 	
@@ -324,12 +345,25 @@ myApp.onPageInit('convites', function (page) {
 										return false;
 									}
 									for(i = 0; i < data.length; i++){
-									
+									var dataAtual = new Date();
+									var dataInvite = new Date(data[i].data);
+									var diffDays = Math.floor((dataAtual - dataInvite) / (1000*60*60*24)); 
+									switch(diffDays) {
+										case 0:
+											diffDays = 3;
+											break;
+										case 1:
+											diffDays = 2;
+											break;
+										case 2:
+											diffDays = 1;
+											break;
+									}
 									//Seta id da confirmacao-convite
 									var idc = localStorage.setItem("idc", data[i].id);
 									
 									//Monta o DOM
-									var line1 = "<li class='swipeout' id='kjk'>"
+									var line1 = "<li class='swipeout'>"
 												+ "<div class='swipeout-content'>"
 												+ "<div class='item-content'>"
 												+ "<div class='item-media cont'>"
@@ -338,14 +372,14 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>This invitation expires in 3 days</span>"
+												+ "<span class='subtitle'>This invitation expires in " + diffDays + " days</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
 												+ "</a>"
 												+ "</div>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='swipeout-delete' id='kjk'>Delete</a>"
+												+ "<a href='#' class='bg-red del-invite'>Delete</a>"
 												+ "</div>"
 												+ "</li>";
 														
@@ -354,19 +388,21 @@ myApp.onPageInit('convites', function (page) {
 									}
 									
 									//Deleta convite
-									$('.swipeout-delete').on('click', function () {
-									 
-									  var inviteId = $(this).parents("li").find("div.div-match").attr("id");										
+									$('.del-invite').on('click', function () {
+										var inviteId = $(this).parents("li").find("div.div-match").attr("id");
+										myApp.confirm("Are you sure?", "The Coffee Match", function(){										
 									
-									  var matchToDelete = {
-											invite: inviteId
-										};
-										
-										$.ajax({
-																	url: 'http://thecoffeematch.com/webservice/delete-invite.php',
-																	type: 'post',
-																	data: matchToDelete						
+										  var matchToDelete = {
+												invite: inviteId
+											};
+											
+											$.ajax({
+												url: 'http://thecoffeematch.com/webservice/delete-invite.php',
+												type: 'post',
+												data: matchToDelete						
+											});
 										});
+									  
 										
 									});
 									
@@ -474,7 +510,7 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='swipeout-delete' id='unmatch'>Unmatch</a>"
+												+ "<a href='#' class='bg-red unmatch'>Unmatch</a>"
 												+ "</div>"
 												+"</li>";		
 									    $("#match-li").append(line1);
@@ -492,18 +528,57 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("shown_user_id", idp);
 										mainView.router.loadPage("user.html");
 									});
-									
-									$("#unmatch").on("click", function(){
-										var idp = $(".match").attr("id");
-										var abc = {
-											match: idp
-										};
-										$.ajax({
-											url: 'http://thecoffeematch.com/webservice/unmatch.php',
-											type: 'post',
-											data: abc
+																		
+									$(".unmatch").on("click", function(){
+										var self   = $(this);
+										var idMatch = self.parent().siblings(".match").attr("id");
+										var swipeout = self.closest(".swipeout");
+										
+										myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
+											myApp.swipeoutDelete(swipeout, function() {
+												var abc = {
+													match: idMatch
+												};
+												$.ajax({
+													url: 'http://thecoffeematch.com/webservice/unmatch.php',
+													type: 'post',
+													data: abc
+												});
+											});
+											
+										});
+										
+									});
+									/*
+									$$('.swipeout').on('swipeout:delete', function () {
+										myApp.alert("Are you sure?", "The Coffee Match", function(){
+											var idp = $(".match").attr("id");
+											var abc = {
+												match: idp
+											};
+											$.ajax({
+												url: 'http://thecoffeematch.com/webservice/unmatch.php',
+												type: 'post',
+												data: abc
+											});
 										});
 									});
+									
+									$(".unmatch").on("click", function(event){
+										myApp.alert("Are you sure?", "The Coffee Match", function(){
+											var idp = $(".match").attr("id");
+											var abc = {
+												match: idp
+											};
+											$.ajax({
+												url: 'http://thecoffeematch.com/webservice/unmatch.php',
+												type: 'post',
+												data: abc
+											});
+										});
+										
+									});
+									*/
 									
 									
 									
@@ -714,12 +789,14 @@ myApp.onPageInit('messages', function (page) {
 									
 									for(i = 0; i < data.length; i++){
 										var replyArrow = "";
+										var weight = "bold";
 										if(data[i].last_message === null){
 											data[i].last_message = "Matched in "+data[i].date;
 										}
 										
 										if(data[i].user == x.user_id) {
-											replyArrow = "<img style='width: 12px; height: 12px; margin-right: 5px' src='img/reply-arrow.png' /> "
+											replyArrow = "<img style='width: 12px; height: 12px; margin-right: 5px' src='img/reply-arrow.png' /> ";
+											weight = "";
 										}
 													
 										//Monta o DOM
@@ -730,7 +807,7 @@ myApp.onPageInit('messages', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='chat.html' class='item-link chat' id="+data[i].id+">"
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";		
+												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
 																		
 										$(".chat").on("click", function(){
@@ -752,6 +829,10 @@ myApp.onPageInit('messages', function (page) {
 
 
 myApp.onPageInit('profile', function (page) {
+	
+	$("a.close-popup").on("click touchstart", function(event){
+		alert("close")
+	});
 	
 	$(".cms").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
@@ -855,35 +936,12 @@ myApp.onPageInit('profile', function (page) {
 
 myApp.onPageInit('user', function (page) {
 	
-	$$('#report').on('click', function () {
-				
-				var buttons1 = [
-					{
-						text: 'Report',
-						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(){
-								myApp.alert("User has been reported", "Thank you", function(){
-									mainView.router.back();
-								})
-							})
-						}
-					}
-				];
-				var buttons2 = [
-					{
-						text: 'Cancel',
-						color: 'red'
-					}
-				];
-				var groups = [buttons1, buttons2];
-				myApp.actions(groups);		
-	});	
-	
 	var metrica = localStorage.getItem("metrica");
 	$$("#user-metrica").html(metrica);
 	
 	var suid = localStorage.getItem("shown_user_id");
-	var user_id = localStorage.getItem("user_id");
+	var user_id = localStorage.getItem("user_id");	
+	
 	var dado = {
 		user_id: user_id,
 		shown_user_id: suid
@@ -924,6 +982,46 @@ myApp.onPageInit('user', function (page) {
 								
 	});
 	
+	$$('#report').on('click', function () {
+				
+				var buttons1 = [
+					{
+						text: 'Report',
+						onClick: function () {
+							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+								var dataReport = {
+									user_id: suid,
+									reason: value
+								}
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/phpmailer/report.php',
+										type: 'post',
+										data: dataReport,
+										success: function(data){
+											myApp.alert("User has been reported", "Thank you", function(){
+												mainView.router.back();
+											})
+										}error: function (request, status, error) {
+											myApp.alert("User has been reported", "Thank you", function(){
+												mainView.router.back();
+											})
+										}
+								});
+								
+							})
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);		
+	});	
+	
 });
 
 
@@ -932,6 +1030,26 @@ myApp.onPageBeforeInit('settings', function (page) {
 	var uid = localStorage.getItem("user_id");
 	var ud = {user_id: uid};
 	var dst = null;
+	
+	$$('#delete-account').on('click', function(){
+		myApp.confirm("You will lose all its data", "Are you sure you want to delete your profile?", function(){
+			myApp.showIndicator()
+			$.ajax({
+				url: 'http://thecoffeematch.com/webservice/delete-user.php',
+				type: 'post',
+				data: ud,
+				success: function (data) {
+					//Anula variável logged	e envia email avisando da exclusão	
+					localStorage.removeItem("logged");
+					myApp.hideIndicator()
+					mainView.router.loadPage('login2.html');
+				}error: function (request, status, error) {
+					myApp.hideIndicator()
+					alert("Error");
+				}
+			});
+		});
+	})
 	
 	//Ajax request to get user
 	$.ajax({
@@ -1014,6 +1132,8 @@ myApp.onPageBeforeInit('settings', function (page) {
 		setPreferences(metrica, distance, convites, emails, user_id);
 		mainView.router.loadPage('index.html');
 	})
+	
+	
 });
 
 myApp.onPageInit('chat', function (page) {
@@ -1388,6 +1508,7 @@ function setProfile(description, occupation, nascimento, college, tags, looking,
 		looking: looking,
 		user_id: user_id
 		}
+		
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/set-profile-info.php',
 								type: 'post',
