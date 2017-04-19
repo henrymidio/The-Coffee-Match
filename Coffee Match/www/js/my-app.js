@@ -1139,8 +1139,23 @@ myApp.onPageInit('chat', function (page) {
 					{
 						text: 'Report',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(){
-								myApp.alert("User has been reported", "Thank you")
+							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+								var dataReport = {
+									user_id: match,
+									match: match,
+									reason: value
+								}
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/phpmailer/report.php',
+										type: 'post',
+										data: dataReport,
+										success: function(data){
+											myApp.alert("User has been reported", "Thank you")
+										},error: function (request, status, error) {
+											myApp.alert("User has been reported", "Thank you")
+										}
+								});
+								
 							})
 						}
 					},
