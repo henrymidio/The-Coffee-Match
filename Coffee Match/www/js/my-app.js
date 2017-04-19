@@ -346,20 +346,7 @@ myApp.onPageInit('convites', function (page) {
 										return false;
 									}
 									for(i = 0; i < data.length; i++){
-									var dataAtual = new Date();
-									var dataInvite = new Date(data[i].data.replace(/-/g, "/"));
-									var diffDays = Math.floor((dataAtual - dataInvite) / (1000*60*60*24)); 
-									switch(diffDays) {
-										case 0:
-											diffDays = 3;
-											break;
-										case 1:
-											diffDays = 2;
-											break;
-										case 2:
-											diffDays = 1;
-											break;
-									}
+									
 									//Seta id da confirmacao-convite
 									var idc = localStorage.setItem("idc", data[i].id);
 									
@@ -373,7 +360,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>This invitation expires in " + diffDays + " days</span>"
+												+ "<span class='subtitle'>This invitation expires soon!</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
@@ -390,18 +377,21 @@ myApp.onPageInit('convites', function (page) {
 									
 									//Deleta convite
 									$('.del-invite').on('click', function () {
-										var inviteId = $(this).parents("li").find("div.div-match").attr("id");
+										var self   = $(this);
+										var inviteId = self.parents("li").find("div.div-match").attr("id");
+										var swipeout = self.closest(".swipeout");
 										myApp.confirm("Are you sure?", "The Coffee Match", function(){										
-									
-										  var matchToDelete = {
-												invite: inviteId
-											};
-											
-											$.ajax({
-												url: 'http://thecoffeematch.com/webservice/delete-invite.php',
-												type: 'post',
-												data: matchToDelete						
-											});
+											myApp.swipeoutDelete(swipeout, function() {
+												var matchToDelete = {
+													invite: inviteId
+												};
+												
+												$.ajax({
+													url: 'http://thecoffeematch.com/webservice/delete-invite.php',
+													type: 'post',
+													data: matchToDelete						
+												});
+											});	
 										});
 									  
 										
