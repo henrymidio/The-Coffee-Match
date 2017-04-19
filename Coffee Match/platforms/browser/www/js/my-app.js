@@ -347,7 +347,7 @@ myApp.onPageInit('convites', function (page) {
 									}
 									for(i = 0; i < data.length; i++){
 									var dataAtual = new Date();
-									var dataInvite = new Date(data[i].data);
+									var dataInvite = new Date(data[i].data.replace(/-/g, "/"));
 									var diffDays = Math.floor((dataAtual - dataInvite) / (1000*60*60*24)); 
 									switch(diffDays) {
 										case 0:
