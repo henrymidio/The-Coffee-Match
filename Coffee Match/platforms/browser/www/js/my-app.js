@@ -161,7 +161,6 @@ myApp.onPageInit('passo2', function (page) {
 	});
 	
 	$$("#finalizar").on("click", function(){
-		myApp.showIndicator()
 		
 		var tags = [];
 		var looking = [];
@@ -184,6 +183,8 @@ myApp.onPageInit('passo2', function (page) {
 			document.getElementById("passo2-nascimento").focus();
 			return false;
 		}
+		
+		myApp.showIndicator();
 		
 		$('#skills select option:selected').each(function(){
 				tags.push($(this).text());
@@ -1001,7 +1002,7 @@ myApp.onPageInit('user', function (page) {
 											myApp.alert("User has been reported", "Thank you", function(){
 												mainView.router.back();
 											})
-										}error: function (request, status, error) {
+										},error: function (request, status, error) {
 											myApp.alert("User has been reported", "Thank you", function(){
 												mainView.router.back();
 											})
@@ -1043,7 +1044,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 					localStorage.removeItem("logged");
 					myApp.hideIndicator()
 					mainView.router.loadPage('login2.html');
-				}error: function (request, status, error) {
+				},error: function (request, status, error) {
 					myApp.hideIndicator()
 					alert("Error");
 				}
