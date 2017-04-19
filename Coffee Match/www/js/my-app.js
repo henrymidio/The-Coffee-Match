@@ -161,7 +161,6 @@ myApp.onPageInit('passo2', function (page) {
 	});
 	
 	$$("#finalizar").on("click", function(){
-		myApp.showIndicator()
 		
 		var tags = [];
 		var looking = [];
@@ -184,6 +183,8 @@ myApp.onPageInit('passo2', function (page) {
 			document.getElementById("passo2-nascimento").focus();
 			return false;
 		}
+		
+		myApp.showIndicator();
 		
 		$('#skills select option:selected').each(function(){
 				tags.push($(this).text());
