@@ -181,6 +181,7 @@ var app = {
 		function getUserList() {
 			//Faz request das informações dos users compatíveis
 			var dados = {
+					user_id: localStorage.getItem('user_id'),
 					distance: localStorage.getItem('distance')
 				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));

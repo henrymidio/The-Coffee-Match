@@ -289,6 +289,11 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
 									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
 									
+									var message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
+									if(data[0].id == 193) {
+										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
+									}
+									
 									$$("#name-confirm").html(data[0].name);
 									$$("#cc-distance").html(data[0].distance);
 									$$("#cc-metrica").html(metrica);
@@ -298,7 +303,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									$$("#occupation-confirm").html(data[0].occupation);
 									$$("#pic-confirm").attr("src", data[0].picture);
 									$(".skills").append(skill1, skill2, skill3);
-									$$("#message").html(data[0].message);
+									$$("#message").html(message);
 									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
 									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
 									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
@@ -771,8 +776,7 @@ myApp.onPageInit('messages', function (page) {
 	
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
-	//myApp.showPreloader();
-	//Ajax request to get user
+	
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-last-message.php',
 								type: 'post',
@@ -794,7 +798,7 @@ myApp.onPageInit('messages', function (page) {
 													
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
-												+ "<div class='item-media'>"
+												+ "<div class='item-media perfil' id="+data[i].suid+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -806,10 +810,14 @@ myApp.onPageInit('messages', function (page) {
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
 										});
+										
+										$(".perfil").on("click", function(){
+											var idp = $(this).attr("id");
+											localStorage.setItem("shown_user_id", idp);
+											mainView.router.loadPage("user.html");
+										});
 									}
 									
-									
-									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
 									alert(request.responseText);
