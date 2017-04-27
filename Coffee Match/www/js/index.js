@@ -181,7 +181,6 @@ var app = {
 		function getUserList() {
 			//Faz request das informações dos users compatíveis
 			var dados = {
-					user_id: localStorage.getItem('user_id'),
 					distance: localStorage.getItem('distance')
 				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));
@@ -342,13 +341,12 @@ var app = {
 										}
 										
 										$.ajax({
-																			url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
-																			type: 'post',
-																			data: metaData,
-																			success: function (data) {
-																				 
-																				mainView.router.loadPage("calendario.html");
-																			}
+											url: 'http://thecoffeematch.com/webservice/set-starbucks.php',
+											type: 'post',
+											data: metaData,
+											success: function (data) {
+												mainView.router.loadPage("calendario.html");
+											}
 										});
 										//e.stopPropagation(); //stops propagation
 									});
@@ -505,6 +503,7 @@ var app = {
 										localStorage.setItem("occupation", data.occupation);
 										localStorage.setItem("college", data.college);
 										localStorage.setItem("metrica", "Mi");
+										localStorage.setItem("distance", 10);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										myApp.onPageBack('user', function() {
@@ -523,6 +522,7 @@ var app = {
 										localStorage.setItem("email", result.email);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("metrica", "Mi");
+										localStorage.setItem("distance", 10);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
 										myApp.hideIndicator()

@@ -266,33 +266,42 @@ myApp.onPageInit('passo2', function (page) {
 
 myApp.onPageInit('confirmacao-convite', function (page) {
 
-	var like_id = localStorage.getItem("invite");
-	var dadosConfirm = {like_id: like_id};
+	var user_id  = localStorage.getItem("user_id");
+	var other_id = localStorage.getItem("idc");
 	
+	var dados = {
+		user_id: user_id,
+		shown_user_id: other_id,
+		liked: 1
+	}
+		
 	//Ajax request to get user
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-invites.php',
+								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
 								type: 'post',
 								dataType: 'json',
-								data: dadosConfirm,
+								data: dados,
 								success: function (data) {
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									
-									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
-									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
-									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
+									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
+									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
+									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
 									
-									$$("#name-confirm").html(data.name);
-									$$("#invite-age").html(data.age);
-									$$("#invite-college").html(data.college);
-									$$("#occupation-confirm").html(data.occupation);
-									$$("#pic-confirm").attr("src", data.picture);
+									$$("#name-confirm").html(data[0].name);
+									$$("#cc-distance").html(data[0].distance);
+									$$("#cc-metrica").html(metrica);
+									$$("#invite-age").html(data[0].age);
+									$$("#invite-college").html(data[0].college);
+									$$("#description-confirm").html(data[0].description);
+									$$("#occupation-confirm").html(data[0].occupation);
+									$$("#pic-confirm").attr("src", data[0].picture);
 									$(".skills").append(skill1, skill2, skill3);
-									$$("#message").html(data.message);
-									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data.l1);
-									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data.l2);
-									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
+									$$("#message").html(data[0].message);
+									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
+									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
+									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
 								}
 							});
 	
@@ -300,14 +309,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	$('#confirmar-cafe').on("click", function(){
 		myApp.showIndicator()
 		//Faz o PUT LIKE
-				var user_id  = localStorage.getItem("user_id");
-				var other_id = localStorage.getItem("idc");
-				
-				var dados = {
-					user_id: user_id,
-					shown_user_id: other_id,
-					liked: 1
-				}
+								
 				$.ajax({
 								url: 'http://thecoffeematch.com/webservice/put-like.php',
 								type: 'post',
@@ -346,20 +348,7 @@ myApp.onPageInit('convites', function (page) {
 										return false;
 									}
 									for(i = 0; i < data.length; i++){
-									var dataAtual = new Date();
-									var dataInvite = new Date(data[i].data.replace(/-/g, "/"));
-									var diffDays = Math.floor((dataAtual - dataInvite) / (1000*60*60*24)); 
-									switch(diffDays) {
-										case 0:
-											diffDays = 3;
-											break;
-										case 1:
-											diffDays = 2;
-											break;
-										case 2:
-											diffDays = 1;
-											break;
-									}
+									
 									//Seta id da confirmacao-convite
 									var idc = localStorage.setItem("idc", data[i].id);
 									
@@ -373,7 +362,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>This invitation expires in " + diffDays + " days</span>"
+												+ "<span class='subtitle'>This invitation expires soon!</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
@@ -390,18 +379,21 @@ myApp.onPageInit('convites', function (page) {
 									
 									//Deleta convite
 									$('.del-invite').on('click', function () {
-										var inviteId = $(this).parents("li").find("div.div-match").attr("id");
+										var self   = $(this);
+										var inviteId = self.parents("li").find("div.div-match").attr("id");
+										var swipeout = self.closest(".swipeout");
 										myApp.confirm("Are you sure?", "The Coffee Match", function(){										
-									
-										  var matchToDelete = {
-												invite: inviteId
-											};
-											
-											$.ajax({
-												url: 'http://thecoffeematch.com/webservice/delete-invite.php',
-												type: 'post',
-												data: matchToDelete						
-											});
+											myApp.swipeoutDelete(swipeout, function() {
+												var matchToDelete = {
+													invite: inviteId
+												};
+												
+												$.ajax({
+													url: 'http://thecoffeematch.com/webservice/delete-invite.php',
+													type: 'post',
+													data: matchToDelete						
+												});
+											});	
 										});
 									  
 										
@@ -1148,8 +1140,23 @@ myApp.onPageInit('chat', function (page) {
 					{
 						text: 'Report',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(){
-								myApp.alert("User has been reported", "Thank you")
+							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+								var dataReport = {
+									user_id: match,
+									match: match,
+									reason: value
+								}
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/phpmailer/report.php',
+										type: 'post',
+										data: dataReport,
+										success: function(data){
+											myApp.alert("User has been reported", "Thank you")
+										},error: function (request, status, error) {
+											myApp.alert("User has been reported", "Thank you")
+										}
+								});
+								
 							})
 						}
 					},
