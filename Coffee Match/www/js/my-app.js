@@ -208,6 +208,7 @@ myApp.onPageInit('passo2', function (page) {
 			fbid: localStorage.getItem("fbid"),
 			notification_key: localStorage.getItem("notification_key"),
 			name: localStorage.getItem("name"),
+			gender: localStorage.getItem("gender"),
 			email: localStorage.getItem("email"),
 			picture: localStorage.getItem("picture")
 		}

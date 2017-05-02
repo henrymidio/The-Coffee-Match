@@ -454,7 +454,7 @@ var app = {
 				
 				var fbLoginSuccess = function (userData) {
 				myApp.showIndicator()
-				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
+				 facebookConnectPlugin.api("/me?fields=id,name, gender, email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
 						  
@@ -520,6 +520,7 @@ var app = {
 									if(data.code == 2){
 										localStorage.setItem("notification_key", notification_key);
 										localStorage.setItem("name", result.name);
+										localStorage.setItem("gender", result.gender);
 										localStorage.setItem("email", result.email);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("metrica", "Mi");
