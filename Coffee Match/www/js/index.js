@@ -692,22 +692,23 @@ var app = {
 			
 		//Função que verifica se o usuário atingiu o limite de usuários visualizados por dia	
 		function getLimitInvites(){
-			var savedDate = localStorage.getItem("savedDate");
-			if(!savedDate) {
-				localStorage.setItem("savedDate", new Date().getDate());
+			var dataSalva = localStorage.getItem("dataSalva");
+			if(!dataSalva) {
+				localStorage.setItem("dataSalva", new Date());
 				localStorage.setItem("limit", 8);
 				return true;
 			}
-			var currentDate = new Date().getDate();
+			var currentDate = new Date();
+			var diferenca = Math.abs(currentDate - dataSalva);
+			var dia = 1000*60*60*24;
+			var total = Math.round(diferenca/dia);
+
+			if(total > 0){
+				localStorage.setItem("limit", 8);
+				localStorage.setItem("dataSalva", new Date());
+				return true;
+			} 
 			
-			if(currentDate > savedDate){
-				localStorage.setItem("limit", 8);
-				localStorage.setItem("savedDate", new Date().getDate());
-				return true;
-			} else if (currentDate == 1){
-				localStorage.setItem("limit", 8);
-				localStorage.setItem("savedDate", new Date().getDate());
-			}
 		}
 		
 		}
