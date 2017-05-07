@@ -699,6 +699,7 @@ var app = {
 				return true;
 			}
 			var currentDate = new Date();
+			dataSalva = new Date(dataSalva);
 			var timeDiff = Math.abs(currentDate.getTime() - dataSalva.getTime());
 			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 			
