@@ -699,10 +699,10 @@ var app = {
 				return true;
 			}
 			var currentDate = new Date();
-			dataSalva = new Date(dataSalva);
-			var timeDiff = Math.abs(currentDate.getTime() - dataSalva.getTime());
+			var dataSalva2 = new Date(dataSalva);
+			var timeDiff = Math.abs(currentDate.getTime() - dataSalva2.getTime());
 			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-			
+			alert(diffDays);
 			if(diffDays > 0){
 				localStorage.setItem("limit", 8);
 				localStorage.setItem("dataSalva", new Date());
