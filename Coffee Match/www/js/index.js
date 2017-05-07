@@ -694,20 +694,28 @@ var app = {
 		function getLimitInvites(){
 			var dataSalva = localStorage.getItem("dataSalva");
 			if(!dataSalva) {
-				localStorage.setItem("dataSalva", new Date().getTime());
+				localStorage.setItem("dataSalva", new Date());
 				localStorage.setItem("limit", 8);
 				return true;
 			}
-			var currentDate = new Date().getTime();
-			var timeDiff = Math.abs(currentDate - dataSalva);
-			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+			var currentDate = new Date();
+			var dataSalva2 = new Date(dataSalva);
+			var diffDays = dateDiffInDays(currentDate, dataSalva2);
 			
 			if(diffDays > 0){
 				localStorage.setItem("limit", 8);
-				localStorage.setItem("dataSalva", new Date().getTime());
+				localStorage.setItem("dataSalva", new Date());
 				return true;
 			} 
 			
+		}
+		function dateDiffInDays(a, b) {
+		  var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+		  // Discard the time and time-zone information.
+		  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+		  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+		  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 		}
 		
 		}
