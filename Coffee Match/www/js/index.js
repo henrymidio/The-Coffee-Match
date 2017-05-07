@@ -694,20 +694,17 @@ var app = {
 		function getLimitInvites(){
 			var dataSalva = localStorage.getItem("dataSalva");
 			if(!dataSalva) {
-				localStorage.setItem("dataSalva", new Date());
+				localStorage.setItem("dataSalva", new Date().getTime());
 				localStorage.setItem("limit", 8);
 				return true;
 			}
-			var currentDate = new Date();
-			var dataSalva2 = new Date(dataSalva);
-			var timeDiff = Math.abs(currentDate.getTime() - dataSalva2.getTime());
+			var currentDate = new Date().getTime();
+			var timeDiff = Math.abs(currentDate - dataSalva);
 			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-			alert(currentDate);
-			alert(dataSalva2);
-			alert(diffDays);
+			
 			if(diffDays > 0){
 				localStorage.setItem("limit", 8);
-				localStorage.setItem("dataSalva", new Date());
+				localStorage.setItem("dataSalva", new Date().getTime());
 				return true;
 			} 
 			
