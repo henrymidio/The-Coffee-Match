@@ -702,7 +702,9 @@ var app = {
 			var diferenca = Math.abs(currentDate - dataSalva);
 			var dia = 1000*60*60*24;
 			var total = Math.round(diferenca/dia);
-
+			alert(dataSalva);
+			alert(currentDate);
+			alert(total);
 			if(total > 0){
 				localStorage.setItem("limit", 8);
 				localStorage.setItem("dataSalva", new Date());
