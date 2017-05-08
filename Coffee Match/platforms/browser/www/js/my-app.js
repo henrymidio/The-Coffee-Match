@@ -208,6 +208,7 @@ myApp.onPageInit('passo2', function (page) {
 			fbid: localStorage.getItem("fbid"),
 			notification_key: localStorage.getItem("notification_key"),
 			name: localStorage.getItem("name"),
+			gender: localStorage.getItem("gender"),
 			email: localStorage.getItem("email"),
 			picture: localStorage.getItem("picture")
 		}
@@ -1208,7 +1209,7 @@ myApp.onPageInit('chat', function (page) {
 	var user_id = localStorage.getItem("user_id");
 		
 	// Handle message
-$$('.messagebar').on('click', function () {
+$$('.messagebar .link').on('click', function () {
 	// Init Messages
 	var myMessages = myApp.messages('.messages', {
 	  autoLayout:true
@@ -1223,7 +1224,7 @@ $$('.messagebar').on('click', function () {
  
   // Empty messagebar
   myMessagebar.clear()
-  
+  $('#toolbar').css("height","");
   // Message type
   var messageType = "sent";
   var avatar      = localStorage.getItem("picture");

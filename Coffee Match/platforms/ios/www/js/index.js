@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		/*
+		
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -85,11 +85,11 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		*/
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-		getLimitInvites();
+		//getLimitInvites();
 		
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
@@ -442,19 +442,19 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    facebookConnectPlugin.browserInit("1647443792236383");
+			    //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				/*
+				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				*/
+				
 				
 				var fbLoginSuccess = function (userData) {
 				myApp.showIndicator()
-				 facebookConnectPlugin.api("/me?fields=id,name,email,birthday,work,education", 
+				 facebookConnectPlugin.api("/me?fields=id,name,gender,email,birthday,work,education", 
 				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
 					  function onSuccess (result) {
 						  
@@ -520,6 +520,7 @@ var app = {
 									if(data.code == 2){
 										localStorage.setItem("notification_key", notification_key);
 										localStorage.setItem("name", result.name);
+										localStorage.setItem("gender", result.gender);
 										localStorage.setItem("email", result.email);
 										localStorage.setItem("fbid", result.id);
 										localStorage.setItem("metrica", "Mi");
@@ -691,22 +692,30 @@ var app = {
 			
 		//Função que verifica se o usuário atingiu o limite de usuários visualizados por dia	
 		function getLimitInvites(){
-			var savedDate = localStorage.getItem("savedDate");
-			if(!savedDate) {
-				localStorage.setItem("savedDate", new Date().getDate());
+			var dataSalva = localStorage.getItem("dataSalva");
+			if(!dataSalva) {
+				localStorage.setItem("dataSalva", new Date());
 				localStorage.setItem("limit", 8);
 				return true;
 			}
-			var currentDate = new Date().getDate();
+			var currentDate = new Date();
+			var dataSalva2 = new Date(dataSalva);
+			var diffDays = dateDiffInDays(currentDate, dataSalva2);
 			
-			if(currentDate > savedDate){
+			if(diffDays !== 0){
 				localStorage.setItem("limit", 8);
-				localStorage.setItem("savedDate", new Date().getDate());
+				localStorage.setItem("dataSalva", new Date());
 				return true;
-			} else if (currentDate == 1){
-				localStorage.setItem("limit", 8);
-				localStorage.setItem("savedDate", new Date().getDate());
-			}
+			} 
+			
+		}
+		function dateDiffInDays(a, b) {
+		  var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+		  // Discard the time and time-zone information.
+		  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+		  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+		  
+		  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 		}
 		
 		}

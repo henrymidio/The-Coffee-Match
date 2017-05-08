@@ -1209,7 +1209,7 @@ myApp.onPageInit('chat', function (page) {
 	var user_id = localStorage.getItem("user_id");
 		
 	// Handle message
-$$('.messagebar').on('click', function () {
+$$('.messagebar .link').on('click', function () {
 	// Init Messages
 	var myMessages = myApp.messages('.messages', {
 	  autoLayout:true
@@ -1224,7 +1224,7 @@ $$('.messagebar').on('click', function () {
  
   // Empty messagebar
   myMessagebar.clear()
-  
+  $('#toolbar').css("height","");
   // Message type
   var messageType = "sent";
   var avatar      = localStorage.getItem("picture");
