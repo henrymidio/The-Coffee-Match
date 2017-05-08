@@ -701,10 +701,8 @@ var app = {
 			var currentDate = new Date();
 			var dataSalva2 = new Date(dataSalva);
 			var diffDays = dateDiffInDays(currentDate, dataSalva2);
-			alert(currentDate);
-			alert(dataSalva2);
-			alert(diffDays);
-			if(diffDays > 0){
+			
+			if(diffDays !== 0){
 				localStorage.setItem("limit", 8);
 				localStorage.setItem("dataSalva", new Date());
 				return true;
@@ -716,8 +714,7 @@ var app = {
 		  // Discard the time and time-zone information.
 		  var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
 		  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-		  alert(utc1);
-		  alert(utc2);
+		  
 		  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 		}
 		
