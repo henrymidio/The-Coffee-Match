@@ -1207,6 +1207,11 @@ myApp.onPageInit('chat', function (page) {
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
+	
+	var myMessages = myApp.messages('.messages', {
+	  autoLayout:true
+	});
+	myMessages.scrollMessages();
 		
 	// Handle message
 $$('.messagebar .link').on('click', function () {
