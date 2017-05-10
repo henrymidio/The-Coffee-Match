@@ -1304,7 +1304,7 @@ $$('.messagebar .link').on('click', function () {
 									
 									}
 									myMessages.scrollMessages();
-									$('.messagebar').trigger('click');
+									$('.messagebar .link').trigger('click');
 									
 									updateStatusUser(1);	
 									
