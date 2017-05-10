@@ -1207,7 +1207,12 @@ myApp.onPageInit('chat', function (page) {
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
-		
+	
+	// Init Messages
+	var myMessages = myApp.messages('.messages', {
+	  autoLayout:true
+	});
+			
 	// Handle message
 $$('.messagebar .link').on('click', function () {
 	// Init Messages
@@ -1216,7 +1221,8 @@ $$('.messagebar .link').on('click', function () {
 	});
 	
 	// Init Messagebar
-	var myMessagebar = myApp.messagebar('.messagebar');
+	var myMessagebar = myApp.messagebar('.messagebar');	
+	
   // Message text
   var messageText = myMessagebar.value().trim();
   // Exit if empy message
@@ -1301,7 +1307,8 @@ $$('.messagebar .link').on('click', function () {
 										myApp.hideIndicator();
 									
 									}
-								
+				
+									myMessages.scrollMessages();
 									$('.messagebar').trigger('click');
 									
 									updateStatusUser(1);	

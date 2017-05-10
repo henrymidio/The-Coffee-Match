@@ -1212,13 +1212,17 @@ myApp.onPageInit('chat', function (page) {
 	var myMessages = myApp.messages('.messages', {
 	  autoLayout:true
 	});
-	
-		
+			
 	// Handle message
 $$('.messagebar .link').on('click', function () {
-		
+	// Init Messages
+	var myMessages = myApp.messages('.messages', {
+	  autoLayout:true
+	});
+	
 	// Init Messagebar
-	var myMessagebar = myApp.messagebar('.messagebar');
+	var myMessagebar = myApp.messagebar('.messagebar');	
+	
   // Message text
   var messageText = myMessagebar.value().trim();
   // Exit if empy message
@@ -1303,8 +1307,9 @@ $$('.messagebar .link').on('click', function () {
 										myApp.hideIndicator();
 									
 									}
+				
 									myMessages.scrollMessages();
-									$('.messagebar .link').trigger('click');
+									$('.messagebar').trigger('click');
 									
 									updateStatusUser(1);	
 									
