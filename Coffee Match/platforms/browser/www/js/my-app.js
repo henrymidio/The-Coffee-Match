@@ -189,7 +189,8 @@ myApp.onPageInit('passo2', function (page) {
 		$('#skills select option:selected').each(function(){
 				tags.push($(this).text());
 		});
-		tags = tags.join(); 
+		
+		var skills = tags.join(); 
 		
 		$('#looking-for select option:selected').each(function(){
 				looking.push($(this).text());
@@ -203,7 +204,7 @@ myApp.onPageInit('passo2', function (page) {
 		
 		//var user_id = localStorage.getItem("user_id");
 		
-		//Chamada ao servidor para cadastro/atualização de informações de perfil
+		//Chamada o servidor para cadastro/atualização de informações de perfil
 		var userObj = {
 			fbid: localStorage.getItem("fbid"),
 			notification_key: localStorage.getItem("notification_key"),
@@ -219,7 +220,7 @@ myApp.onPageInit('passo2', function (page) {
 			data: userObj, 
 			success: function(data) {
 				localStorage.setItem("user_id", data.user_id);
-				setProfile(descricao, profissao, nascimento, faculdade, tags, looking, data.user_id);
+				setProfile(descricao, profissao, nascimento, faculdade, skills, looking, data.user_id);
 				localStorage.setItem("logged", 1);
 				myApp.hideIndicator();
 				mainView.router.loadPage("index.html");
@@ -1207,7 +1208,12 @@ myApp.onPageInit('chat', function (page) {
 	
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
-		
+	
+	// Init Messages
+	var myMessages = myApp.messages('.messages', {
+	  autoLayout:true
+	});
+			
 	// Handle message
 $$('.messagebar .link').on('click', function () {
 	// Init Messages
@@ -1216,7 +1222,8 @@ $$('.messagebar .link').on('click', function () {
 	});
 	
 	// Init Messagebar
-	var myMessagebar = myApp.messagebar('.messagebar');
+	var myMessagebar = myApp.messagebar('.messagebar');	
+	
   // Message text
   var messageText = myMessagebar.value().trim();
   // Exit if empy message
@@ -1301,7 +1308,8 @@ $$('.messagebar .link').on('click', function () {
 										myApp.hideIndicator();
 									
 									}
-								
+				
+									myMessages.scrollMessages();
 									$('.messagebar').trigger('click');
 									
 									updateStatusUser(1);	

@@ -101,8 +101,8 @@ var app = {
 		logged = localStorage.getItem("logged");
 			
 		if(localStorage.getItem("lastLog") == null){
-				localStorage.setItem("lastLog", new Date());
-			}
+			localStorage.setItem("lastLog", new Date());
+		}
 		
 		//Verifica se usuário está logado
 		if(logged == null){
@@ -110,7 +110,13 @@ var app = {
 			myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
 			}).trigger();
-		} 
+		} else {
+			var user_id = localStorage.getItem("user_id");
+			//Atualiza última entrada no app
+			var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+			var lastEntry = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T', ' ');
+			$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
+		}		
 		
 		
 		myApp.onPageInit('index', function() {
@@ -167,7 +173,7 @@ var app = {
 					}
 				});
 			}, function(){
-				alert('Não foi possível encontrar a sua localização');
+				myApp.alert('It was not possible to find your location. Check it out on settings.');
 			});
 			
 		$$('.invite').on('click', function () {
@@ -244,9 +250,11 @@ var app = {
 												+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
 												+ "<div class='like'></div><div class='dislike'></div>"
 												+ "</div>"
-												+ "</a></li>";		
-									$("#user-list").append(line1);
+												+ "</a></li>";
+												$("#user-list").append(line1);
+												
 									}
+									
 									$$(".buttons-row").toggleClass("none visivel");
 									
 									/**

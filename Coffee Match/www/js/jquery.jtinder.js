@@ -192,7 +192,7 @@
 					//Evento de salvar perfil nos favoritos
 						 myApp.addNotification({
 							title: 'The Coffee Match',
-							subtitle: 'Added to favorites',
+							subtitle: 'Saved for later',
 							media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
 						});
 					
