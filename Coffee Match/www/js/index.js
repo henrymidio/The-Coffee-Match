@@ -187,13 +187,12 @@ var app = {
 		function getUserList() {
 			//Faz request das informações dos users compatíveis
 			var dados = {
-					user_id: localStorage.getItem('user_id'),
-					distance: localStorage.getItem('distance')
+					requester: localStorage.getItem('user_id')
 				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));
 			$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
-								type: 'post',
+								url: 'http://api.thecoffeematch.com/v1/users',
+								type: 'get',
 								dataType: 'json',
 								data: dados,
 								crossDomain: true,
@@ -234,7 +233,7 @@ var app = {
 																	
 								    //Monta o DOM
 									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
-												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; height: 45vh'>"
+												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; min-height: 45vh'>"
 												+ "<div class='row card-top'>"
 												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>"+data[i].distance+"</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
 												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
@@ -489,28 +488,27 @@ var app = {
 						  }
 						
 						  var person = {
-								novo: 1,
 								fbid: result.id
 							}
 						 								
 						  //Chamada ajax para registrar/autenticar usuário
 						  $.ajax({
-								url: 'http://thecoffeematch.com/webservice/register.php',
+								url: 'http://api.thecoffeematch.com/v1/users/authenticate',
 								type: 'post',
 								dataType: 'json',
 								data: person,
-								success: function (data) {
+								success: function (response) {
 									
 									//AUTENTICA USUÁRIO
-									if(data.code == 1){
+									if(response.status === 'success'){
 										
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("user_id", data.user_id);
-										localStorage.setItem("age", data.age);
-										localStorage.setItem("description", data.description);
-										localStorage.setItem("occupation", data.occupation);
-										localStorage.setItem("college", data.college);
+										localStorage.setItem("user_id", response.data.user.id);
+										localStorage.setItem("age", response.data.user.nascimento);
+										localStorage.setItem("description", response.data.user.description);
+										localStorage.setItem("occupation", response.data.user.occupation);
+										localStorage.setItem("college", response.data.user.college);
 										localStorage.setItem("metrica", "Mi");
 										localStorage.setItem("distance", 10);
 										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
@@ -524,8 +522,7 @@ var app = {
 										window.location = "index.html";
 									} 
 									
-									//CADASTRA USUÁRIO
-									if(data.code == 2){
+									else if(response.status === 'fail'){
 										localStorage.setItem("notification_key", notification_key);
 										localStorage.setItem("name", result.name);
 										localStorage.setItem("gender", result.gender);
@@ -537,6 +534,11 @@ var app = {
 										
 										myApp.hideIndicator()
 										mainView.router.loadPage("passo2.html");
+									}
+									
+									else {
+										myApp.hideIndicator();
+										myApp.alert(error, "The Coffee Match");
 									}
 									
 								

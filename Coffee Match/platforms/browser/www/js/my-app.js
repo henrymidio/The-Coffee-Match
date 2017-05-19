@@ -211,24 +211,33 @@ myApp.onPageInit('passo2', function (page) {
 			name: localStorage.getItem("name"),
 			gender: localStorage.getItem("gender"),
 			email: localStorage.getItem("email"),
-			picture: localStorage.getItem("picture")
+			picture: localStorage.getItem("picture"),
+			nascimento: nascimento,
+			description: descricao,
+			occupation: profissao,
+			college: faculdade,
+			skills: skills,
+			looking: looking
 		}
 		$.ajax({
-			url: 'http://thecoffeematch.com/webservice/register.php',
+			url: 'http://api.thecoffeematch.com/v1/users',
 			type: 'post',
 			dataType: 'json',
 			data: userObj, 
-			success: function(data) {
-				localStorage.setItem("user_id", data.user_id);
-				setProfile(descricao, profissao, nascimento, faculdade, skills, looking, data.user_id);
+			success: function(response) {
+				localStorage.setItem("user_id", response.data.id);
 				localStorage.setItem("logged", 1);
 				myApp.hideIndicator();
 				mainView.router.loadPage("index.html");
+			},
+			error: function (request, status, error) {
+				myApp.hideIndicator();
+				myApp.alert(request.responseText, "The Coffee Match");
 			}
 		});
 		
 		
-	})
+	});
 	
 	var today = new Date();
  
@@ -271,44 +280,42 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	var user_id  = localStorage.getItem("user_id");
 	var other_id = localStorage.getItem("idc");
 	
-	var dados = {
-		user_id: user_id,
-		shown_user_id: other_id,
-		liked: 1
+	var requester = {
+		requester: user_id
 	}
 		
 	//Ajax request to get user
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
-								type: 'post',
+								url: 'http://api.thecoffeematch.com/v1/users/' + other_id,
+								type: 'get',
 								dataType: 'json',
-								data: dados,
+								data: requester,
 								success: function (data) {
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
 									
-									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
-									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
-									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
+									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
+									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
 									
 									var message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
-									if(data[0].id == 193) {
+									if(data.id == 193) {
 										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
 									}
 									
-									$$("#name-confirm").html(data[0].name);
-									$$("#cc-distance").html(data[0].distance);
+									$$("#name-confirm").html(data.name);
+									$$("#cc-distance").html(data.distance);
 									$$("#cc-metrica").html(metrica);
-									$$("#invite-age").html(data[0].age);
-									$$("#invite-college").html(data[0].college);
-									$$("#description-confirm").html(data[0].description);
-									$$("#occupation-confirm").html(data[0].occupation);
-									$$("#pic-confirm").attr("src", data[0].picture);
+									$$("#invite-age").html(data.age);
+									$$("#invite-college").html(data.college);
+									$$("#description-confirm").html(data.description);
+									$$("#occupation-confirm").html(data.occupation);
+									$$("#pic-confirm").attr("src", data.picture);
 									$(".skills").append(skill1, skill2, skill3);
 									$$("#message").html(message);
-									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
-									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
-									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
+									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data.l1);
+									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data.l2);
+									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
 								}
 							});
 	
@@ -316,6 +323,12 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	$('#confirmar-cafe').on("click", function(){
 		myApp.showIndicator()
 		//Faz o PUT LIKE
+		
+		var dados = {
+			user_id: user_id,
+			shown_user_id: other_id,
+			liked: 1
+		}
 								
 				$.ajax({
 								url: 'http://thecoffeematch.com/webservice/put-like.php',
@@ -631,35 +644,28 @@ myApp.onPageInit('profile-preview', function (page) {
 	var metrica = localStorage.getItem("metrica");
 	$$("#preview-metrica").html(metrica);
 	
-	//Preview é o id do usuário que irá ser visualizado
-	var preview = localStorage.getItem("preview");
 	var user_id = localStorage.getItem("user_id");
-	var dado = {
-		user_id: user_id,
-		shown_user_id: preview
-	};
 	
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
-								type: 'post',
-								data: dado,
+								url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
+								type: 'get',
 								dataType: 'json',
 								success: function (data) {
 									
-									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
-									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
-									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
+									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
+									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
 									
-									$$("#preview-img").attr("src", data[0].picture);
-									$$("#preview-name").html(data[0].name);
-									$$("#preview-age").html(data[0].age);
-									$$("#preview-occupation").html(data[0].occupation);
+									$$("#preview-img").attr("src", data.picture);
+									$$("#preview-name").html(data.name);
+									$$("#preview-age").html(data.age);
+									$$("#preview-occupation").html(data.occupation);
 									$(".habilidades").append(skill1, skill2, skill3);
-									$$("#preview-college").html(data[0].college);
-									$$("#preview-description").html(data[0].description);
-									$$("#profile-l1").html('<span style="margin-right: 10px">●</span>' + data[0].l1);
-									$$("#profile-l2").html('<span style="margin-right: 10px">●</span>' + data[0].l2);
-									$$("#profile-l3").html('<span style="margin-right: 10px">●</span>' + data[0].l3);
+									$$("#preview-college").html(data.college);
+									$$("#preview-description").html(data.description);
+									$$("#profile-l1").html('<span style="margin-right: 10px">●</span>' + data.l1);
+									$$("#profile-l2").html('<span style="margin-right: 10px">●</span>' + data.l2);
+									$$("#profile-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
 									
 								}
 								
@@ -677,35 +683,29 @@ myApp.onPageInit('profile-view', function (page) {
 	
 	//Preview é o id do usuário que irá ser visualizado
 	var preview = localStorage.getItem("preview");
-	var user_id = localStorage.getItem("user_id");
-	var dado = {
-		user_id: user_id,
-		shown_user_id: preview
-	};
 	
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
-								type: 'post',
-								data: dado,
+								url: 'http://api.thecoffeematch.com/v1/users/' + preview,
+								type: 'get',
 								dataType: 'json',
 								success: function (data) {
 									
-									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
-									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
-									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
+									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
+									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
 									
-									var l1 = data[0].l1 ? '<span style="margin-right: 10px">●</span>' + data[0].l1 : "";
-									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
-									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
+									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
+									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
+									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
 									
-									$$("#view-distance").html(data[0].distance);
-									$$("#profile-view-img").attr("src", data[0].picture);
-									$$("#profile-view-name").html(data[0].name);
-									$$("#profile-view-age").html(data[0].age);
-									$$("#profile-view-occupation").html(data[0].occupation);
+									$$("#view-distance").html(data.distance);
+									$$("#profile-view-img").attr("src", data.picture);
+									$$("#profile-view-name").html(data.name);
+									$$("#profile-view-age").html(data.age);
+									$$("#profile-view-occupation").html(data.occupation);
 									$(".sks").append(skill1, skill2, skill3);
-									$$("#profile-view-college").html(data[0].college);
-									$$("#profile-view-description").html(data[0].description);
+									$$("#profile-view-college").html(data.college);
+									$$("#profile-view-description").html(data.description);
 									$$("#view-l1").html(l1);
 									$$("#view-l2").html(l2);
 									$$("#view-l3").html(l3);
@@ -945,38 +945,37 @@ myApp.onPageInit('user', function (page) {
 	var suid = localStorage.getItem("shown_user_id");
 	var user_id = localStorage.getItem("user_id");	
 	
-	var dado = {
-		user_id: user_id,
-		shown_user_id: suid
+	var requesterObj = {
+		requester: user_id
 	};
 	
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
-								type: 'post',
-								data: dado,
+								url: 'http://api.thecoffeematch.com/v1/users/' + suid,
+								type: 'get',
+								data: requesterObj,
 								dataType: 'json',
 								success: function (data) {
 									
-									var skill1 = data[0].skill1 ? "<span class='tag'>"+data[0].skill1+"</span>" : "";
-									var skill2 = data[0].skill2 ? "<span class='tag'>"+data[0].skill2+"</span>" : "";
-									var skill3 = data[0].skill3 ? "<span class='tag'>"+data[0].skill3+"</span>" : "";
+									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
+									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
+									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
 									
-									var l1 = data[0].l1 ? '<span style="margin-right: 10px">●</span>' + data[0].l1 : "";
-									var l2 = data[0].l2 ? '<span style="margin-right: 10px">●</span>' + data[0].l2 : "";
-									var l3 = data[0].l3 ? '<span style="margin-right: 10px">●</span>' + data[0].l3 : "";
+									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
+									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
+									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
 									
-									if(data[0].distance < 1) {
-											data[0].distance = 0.5;
+									if(data.distance < 1) {
+											data.distance = 0.5;
 									}
 									
-									$$("#user-distance").html(data[0].distance);
-									$$("#user-view-img").attr("src", data[0].picture);
-									$$("#user-view-name").html(data[0].name);
-									$$("#user-view-age").html(data[0].age);
-									$$("#user-view-occupation").html(data[0].occupation);
+									$$("#user-distance").html(data.distance);
+									$$("#user-view-img").attr("src", data.picture);
+									$$("#user-view-name").html(data.name);
+									$$("#user-view-age").html(data.age);
+									$$("#user-view-occupation").html(data.occupation);
 									$(".skss").append(skill1, skill2, skill3);
-									$$("#user-view-college").html(data[0].college);
-									$$("#user-view-description").html(data[0].description);
+									$$("#user-view-college").html(data.college);
+									$$("#user-view-description").html(data.description);
 									$$("#l1").html(l1);
 									$$("#l2").html(l2);
 									$$("#l3").html(l3);
@@ -1379,20 +1378,19 @@ myApp.onPageInit('match', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	var suid = localStorage.getItem("idc");
 	var d = {
-		user_id: user_id,
-		shown_user_id: suid
-		};
+		requester: user_id
+	};
 	
 	//Ajax request to get user info
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/get-user-list.php',
-								type: 'post',
+								url: 'http://api.thecoffeematch.com/v1/users/' + suid,
+								type: 'get',
 								dataType: 'json',
 								data: d,
 								success: function (data) {
 								
 									$$("#user-one-img").attr("src", localStorage.getItem("picture"));
-									$$("#user-two-img").attr("src", data[0].picture);						
+									$$("#user-two-img").attr("src", data.picture);						
 								}
 							});
 	$$("#select-starbucks").on("click", function(){
