@@ -232,7 +232,7 @@ myApp.onPageInit('passo2', function (page) {
 			},
 			error: function (request, status, error) {
 				myApp.hideIndicator();
-				myApp.alert(request.responseText, "The Coffee Match");
+				myApp.alert(error, "The Coffee Match");
 			}
 		});
 		
