@@ -500,7 +500,7 @@ var app = {
 								data: person,
 								success: function (response) {
 									
-									//AUTENTICA USUÁRIO
+									//AUTENTICAção USUÁRIO
 									if(response.status === 'success'){
 										
 										localStorage.setItem("name", result.name);
