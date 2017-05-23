@@ -125,8 +125,6 @@ var app = {
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-			
-			
 		
 			//Dispara invite e nope
 			$$('.nope').on('click', function () {
@@ -166,9 +164,11 @@ var app = {
 					type: 'post',
 					data: locs,
 					success: function (data) {
-						getUserList();
+						var requester = localStorage.getItem('user_id');
+						getUserList(requester);
 					},
 					error: function (request, status, error) {
+						requester: localStorage.getItem('user_id');
 						getUserList();
 					}
 				});
@@ -184,10 +184,11 @@ var app = {
 		
 		//Armazena as preferencias em variaveis
 		
-		function getUserList() {
+		function getUserList(requester) {
+			if(!requester){return false}
 			//Faz request das informações dos users compatíveis
 			var dados = {
-					requester: localStorage.getItem('user_id')
+					requester: requester
 				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));
 			$.ajax({
@@ -500,7 +501,7 @@ var app = {
 								data: person,
 								success: function (response) {
 									
-									//AUTENTICA USUÁRIO
+									//AUTENTICAção USUÁRIO
 									if(response.status === 'success'){
 										
 										localStorage.setItem("name", result.name);
