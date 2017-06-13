@@ -185,7 +185,7 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
-			facebookConnectPlugin.getLoginStatus(alert('sucesso'), alert('falha'));
+			
 			if(!requester){return false}
 			//Faz request das informações dos users compatíveis
 			var dados = {
@@ -267,6 +267,7 @@ var app = {
 									});
 									getPendingNotifications();
 									getLimitInvites();
+									facebookConnectPlugin.getLoginStatus(alert('sucesso'), alert('falha'));
 								},
 								error: function (request, status, error) {
 									//alert(request.responseText);
