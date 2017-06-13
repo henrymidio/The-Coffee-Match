@@ -267,7 +267,11 @@ var app = {
 									});
 									getPendingNotifications();
 									getLimitInvites();
-									facebookConnectPlugin.getLoginStatus(alert('sucesso'), alert('falha'));
+									facebookConnectPlugin.getLoginStatus(function(){
+										alert('success')
+									}, function(){
+										alert('falha')
+									});
 								},
 								error: function (request, status, error) {
 									//alert(request.responseText);
