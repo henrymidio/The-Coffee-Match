@@ -232,7 +232,8 @@ myApp.onPageInit('passo2', function (page) {
 			},
 			error: function (request, status, error) {
 				myApp.hideIndicator();
-				myApp.alert(error, "The Coffee Match");
+				mainView.router.loadPage("index.html");
+				//myApp.alert(error, "The Coffee Match");
 			}
 		});
 		
@@ -1520,26 +1521,25 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 }
 
 //Seta informações do perfil (somente descrição por enquanto)
-function setProfile(description, occupation, nascimento, college, tags, looking, user_id){
+function setProfile(description, occupation, nascimento, college, skills, looking, user_id){
 	
 	var info = {
 		description: description, 
 		occupation: occupation,
 		nascimento: nascimento,
 		college: college,
-		tags: tags,
-		looking: looking,
-		user_id: user_id
+		skills: skills,
+		looking: looking
 		}
 		
 	$.ajax({
-								url: 'http://thecoffeematch.com/webservice/set-profile-info.php',
-								type: 'post',
+								url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
+								type: 'put',
 								dataType: 'json',
 								data: info,
 								success: function (data) {
 									
-									if(data.code == 1){
+									if(data.status == 'success'){
 										
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("description", description);

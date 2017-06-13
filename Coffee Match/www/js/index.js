@@ -168,7 +168,7 @@ var app = {
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
-						requester: localStorage.getItem('user_id');
+						var requester: localStorage.getItem('user_id');
 						getUserList();
 					}
 				});
@@ -185,6 +185,7 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
+			facebookConnectPlugin.getLoginStatus(alert('sucesso'), alert('falha'));
 			if(!requester){return false}
 			//Faz request das informações dos users compatíveis
 			var dados = {

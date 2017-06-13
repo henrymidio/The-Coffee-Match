@@ -232,7 +232,8 @@ myApp.onPageInit('passo2', function (page) {
 			},
 			error: function (request, status, error) {
 				myApp.hideIndicator();
-				myApp.alert(error, "The Coffee Match");
+				mainView.router.loadPage("index.html");
+				//myApp.alert(error, "The Coffee Match");
 			}
 		});
 		
