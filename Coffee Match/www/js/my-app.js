@@ -973,8 +973,8 @@ myApp.onPageInit('user', function (page) {
 											$("#fc3 img").attr("src", friendsData.context.all_mutual_friends.data[2].picture.data.url)
 											$("#fc3 span").html(friendsData.context.all_mutual_friends.data[2].name)
 											
-											$("#fc3 img").attr("src", friendsData.context.all_mutual_friends.data[3].picture.data.url)
-											$("#fc3 span").html(friendsData.context.all_mutual_friends.data[3].name)
+											$("#fc4 img").attr("src", friendsData.context.all_mutual_friends.data[3].picture.data.url)
+											$("#fc4 span").html(friendsData.context.all_mutual_friends.data[3].name)
 										},error: function (request, status, error) {
 											alert(JSON.stringify(request));
 										}
