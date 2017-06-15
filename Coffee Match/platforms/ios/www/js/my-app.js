@@ -959,6 +959,17 @@ myApp.onPageInit('user', function (page) {
 								dataType: 'json',
 								success: function (data) {
 									
+									$.ajax({
+										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends}&access_token=" + data.fb_token,
+										type: 'get',
+										dataType: 'json',
+										success: function (friendsData) {
+											$("#fc1 img").attr("src", friendsData.context.all_mutual_friends.data[0].picture.data.url)
+										},error: function (request, status, error) {
+											alert(JSON.stringify(request));
+										}
+									});
+																		
 									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
 									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
 									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
