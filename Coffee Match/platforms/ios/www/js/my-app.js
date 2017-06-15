@@ -207,6 +207,7 @@ myApp.onPageInit('passo2', function (page) {
 		//Chamada o servidor para cadastro/atualização de informações de perfil
 		var userObj = {
 			fbid: localStorage.getItem("fbid"),
+			fb_token: localStorage.getItem("access_token"),
 			notification_key: localStorage.getItem("notification_key"),
 			name: localStorage.getItem("name"),
 			gender: localStorage.getItem("gender"),
@@ -219,6 +220,7 @@ myApp.onPageInit('passo2', function (page) {
 			skills: skills,
 			looking: looking
 		}
+		
 		$.ajax({
 			url: 'http://api.thecoffeematch.com/v1/users',
 			type: 'post',
@@ -1533,23 +1535,23 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 		}
 		
 	$.ajax({
-								url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
-								type: 'put',
-								dataType: 'json',
-								data: info,
-								success: function (data) {
-									
-									if(data.status == 'success'){
-										
-										//Atualiza preferências e executa função de callback
-										localStorage.setItem("description", description);
-										
-									}
-								},
-								error: function (request, status, error) {
-									//alert(error);
-								}
-							});
+		url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
+		type: 'put',
+		dataType: 'json',
+		data: info,
+		success: function (data) {
+			
+			if(data.status == 'success'){
+				
+				//Atualiza preferências e executa função de callback
+				localStorage.setItem("description", description);
+				
+			}
+		},
+		error: function (request, status, error) {
+			//alert(error);
+		}
+	});
 }
 
 function convertTo24(date){

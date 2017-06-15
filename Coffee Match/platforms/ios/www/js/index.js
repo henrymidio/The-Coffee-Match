@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		
+		/*
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -85,7 +85,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		
+		*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -120,7 +120,7 @@ var app = {
 		
 		
 		myApp.onPageInit('index', function() {
-			
+				
 			//Configura barra de navegação
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
@@ -168,7 +168,7 @@ var app = {
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
-						var requester: localStorage.getItem('user_id');
+						var requester = localStorage.getItem('user_id');
 						getUserList();
 					}
 				});
@@ -185,6 +185,7 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
+			
 			if(!requester){return false}
 			//Faz request das informações dos users compatíveis
 			var dados = {
@@ -266,10 +267,8 @@ var app = {
 									});
 									getPendingNotifications();
 									getLimitInvites();
-								},
-								error: function (request, status, error) {
-									//alert(request.responseText);
-								}								
+										
+								}									
 							});
 		}
 						
@@ -451,117 +450,136 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    //facebookConnectPlugin.browserInit("1647443792236383");
+			    facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				
+				/*
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				
+				*/
 				
 				var fbLoginSuccess = function (userData) {
+					
 				myApp.showIndicator()
-				 facebookConnectPlugin.api("/me?fields=id,name,gender,email,birthday,work,education", 
-				 ["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
-					  function onSuccess (result) {
-						  
-						  try {
-							var dd = new Date(result.birthday);
-							var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
-							localStorage.setItem("birthday", birthday);
-						  } catch(err) { 
-							localStorage.setItem("birthday", "");
-						  }
-						  
-						  try {
-							localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
-						  } catch(err) { 
-							localStorage.setItem("occupation", "");
-						  }
-						  
-						  try {
-							var lnt = result.education.length;
-							var college = result.education[lnt - 1].school.name;
-							localStorage.setItem("college", college);
-						  } catch(err) { 
-							localStorage.setItem("college", "");
-						  }
-						
-						  var person = {
-								fbid: result.id
-							}
-						 								
-						  //Chamada ajax para registrar/autenticar usuário
-						  $.ajax({
-								url: 'http://api.thecoffeematch.com/v1/users/authenticate',
-								type: 'post',
-								dataType: 'json',
-								data: person,
-								success: function (response) {
+					facebookConnectPlugin.api("/me?fields=id,name,gender,email,birthday,work,education", 
+					["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
+						function onSuccess (result) {
+							  
+							  try {
+								var dd = new Date(result.birthday);
+								var birthday = dd.getFullYear() + "-" + (dd.getMonth() + 1) + "-" + dd.getDate();
+								localStorage.setItem("birthday", birthday);
+							  } catch(err) { 
+								localStorage.setItem("birthday", "");
+							  }
+							  
+							  try {
+								localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
+							  } catch(err) { 
+								localStorage.setItem("occupation", "");
+							  }
+							  
+							  try {
+								var lnt = result.education.length;
+								var college = result.education[lnt - 1].school.name;
+								localStorage.setItem("college", college);
+							  } catch(err) { 
+								localStorage.setItem("college", "");
+							  }
+							
+							  var person = {
+									fbid: result.id
+								}
+															
+							  //Chamada ajax para registrar/autenticar usuário
+							  $.ajax({
+									url: 'http://api.thecoffeematch.com/v1/users/authenticate',
+									type: 'post',
+									dataType: 'json',
+									data: person,
+									success: function (response) {
+										
+										//AUTENTICAção USUÁRIO
+										if(response.status === 'success'){
+											
+											localStorage.setItem("name", result.name);
+											localStorage.setItem("fbid", result.id);
+											localStorage.setItem("access_token", userData.authResponse.accessToken);
+											localStorage.setItem("user_id", response.data.user.id);
+											localStorage.setItem("age", response.data.user.nascimento);
+											localStorage.setItem("description", response.data.user.description);
+											localStorage.setItem("occupation", response.data.user.occupation);
+											localStorage.setItem("college", response.data.user.college);
+											localStorage.setItem("metrica", "Mi");
+											localStorage.setItem("distance", 10);
+											localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
+											
+											fbtoken = {
+												fb_token: userData.authResponse.accessToken
+											}
+											
+											$.ajax({
+												url: 'http://api.thecoffeematch.com/v1/users/' + response.data.user.id,
+												type: 'put',
+												dataType: 'json',
+												data: fbtoken,
+												success: function (data) {
+												},
+												error: function (request, status, error) {
+													alert(JSON.stringify(request));
+												}
+											});
+											
+											myApp.onPageBack('user', function() {
+												StatusBar.overlaysWebView(false);				
+											});
+											
+											myApp.hideIndicator()
+											localStorage.setItem("logged", 1);
+											window.location = "index.html";
+										} 
+										
+										else if(response.status === 'fail'){
+											localStorage.setItem("notification_key", notification_key);
+											localStorage.setItem("name", result.name);
+											localStorage.setItem("gender", result.gender);
+											localStorage.setItem("email", result.email);
+											localStorage.setItem("fbid", result.id);
+											localStorage.setItem("access_token", userData.authResponse.accessToken);
+											localStorage.setItem("metrica", "Mi");
+											localStorage.setItem("distance", 10);
+											localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
+																						
+											myApp.hideIndicator()
+											mainView.router.loadPage("passo2.html");
+										}
+										
+										else {
+											myApp.hideIndicator();
+											myApp.alert(error, "The Coffee Match");
+										}
+										
 									
-									//AUTENTICAção USUÁRIO
-									if(response.status === 'success'){
 										
-										localStorage.setItem("name", result.name);
-										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("user_id", response.data.user.id);
-										localStorage.setItem("age", response.data.user.nascimento);
-										localStorage.setItem("description", response.data.user.description);
-										localStorage.setItem("occupation", response.data.user.occupation);
-										localStorage.setItem("college", response.data.user.college);
-										localStorage.setItem("metrica", "Mi");
-										localStorage.setItem("distance", 10);
-										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
 										
-										myApp.onPageBack('user', function() {
-											StatusBar.overlaysWebView(false);				
-										});
-										
-										myApp.hideIndicator()
-										localStorage.setItem("logged", 1);
-										window.location = "index.html";
-									} 
-									
-									else if(response.status === 'fail'){
-										localStorage.setItem("notification_key", notification_key);
-										localStorage.setItem("name", result.name);
-										localStorage.setItem("gender", result.gender);
-										localStorage.setItem("email", result.email);
-										localStorage.setItem("fbid", result.id);
-										localStorage.setItem("metrica", "Mi");
-										localStorage.setItem("distance", 10);
-										localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');
-										
-										myApp.hideIndicator()
-										mainView.router.loadPage("passo2.html");
-									}
-									
-									else {
+									},
+									error: function (request, status, error) {
 										myApp.hideIndicator();
 										myApp.alert(error, "The Coffee Match");
 									}
 									
-								
-									
-									
-								},
-								error: function (request, status, error) {
-									myApp.hideIndicator();
-									myApp.alert(error, "The Coffee Match");
-								}
-								
-							});
-						  
-					  }, function onError (error) {
-						//alert("first" + "-" + error);
-					  }
-					);
+								});
+							  
+						}, function onError (error) {
+							//alert("first" + "-" + error);
+						  }
+						);
 				};		
 				
 				$$('#loginFB').on('click', function(){		
-					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"], fbLoginSuccess,
+					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history", "user_friends"], fbLoginSuccess,
 					  function loginError (error) {
 						//myApp.alert("second" + "-" + error);
 					  }
