@@ -960,7 +960,7 @@ myApp.onPageInit('user', function (page) {
 								success: function (data) {
 									
 									$.ajax({
-										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.type(large), name).limit(5)}&access_token=" + data.fb_token,
+										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.type(large), name).limit(6)}&access_token=" + data.fb_token,
 										type: 'get',
 										dataType: 'json',
 										success: function (friendsData) {
