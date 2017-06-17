@@ -964,8 +964,9 @@ myApp.onPageInit('user', function (page) {
 										type: 'get',
 										dataType: 'json',
 										success: function (friendsData) {
-											
-											for(i = 0; i < friendsData.context.all_mutual_friends.data.length || i < 2; i++){
+											var loops = friendsData.context.all_mutual_friends.data.length;
+											if(loops > 2) {loops = 2}
+											for(i = 0; i < loops; i++){
 												var line = '<div class="col-25"><img class="img-circle" src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span style="color: 596872">'+friendsData.context.all_mutual_friends.data[i].name+'</span></div>';
 												$("#friends-list").append(line);
 											}
