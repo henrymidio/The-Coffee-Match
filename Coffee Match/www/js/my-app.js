@@ -965,23 +965,11 @@ myApp.onPageInit('user', function (page) {
 										dataType: 'json',
 										success: function (friendsData) {
 											
-											for(i = 0; i < friendsData.context.all_mutual_friends.data.length; i++){
-												var line = '<div class="col-25"><img class="img-circle" src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span style="color: 596872">'+friendsData.context.all_mutual_friends.data[0].name+'</span></div>';
+											for(i = 0; i < friendsData.context.all_mutual_friends.data.length || i < 2; i++){
+												var line = '<div class="col-25"><img class="img-circle" src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span style="color: 596872">'+friendsData.context.all_mutual_friends.data[i].name+'</span></div>';
 												$("#friends-list").append(line);
 											}
-											/*
-											$("#fc1 img").attr("src", friendsData.context.all_mutual_friends.data[0].picture.data.url)
-											$("#fc1 span").html(friendsData.context.all_mutual_friends.data[0].name)
 											
-											$("#fc2 img").attr("src", friendsData.context.all_mutual_friends.data[1].picture.data.url)
-											$("#fc2 span").html(friendsData.context.all_mutual_friends.data[1].name)
-											
-											$("#fc3 img").attr("src", friendsData.context.all_mutual_friends.data[2].picture.data.url)
-											$("#fc3 span").html(friendsData.context.all_mutual_friends.data[2].name)
-											
-											$("#fc4 img").attr("src", friendsData.context.all_mutual_friends.data[3].picture.data.url)
-											$("#fc4 span").html(friendsData.context.all_mutual_friends.data[3].name)
-											*/
 										},error: function (request, status, error) {
 											//alert(JSON.stringify(request));
 										}
