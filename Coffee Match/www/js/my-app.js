@@ -960,13 +960,13 @@ myApp.onPageInit('user', function (page) {
 								success: function (data) {
 									
 									$.ajax({
-										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90)).limit(5)}&access_token=" + data.fb_token,
+										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.type(large), name).limit(5)}&access_token=" + data.fb_token,
 										type: 'get',
 										dataType: 'json',
 										success: function (friendsData) {
 											var loops = friendsData.context.all_mutual_friends.data.length;
 											for(i = 0; i < loops; i++){
-												var line = '<div class="col-33"><img style="width: 80px; height: 80px; border-radius: 100%; margin-top: 5px" src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span style="color: 596872">'+friendsData.context.all_mutual_friends.data[i].name+'</span></div>';
+												var line = '<div class="col-33"><img style="width: 80px; height: 80px; border-radius: 100%; margin-top: 8px" src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span style="color: 596872">'+friendsData.context.all_mutual_friends.data[i].name+'</span></div>';
 												$("#friends-list").append(line);
 											}
 											if(loops == 5 || loops == 2) {
