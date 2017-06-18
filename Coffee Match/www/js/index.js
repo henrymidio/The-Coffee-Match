@@ -257,7 +257,7 @@ var app = {
 												+ "<p class='username'>"+data[i].name+"</p>"
 												+ "<p class='college'>"+data[i].college+"</p>"
 												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-												+ "<p class='college' style='margin-top: -12px; font-size: 15px; color: #00d173'><b>"+friends_number+" friends in common</b></p>"
+												+ "<p class='college' style='margin-top: -12px; font-size: 15px; color: #00d173'><b>"+friends_number+" mutual connections</b></p>"
 												+ "</div><br>"
 												+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
 												+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+"</div><br>"

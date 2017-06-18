@@ -465,6 +465,13 @@ input:focus {
 	display: inline-block;
 }
 
+#friends-list img {
+	width: 75px; 
+	height: 75px; 
+	border-radius: 100%; 
+	margin-top: 8px
+}
+
 .img-circle {
 	width: 50px;
 	height: 50px;
