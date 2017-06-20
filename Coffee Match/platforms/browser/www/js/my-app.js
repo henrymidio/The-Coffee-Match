@@ -960,26 +960,29 @@ myApp.onPageInit('user', function (page) {
 								success: function (data) {
 									
 									$.ajax({
-										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(6)}&access_token=" + data.fb_token,
+										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data.fb_token,
 										type: 'get',
 										dataType: 'json',
 										success: function (friendsData) {
 											var loops = friendsData.context.all_mutual_friends.data.length;
 											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
+											var friendName = friendsData.context.all_mutual_friends.data[i].name;
+											friendName = friendName.substring(0,12);
 											
 											for(i = 0; i < loops; i++){
-												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+friendsData.context.all_mutual_friends.data[i].name+'</span></div>';
+												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+friendName+'...</span></div>';
 												$("#friends-list").append(line);
 											}
 											
-											if(loops == 5 || loops == 2) {
+											if(loops == 2 || loops == 5) {
 												var line = '<div class="col-33"></div>';
 												$("#friends-list").append(line);
 											}
-											if(friends_number > 6){
-												var line = "<p style='color: #00d173'>" + (friends_number - 6) + " more...</p>";
-												$("#more").append(line);
+											if(friends_number > 5){
+												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
+												$("#friends-list").append(line);
 											}
+											
 											
 										},error: function (request, status, error) {
 											//alert(JSON.stringify(request));
