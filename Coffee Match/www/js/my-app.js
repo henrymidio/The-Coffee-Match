@@ -969,7 +969,7 @@ myApp.onPageInit('user', function (page) {
 											
 											
 											for(i = 0; i < loops; i++){
-												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'...</span></div>';
+												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
 												$("#friends-list").append(line);
 											}
 											
