@@ -466,8 +466,8 @@ input:focus {
 }
 
 #friends-list img {
-	width: 75px; 
-	height: 75px; 
+	width: 70px; 
+	height: 70px; 
 	border-radius: 100%; 
 	margin-top: 8px
 }
@@ -689,6 +689,25 @@ input:focus {
 .friends-list li {
 display: inline-block;
 
+}
+
+.user-label {
+	color: #2f3a41; 
+	padding-left: 30px
+}
+
+.user-label img {
+	vertical-align: middle; 
+	width: 22px; 
+	height: 22px;
+}
+
+.more {
+	 left: 0;
+    position:absolute;
+    text-align:center;
+    top: 30px;
+    width: 100%
 }
 
 .picker-calendar-day.picker-calendar-day-selected span {
