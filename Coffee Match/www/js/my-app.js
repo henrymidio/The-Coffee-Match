@@ -973,12 +973,11 @@ myApp.onPageInit('user', function (page) {
 												$("#friends-list").append(line);
 											}
 											
-											if(loops == 2 || loops == 5) {
-												var line = '<div class="col-33"></div>';
-												$("#friends-list").append(line);
-											}
 											if(friends_number > 5){
 												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
+												$("#friends-list").append(line);
+											} else {
+												var line = '<div class="col-33"></div>';
 												$("#friends-list").append(line);
 											}
 											
