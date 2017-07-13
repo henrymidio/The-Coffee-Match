@@ -234,7 +234,7 @@ myApp.onPageInit('passo2', function (page) {
 			},
 			error: function (request, status, error) {
 				myApp.hideIndicator();
-				myApp.alert(error, "The Coffee Match");
+				myApp.alert("There was an error processing your request, please try again.", "The Coffee Match");
 				mainView.router.loadPage("login.html");
 			}
 		});
