@@ -311,13 +311,12 @@ letter-spacing:0.09em;
 }
 
 .header-panel {
-	height: 33%;
+	//height: 33%;
 	background: #2f3a41;
 	text-align: center;
-	//color: #775952;
 	display: flex;
-  justify-content: center;
-  margin-bottom: 0px;
+	justify-content: center;
+	margin-bottom: 0px;
 }
 
 input:focus {
