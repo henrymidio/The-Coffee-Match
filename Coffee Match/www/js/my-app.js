@@ -948,7 +948,7 @@ myApp.onPageInit('profile', function (page) {
 		
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
-		editProfile(descricao, profissao, faculdade, tags, looking, user_id);
+		setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
 		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
@@ -1582,36 +1582,6 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 		description: description, 
 		occupation: occupation,
 		nascimento: nascimento,
-		college: college,
-		skills: skills,
-		looking: looking
-		}
-		
-	$.ajax({
-		url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
-		type: 'put',
-		dataType: 'json',
-		data: info,
-		success: function (data) {
-			
-			if(data.status == 'success'){
-				
-				//Atualiza preferências e executa função de callback
-				localStorage.setItem("description", description);
-				
-			}
-		},
-		error: function (request, status, error) {
-			//alert(error);
-		}
-	});
-}
-
-function editProfile(description, occupation, college, skills, looking, user_id){
-	
-	var info = {
-		description: description, 
-		occupation: occupation,
 		college: college,
 		skills: skills,
 		looking: looking
