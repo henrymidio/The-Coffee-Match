@@ -925,7 +925,6 @@ myApp.onPageInit('profile', function (page) {
 		var descricao = $$("#description").val();
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
-		var idade     = null;
 		
 		if (profissao.length == 0) {
 			document.getElementById("occupation").focus();
@@ -949,7 +948,7 @@ myApp.onPageInit('profile', function (page) {
 		
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, idade, faculdade, tags, looking, user_id);
+		setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
 		
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
