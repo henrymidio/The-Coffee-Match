@@ -544,7 +544,7 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-content swipeout'>"
-												+ "<div class='item-media profile swipeout' id="+data[i].preview_id+">"
+												+ "<div class='item-media swipeout' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner match' id="+data[i].id+">"
@@ -565,13 +565,13 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
 									});
-									
+									/*
 									$(".profile").on("click", function(){
 										var idp = $(this).attr("id");
 										localStorage.setItem("shown_user_id", idp);
 										mainView.router.loadPage("user.html");
 									});
-																		
+									*/									
 									$(".unmatch").on("click", function(){
 										var self   = $(this);
 										var idMatch = self.parent().siblings(".match").attr("id");
