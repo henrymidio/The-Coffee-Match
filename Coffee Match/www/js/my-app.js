@@ -184,6 +184,11 @@ myApp.onPageInit('passo2', function (page) {
 			return false;
 		}
 		
+		if (descricao.length == 0) {
+			document.getElementById("passo2-description").focus();
+			return false;
+		}
+		
 		myApp.showIndicator();
 		
 		$('#skills select option:selected').each(function(){
@@ -830,7 +835,7 @@ myApp.onPageInit('messages', function (page) {
 													
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
-												+ "<div class='item-media perfil' id="+data[i].suid+">"
+												+ "<div class='item-media' id="+data[i].suid+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -842,12 +847,13 @@ myApp.onPageInit('messages', function (page) {
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
 										});
-										
+										/*
 										$(".perfil").on("click", function(){
 											var idp = $(this).attr("id");
 											localStorage.setItem("shown_user_id", idp);
 											mainView.router.loadPage("user.html");
 										});
+										*/
 									}
 									
 								},
@@ -933,6 +939,11 @@ myApp.onPageInit('profile', function (page) {
 		
 		if (faculdade.length == 0) {
 			document.getElementById("graduation").focus();
+			return false;
+		}
+		
+		if (descricao.length == 0) {
+			document.getElementById("description").focus();
 			return false;
 		}
 		

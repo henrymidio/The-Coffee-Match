@@ -236,7 +236,7 @@ var app = {
 									var friends_number = 0;
 									
 									$.ajax({
-										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends}&access_token=" + data[i].fb_token,
+										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data.fb_token + "&appsecret_proof=" + data.appsecret,
 										type: 'get',
 										dataType: 'json',
 										success: function (friendsData) {
