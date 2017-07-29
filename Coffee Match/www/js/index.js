@@ -261,7 +261,7 @@ var app = {
 													+ "</a></li>";
 													$("#user-list").append(line1);
 											},error: function (request, status, error) {
-												//alert(JSON.stringify(request));
+												alert(JSON.stringify(request));
 											}
 										});
 																	
