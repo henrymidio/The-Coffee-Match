@@ -263,10 +263,10 @@ var app = {
 											dataType: 'json',
 											success: function (friendsData) {
 												var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-												alert(friends_number)
-												$(""+data[i].id+".f-number").html(friends_number);
+												//alert(friends_number)
+												$("#"+data[i].id+" .f-number").html(friends_number);
 											},error: function (request, status, error) {
-												alert(JSON.stringify(request));
+												//alert(JSON.stringify(request));
 											}
 										});
 												
