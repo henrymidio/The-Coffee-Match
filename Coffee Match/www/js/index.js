@@ -266,7 +266,7 @@ var app = {
 												alert(friends_number)
 												$(""+data[i].id+".f-number").html(friends_number);
 											},error: function (request, status, error) {
-												//alert(JSON.stringify(request));
+												alert(JSON.stringify(request));
 											}
 										});
 												
