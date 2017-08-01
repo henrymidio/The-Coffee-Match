@@ -2,7 +2,7 @@
 var myApp = new Framework7({
     statusbarOverlay:false 
 });
- 
+
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
  
@@ -1215,6 +1215,7 @@ myApp.onPageInit('chat', function (page) {
 				var buttons1 = [
 					{
 						text: 'Report',
+						color: 'red',
 						onClick: function () {
 							myApp.prompt("For what reason?", "The Coffee Match", function(value){
 								var dataReport = {
@@ -1238,6 +1239,7 @@ myApp.onPageInit('chat', function (page) {
 					},
 					{
 						text: 'Unmatch',
+						color: 'red',
 						onClick: function () {
 							
 										var abc = {
@@ -1259,12 +1261,25 @@ myApp.onPageInit('chat', function (page) {
 							
 									
 						}
+					},
+					{
+						text: 'View Profile',
+						onClick: function () {
+							$$("#toolbar").toggleClass("visivel none");
+							var call = myApp.onPageBack('user', function (page) {
+								$$("#toolbar").toggleClass("visivel none");
+							});
+							myApp.onPageAfterBack('user', function (page) {
+								call.remove();
+							});
+							mainView.router.loadPage('user.html');
+						}
 					}
 				];
 				var buttons2 = [
 					{
 						text: 'Cancel',
-						color: 'red'
+						bold: true
 					}
 				];
 				var groups = [buttons1, buttons2];
@@ -1354,6 +1369,7 @@ $$('.messagebar .link').on('click', function () {
 											$(".messages").append(line0);
 										} else {
 											if(data[i].id){
+												localStorage.setItem("shown_user_id", data[i].id);
 											user = data[i].id;
 											
 											//Monta o DOM

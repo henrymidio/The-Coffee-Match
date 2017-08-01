@@ -229,44 +229,45 @@ var app = {
 										//Grava a distancia do usuário para exibir no perfil expandido
 										localStorage.setItem("shown_user_id_distance", data[i].distance);
 									    
-									var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
-									var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
-									var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
-									
-									var friends_number = 0;
-									
-									$.ajax({
-										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends}&access_token=" + data[i].fb_token,
-										type: 'get',
-										dataType: 'json',
-										success: function (friendsData) {
-											friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-										},error: function (request, status, error) {
-											//alert(JSON.stringify(request));
-										}
-									});
-																	
-								    //Monta o DOM
-									var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
-												+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; min-height: 45vh'>"
-												+ "<div class='row card-top'>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>"+data[i].distance+"</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
-												+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
-												+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
-												+ "</div>"
-												+ "<p class='username'>"+data[i].name+"</p>"
-												+ "<p class='college'>"+data[i].college+"</p>"
-												+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-												+ "<p class='college' style='margin-top: -12px; font-size: 15px; color: #00d173'><b>"+friends_number+" mutual connections</b></p>"
-												+ "</div><br>"
-												+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
-												+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+"</div><br>"
-												+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About Me</b></span></p>"
-												+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
-												+ "<div class='like'></div><div class='dislike'></div>"
-												+ "</div>"
-												+ "</a></li>";
-												$("#user-list").append(line1);
+										var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
+										var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
+										var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
+										
+																											
+										//Monta o DOM
+										var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
+													+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; min-height: 45vh'>"
+													+ "<div class='row card-top'>"
+													+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>"+data[i].distance+"</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
+													+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
+													+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
+													+ "</div>"
+													+ "<p class='username'>"+data[i].name+"</p>"
+													+ "<p class='college'>"+data[i].college+"</p>"
+													+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
+													+ "<p class='college' style='margin-top: -12px; font-size: 15px; color: #00d173'><b><span class='f-number'>0</span> mutual connections</b></p>"
+													+ "</div><br>"
+													+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
+													+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+"</div><br>"
+													+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About Me</b></span></p>"
+													+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
+													+ "<div class='like'></div><div class='dislike'></div>"
+													+ "</div>"
+													+ "</a></li>";
+													$("#user-list").append(line1);
+													
+										$.ajax({
+											url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data[i].fb_token + "&appsecret_proof=" + data[i].appsecret,
+											type: 'get',
+											async: false,
+											dataType: 'json',
+											success: function (friendsData) {
+												var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
+												$("#"+data[i].id+" .f-number").html(friends_number);
+											},error: function (request, status, error) {
+												//alert(JSON.stringify(request));
+											}
+										});
 												
 									}
 									
@@ -283,6 +284,7 @@ var app = {
 										
 								}									
 							});
+							
 		}
 						
 		if(localStorage.getItem("starCount") <= 0){

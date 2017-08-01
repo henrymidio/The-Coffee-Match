@@ -2,7 +2,7 @@
 var myApp = new Framework7({
     statusbarOverlay:false 
 });
- 
+
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
  
@@ -181,6 +181,11 @@ myApp.onPageInit('passo2', function (page) {
 		
 		if (nascimento.length == 0) {
 			document.getElementById("passo2-nascimento").focus();
+			return false;
+		}
+		
+		if (descricao.length == 0) {
+			document.getElementById("passo2-description").focus();
 			return false;
 		}
 		
@@ -544,7 +549,7 @@ myApp.onPageInit('combinacoes', function (page) {
 			
 										//Monta o DOM
 									    var line1 = "<li class='item-content swipeout'>"
-												+ "<div class='item-media profile swipeout' id="+data[i].preview_id+">"
+												+ "<div class='item-media swipeout' id="+data[i].preview_id+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner match' id="+data[i].id+">"
@@ -565,13 +570,13 @@ myApp.onPageInit('combinacoes', function (page) {
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
 									});
-									
+									/*
 									$(".profile").on("click", function(){
 										var idp = $(this).attr("id");
 										localStorage.setItem("shown_user_id", idp);
 										mainView.router.loadPage("user.html");
 									});
-																		
+									*/									
 									$(".unmatch").on("click", function(){
 										var self   = $(this);
 										var idMatch = self.parent().siblings(".match").attr("id");
@@ -830,7 +835,7 @@ myApp.onPageInit('messages', function (page) {
 													
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
-												+ "<div class='item-media perfil' id="+data[i].suid+">"
+												+ "<div class='item-media' id="+data[i].suid+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -842,12 +847,13 @@ myApp.onPageInit('messages', function (page) {
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
 										});
-										
+										/*
 										$(".perfil").on("click", function(){
 											var idp = $(this).attr("id");
 											localStorage.setItem("shown_user_id", idp);
 											mainView.router.loadPage("user.html");
 										});
+										*/
 									}
 									
 								},
@@ -933,6 +939,11 @@ myApp.onPageInit('profile', function (page) {
 		
 		if (faculdade.length == 0) {
 			document.getElementById("graduation").focus();
+			return false;
+		}
+		
+		if (descricao.length == 0) {
+			document.getElementById("description").focus();
 			return false;
 		}
 		
@@ -1204,6 +1215,7 @@ myApp.onPageInit('chat', function (page) {
 				var buttons1 = [
 					{
 						text: 'Report',
+						color: 'red',
 						onClick: function () {
 							myApp.prompt("For what reason?", "The Coffee Match", function(value){
 								var dataReport = {
@@ -1227,6 +1239,7 @@ myApp.onPageInit('chat', function (page) {
 					},
 					{
 						text: 'Unmatch',
+						color: 'red',
 						onClick: function () {
 							
 										var abc = {
@@ -1248,12 +1261,25 @@ myApp.onPageInit('chat', function (page) {
 							
 									
 						}
+					},
+					{
+						text: 'View Profile',
+						onClick: function () {
+							$$("#toolbar").toggleClass("visivel none");
+							var call = myApp.onPageBack('user', function (page) {
+								$$("#toolbar").toggleClass("visivel none");
+							});
+							myApp.onPageAfterBack('user', function (page) {
+								call.remove();
+							});
+							mainView.router.loadPage('user.html');
+						}
 					}
 				];
 				var buttons2 = [
 					{
 						text: 'Cancel',
-						color: 'red'
+						bold: true
 					}
 				];
 				var groups = [buttons1, buttons2];
@@ -1343,6 +1369,7 @@ $$('.messagebar .link').on('click', function () {
 											$(".messages").append(line0);
 										} else {
 											if(data[i].id){
+												localStorage.setItem("shown_user_id", data[i].id);
 											user = data[i].id;
 											
 											//Monta o DOM
