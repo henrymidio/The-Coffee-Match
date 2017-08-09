@@ -1362,6 +1362,7 @@ $$('.messagebar .link').on('click', function () {
 										
 										if(data[i].id === user_id){
 											var line0 = "<div class='message message-with-avatar message-sent'>"
+														+ "<div class='message-name'>"+data[i].name+"</div>"
 														+ "<div class='message-text'>"+data[i].message+"</div>"
 														+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
 														//+ "<div class='message-label'>"+data[i].data+"</div>"
