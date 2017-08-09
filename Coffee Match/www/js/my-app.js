@@ -1361,8 +1361,7 @@ $$('.messagebar .link').on('click', function () {
 									for(i = 0; i < data.length; i++){
 										
 										if(data[i].id === user_id){
-											var line0 = "<div class='message message-with-avatar message-sent'>"
-														+ "<div class='message-name'>"+data[i].name+"</div>"
+											var line0 = "<div class='message message-with-avatar message-sent message-last message-with-tail message-first'>"
 														+ "<div class='message-text'>"+data[i].message+"</div>"
 														+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
 														//+ "<div class='message-label'>"+data[i].data+"</div>"
@@ -1374,7 +1373,7 @@ $$('.messagebar .link').on('click', function () {
 												user = data[i].id;
 												
 												//Monta o DOM
-												var line1 = "<div class='message message-with-avatar message-received' id="+data[i].message_id+">"
+												var line1 = "<div class='message message-with-avatar message-received message-last message-with-tail message-first' id="+data[i].message_id+">"
 																+ "<div class='message-name'>"+data[i].name+"</div>"
 																+ "<div class='message-text'>"+data[i].message+"</div>"
 																+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
