@@ -1370,21 +1370,22 @@ $$('.messagebar .link').on('click', function () {
 										} else {
 											if(data[i].id){
 												localStorage.setItem("shown_user_id", data[i].id);
-											user = data[i].id;
-											
-											//Monta o DOM
-											var line1 = "<div class='message message-with-avatar message-received' id="+data[i].message_id+">"
-															+ "<div class='message-name'>"+data[i].name+"</div>"
-															+ "<div class='message-text'>"+data[i].message+"</div>"
-															+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
-															//+ "<div class='message-label'>"+data[i].data+"</div>"
-															+ "</div>";
-											$(".messages").append(line1);
-											} else {
-												if(data[0].first_user === user_id){
-													user = data[0].sec_user;
+												user = data[i].id;
+												
+												//Monta o DOM
+												var line1 = "<div class='message message-with-avatar message-received' id="+data[i].message_id+">"
+																+ "<div class='message-name'>"+data[i].name+"</div>"
+																+ "<div class='message-text'>"+data[i].message+"</div>"
+																+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
+																//+ "<div class='message-label'>"+data[i].data+"</div>"
+																+ "</div>";
+												$(".messages").append(line1);
+												} else {
+													if(data[0].first_user === user_id){
+														user = data[0].sec_user;
+														localStorage.setItem("shown_user_id", user);
+													}
 												}
-											}
 										}
 										
 										myApp.hideIndicator();
