@@ -835,17 +835,20 @@ myApp.onPageInit('messages', function (page) {
 													
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
-												+ "<div class='item-media' id="+data[i].suid+">"
+												+ "<div class='item-media perfil' id="+data[i].suid+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='chat.html' class='item-link chat' id="+data[i].id+">"
+												+ "<a href='#' class='item-link chat' id="+data[i].id+">"
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
 																		
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
+											var idp = $('.perfil').attr("id");
+											localStorage.setItem("shown_user_id", idp);
+											mainView.router.loadPage("chat.html");
 										});
 										/*
 										$(".perfil").on("click", function(){
