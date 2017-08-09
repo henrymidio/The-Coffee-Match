@@ -1445,7 +1445,7 @@ $$('.messagebar .link').on('click', function () {
 
 
 
-myApp.onPageBeforeRemove('chat', function (page) {
+myApp.onPageBeforeReinit('messages', function (page) {
 	
 	$$("#toolbar").toggleClass("visivel none");
 	updateStatusUser(0)
