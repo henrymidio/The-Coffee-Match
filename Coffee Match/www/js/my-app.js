@@ -1445,17 +1445,18 @@ $$('.messagebar .link').on('click', function () {
 
 
 
-myApp.onPageBeforeReinit('messages', function (page) {
-	
-	$$("#toolbar").toggleClass("visivel none");
-	updateStatusUser(0)
-	try {
-		clearInterval(myInterval);
-	}
-	catch(err) {
-		alert('chat onBack error')
-	}
-	
+myApp.onPageInit('chat', function (page) {
+	$$(".to-messages").on("click", function(){
+		$$("#toolbar").toggleClass("visivel none");
+		updateStatusUser(0)
+		try {
+			clearInterval(myInterval);
+		}
+		catch(err) {
+			alert('chat onBack error')
+		}
+		mainView.router.loadPage('messages.html');
+	})	
 });
 
 
