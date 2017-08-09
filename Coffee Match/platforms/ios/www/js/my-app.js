@@ -1458,6 +1458,7 @@ myApp.onPageBack('chat', function (page) {
 	
 });
 
+
 myApp.onPageInit('match', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	var suid = localStorage.getItem("idc");
