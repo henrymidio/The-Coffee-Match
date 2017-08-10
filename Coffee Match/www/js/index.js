@@ -400,7 +400,7 @@ var app = {
 			var match       = localStorage.getItem("match");
 			
 			//Renderiza o mapa
-			var latLng      = new google.maps.LatLng(latitude, longitude);	
+			var latLng = new google.maps.LatLng(latitude, longitude);	
 			
 			var mapOptions = {
 				center: latLng,
@@ -455,8 +455,9 @@ var app = {
 									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
+									myApp.alert("There was an error processing your request, please try again.", "The Coffee Match");
 									//myApp.hidePreloader();
-									mainView.router.loadPage("starbucks-proximas.html");
+									//mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});	
 			
