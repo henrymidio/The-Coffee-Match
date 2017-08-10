@@ -569,14 +569,10 @@ myApp.onPageInit('combinacoes', function (page) {
 									$(".match").on("click", function(){
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
+										var suid = $(this).siblings("div.swipeout").attr("id");
+										localStorage.setItem("shown_user_id", this.id);
 									});
-									/*
-									$(".profile").on("click", function(){
-										var idp = $(this).attr("id");
-										localStorage.setItem("shown_user_id", idp);
-										mainView.router.loadPage("user.html");
-									});
-									*/									
+																	
 									$(".unmatch").on("click", function(){
 										var self   = $(this);
 										var idMatch = self.parent().siblings(".match").attr("id");
@@ -597,38 +593,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										});
 										
 									});
-									/*
-									$$('.swipeout').on('swipeout:delete', function () {
-										myApp.alert("Are you sure?", "The Coffee Match", function(){
-											var idp = $(".match").attr("id");
-											var abc = {
-												match: idp
-											};
-											$.ajax({
-												url: 'http://thecoffeematch.com/webservice/unmatch.php',
-												type: 'post',
-												data: abc
-											});
-										});
-									});
-									
-									$(".unmatch").on("click", function(event){
-										myApp.alert("Are you sure?", "The Coffee Match", function(){
-											var idp = $(".match").attr("id");
-											var abc = {
-												match: idp
-											};
-											$.ajax({
-												url: 'http://thecoffeematch.com/webservice/unmatch.php',
-												type: 'post',
-												data: abc
-											});
-										});
-										
-									});
-									*/
-									
-									
+																	
 									
 								}
 															
@@ -1458,7 +1423,10 @@ myApp.onPageInit('chat', function (page) {
 		catch(err) {
 			alert('chat onBack error')
 		}
-		mainView.router.loadPage('messages.html');
+		
+		//Cancela o carregamento da lista de usuários no index (bug)
+		localStorage.setItem("cancelList", "t");
+		mainView.router.back();
 	})	
 });
 

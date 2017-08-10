@@ -186,7 +186,13 @@ var app = {
 		
 		function getUserList(requester) {
 			
+			if(localStorage.getItem("cancelList") == "t") {
+				localStorage.setItem("cancelList", "f");
+				return false;
+			}
+			
 			if(!requester){return false}
+			
 			//Faz request das informações dos users compatíveis
 			var dados = {
 					requester: requester

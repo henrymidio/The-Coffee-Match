@@ -185,8 +185,14 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
-			alert('disparado')
+			
+			if(localStorage.getItem("cancelList") == "t") {
+				localStorage.setItem("cancelList", "f");
+				return false;
+			}
+			
 			if(!requester){return false}
+			alert("fire")
 			//Faz request das informações dos users compatíveis
 			var dados = {
 					requester: requester

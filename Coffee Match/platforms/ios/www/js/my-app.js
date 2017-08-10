@@ -569,14 +569,10 @@ myApp.onPageInit('combinacoes', function (page) {
 									$(".match").on("click", function(){
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
+										var suid = $(this).siblings("div.swipeout").attr("id");
+										localStorage.setItem("shown_user_id", this.id);
 									});
-									/*
-									$(".profile").on("click", function(){
-										var idp = $(this).attr("id");
-										localStorage.setItem("shown_user_id", idp);
-										mainView.router.loadPage("user.html");
-									});
-									*/									
+																	
 									$(".unmatch").on("click", function(){
 										var self   = $(this);
 										var idMatch = self.parent().siblings(".match").attr("id");
@@ -597,38 +593,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										});
 										
 									});
-									/*
-									$$('.swipeout').on('swipeout:delete', function () {
-										myApp.alert("Are you sure?", "The Coffee Match", function(){
-											var idp = $(".match").attr("id");
-											var abc = {
-												match: idp
-											};
-											$.ajax({
-												url: 'http://thecoffeematch.com/webservice/unmatch.php',
-												type: 'post',
-												data: abc
-											});
-										});
-									});
-									
-									$(".unmatch").on("click", function(event){
-										myApp.alert("Are you sure?", "The Coffee Match", function(){
-											var idp = $(".match").attr("id");
-											var abc = {
-												match: idp
-											};
-											$.ajax({
-												url: 'http://thecoffeematch.com/webservice/unmatch.php',
-												type: 'post',
-												data: abc
-											});
-										});
-										
-									});
-									*/
-									
-									
+																	
 									
 								}
 															
@@ -835,17 +800,20 @@ myApp.onPageInit('messages', function (page) {
 													
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
-												+ "<div class='item-media' id="+data[i].suid+">"
+												+ "<div class='item-media perfil' id="+data[i].suid+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='chat.html' class='item-link chat' id="+data[i].id+">"
+												+ "<a href='#' class='item-link chat' id="+data[i].id+">"
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";		
 									    $("#messages-li").append(line1);
 																		
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
+											var idp = $('.perfil').attr("id");
+											localStorage.setItem("shown_user_id", idp);
+											mainView.router.loadPage("chat.html");
 										});
 										/*
 										$(".perfil").on("click", function(){
@@ -1445,17 +1413,21 @@ $$('.messagebar .link').on('click', function () {
 
 
 
-myApp.onPageBack('chat', function (page) {
-	
-	$$("#toolbar").toggleClass("visivel none");
-	updateStatusUser(0)
-	try {
-		clearInterval(myInterval);
-	}
-	catch(err) {
-		alert('chat onBack error')
-	}
-	
+myApp.onPageInit('chat', function (page) {
+	$$(".to-messages").on("click", function(){
+		$$("#toolbar").toggleClass("visivel none");
+		updateStatusUser(0)
+		try {
+			clearInterval(myInterval);
+		}
+		catch(err) {
+			alert('chat onBack error')
+		}
+		
+		//Cancela o carregamento da lista de usuários no index (bug)
+		localStorage.setItem("cancelList", "t");
+		mainView.router.back();
+	})	
 });
 
 
