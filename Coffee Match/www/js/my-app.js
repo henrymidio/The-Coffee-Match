@@ -517,6 +517,8 @@ myApp.onPageInit('favorites', function (page) {
 });
 
 myApp.onPageInit('combinacoes', function (page) {
+	//gambs
+	localStorage.setItem("cancel", "f");
 	
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}

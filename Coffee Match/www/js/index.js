@@ -189,15 +189,11 @@ var app = {
 			var cl = localStorage.getItem("cancel");
 			if(cl == "t") {
 				localStorage.setItem("cancel", "f");
-				$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-				$$(".search-img").removeClass("search-effect");
 				return false;
 			}
 			if(!requester){
-				$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-				$$(".search-img").removeClass("search-effect");
 				return false;
-				}
+			}
 			
 			//Faz request das informações dos users compatíveis
 			var dados = {
