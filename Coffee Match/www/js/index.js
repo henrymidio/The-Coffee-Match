@@ -185,13 +185,7 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
-			//gambiarra para evitar o bug quando se chama pageBack do chat 
-			var cl = localStorage.getItem("cancelList");
-			if(cl == "t") {
-				localStorage.setItem("cancelList", "f");
-				return false;
-			}
-			
+						
 			if(!requester){return false}
 			
 			//Faz request das informações dos users compatíveis
@@ -456,9 +450,8 @@ var app = {
 									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
-									myApp.alert("There was an error processing your request, please try again.", "The Coffee Match");
 									//myApp.hidePreloader();
-									//mainView.router.loadPage("starbucks-proximas.html");
+									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});	
 			
