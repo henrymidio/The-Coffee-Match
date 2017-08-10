@@ -185,10 +185,9 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
+			//gambiarra para evitar o bug quando se chama pageBack do chat 
 			var cl = localStorage.getItem("cancelList");
-			alert(cl)
 			if(cl == "t") {
-				alert("travou")
 				localStorage.setItem("cancelList", "f");
 				return false;
 			}
