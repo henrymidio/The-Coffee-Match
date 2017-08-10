@@ -530,7 +530,7 @@ myApp.onPageInit('combinacoes', function (page) {
 								dataType: 'json',
 								data: x,
 								success: function (data) {
-									
+									$("#match-li").empty();
 									for(i = 0; i < data.length; i++){
 										
 										var agendamento = data[i].date;

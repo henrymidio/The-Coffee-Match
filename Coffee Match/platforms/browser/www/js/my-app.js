@@ -517,6 +517,8 @@ myApp.onPageInit('favorites', function (page) {
 });
 
 myApp.onPageInit('combinacoes', function (page) {
+	//gambs
+	localStorage.setItem("cancel", "f");
 	
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}
@@ -1229,19 +1231,6 @@ myApp.onPageInit('chat', function (page) {
 							
 									
 						}
-					},
-					{
-						text: 'View Profile',
-						onClick: function () {
-							$$("#toolbar").toggleClass("visivel none");
-							var call = myApp.onPageBack('user', function (page) {
-								$$("#toolbar").toggleClass("visivel none");
-							});
-							myApp.onPageAfterBack('user', function (page) {
-								call.remove();
-							});
-							mainView.router.loadPage('user.html');
-						}
 					}
 				];
 				var buttons2 = [
@@ -1337,7 +1326,6 @@ $$('.messagebar .link').on('click', function () {
 											$(".messages").append(line0);
 										} else {
 											if(data[i].id){
-												localStorage.setItem("shown_user_id", data[i].id);
 												user = data[i].id;
 												
 												//Monta o DOM
@@ -1351,7 +1339,6 @@ $$('.messagebar .link').on('click', function () {
 												} else {
 													if(data[0].first_user === user_id){
 														user = data[0].sec_user;
-														localStorage.setItem("shown_user_id", user);
 													}
 												}
 										}
@@ -1413,8 +1400,8 @@ $$('.messagebar .link').on('click', function () {
 
 
 
-myApp.onPageInit('chat', function (page) {
-	$$(".to-messages").on("click", function(){
+myApp.onPageBack('chat', function (page) {
+		localStorage.setItem("cancel", "t");
 		$$("#toolbar").toggleClass("visivel none");
 		updateStatusUser(0)
 		try {
@@ -1423,11 +1410,6 @@ myApp.onPageInit('chat', function (page) {
 		catch(err) {
 			alert('chat onBack error')
 		}
-		
-		//Cancela o carregamento da lista de usuários no index (bug)
-		localStorage.setItem("cancelList", "t");
-		mainView.router.back();
-	})	
 });
 
 

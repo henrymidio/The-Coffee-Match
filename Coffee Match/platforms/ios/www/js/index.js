@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 					
-		/*
+		
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -85,7 +85,7 @@ var app = {
  			.handleNotificationOpened(notificationOpenedCallback)
 			.inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
  			.endInit();
-		*/
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -185,14 +185,16 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
-			
-			if(localStorage.getItem("cancelList") == "t") {
-				localStorage.setItem("cancelList", "f");
+			//Gambiarra pra não bugar no page back do chat
+			var cl = localStorage.getItem("cancel");
+			if(cl == "t") {
+				localStorage.setItem("cancel", "f");
+				return false;
+			}
+			if(!requester){
 				return false;
 			}
 			
-			if(!requester){return false}
-			alert("fire")
 			//Faz request das informações dos users compatíveis
 			var dados = {
 					requester: requester
@@ -400,7 +402,7 @@ var app = {
 			var match       = localStorage.getItem("match");
 			
 			//Renderiza o mapa
-			var latLng      = new google.maps.LatLng(latitude, longitude);	
+			var latLng = new google.maps.LatLng(latitude, longitude);	
 			
 			var mapOptions = {
 				center: latLng,
@@ -471,15 +473,15 @@ var app = {
 		
 		myApp.onPageInit('login2', function() {
 			 
-			    facebookConnectPlugin.browserInit("1647443792236383");
+			    //facebookConnectPlugin.browserInit("1647443792236383");
 				
 				notification_key = null;
-				/*
+				
 				//Push Notifications
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-				*/
+				
 				
 				var fbLoginSuccess = function (userData) {
 					
