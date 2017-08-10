@@ -185,9 +185,11 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
+			alert("fire")
 			//Gambiarra pra não bugar no page back do chat
 			var cl = localStorage.getItem("cancel");
 			if(cl == "t") {
+				alert("travou")
 				localStorage.setItem("cancel", "f");
 				return false;
 			}
