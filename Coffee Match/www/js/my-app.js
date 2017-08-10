@@ -1399,6 +1399,7 @@ $$('.messagebar .link').on('click', function () {
 
 
 myApp.onPageBack('chat', function (page) {
+		localStorage.setItem("cancel", "t");
 		$$("#toolbar").toggleClass("visivel none");
 		updateStatusUser(0)
 		try {

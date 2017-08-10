@@ -185,7 +185,12 @@ var app = {
 		//Armazena as preferencias em variaveis
 		
 		function getUserList(requester) {
-						
+			//Gambiarra pra não bugar no page back do chat
+			var cl = localStorage.getItem("cancel");
+			if(cl == "t") {
+				localStorage.setItem("cancel", "f");
+				return false;
+			}
 			if(!requester){return false}
 			
 			//Faz request das informações dos users compatíveis
