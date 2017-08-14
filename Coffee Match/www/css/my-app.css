@@ -812,7 +812,7 @@ div#columns figure {
     height: 35px;
     border-radius: 100%;
     border: 2px solid white;
-    vertical-align: middle
+    vertical-align: middle;
   }
 
 .presentation {
