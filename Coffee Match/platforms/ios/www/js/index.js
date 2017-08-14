@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-		
+
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -120,19 +120,18 @@ var app = {
 
 
 		myApp.onPageInit('index', function() {
+      //Evento de clique nas tabs que exibe o floating button
+      $('.tab2').on('click', function () {
+          $$('.floating-button').removeClass('none');
+      });
+      $('.tab1').on('click', function () {
+          $('.floating-button').addClass('none');
+      });
 
 			//Configura barra de navegação
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-
-			//Dispara invite e nope
-			$$('.nope').on('click', function () {
-					$("#tinderslide").jTinder('dislike');
-			});
-			$$('.yep').on('click', function () {
-					$("#tinderslide").jTinder('like');
-			});
 
 			var pic = localStorage.getItem("picture");
 
@@ -279,16 +278,18 @@ var app = {
 
 									}
 
-									$$(".buttons-row").toggleClass("none visivel");
+									//$$(".buttons-row").toggleClass("none visivel");
 
 									/**
 									 * jTinder initialization
 									 */
+                   /*
 									$("#tinderslide").jTinder({
 
 									});
+                  */
 									getPendingNotifications();
-									getLimitInvites();
+									//getLimitInvites();
 
 								}
 							});

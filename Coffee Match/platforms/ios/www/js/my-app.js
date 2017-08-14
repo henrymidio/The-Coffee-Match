@@ -1,29 +1,29 @@
 // Initialize app
 var myApp = new Framework7({
-    statusbarOverlay:false 
+    statusbarOverlay:false
 });
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
- 
+
 // Add view
 var mainView = myApp.addView('.view-main', {
   // Because we want to use dynamic navbar, we need to enable it for this view:
   dynamicNavbar: true,
   animateNavBackIcon: true,
   swipeBackPage: false
-});  
+});
 
 myApp.onPageInit('login2', function (page) {
 	var mySwiper = myApp.swiper('.swiper-container', {
 		speed: 400,
 		pagination: '.swiper-pagination'
-	}); 
+	});
 });
 
 myApp.onPageInit('address', function (page) {
 	StatusBar.overlaysWebView(false);
-	
+
 	//Quando o campo cep perde o foco.
             $("#zip").blur(function() {
 
@@ -43,7 +43,7 @@ myApp.onPageInit('address', function (page) {
                         $("#street_address").val("...");
                         $("#user_neighborhood").val("...");
                         $("#user_city").val("...");
-                        
+
 						$.ajax({
 								url: "https://viacep.com.br/ws/"+ cep +"/json/?callback=?",
 								dataType: 'json',
@@ -93,7 +93,7 @@ myApp.onPageInit('address', function (page) {
                     limpa_formulário_cep();
                 }
             });
-	
+
 	$$("#submit-address").on("click", function(){
 		var number = $$("#street_number").val();
 		var street = $$("#street_address").val();
@@ -119,8 +119,8 @@ myApp.onPageInit('address', function (page) {
 									});
 								}
 		});
-	}) 
-	
+	})
+
 	function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
                 $("#street_address").val("");
@@ -130,8 +130,8 @@ myApp.onPageInit('address', function (page) {
 });
 
 myApp.onPageInit('passo2', function (page) {
-	
-	
+
+
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-tags.php',
 								dataType: 'json',
@@ -141,7 +141,7 @@ myApp.onPageInit('passo2', function (page) {
 									}
 								}
 	});
-	
+
 	var birthday = localStorage.getItem("birthday");
 	var picture = localStorage.getItem("picture");
 	var name    = localStorage.getItem("name");
@@ -152,63 +152,63 @@ myApp.onPageInit('passo2', function (page) {
 	$$("#passo2-profissao").val(work);
 	$$("#passo2-faculdade").val(education);
 	$$("#passo2-nascimento").val(birthday);
-	
+
 	$("#call-smart-select").on("click", function(){
 		myApp.smartSelectOpen("#skills")
 	});
 	$("#call-smart-select2").on("click", function(){
 		myApp.smartSelectOpen("#looking-for")
 	});
-	
+
 	$$("#finalizar").on("click", function(){
-		
+
 		var tags = [];
 		var looking = [];
 		var descricao = $$("#passo2-description").val();
 		var profissao = $$("#passo2-profissao").val();
 		var faculdade = $$("#passo2-faculdade").val();
 		var nascimento = $$("#passo2-nascimento").val();
-		
+
 		if (faculdade.length < 3) {
 			document.getElementById("passo2-faculdade").focus();
 			return false;
 		}
-		
+
 		if (profissao.length < 3) {
 			document.getElementById("passo2-profissao").focus();
 			return false;
 		}
-		
+
 		if (nascimento.length == 0) {
 			document.getElementById("passo2-nascimento").focus();
 			return false;
 		}
-		
+
 		if (descricao.length == 0) {
 			document.getElementById("passo2-description").focus();
 			return false;
 		}
-		
+
 		myApp.showIndicator();
-		
+
 		$('#skills select option:selected').each(function(){
 				tags.push($(this).text());
 		});
-		
-		var skills = tags.join(); 
-		
+
+		var skills = tags.join();
+
 		$('#looking-for select option:selected').each(function(){
 				looking.push($(this).text());
 		});
-		looking = looking.join(); 
-		
+		looking = looking.join();
+
 		localStorage.setItem("age", nascimento);
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
-		
+
 		//var user_id = localStorage.getItem("user_id");
-		
+
 		//Chamada o servidor para cadastro/atualização de informações de perfil
 		var userObj = {
 			fbid: localStorage.getItem("fbid"),
@@ -225,12 +225,12 @@ myApp.onPageInit('passo2', function (page) {
 			skills: skills,
 			looking: looking
 		}
-		
+
 		$.ajax({
 			url: 'http://api.thecoffeematch.com/v1/users',
 			type: 'post',
 			dataType: 'json',
-			data: userObj, 
+			data: userObj,
 			success: function(response) {
 				localStorage.setItem("user_id", response.data.id);
 				localStorage.setItem("logged", 1);
@@ -243,21 +243,21 @@ myApp.onPageInit('passo2', function (page) {
 				mainView.router.loadPage("login2.html");
 			}
 		});
-		
-		
+
+
 	});
-	
+
 	var today = new Date();
- 
+
 	var pickerInline = myApp.picker({
     input: '#passo2-nascimento',
     toolbar: true,
     rotateEffect: true,
- 
+
     formatValue: function (p, values, displayValues) {
         return displayValues[0] + '-' + values[1] + '-' + values[2];
     },
- 
+
     cols: [
 		// Years
         {
@@ -278,20 +278,20 @@ myApp.onPageInit('passo2', function (page) {
         {
             values: [01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
         }
-        
+
     ]
-}); 
+});
 });
 
 myApp.onPageInit('confirmacao-convite', function (page) {
 
 	var user_id  = localStorage.getItem("user_id");
 	var other_id = localStorage.getItem("idc");
-	
+
 	var requester = {
 		requester: user_id
 	}
-		
+
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://api.thecoffeematch.com/v1/users/' + other_id,
@@ -306,12 +306,12 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 										success: function (friendsData) {
 											var loops = friendsData.context.all_mutual_friends.data.length;
 											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-																						
+
 											for(i = 0; i < loops; i++){
 												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
 												$("#confirmacao-friends-list").append(line);
 											}
-											
+
 											if(friends_number > 5){
 												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
 												$("#confirmacao-friends-list").append(line);
@@ -319,25 +319,25 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 												var line = '<div class="col-33"></div>';
 												$("#confirmacao-friends-list").append(line);
 											}
-											
-											
+
+
 										},error: function (request, status, error) {
 											//alert(JSON.stringify(request));
 										}
 									});
-									
+
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
-									
+
 									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
 									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
 									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
-									
+
 									var message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
 									if(data.id == 193) {
 										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
 									}
-									
+
 									$$("#name-confirm").html(data.name);
 									$$("#cc-distance").html(data.distance);
 									$$("#cc-metrica").html(metrica);
@@ -353,18 +353,18 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
 								}
 							});
-	
-	
+
+
 	$('#confirmar-cafe').on("click", function(){
 		myApp.showIndicator()
 		//Faz o PUT LIKE
-		
+
 		var dados = {
 			user_id: user_id,
 			shown_user_id: other_id,
 			liked: 1
 		}
-								
+
 				$.ajax({
 								url: 'http://thecoffeematch.com/webservice/put-like.php',
 								type: 'post',
@@ -373,23 +373,23 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								success: function (data) {
 									myApp.hideIndicator();
 									localStorage.setItem("match", data.combinacao);
-									mainView.router.loadPage("match.html");	
+									mainView.router.loadPage("match.html");
 								},
 								error: function (request, status, error) {
 									myApp.hideIndicator();
-									mainView.router.loadPage("combinacoes.html");	
+									mainView.router.loadPage("combinacoes.html");
 									//alert(error);
 								}
-								
+
 				});
 	})
-	
+
 });
 
 myApp.onPageInit('convites', function (page) {
 	var user_id = localStorage.getItem("user_id");
 	var y = {user_id: user_id};
-	
+
 	//myApp.showPreloader();
 	//Ajax request to get user
 	$.ajax({
@@ -403,10 +403,10 @@ myApp.onPageInit('convites', function (page) {
 										return false;
 									}
 									for(i = 0; i < data.length; i++){
-									
+
 									//Seta id da confirmacao-convite
 									var idc = localStorage.setItem("idc", data[i].id);
-									
+
 									//Monta o DOM
 									var line1 = "<li class='swipeout'>"
 												+ "<div class='swipeout-content'>"
@@ -427,56 +427,56 @@ myApp.onPageInit('convites', function (page) {
 												+ "<a href='#' class='bg-red del-invite'>Delete</a>"
 												+ "</div>"
 												+ "</li>";
-														
+
 									$("#invites-li").append(line1);
-									
+
 									}
-									
+
 									//Deleta convite
 									$('.del-invite').on('click', function () {
 										var self   = $(this);
 										var inviteId = self.parents("li").find("div.div-match").attr("id");
 										var swipeout = self.closest(".swipeout");
-										myApp.confirm("Are you sure?", "The Coffee Match", function(){										
+										myApp.confirm("Are you sure?", "The Coffee Match", function(){
 											myApp.swipeoutDelete(swipeout, function() {
 												var matchToDelete = {
 													invite: inviteId
 												};
-												
+
 												$.ajax({
 													url: 'http://thecoffeematch.com/webservice/delete-invite.php',
 													type: 'post',
-													data: matchToDelete						
+													data: matchToDelete
 												});
-											});	
+											});
 										});
-									  
-										
+
+
 									});
-									
-									
+
+
 									$(".match").on("click touch", function(){
-										localStorage.setItem("idc", $(this).attr("id"));		
+										localStorage.setItem("idc", $(this).attr("id"));
 									})
 									$(".div-match").on("click touch", function(){
 										localStorage.setItem("invite", $(this).attr("id"));
 									})
-									
+
 									//myApp.hidePreloader();
-									
+
 								}
-								
-								
-															
+
+
+
 							});
-							
+
 });
 
 myApp.onPageInit('favorites', function (page) {
-					
+
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}
-	
+
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-favorites.php',
@@ -484,9 +484,9 @@ myApp.onPageInit('favorites', function (page) {
 								dataType: 'json',
 								data: x,
 								success: function (data) {
-									
+
 									for(i = 0; i < data.length; i++){
-										
+
 										//Monta o DOM
 									    var line1 = "<li class='item-link item-content'>"
 												+ "<div class='item-media profile'>"
@@ -495,12 +495,12 @@ myApp.onPageInit('favorites', function (page) {
 												+ "<div class='item-inner fav' id="+data[i].shown_user_id+">"
 												+ "<a href='#' class='item-link'>"
 												+ "<div class='item-title '><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>Favorited in "+data[i].date+"</span></div></div></a></li>";		
+												+ "<span class='subtitle'>Favorited in "+data[i].date+"</span></div></div></a></li>";
 									    $("#favorites-ul").append(line1);
-										
-										
+
+
 									}
-									
+
 									$(".fav").on("click", function(){
 										var idp = $(this).attr("id");
 										localStorage.setItem("preview", idp);
@@ -510,16 +510,16 @@ myApp.onPageInit('favorites', function (page) {
 								error: function (request, status, error) {
 									alert(error);
 								}
-								
-								
-														
+
+
+
 							});
 });
 
 myApp.onPageInit('combinacoes', function (page) {
 	//gambs
 	localStorage.setItem("cancel", "f");
-	
+
 	var user_id = localStorage.getItem("user_id");
 	var x = {user_id: user_id}
 	//myApp.showPreloader();
@@ -532,23 +532,23 @@ myApp.onPageInit('combinacoes', function (page) {
 								success: function (data) {
 									$("#match-li").empty();
 									for(i = 0; i < data.length; i++){
-										
+
 										var agendamento = data[i].date;
 										if(data[i].date === null){
 											agendamento = "Waiting to schedule";
-										} 
+										}
 										/*
 										else {
 											agendamento = formatDate(new Date(data[i].date));
 										}
 										*/
-								
+
 										var starbucksLine = "";
-															
+
 										if(data[i].starbucks !== null){
 											starbucksLine = "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/map.png' />"+data[i].starbucks+"</span><br>";
 										}
-			
+
 										//Monta o DOM
 									    var line1 = "<li class='item-content swipeout'>"
 												+ "<div class='item-media swipeout' id="+data[i].preview_id+">"
@@ -562,24 +562,24 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ "<div class='swipeout-actions-right'>"
 												+ "<a href='#' class='bg-red unmatch'>Unmatch</a>"
 												+ "</div>"
-												+"</li>";		
+												+"</li>";
 									    $("#match-li").append(line1);
-										
-										
+
+
 									}
-																	
+
 									$(".match").on("click", function(){
 										localStorage.setItem("match", this.id);
 										mainView.router.loadPage("detail-calendar.html");
 										var suid = $(this).siblings("div.swipeout").attr("id");
 										localStorage.setItem("shown_user_id", this.id);
 									});
-																	
+
 									$(".unmatch").on("click", function(){
 										var self   = $(this);
 										var idMatch = self.parent().siblings(".match").attr("id");
 										var swipeout = self.closest(".swipeout");
-										
+
 										myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
 											myApp.swipeoutDelete(swipeout, function() {
 												var abc = {
@@ -591,27 +591,27 @@ myApp.onPageInit('combinacoes', function (page) {
 													data: abc
 												});
 											});
-											
+
 										});
-										
+
 									});
-																	
-									
+
+
 								}
-															
+
 							});
-							
-	
+
+
 });
 
 myApp.onPageInit('detail-calendar', function(page){
-	
+
 	$$(".btn-green").on("click", function(){
 		mainView.router.loadPage("chat.html");
 	});
-	
+
 	$$('.edit').on('click', function () {
-				
+
 				var buttons1 = [
 					{
 						text: 'Edit',
@@ -638,26 +638,26 @@ myApp.onPageInit('detail-calendar', function(page){
 				];
 				var groups = [buttons1, buttons2];
 				myApp.actions(groups);
-				
+
 	});
 });
 
 myApp.onPageInit('profile-preview', function (page) {
 	var metrica = localStorage.getItem("metrica");
 	$$("#preview-metrica").html(metrica);
-	
+
 	var user_id = localStorage.getItem("user_id");
-	
+
 	$.ajax({
 								url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
 								type: 'get',
 								dataType: 'json',
 								success: function (data) {
-									
+
 									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
 									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
 									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
-									
+
 									$$("#preview-img").attr("src", data.picture);
 									$$("#preview-name").html(data.name);
 									$$("#preview-age").html(data.age);
@@ -668,38 +668,38 @@ myApp.onPageInit('profile-preview', function (page) {
 									$$("#profile-l1").html('<span style="margin-right: 10px">●</span>' + data.l1);
 									$$("#profile-l2").html('<span style="margin-right: 10px">●</span>' + data.l2);
 									$$("#profile-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
-									
+
 								}
-								
+
 	});
-	
+
 	$("#to-edit-profile").on("click", function(){
 		mainView.router.loadPage('profile.html');
 	});
-	
+
 });
 
 myApp.onPageInit('profile-view', function (page) {
 	var metrica = localStorage.getItem("metrica");
 	$$("#view-metrica").html(metrica);
-	
+
 	//Preview é o id do usuário que irá ser visualizado
 	var preview = localStorage.getItem("preview");
-	
+
 	$.ajax({
 								url: 'http://api.thecoffeematch.com/v1/users/' + preview,
 								type: 'get',
 								dataType: 'json',
 								success: function (data) {
-									
+
 									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
 									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
 									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
-									
+
 									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
 									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
 									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
-									
+
 									$$("#view-distance").html(data.distance);
 									$$("#profile-view-img").attr("src", data.picture);
 									$$("#profile-view-name").html(data.name);
@@ -711,11 +711,11 @@ myApp.onPageInit('profile-view', function (page) {
 									$$("#view-l1").html(l1);
 									$$("#view-l2").html(l2);
 									$$("#view-l3").html(l3);
-									
+
 								}
-								
+
 	});
-	
+
 		$$('.nope').on('click', function () {
 			var abc = {
 				user_id: localStorage.getItem("user_id"),
@@ -727,7 +727,7 @@ myApp.onPageInit('profile-view', function (page) {
 									type: 'post',
 									data: abc
 			});
-			
+
 			 myApp.addNotification({
 				title: 'The Coffee Match',
 				subtitle: 'Your invite is on its way!',
@@ -736,7 +736,7 @@ myApp.onPageInit('profile-view', function (page) {
 					mainView.router.loadPage('favorites.html');
 				}
 			});
-			
+
 		});
 		$$('.yep').on('click', function () {
 			var abc = {
@@ -770,36 +770,36 @@ myApp.onPageInit('profile-view', function (page) {
 											}
 									}
 			});
-			
-			
+
+
 		});
-	
+
 });
 
 myApp.onPageInit('messages', function (page) {
-	
+
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
-	
+
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-last-message.php',
 								type: 'post',
 								dataType: 'json',
 								data: x,
 								success: function (data) {
-									
+
 									for(i = 0; i < data.length; i++){
 										var replyArrow = "";
 										var weight = "bold";
 										if(data[i].last_message === null){
 											data[i].last_message = "Matched in "+data[i].date;
 										}
-										
+
 										if(data[i].user == x.user_id) {
 											replyArrow = "<img style='width: 12px; height: 12px; margin-right: 5px' src='img/reply-arrow.png' /> ";
 											weight = "";
 										}
-													
+
 										//Monta o DOM
 									    var line1 = "<li class='item-content'>"
 												+ "<div class='item-media perfil' id="+data[i].suid+">"
@@ -808,9 +808,9 @@ myApp.onPageInit('messages', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link chat' id="+data[i].id+">"
 												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";		
+												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";
 									    $("#messages-li").append(line1);
-																		
+
 										$(".chat").on("click", function(){
 											localStorage.setItem("match", this.id);
 											var idp = $('.perfil').attr("id");
@@ -825,42 +825,42 @@ myApp.onPageInit('messages', function (page) {
 										});
 										*/
 									}
-									
+
 								},
 								error: function (request, status, error) {
 									alert(request.responseText);
 								}
-															
+
 							});
-				
-	
+
+
 });
 
 
 myApp.onPageInit('profile', function (page) {
-	
+
 	$("a.close-popup").on("click touchstart", function(event){
 		alert("close")
 	});
-	
+
 	$(".cms").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
 	});
 	$(".cms2").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#looking-for")
 	});
-	
+
 	var user = {
 		user: localStorage.getItem("user_id")
 	};
-	
+
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-tags.php',
 								type: 'post',
 								data: user,
 								dataType: 'json',
 								success: function (data) {
-									
+
 									for(i = 1; i < data.length; i++){
 										if(data[i].nome === data[0].skill1 || data[i].nome === data[0].skill2 || data[i].nome === data[0].skill3){
 												myApp.smartSelectAddOption('#skills select', "<option selected>"+data[i].nome+"</option>");
@@ -870,7 +870,7 @@ myApp.onPageInit('profile', function (page) {
 											}else {
 												myApp.smartSelectAddOption('#skills select', "<option>"+data[i].nome+"</option>");
 											}
-											
+
 										}
 									}
 									/*
@@ -879,9 +879,9 @@ myApp.onPageInit('profile', function (page) {
 									if(data[1].l1.length > 0){ $("#looking-for select option:contains("+data[1].l1+")").prop('selected', true) }
 									if(data[1].l2.length > 0){ $("#looking-for select option:contains("+data[1].l2+")").prop('selected', true) }
 									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
-									
+
 									//$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
-									
+
 									//$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
 									//$("#call-smart-select2").val(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3)
 								}
@@ -894,78 +894,78 @@ myApp.onPageInit('profile', function (page) {
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#occupation").val(localStorage.getItem("occupation"));
 	$$("#graduation").val(localStorage.getItem("college"));
-	
+
 	$$("#finalizar-edicao").on("click", function(){
 		var tags = [];
 		var looking = [];
 		var descricao = $$("#description").val();
 		var profissao = $$("#occupation").val();
 		var faculdade = $$("#graduation").val();
-		
+
 		if (profissao.length == 0) {
 			document.getElementById("occupation").focus();
 			return false;
 		}
-		
+
 		if (faculdade.length == 0) {
 			document.getElementById("graduation").focus();
 			return false;
 		}
-		
+
 		if (descricao.length == 0) {
 			document.getElementById("description").focus();
 			return false;
 		}
-		
+
 		$('#skills select option:selected').each(function(){
 			tags.push($(this).text());
 		});
 		tags = tags.join();
-		
+
 		$('#looking-for select option:selected').each(function(){
 				looking.push($(this).text());
 		});
-		looking = looking.join(); 
-		
+		looking = looking.join();
+
 		var user_id = localStorage.getItem("user_id");
 		//Chamada ao servidor para atualização de informações de perfil
 		setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
-		
+
 		localStorage.setItem("description", descricao);
 		localStorage.setItem("occupation", profissao);
 		localStorage.setItem("college", faculdade);
-		
+
 		//Para dar tempo de atuaizar antes de exibir novamete o preview do perfil
 		setTimeout(function(){ mainView.router.loadPage('profile-preview.html'); }, 1000);
-		
+
 	})
-	
-	
-	
+
+
+
 });
 
 
 //SHOWN USER
 
 myApp.onPageInit('user', function (page) {
-	
+
 	var metrica = localStorage.getItem("metrica");
 	$$("#user-metrica").html(metrica);
-	
+
 	var suid = localStorage.getItem("shown_user_id");
-	var user_id = localStorage.getItem("user_id");	
-	
+	var user_id = localStorage.getItem("user_id");
+
 	var requesterObj = {
 		requester: user_id
 	};
-	
+
 	$.ajax({
 								url: 'http://api.thecoffeematch.com/v1/users/' + suid,
 								type: 'get',
 								data: requesterObj,
 								dataType: 'json',
 								success: function (data) {
-									
+
 									$.ajax({
 										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data.fb_token + "&appsecret_proof=" + data.appsecret,
 										type: 'get',
@@ -973,12 +973,12 @@ myApp.onPageInit('user', function (page) {
 										success: function (friendsData) {
 											var loops = friendsData.context.all_mutual_friends.data.length;
 											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-																						
+
 											for(i = 0; i < loops; i++){
 												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
 												$("#friends-list").append(line);
 											}
-											
+
 											if(friends_number > 5){
 												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
 												$("#friends-list").append(line);
@@ -986,25 +986,25 @@ myApp.onPageInit('user', function (page) {
 												var line = '<div class="col-33"></div>';
 												$("#friends-list").append(line);
 											}
-											
-											
+
+
 										},error: function (request, status, error) {
 											//alert(JSON.stringify(request));
 										}
 									});
-																		
+
 									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
 									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
 									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
-									
+
 									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
 									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
 									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
-									
+
 									if(data.distance < 1) {
 											data.distance = 0.5;
 									}
-									
+
 									$$("#user-distance").html(data.distance);
 									$$("#user-view-img").attr("src", data.picture);
 									$$("#user-view-name").html(data.name);
@@ -1016,13 +1016,13 @@ myApp.onPageInit('user', function (page) {
 									$$("#l1").html(l1);
 									$$("#l2").html(l2);
 									$$("#l3").html(l3);
-									
+
 								}
-								
+
 	});
-	
+
 	$$('#report').on('click', function () {
-				
+
 				var buttons1 = [
 					{
 						text: 'Report',
@@ -1046,7 +1046,7 @@ myApp.onPageInit('user', function (page) {
 											})
 										}
 								});
-								
+
 							})
 						}
 					}
@@ -1058,18 +1058,18 @@ myApp.onPageInit('user', function (page) {
 					}
 				];
 				var groups = [buttons1, buttons2];
-				myApp.actions(groups);		
-	});	
-	
+				myApp.actions(groups);
+	});
+
 });
 
 
 myApp.onPageBeforeInit('settings', function (page) {
-	
+
 	var uid = localStorage.getItem("user_id");
 	var ud = {user_id: uid};
 	var dst = null;
-	
+
 	$$('#delete-account').on('click', function(){
 		myApp.confirm("You will lose all its data", "Are you sure you want to delete your profile?", function(){
 			myApp.showIndicator()
@@ -1078,7 +1078,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 				type: 'post',
 				data: ud,
 				success: function (data) {
-					//Anula variável logged	e envia email avisando da exclusão	
+					//Anula variável logged	e envia email avisando da exclusão
 					localStorage.removeItem("logged");
 					myApp.hideIndicator()
 					mainView.router.loadPage('login2.html');
@@ -1089,7 +1089,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 			});
 		});
 	})
-	
+
 	//Ajax request to get user
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-preferences.php',
@@ -1115,13 +1115,13 @@ myApp.onPageBeforeInit('settings', function (page) {
 										$('#check-mile').prop('checked', true);
 										$$("#valBox").html(data.distance + " Mi")
 									}
-									
+
 								},
 								error: function (request, status, error) {
 									alert(error);
 								}
 	});
-	
+
 	$('#check-mile:checkbox').change(function() {
 		if($(this).is(":checked")) {
 			$('#check-km').prop('checked', false);
@@ -1133,9 +1133,9 @@ myApp.onPageBeforeInit('settings', function (page) {
 			localStorage.setItem("medida", "Km")
 		}
 	});
-	
+
 	$('#check-km:checkbox').change(function() {
-		
+
 		if($(this).is(":checked")) {
 			$('#check-mile').prop('checked', false);
 			$$("#valBox").html(dst + " km");
@@ -1145,9 +1145,9 @@ myApp.onPageBeforeInit('settings', function (page) {
 			$$("#valBox").html(dst + " Mi");
 			localStorage.setItem("medida", "Mi")
 		}
-		
+
 	});
-	
+
 	$$('#salvar').on('click', function(){
 		var convites = 0;
 		if($('#check-convites').is(":checked")){
@@ -1163,25 +1163,25 @@ myApp.onPageBeforeInit('settings', function (page) {
 			metrica = 'm';
 			localStorage.setItem("metrica", "Mi");
 		};
-		
+
 		var distance = $$("#ranger").val();
 		localStorage.setItem("distance", distance);
-		
+
 		var user_id = localStorage.getItem("user_id");
 		setPreferences(metrica, distance, convites, emails, user_id);
 		mainView.router.loadPage('index.html');
 	})
-	
-	
+
+
 });
 
 myApp.onPageInit('chat', function (page) {
 	myApp.showIndicator()
-	
+
 	var match = localStorage.getItem("match");
-	
+
 	$$('.overflow').on('click', function () {
-				
+
 				var buttons1 = [
 					{
 						text: 'Report',
@@ -1203,7 +1203,7 @@ myApp.onPageInit('chat', function (page) {
 											myApp.alert("User has been reported", "Thank you")
 										}
 								});
-								
+
 							})
 						}
 					},
@@ -1211,7 +1211,7 @@ myApp.onPageInit('chat', function (page) {
 						text: 'Unmatch',
 						color: 'red',
 						onClick: function () {
-							
+
 										var abc = {
 											match: match
 										};
@@ -1227,9 +1227,9 @@ myApp.onPageInit('chat', function (page) {
 												})
 											}
 										});
-										
-							
-									
+
+
+
 						}
 					}
 				];
@@ -1241,39 +1241,39 @@ myApp.onPageInit('chat', function (page) {
 				];
 				var groups = [buttons1, buttons2];
 				myApp.actions(groups);
-				
-	});			
-	
+
+	});
+
 	$$("#toolbar").toggleClass("none visivel");
 	var user_id = localStorage.getItem("user_id");
-	
+
 	// Init Messages
 	var myMessages = myApp.messages('.messages', {
 	  autoLayout:true
 	});
-			
+
 	// Handle message
 $$('.messagebar .link').on('click', function () {
 	// Init Messages
 	var myMessages = myApp.messages('.messages', {
 	  autoLayout:true
 	});
-	
+
 	// Init Messagebar
-	var myMessagebar = myApp.messagebar('.messagebar');	
-	
+	var myMessagebar = myApp.messagebar('.messagebar');
+
   // Message text
   var messageText = myMessagebar.value().trim();
   // Exit if empy message
   if (messageText.length === 0) return;
- 
+
   // Empty messagebar
   myMessagebar.clear()
   $('#toolbar').css("height","");
   // Message type
   var messageType = "sent";
   var avatar      = localStorage.getItem("picture");
-  
+
   myMessages.addMessage({
     // Message text
     text: messageText,
@@ -1281,29 +1281,29 @@ $$('.messagebar .link').on('click', function () {
     type: messageType,
 	avatar: avatar
   })
-  
+
   //Put message on DB via ajax
   var putMessageData = {
 	  user: user_id,
 	  message: messageText,
 	  combinacao: localStorage.getItem("match")
   }
- 
+
 	  $.ajax({
 									url: 'http://thecoffeematch.com/webservice/put-message.php',
 									type: 'post',
 									data: putMessageData,
 									success: function (data) {
-										
+
 									}
 		});
- 
-  
- 
-	}); 
-	
+
+
+
+	});
+
 	var g = {match: match};
-	
+
 	//Request ajax que recupera a conversa
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/get-messages.php',
@@ -1311,12 +1311,12 @@ $$('.messagebar .link').on('click', function () {
 								dataType: 'json',
 								data: g,
 								success: function (data) {
-									
+
 									var user; //shown_user
 									var message_id;
-								
+
 									for(i = 0; i < data.length; i++){
-										
+
 										if(data[i].id === user_id){
 											var line0 = "<div class='message message-with-avatar message-sent message-last message-with-tail message-first'>"
 														+ "<div class='message-text'>"+data[i].message+"</div>"
@@ -1327,7 +1327,7 @@ $$('.messagebar .link').on('click', function () {
 										} else {
 											if(data[i].id){
 												user = data[i].id;
-												
+
 												//Monta o DOM
 												var line1 = "<div class='message message-with-avatar message-received message-last message-with-tail message-first' id="+data[i].message_id+">"
 																+ "<div class='message-name'>"+data[i].name+"</div>"
@@ -1342,27 +1342,27 @@ $$('.messagebar .link').on('click', function () {
 													}
 												}
 										}
-										
+
 										myApp.hideIndicator();
-									
+
 									}
-				
+
 									myMessages.scrollMessages();
 									$('.messagebar').trigger('click');
-									
-									updateStatusUser(1);	
-									
-									myInterval = setInterval(function(){ 
-										getLastMessage(user, match); 
+
+									updateStatusUser(1);
+
+									myInterval = setInterval(function(){
+										getLastMessage(user, match);
 									}, 3000);
-									
+
 								}
 	});
-	
-	
-	
+
+
+
 	function getLastMessage(user, combinacao){
-		
+
 		var last_message_id = $(".message-received").last().attr("id");
 		if(!last_message_id){
 			last_message_id = 0;
@@ -1372,7 +1372,7 @@ $$('.messagebar .link').on('click', function () {
 			  last_message_id: last_message_id,
 			  combinacao: combinacao
 		}
-		
+
 		$.ajax({
 								url: 'http://thecoffeematch.com/webservice/ajax-get-last-message.php',
 								type: 'post',
@@ -1387,15 +1387,15 @@ $$('.messagebar .link').on('click', function () {
 															+ "</div>";
 											$(".messages").append(line1);
 									} catch(err) {
-										
+
 									} finally {
 										//$('.messagebar').trigger('click');
 									}
-									
+
 								}
 		});
 	}
-	
+
 });
 
 
@@ -1419,7 +1419,7 @@ myApp.onPageInit('match', function (page) {
 	var d = {
 		requester: user_id
 	};
-	
+
 	//Ajax request to get user info
 	$.ajax({
 								url: 'http://api.thecoffeematch.com/v1/users/' + suid,
@@ -1427,25 +1427,25 @@ myApp.onPageInit('match', function (page) {
 								dataType: 'json',
 								data: d,
 								success: function (data) {
-								
+
 									$$("#user-one-img").attr("src", localStorage.getItem("picture"));
-									$$("#user-two-img").attr("src", data.picture);						
+									$$("#user-two-img").attr("src", data.picture);
 								}
 							});
 	$$("#select-starbucks").on("click", function(){
 		mainView.router.loadPage('starbucks-proximas.html');
 	})
-});		
+});
 
 myApp.onPageInit('calendario', function(page){
 	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'];
- 
+
 var calendarInline = myApp.calendar({
     container: '#calendar-inline-container',
     value: [new Date()],
     weekHeader: false,
 	input: '#picker-data',
-    toolbarTemplate: 
+    toolbarTemplate:
         '<div class="toolbar calendar-custom-toolbar" style="background: white">' +
             '<div class="toolbar-inner">' +
                 '<div class="left">' +
@@ -1472,11 +1472,11 @@ var calendarInline = myApp.calendar({
 		$$('.calendar-custom-toolbar .left p').text(monthNames[p.currentMonth - 1]);
         $$('.calendar-custom-toolbar .center').text(monthNames[p.currentMonth]);
 		$$('.calendar-custom-toolbar .right p').text(monthNames[p.currentMonth + 1]);
-    }, 
+    },
 	onDayClick: function (p, dayContainer, year, month, day) {
 		pickerDescribe.open();
 	}
-}); 
+});
 
 var pickerDescribe = myApp.picker({
     input: '#picker-horario',
@@ -1493,7 +1493,7 @@ var pickerDescribe = myApp.picker({
             values: ('AM PM').split(' ')
         },
     ]
-}); 
+});
 
 $("#confirmar-data").one("click", function(e){
 	var data    = $$("#picker-data").val();
@@ -1506,15 +1506,15 @@ $("#confirmar-data").one("click", function(e){
 	var match = localStorage.getItem("match");
 	var user_id = localStorage.getItem("user_id");
 	var d2 = {match: match, data: value, user_id: user_id};
-	
+
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/update-date.php',
 								type: 'post',
 								data: d2,
 								success: function (data) {
-									
+
 									mainView.router.loadPage('detail-calendar.html');
-									
+
 								}
 	});
 	 myApp.addNotification({
@@ -1523,7 +1523,7 @@ $("#confirmar-data").one("click", function(e){
         message: 'Feel free to reschedule at any time',
         media: '<img width="44" height="44" style="border-radius:100%" src="img/logotipo.png">'
     });
-	
+
 });
 
 });
@@ -1531,11 +1531,11 @@ $("#confirmar-data").one("click", function(e){
 //Mudança do slider de distância
 function showVal(newVal){
   var medida = localStorage.getItem("medida");
-  
+
   if(!medida){
 	  medida = localStorage.getItem("metrica");
   }
-  
+
   document.getElementById("valBox").innerHTML=newVal + " " + medida;
 }
 
@@ -1549,39 +1549,39 @@ function setPreferences(metrica, distance, convites, emails, user_id){
 								type: 'post',
 								data: pref,
 								success: function (data) {
-										
+
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
 										//myApp.hidePreloader();
-										
+
 								}
 							});
 }
 
 //Seta informações do perfil (somente descrição por enquanto)
 function setProfile(description, occupation, nascimento, college, skills, looking, user_id){
-	
+
 	var info = {
-		description: description, 
+		description: description,
 		occupation: occupation,
 		nascimento: nascimento,
 		college: college,
 		skills: skills,
 		looking: looking
 		}
-		
+
 	$.ajax({
 		url: 'http://api.thecoffeematch.com/v1/users/' + user_id,
 		type: 'put',
 		dataType: 'json',
 		data: info,
 		success: function (data) {
-			
+
 			if(data.status == 'success'){
-				
+
 				//Atualiza preferências e executa função de callback
 				localStorage.setItem("description", description);
-				
+
 			}
 		},
 		error: function (request, status, error) {
@@ -1597,7 +1597,7 @@ function convertTo24(date){
 	var dia = data.getDate();
 	var hora = data.getHours();
 	var minutos = data.getMinutes();
-	
+
 	return ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":00";
 }
 
@@ -1628,6 +1628,3 @@ function updateStatusUser(status){
 			}
 		});
 	}
-	
-
-
