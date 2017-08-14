@@ -790,7 +790,7 @@ div#columns figure {
 }
 
 .demo-card-header-pic .card-header {
-    height: 40vw;
+    height: 45vw;
     background-size: cover;
     background-position: center;
   }
@@ -806,6 +806,7 @@ div#columns figure {
   .project-owner {
     position: absolute;
     bottom: 7%;
+    left: 3%;
   }
   .project-owner img {
     width: 35px;
