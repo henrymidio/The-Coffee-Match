@@ -29,7 +29,7 @@
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
+    <div class="panel panel-left panel-cover">
       <div class="content-block navigation-drawer">
         <div class="header-panel">
 		 <a href="profile-preview.html" class="close-panel">
@@ -121,43 +121,116 @@
         </div>
         <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
         <div class="pages navbar-through toolbar-through">
-          <!-- Page, "data-page" contains page name -->
-          <div data-page="index" class="page blue-page">
-            <!-- Scrollable page content -->
-            <div class="page-content">
-				<!-- CONTAINER QUE OCULTA A PÁGINA -->
-				<div id="invisible-container" class="none">
-				 <!-- start padding container -->
-					<div class="wrap">
-						<!-- start jtinder container -->
-						<div id="tinderslide">
-							<ul id="user-list">							
-								
-							</ul>
+			<!-- Page, "data-page" contains page name -->
+			<div data-page="index" class="page blue-page">
+				<!-- Scrollable page content -->
+				<div class="page-content">
+					<div class="tabs-container">
+						<!-- Buttons row as tabs controller -->
+						<div class="buttons-row">
+						  <!-- Link to 1st tab, active -->
+						  <a href="#tab1" class="dark-blue tab-link active button">People</a>
+						  <!-- Link to 2nd tab -->
+						  <a href="#tab2" class="tab-link button">Projects</a>
 						</div>
-						<!-- end jtinder container -->
 					</div>
-				<!-- end padding container -->
-				
-				
-				
+					
+					<div id="columns">
+	
+					   <figure>
+							<div class="user-card">
+								<div class="row">
+									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+									<div class="col-60 user-card"><img class="img-circle-plus" src="http://static4.businessinsider.com/image/5229d0a4eab8eab37bad5a7e-100-100/elon-musk.jpg" /></div>
+									<div class="col-20 user-card" style="color: #596872; opacity: 0.6">X</div>
+								</div>
+								<div style="text-align: center">
+									<h3 style="color: #596872; margin-bottom: 0">Elon Musk</h3>
+									<p style="color: #596872; margin-top: 5px; font-size: 13px">Chief Executive Officer at Tesla</p>
+								</div>
+							</div>
+						</figure>
+						
+						<figure>
+							<div class="user-card">
+								<div class="row">
+									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+									<div class="col-60 user-card"><img class="img-circle-plus" src="https://pazh.net/fa/wp-content/uploads/2017/02/services-analyze4.jpg" /></div>
+									<div class="col-20 user-card" style="color: #596872; opacity: 0.6">X</div>
+								</div>
+								<div style="text-align: center">
+									<h3 style="color: #596872; margin-bottom: 0">Howard Schultz</h3>
+									<p style="color: #596872; margin-top: 5px; font-size: 13px">CEO at Starbucks</p>
+									<hr>
+									<p style="color: #596872; margin: 5px">2 Projetos</p>
+								</div>
+							</div>
+						</figure>
+						
+						<figure>
+							<div class="user-card">
+								<div class="row">
+									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+									<div class="col-60 user-card"><img class="img-circle-plus" src="http://4827-presscdn.pagely.netdna-cdn.com/wp-content/uploads/2014/12/steve_jobs_thumb-100x100.jpg" /></div>
+									<div class="col-20 user-card" style="color: #596872; opacity: 0.6">X</div>
+								</div>
+								<div style="text-align: center">
+									<h3 style="color: #596872; margin-bottom: 0">Steve Jobs</h3>
+									<p style="color: #596872; margin-top: 5px; font-size: 13px">Chief Executive Officer at Apple Inc.</p>
+									<hr>
+									<p style="color: #596872; margin: 5px">2 Projetos</p>
+								</div>
+							</div>
+						</figure>
+						
+						<figure>
+							<div class="user-card">
+								<div class="row">
+									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+									<div class="col-60 user-card"><img class="img-circle-plus" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/091/28a/31ed982.jpg" /></div>
+									<div class="col-20 user-card" style="color: #596872; opacity: 0.6">X</div>
+								</div>
+								<div style="text-align: center">
+									<h3 style="color: #596872; margin-bottom: 0">Erlich Bachman</h3>
+									<p style="color: #596872; margin-top: 5px; font-size: 13px">Pied Piper</p>
+								</div>
+							</div>
+						</figure>
+						
+						<figure>
+							<div class="user-card">
+								<div class="row">
+									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
+									<div class="col-60 user-card"><img class="img-circle-plus" src="http://www.whosampled.com/static/artist_images/r2_2008910_18102452274.jpg" /></div>
+									<div class="col-20 user-card" style="color: #596872; opacity: 0.6">X</div>
+								</div>
+								<div style="text-align: center">
+									<h3 style="color: #596872; margin-bottom: 0">Snoop Dogg</h3>
+									<p style="color: #596872; margin-top: 5px; font-size: 13px">Robin Hood</p>
+								</div>
+							</div>
+						</figure>
+						
+						<figure>
+							<div class="user-card">
+								<div class="row">
+									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
+									<div class="col-60 user-card"><img class="img-circle-plus" src="https://files.startupranking.com/person/thumb/992_d01ab99fc581fdeac97bee2708051402ea62a196_travis-kalanick_s.png" /></div>
+									<div class="col-20 user-card" style="color: #596872; opacity: 0.6">X</div>
+								</div>
+								<div style="text-align: center">
+									<h3 style="color: #596872; margin-bottom: 0">Travis Kalanick</h3>
+									<p style="color: #596872; margin-top: 5px; font-size: 13px">Ex-CEO at Uber</p>
+								</div>
+							</div>
+						</figure>
+						
+						
+					</div>
+					  
+						
+					</div>
 				</div>
-				
-				<div id="search-box">
-					<img class="search-img search-effect" src="" />
-					<p class="search-text">Finding people nearby...</p>
-				</div>
-
-            </div>
-			<div class="text-center row buttons-row none" style="position: absolute; left: 6%; right:0; margin: 0 auto; bottom: 4%; z-index: 10">
-					<div class="col-33 nope"><img width="60" height="60" src="img/button_nope.png" id="img-nope" style="vertical-align: bottom; margin-right: 10px; margin-top: 20px" />
-					</div>
-					<div class="col-33 invite"><img width="80" height="80" src="img/button_star.png" id="img-fav" style="vertical-align: bottom; margin-right: 10px" />
-					</div>
-					<div class="col-33 yep" ><img width="60" height="60" src="img/button_yep.png" id="img-yep" style="vertical-align: bottom; margin-right: 10px; margin-top: 20px" />
-					</div>
-			</div>
-          </div>
         </div>
 		
 		<div class="toolbar messagebar invisible" id="toolbar" style="background-color: white">
@@ -178,8 +251,9 @@
 	<script type="text/javascript" src="js/my-app.js"></script>
 	<!-- transform2d lib -->
     <script type="text/javascript" src="js/jquery.transform2d.js"></script>
-    <!-- jTinder lib -->
+    <!-- jTinder lib
     <script type="text/javascript" src="js/jquery.jtinder.js"></script>
+	-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcs3g8j5yPjagkK-GH9rhLK7aYe-CYA3w" type="text/javascript"></script>
     <script type="text/javascript">
         app.initialize();
