@@ -63,6 +63,15 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
 	//background-image: -webkit-linear-gradient(top, grey, grey 30%, transparent 30%, transparent 100%);
 }
 
+.user-card hr{
+  margin-left: 15px;
+  margin-right: 15px;
+  color: #eee;
+  height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
 .user-card .img-circle-plus {
 	width: 75px;
 	height: 75px;

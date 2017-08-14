@@ -128,6 +128,7 @@ var app = {
           $('.floating-button').addClass('none');
       });
 
+
 			//Configura barra de navegação
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
