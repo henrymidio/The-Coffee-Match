@@ -130,8 +130,8 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
 }
 
 .user-card hr{
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 16px;
+  margin-right: 16px;
   color: #eee;
   height: 1px;
     border: 0;
@@ -863,6 +863,10 @@ div#columns figure {
 	-webkit-column-break-inside: avoid;
     page-break-inside: avoid;
     break-inside: avoid;
+}
+
+.card {
+  margin: 8px !important;
 }
 
 .demo-card-header-pic .card-header {
