@@ -140,7 +140,9 @@ var app = {
 
       //Evento que elimina card do user
       $('.hide-user').on('click', function () {
-          $(this).parent().closest('figure').fadeOut('slow');
+        $(this).parent().closest('figure').fadeOut(500,function(){
+          $(this).css({"visibility":"hidden",display:'block'}).slideUp();
+        });
       });
 
 			var pic = localStorage.getItem("picture");
