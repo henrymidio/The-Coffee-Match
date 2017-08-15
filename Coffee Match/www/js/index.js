@@ -120,6 +120,11 @@ var app = {
 
 
 		myApp.onPageInit('index', function() {
+      //Configura barra de navegação
+			StatusBar.overlaysWebView(false);
+			StatusBar.styleLightContent();
+			StatusBar.backgroundColorByHexString("#2f3a41");
+
       //Evento de clique nas tabs que exibe o floating button
       $('.tab2').on('click', function () {
           $$('.floating-button').removeClass('none');
@@ -128,11 +133,15 @@ var app = {
           $('.floating-button').addClass('none');
       });
 
+      //Evento que expande projeto
+      $('.open-card').on('click', function () {
+          $(this).siblings('.card-content').slideToggle();
+      });
 
-			//Configura barra de navegação
-			StatusBar.overlaysWebView(false);
-			StatusBar.styleLightContent();
-			StatusBar.backgroundColorByHexString("#2f3a41");
+      //Evento que elimina card do user
+      $('.hide-user').on('click', function () {
+          $(this).parent().closest('figure').fadeOut('slow');
+      });
 
 			var pic = localStorage.getItem("picture");
 

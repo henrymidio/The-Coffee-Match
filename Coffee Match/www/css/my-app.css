@@ -9,6 +9,39 @@ body {
 	background: #2f3a41;
 }
 
+@font-face {
+  font-family: 'Framework7 Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Framework7Icons-Regular.eot");
+  src: local('Framework7 Icons'),
+     local('Framework7Icons-Regular'),
+     url("../fonts/Framework7Icons-Regular.woff2") format("woff2"),
+     url("../fonts/Framework7Icons-Regular.woff") format("woff"),
+     url("../fonts/Framework7Icons-Regular.ttf") format("truetype");
+}
+
+.f7-icons, .framework7-icons {
+  font-family: 'Framework7 Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 0.7;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+}
+
 .layout-white .list-block ul {
 	background: white;
 }
@@ -781,7 +814,7 @@ display: inline-block;
 #columns {
 	column-width: 170px;
 	column-gap: 3px;
-    width: 100%;
+  width: 100%;
 	//margin: 5px;
 	//max-width: 1100px;
 	//margin: 50px auto;
@@ -789,9 +822,9 @@ display: inline-block;
 
 div#columns figure {
 	background: #fefefe;
-	border-radius: 5px;
+	border-radius: 3px;
 	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-	margin: 0 3px 8px;
+	margin: 0 5px 8px;
 	padding-bottom: 10px;
 	//display: inline-block;
 	-webkit-column-break-inside: avoid;
@@ -803,6 +836,7 @@ div#columns figure {
     height: 45vw;
     background-size: cover;
     background-position: center;
+    border: 1px solid white;
   }
 
   .project-name {
