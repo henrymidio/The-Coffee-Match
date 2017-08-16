@@ -25,7 +25,7 @@ body {
     font-size: 14px;
     font-weight: 400;
     color: #fff;
-    background: rgba(0,0,0,.37);
+    background: #00d173;
     display: inline-block;
     height: 23px;
     line-height: 23px;
@@ -865,14 +865,21 @@ div#columns figure {
     break-inside: avoid;
 }
 
+
+.auto-height {
+  height: auto;
+}
+
 .card {
-  margin: 8px !important;
+  margin: 7px !important;
+  border-radius: 4px !important;
 }
 
 .demo-card-header-pic .card-header {
-    height: 45vw;
+    height: 48vw;
     background-size: cover;
     background-position: center;
+    border-radius: 4px !important;
     border: 1px solid white;
   }
 

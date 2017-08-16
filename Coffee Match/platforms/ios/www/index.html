@@ -29,17 +29,17 @@
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-cover">
+    <div class="panel panel-left panel-reveal">
       <div class="content-block navigation-drawer">
         <div class="header-panel">
-		 <a href="profile-preview.html" class="close-panel">
-		 <div style="align-self: center;">
-			<img class="profile-photo" src="" />
-			<p class="username"><b><span id="name"></span></b></p>
-			<p class="occupation"><b>My Profile</b></p>
-		 </div>
-		 </a>
-		</div>
+		        <a href="profile-preview.html" class="close-panel">
+        		 <div style="align-self: center;">
+        			<img class="profile-photo" src="" />
+        			<p class="username"><b><span id="name"></span></b></p>
+        			<p class="occupation"><b>My Profile</b></p>
+        		 </div>
+        		</a>
+		    </div>
 
 		<div class="list-block no-hairlines" style="margin-top: 0px">
 			<ul id="ul-menu-lateral">
@@ -132,11 +132,12 @@
 						<!-- Buttons row as tabs controller -->
 						<div class="buttons-row">
 						  <!-- Link to 1st tab, active -->
-						  <a href="#tab1" class="dark-blue tab1 tab-link active button">People</a>
+						  <a href='#tab1' class="dark-blue tab1 tab-link active button">People</a>
 						  <!-- Link to 2nd tab -->
-						  <a href="#tab2" class="tab-link tab2 button">Projects</a>
+						  <a href='#tab2' class="tab-link tab2 button">Projects</a>
 						</div>
 					</div>
+
 <div class="tabs-animated-wrap" style="height: auto">
           <div class="tabs">
             <div id="tab1" class="tab active">
@@ -228,11 +229,28 @@
     								</div>
     							</div>
     						</figure>
+
+                <figure>
+    							<div class="user-card">
+    								<div class="row">
+    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
+    									<div class="col-60 user-card"><img class="img-circle-plus" src="http://img4.bdbphotos.com/images/50x50/c/c/ccrj3zg82p97zr8c.jpg?skj2io4l" /></div>
+    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+    								</div>
+    								<div style="text-align: center">
+    									<h3 style="color: #596872; margin-bottom: 0">James Marshall Hendrix</h3>
+    									<p style="color: #596872; margin-top: 5px; font-size: 13px">The Jimi Hendrix Experience</p>
+                      <hr>
+    									<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">3 Mutual connections</p>
+    								</div>
+    							</div>
+    						</figure>
+
 					   </div>
            </div>
 
             <!-- Tab 2 -->
-            <div id="tab2" class="tab">
+            <div id="tab2" class="tab" style="height: 100%">
 
               <div class="card demo-card-header-pic">
                 <div style="background-image:url(https://www.oficinadanet.com.br/imagens/post/18350/nubank2.jpg)" valign="center" class="card-header color-white no-border">

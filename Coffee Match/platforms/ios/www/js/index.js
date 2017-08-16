@@ -126,16 +126,23 @@ var app = {
 			StatusBar.backgroundColorByHexString("#2f3a41");
 
       //Evento de clique nas tabs que exibe o floating button
+      var altura1 = $('#tab1').height();
+      var altura2 = $('#tab2').height();
       $('.tab2').on('click', function () {
           $$('.floating-button').removeClass('none');
+          $('.tabs-animated-wrap').height(altura2);
       });
       $('.tab1').on('click', function () {
           $('.floating-button').addClass('none');
+          $('.tabs-animated-wrap').height(altura1);
       });
 
       //Evento que expande projeto
       $('.open-card').on('click', function () {
-          $(this).siblings('.card-content').slideToggle();
+          $(this).siblings('.card-content').slideToggle('fast', function(){
+            altura2 = $('#tab2').height(); //Resize da tab
+          });
+          $('.tabs-animated-wrap').height('auto')
       });
 
       //Evento que elimina card do user
