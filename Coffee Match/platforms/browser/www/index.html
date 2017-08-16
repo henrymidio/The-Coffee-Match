@@ -22,7 +22,8 @@
 	<link rel="stylesheet" href="css/tablet-styles.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  </head>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
+
   <body class="layout-white">
     <!-- Status bar overlay for full screen mode (PhoneGap) -->
     <div class="statusbar-overlay"></div>
@@ -105,27 +106,26 @@
         <!-- Top Navbar-->
         <div id="invisible-nav" class="navbar">
           <div class="navbar-inner">
-		    <div class="left">
-			 <a href="#" class="link icon-only open-panel color-white">
-              <img class="icon" width="22" height="22" style="margin-left: 0px" src="img/menu_icon.png" />
-			 </a>
-            </div>
+  		        <div class="left">
+        			 <a href="#" class="link icon-only open-panel color-white">
+                      <img class="icon" width="22" height="22" style="margin-left: 0px" src="img/menu_icon.png" />
+        			 </a>
+              </div>
             <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-            <div class="sliding center logo">The Coffee Match</div>
-			<div class="right ndv" id="icon-invite">
-              <a href="convites.html" class="link icon-only color-white">
-				<img class="icon" width="22" height="22" src="img/sino.PNG" />
-			  </a>
-			</div>
+            <div class="center logo">The Coffee Match</div>
+			         <div class="right ndv" id="icon-invite">
+                 <a href="convites.html" class="link icon-only color-white">
+				         <img class="icon" width="22" height="22" src="img/sino.PNG" />
+			           </a>
+			         </div>
           </div>
         </div>
         <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
         <div class="pages navbar-through toolbar-through">
-			<!-- Page, "data-page" contains page name -->
-			<div data-page="index" class="page blue-page">
-        <a href="#" class="floating-button color-white none" style="font-size: 30px">
-            +
-        </a>
+
+			 <!-- Page, "data-page" contains page name -->
+			 <div data-page="index" class="page blue-page">
+
 				<!-- Scrollable page content -->
 				<div class="page-content">
 					<div class="tabs-container">
@@ -284,11 +284,9 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                   <a href="#" class="link"></a>
-                   <a href="#" class="link">
-                     <i class="f7-icons color-gray" style="margin-left: 25px">star_fill</i>
-                     <i class="f7-icons color-gray" style="margin-left: 25px">reply_fill</i>
-                     <i class="f7-icons color-gray" style="margin-left: 25px">trash_fill</i>
+                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> GET IN</a>
+                   <a href="#" class="link color-gray">
+                     <i class="f7-icons" style="margin-right: 8px">trash</i>REMOVE
                    </a>
                   </div>
                  </div>
@@ -326,11 +324,9 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                   <a href="#" class="link"></a>
-                   <a href="#" class="link">
-                     <i class="f7-icons color-gray" style="margin-left: 25px">star_fill</i>
-                     <i class="f7-icons color-gray" style="margin-left: 25px">reply_fill</i>
-                     <i class="f7-icons color-gray" style="margin-left: 25px">trash_fill</i>
+                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> GET IN</a>
+                   <a href="#" class="link color-gray">
+                     <i class="f7-icons" style="margin-right: 8px">trash</i>REMOVE
                    </a>
                   </div>
                  </div>
@@ -365,11 +361,9 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                   <a href="#" class="link"></a>
-                   <a href="#" class="link">
-                     <i class="f7-icons color-gray" style="margin-left: 25px">star_fill</i>
-                     <i class="f7-icons color-gray" style="margin-left: 25px">reply_fill</i>
-                     <i class="f7-icons color-gray" style="margin-left: 25px">trash_fill</i>
+                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> GET IN</a>
+                   <a href="#" class="link color-gray">
+                     <i class="f7-icons" style="margin-right: 8px">trash</i>REMOVE
                    </a>
                   </div>
                  </div>
@@ -379,8 +373,39 @@
           </div>
 </div>
 					</div>
+
+          <!-- Floating Button -->
+          <a href="#" class="floating-button color-white open-popup none" data-popup=".popup-about" style="font-size: 30px">
+              +
+          </a>
+
 				</div>
+
+        <!-- About Popup -->
+        <div class="popup tablet-fullscreen popup-about">
+          <div class="navbar">
+            <div class="navbar-inner">
+    		        <div class="left">
+          			 <a href="#" class="link icon-only open-panel color-white">
+                        <i class="f7-icons">close</i>
+          			 </a>
+                </div>
+              <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+              <div class="center logo">New Project</div>
+		          <div class="right">
+               <a href="#" class="link icon-only color-white">
+			               <img class="icon" width="22" height="22" src="img/sino.PNG" />
+		           </a>
+		          </div>
+            </div>
+          </div>
+          <div class="content-block">
+            <p>About</p>
+            <p><a href="#" class="close-popup">Close popup</a></p>
+            <p>Lorem ipsum dolor ...</p>
+          </div>
         </div>
+      </div>
 
 		<div class="toolbar messagebar invisible" id="toolbar" style="background-color: white">
 			<div class="toolbar-inner" style="background-color: white">
@@ -407,6 +432,5 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-
   </body>
 </html>

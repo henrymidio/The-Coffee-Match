@@ -1,6 +1,6 @@
 html, body {
     position: relative;
-	font-family: Roboto, sans-serif;
+	font-family: 'Nunito', Roboto, sans-serif;
 	font-size: 15px;
 }
 
@@ -406,6 +406,10 @@ letter-spacing:0.09em;
 	padding: 0px !important;
 	margin: 0px !important;
 	height: 100%;
+}
+
+.popup-overlay.modal-overlay-visible {
+  opacity: 0 !important;
 }
 
 .statusbar-overlay {
