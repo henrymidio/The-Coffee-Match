@@ -137,6 +137,14 @@ var app = {
           $('.tabs-animated-wrap').height(altura1);
       });
 
+      //Evento de click no float button para exibir/esconder a toolbutton
+      $('#button-new-project').on('click', function () {
+        $('#ctb').toggleClass('invisible');
+      });
+      $('.cancel-project').on('click', function () {
+        $('#ctb').toggleClass('invisible');
+      });
+
       //Evento que expande projeto
       $(document.body).on('click', '.open-card', function () {
           $(this).siblings('.card-content').slideToggle('fast', function(){
@@ -247,8 +255,17 @@ var app = {
            +'</div>'
         +'</div>';
        $("#tab2").prepend(line);
+
+       $('#ctb').toggleClass('invisible');
        myApp.closeModal(".popup-form", true);
        $('.tabs-animated-wrap').height('auto')
+       cleanProjectForm();
+      }
+      function cleanProjectForm() {
+        $('#project-name').val('');
+        $('#project-category option:eq(0)').prop('selected', true)
+        $('#project-description').val('');
+        $('.container-chip').empty()
       }
 
       //Seta informações do side-panel
