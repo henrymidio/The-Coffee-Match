@@ -152,7 +152,25 @@ var app = {
         });
       });
 
-      
+      //Evento que adiciona chips no form de criação do projeto
+      $('.add-tag').on('click', function () {
+        var conteudo = $('#create-tag').val();
+        if(conteudo < 2) {return false}
+        //Monta o DOM
+        var line = "<div class='chip chip-form'>"
+              + "<div class='chip-label'>"+conteudo+"</div>"
+              + "<a href='#' class='chip-delete'></a>"
+              + "</div>";
+              $(".container-chip").append(line);
+       $('#create-tag').val('');
+      });
+
+      //Evento que deleta chips
+      $(document.body).on('click', '.chip-delete', function (e) {
+        e.preventDefault();
+        var chip = $$(this).parents('.chip');
+        chip.remove();
+      });
 
 			var pic = localStorage.getItem("picture");
 

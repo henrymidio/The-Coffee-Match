@@ -53,6 +53,36 @@ body {
     flex-shrink: 1;
     min-width: 0;
 }
+.chip-delete {
+    margin-right: -6px;
+    width: 23px;
+    height: 23px;
+    text-align: center;
+    line-height: 23px;
+    cursor: pointer;
+    -webkit-flex-shrink: 0;
+    -ms-flex: 0 0 auto;
+    flex-shrink: 0;
+    background-image: url(https://www.northwest.com/sites/all/themes/custom/northwest_ui/assets/img/nav/icon-close-grey.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: 13px 13px;
+    background-size: 13px 13px;
+    opacity: .7;
+}
+
+.container-chip {
+  margin: 10px;
+}
+
+.chip-form {
+  color: grey;
+  background: white;
+  border: 1px solid grey;
+  padding: 10px;
+  margin-right: 7px;
+  border-radius: 20px;
+}
 
 .f7-icons, .framework7-icons {
   font-family: 'Framework7 Icons';
@@ -257,7 +287,7 @@ select.rounded {
 }
 
 .add-tag {
-  width: 29px;
+  width: 30px;
   height: 31px;
   font-size: 20px;
   border-radius: 100%;
