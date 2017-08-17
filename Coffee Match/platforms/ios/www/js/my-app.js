@@ -1,6 +1,7 @@
 // Initialize app
 var myApp = new Framework7({
-    statusbarOverlay:false
+    statusbarOverlay:false,
+    smartSelectOpenIn:'picker'
 });
 
 // If we need to use custom DOM library, let's save it to $$ variable:

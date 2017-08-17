@@ -152,6 +152,8 @@ var app = {
         });
       });
 
+      
+
 			var pic = localStorage.getItem("picture");
 
 			$$(".search-img").attr("src", pic);

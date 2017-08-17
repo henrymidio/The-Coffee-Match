@@ -128,6 +128,7 @@
 
 				<!-- Scrollable page content -->
 				<div class="page-content">
+
 					<div class="tabs-container">
 						<!-- Buttons row as tabs controller -->
 						<div class="buttons-row">
@@ -284,9 +285,11 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> GET IN</a>
                    <a href="#" class="link color-gray">
-                     <i class="f7-icons" style="margin-right: 8px">trash</i>REMOVE
+                     <i class="f7-icons color-yellow" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN
+                   </a>
+                   <a href="#" class="link color-gray">
+                     <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
                    </a>
                   </div>
                  </div>
@@ -324,9 +327,9 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> GET IN</a>
+                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> JOIN</a>
                    <a href="#" class="link color-gray">
-                     <i class="f7-icons" style="margin-right: 8px">trash</i>REMOVE
+                     <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
                    </a>
                   </div>
                  </div>
@@ -361,9 +364,9 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> GET IN</a>
+                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> JOIN</a>
                    <a href="#" class="link color-gray">
-                     <i class="f7-icons" style="margin-right: 8px">trash</i>REMOVE
+                     <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
                    </a>
                   </div>
                  </div>
@@ -372,40 +375,94 @@
             </div>
           </div>
 </div>
-					</div>
 
-          <!-- Floating Button -->
-          <a href="#" class="floating-button color-white open-popup none" data-popup=".popup-about" style="font-size: 30px">
-              +
-          </a>
+					</div>
 
 				</div>
 
+        <!-- Floating Button -->
+        <a href="#" class="floating-button color-white open-popup none" data-popup=".popup-form" style="font-size: 30px">
+            +
+        </a>
         <!-- About Popup -->
-        <div class="popup tablet-fullscreen popup-about">
+        <div class="popup popup-form">
           <div class="navbar">
             <div class="navbar-inner">
-    		        <div class="left">
-          			 <a href="#" class="link icon-only open-panel color-white">
-                        <i class="f7-icons">close</i>
-          			 </a>
+                <div class="left">
+                 <a href="#" class="link icon-only close-popup color-white">
+                        <i class="f7-icons" style="font-size: 25px">close</i>
+                 </a>
                 </div>
               <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
               <div class="center logo">New Project</div>
-		          <div class="right">
-               <a href="#" class="link icon-only color-white">
-			               <img class="icon" width="22" height="22" src="img/sino.PNG" />
-		           </a>
-		          </div>
+              <div class="right">
+                <a href="#" class="link icon-only open-panel">
+                       <i class="f7-icons" style="color: transparent">close</i>
+                </a>
+              </div>
             </div>
           </div>
           <div class="content-block">
-            <p>About</p>
-            <p><a href="#" class="close-popup">Close popup</a></p>
-            <p>Lorem ipsum dolor ...</p>
+            <div class="list-block">
+              <ul>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-input">
+                        <input type="text" style="font-size: 24px" placeholder="Your project Name...">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <br>
+                  <p class="label" style="padding-left: 10px; font-size: 12px">Wich category</p>
+                  <div class="item-content" style="margin-top: -12px">
+                    <div class="item-inner">
+                      <div class="item-input">
+                        <select>
+                          <option>Fintech</option>
+                          <option>Education</option>
+                          <option>Heatlh</option>
+                          <option>Sharing Economy</option>
+                          <option>IoT</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <br>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-input">
+                          <textarea placeholder="Describe your project..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <br>
+                  <p class="label" style="padding-left: 10px; font-size: 12px">Looking for</p>
+                  <div class="row">
+                    <div class="col-85">
+                      <div class="search-tags">
+            						<input class="rounded" type="text" placeholder="Example: developer...">
+            					</div>
+                    </div>
+                    <div class="col-15">
+                      <a href="#" class="button add-tag">+</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
+          <div class="container-toolbutton">
+            <a href="#" class="button button-big toolbutton">SAVE</a>
         </div>
-      </div>
+        </div>
+
 
 		<div class="toolbar messagebar invisible" id="toolbar" style="background-color: white">
 			<div class="toolbar-inner" style="background-color: white">
@@ -423,9 +480,9 @@
     <!-- Path to your app js-->
     <script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/my-app.js"></script>
-	<!-- transform2d lib -->
+	<!-- transform2d lib
     <script type="text/javascript" src="js/jquery.transform2d.js"></script>
-    <!-- jTinder lib
+     jTinder lib
     <script type="text/javascript" src="js/jquery.jtinder.js"></script>
 	-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcs3g8j5yPjagkK-GH9rhLK7aYe-CYA3w" type="text/javascript"></script>

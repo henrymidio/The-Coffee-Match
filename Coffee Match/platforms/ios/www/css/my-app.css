@@ -1,7 +1,7 @@
 html, body {
     position: relative;
 	font-family: 'Nunito', Roboto, sans-serif;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 body {
@@ -230,9 +230,42 @@ select.rounded {
 }
 
 ::-webkit-input-placeholder {
-   color: rgba(89, 104, 114, 0.6) !important;
+   color: rgba(89, 104, 114, 0.3) !important;
 }
 
+.search-tags {
+    margin-left: 8px;
+    background: rgba(47, 58, 65, 0.03);
+    /* padding: 15px; */
+    padding-left: 18px;
+    border-radius: 10px;
+}
+
+.container-toolbutton {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.toolbutton {
+  border-radius: 0;
+  color: rgb(0, 209, 115);
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-top: 1px solid rgb(181, 194, 202);
+}
+
+.add-tag {
+  width: 29px;
+  height: 31px;
+  font-size: 20px;
+  border-radius: 100%;
+  margin-top: 6px;
+  padding: 0 5px;
+  border: 2px solid rgb(89, 104, 114);
+  color: rgb(89, 104, 114);
+}
 
 .message-received .message-text {
 	background-color: #E8e3dd !important;
@@ -409,7 +442,7 @@ letter-spacing:0.09em;
 }
 
 .popup-overlay.modal-overlay-visible {
-  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .statusbar-overlay {
