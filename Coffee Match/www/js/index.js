@@ -138,7 +138,7 @@ var app = {
       });
 
       //Evento que expande projeto
-      $('.open-card').on('click', function () {
+      $(document.body).on('click', '.open-card', function () {
           $(this).siblings('.card-content').slideToggle('fast', function(){
             altura2 = $('#tab2').height(); //Resize da tab
           });
@@ -156,9 +156,9 @@ var app = {
       $('.add-tag').on('click', function () {
         var conteudo = $('#create-tag').val();
         if(conteudo < 2) {return false}
-        //Monta o DOM
+        //Monta o DOM dos chips
         var line = "<div class='chip chip-form'>"
-              + "<div class='chip-label'>"+conteudo+"</div>"
+              + "<div class='chip-label project-skill'>"+conteudo+"</div>"
               + "<a href='#' class='chip-delete'></a>"
               + "</div>";
               $(".container-chip").append(line);
@@ -172,11 +172,89 @@ var app = {
         chip.remove();
       });
 
+      //Evento de criação de novo projeto
+      $(document.body).on('click', '.save-project', function (e) {
+        var projectName        = $('#project-name').val();
+        var projectCategory    = $('#project-category').find(":selected").text();
+        var projectDescription = $('#project-description').val();
+        var projectSkills = $('.project-skill').map(function() {
+            return $(this).text();
+        }).get();
+        //projectSkills.join(',')
+
+        var projeto = {
+          projectName: projectName,
+          projectCategory: projectCategory,
+          projectDescription: projectDescription,
+          projectSkills: projectSkills
+        };
+        if(projectCategory == 'Health') {
+          projeto.background = 'http://hlknweb.tamu.edu/sites/hlknweb.tamu.edu/files/styles/main_page_photo/public/health%20check.jpg?itok=aAKbZUcC';
+        }
+        if(projectCategory == 'Fintech') {
+          projeto.background = 'http://magodomercado.com/wp-content/uploads/2014/08/como-investir-na-bolsa-de-valores.jpg';
+        }
+        //Valida os inputs
+        if(projectName < 1 || projectCategory < 1 || projectDescription < 1 || projectSkills < 1) {
+          alert("Preencha todos os campos");
+          return false;
+        }
+
+        createNewProject(projeto);
+
+      });
+      function createNewProject(projeto) {
+        var projectDate = new Date();
+        var skills = '';
+        projeto.projectSkills.forEach(function(entry) {
+          skills += '<div class="chip" style="margin-right: 3px">'
+                    +'<div class="chip-label">'+entry+'</div>'
+                    +'</div>';
+        });
+
+        //Monta o DOM dos chips
+        var line = '<div class="card demo-card-header-pic">'
+           +'<div style="background-image:url('+projeto.background+')" valign="center" class="card-header color-white no-border">'
+           +'<p class="project-name">'+projeto.projectName+'<br><span style="font-size: 15px">'+projeto.projectCategory+'</span></p>'
+           +'<div class="project-owner">'
+                 +'<img src="'+localStorage.getItem("picture")+'" />'
+                 +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+localStorage.getItem("name")+'</span>'
+              +'</div>'
+           +'</div>'
+           +'<p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
+              +'<small>'+projectDate+'</small>'
+              +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>'
+           +'</p>'
+           +'<div class="card-content" style="display: none">'
+              +'<div class="card-content-inner">'
+                 +'<p class="project-description">'+projeto.projectDescription+'</p>'
+                 +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+                 +'<div class="skills" style="margin-top: -10px">'
+                 +skills
+                 +'</div>'
+              +'</div>'
+              +'<div class="card-footer">'
+                 +'<a href="#" class="link color-gray">'
+                 +'<i class="f7-icons color-yellow" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
+                 +'</a>'
+                 +'<a href="#" class="link color-gray">'
+                 +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward</i>SKIP'
+                 +'</a>'
+                 +'<a href="#" class="link color-gray">'
+                 +'<i class="f7-icons color-red" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
+                 +'</a>'
+              +'</div>'
+           +'</div>'
+        +'</div>';
+       $("#tab2").prepend(line);
+       myApp.closeModal(".popup-form", true);
+       $('.tabs-animated-wrap').height('auto')
+      }
+
+      //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");
-
-			$$(".search-img").attr("src", pic);
+			//$$(".search-img").attr("src", pic);
 			$$(".profile-photo").attr("src", pic);
-
 			$$("#name").html(localStorage.getItem("name"));
 			$$("#age").html(localStorage.getItem("age"));
 
@@ -213,10 +291,6 @@ var app = {
 			}, function(){
 				myApp.alert('It was not possible to find your location. Check it out on settings.');
 			});
-
-		$$('.invite').on('click', function () {
-			$("#tinderslide").jTinder('fav');
-		});
 
 		/* INÍCIO DA BUSCA PROS OUTROS USER */
 

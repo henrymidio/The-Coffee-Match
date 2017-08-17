@@ -1,505 +1,461 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Required meta tags-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <!-- Your app title -->
-    <title>The Coffee Match</title>
-    <!-- Path to Framework7 iOS CSS theme styles-->
-    <link rel="stylesheet" href="css/framework7.ios.min.css">
-    <!-- Path to Framework7 iOS related color styles -->
-    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
-
-	<link rel="stylesheet" href="css/jTinder.css">
-
-	<link rel="stylesheet" href="css/iphone6-7-styles.css">
-
-	<link rel="stylesheet" href="css/tablet-styles.css">
-
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
-
-  <body class="layout-white">
-    <!-- Status bar overlay for full screen mode (PhoneGap) -->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-      <div class="content-block navigation-drawer">
-        <div class="header-panel">
-		        <a href="profile-preview.html" class="close-panel">
-        		 <div style="align-self: center;">
-        			<img class="profile-photo" src="" />
-        			<p class="username"><b><span id="name"></span></b></p>
-        			<p class="occupation"><b>My Profile</b></p>
-        		 </div>
-        		</a>
-		    </div>
-
-		<div class="list-block no-hairlines" style="margin-top: 0px">
-			<ul id="ul-menu-lateral">
-				<li style="text-align: center; padding-top: 17px">
-				   <div>
-					<a href="favorites.html" class="item-link close-panel">
-						<div class="item-title">
-							<img width="22" height="22" src="img/home.png" />
-						</div>
-						<span class="subtitle2">Favorites</span>
-					</a>
-				  </div>
-				</li><br>
-				<li style="text-align: center;">
-				   <div id="icon-agenda">
-					<a href="combinacoes.html" class="item-link close-panel">
-						<div class="item-title">
-							<img src="img/agenda_icon.png" />
-						</div>
-						<span class="subtitle2">Calendar</span>
-					</a>
-
-				  </div>
-				</li><br>
-				<li style="text-align: center">
-				   <div id="icon-message">
-					<a href="messages.html" class="item-link close-panel">
-						<div class="item-title">
-							<img src="img/message_icon.png" />
-						</div>
-						<span class="subtitle2">Messages</span>
-					</a>
-
-				  </div>
-				</li><br>
-				<li style="text-align: center">
-				   <div>
-					<a href="settings.html" class="item-link close-panel">
-						<div class="item-title">
-							<img src="img/settings_icon.png" />
-						</div>
-						<span class="subtitle2">Settings</span>
-					</a>
-				  </div>
-				</li>
-				<br><br>
-				<li style="text-align: center">
-				   <div class="clear-ls">
-					<a href="login2.html" class="item-link close-panel">
-						<div class="item-title">
-							<span style="color: #00d173">Logout</span> <img style="width: 11px; height: 11px; margin-left: 6px" src="img/logout_icon.png" />
-						</div>
-					</a>
-				  </div>
-				</li>
-			</ul>
-		</div>
-      </div>
-    </div>
-    <!-- Views -->
-    <div class="views">
-      <div class="view view-main">
-        <!-- Top Navbar-->
-        <div id="invisible-nav" class="navbar">
-          <div class="navbar-inner">
-  		        <div class="left">
-        			 <a href="#" class="link icon-only open-panel color-white">
-                      <img class="icon" width="22" height="22" style="margin-left: 0px" src="img/menu_icon.png" />
-        			 </a>
-              </div>
-            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-            <div class="center logo">The Coffee Match</div>
-			         <div class="right ndv" id="icon-invite">
-                 <a href="convites.html" class="link icon-only color-white">
-				         <img class="icon" width="22" height="22" src="img/sino.PNG" />
-			           </a>
-			         </div>
-          </div>
-        </div>
-        <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages navbar-through toolbar-through">
-
-			 <!-- Page, "data-page" contains page name -->
-			 <div data-page="index" class="page blue-page">
-
-				<!-- Scrollable page content -->
-				<div class="page-content">
-
-					<div class="tabs-container">
-						<!-- Buttons row as tabs controller -->
-						<div class="buttons-row">
-						  <!-- Link to 1st tab, active -->
-						  <a href='#tab1' class="dark-blue tab1 tab-link active button">People</a>
-						  <!-- Link to 2nd tab -->
-						  <a href='#tab2' class="tab-link tab2 button">Projects</a>
-						</div>
-					</div>
-
-<div class="tabs-animated-wrap" style="height: auto">
-          <div class="tabs">
-            <div id="tab1" class="tab active">
-					   <div id="columns">
-    					  <figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="http://static4.businessinsider.com/image/5229d0a4eab8eab37bad5a7e-100-100/elon-musk.jpg" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">Elon Musk</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">Chief Executive Officer at Tesla</p>
-    								</div>
-    							</div>
-    						</figure>
-
-    						<figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="https://pazh.net/fa/wp-content/uploads/2017/02/services-analyze4.jpg" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">Howard Schultz</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">CEO at Starbucks</p>
-    									<hr>
-    									<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">1 Mutual connection</p>
-    								</div>
-    							</div>
-    						</figure>
-
-    						<figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="http://4827-presscdn.pagely.netdna-cdn.com/wp-content/uploads/2014/12/steve_jobs_thumb-100x100.jpg" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">Steve Jobs</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">Chief Executive Officer at Apple Inc.</p>
-    									<hr>
-    									<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">3 Mutual connections</p>
-    								</div>
-    							</div>
-    						</figure>
-
-    						<figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/091/28a/31ed982.jpg" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">Erlich Bachman</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">Pied Piper</p>
-    								</div>
-    							</div>
-    						</figure>
-
-    						<figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="http://www.whosampled.com/static/artist_images/r2_2008910_18102452274.jpg" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">Snoop Dogg</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">Robin Hood</p>
-    								</div>
-    							</div>
-    						</figure>
-
-    						<figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="https://files.startupranking.com/person/thumb/992_d01ab99fc581fdeac97bee2708051402ea62a196_travis-kalanick_s.png" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">Travis Kalanick</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">Ex-CEO at Uber</p>
-    								</div>
-    							</div>
-    						</figure>
-
-                <figure>
-    							<div class="user-card">
-    								<div class="row">
-    									<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
-    									<div class="col-60 user-card"><img class="img-circle-plus" src="http://img4.bdbphotos.com/images/50x50/c/c/ccrj3zg82p97zr8c.jpg?skj2io4l" /></div>
-    									<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
-    								</div>
-    								<div style="text-align: center">
-    									<h3 style="color: #596872; margin-bottom: 0">James Marshall Hendrix</h3>
-    									<p style="color: #596872; margin-top: 5px; font-size: 13px">The Jimi Hendrix Experience</p>
-                      <hr>
-    									<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">3 Mutual connections</p>
-    								</div>
-    							</div>
-    						</figure>
-
-					   </div>
-           </div>
-
-            <!-- Tab 2 -->
-            <div id="tab2" class="tab" style="height: 100%">
-
-              <div class="card demo-card-header-pic">
-                <div style="background-image:url(https://www.oficinadanet.com.br/imagens/post/18350/nubank2.jpg)" valign="center" class="card-header color-white no-border">
-                  <p class="project-name">Nubank<br><span style="font-size: 15px">Fintech</span></p>
-                  <div class="project-owner">
-                    <img src="https://i.pinimg.com/236x/c4/a9/6d/c4a96db9c0db24b1a6363a022f6399ba--mark-wahlberg-will-smith.jpg" />
-                    <span style="font-size: 13px; text-shadow: 1px 1px 2px #000000">Fulano de Tal</span>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <!-- Your app title -->
+      <title>The Coffee Match</title>
+      <!-- Path to Framework7 iOS CSS theme styles-->
+      <link rel="stylesheet" href="css/framework7.ios.min.css">
+      <!-- Path to Framework7 iOS related color styles -->
+      <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+      <!-- Path to your custom app styles-->
+      <link rel="stylesheet" href="css/my-app.css">
+      <link rel="stylesheet" href="css/jTinder.css">
+      <link rel="stylesheet" href="css/iphone6-7-styles.css">
+      <link rel="stylesheet" href="css/tablet-styles.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
+   <body class="layout-white">
+      <!-- Status bar overlay for full screen mode (PhoneGap) -->
+      <div class="statusbar-overlay"></div>
+      <!-- Panels overlay-->
+      <div class="panel-overlay"></div>
+      <!-- Left panel with reveal effect-->
+      <div class="panel panel-left panel-reveal">
+         <div class="content-block navigation-drawer">
+            <div class="header-panel">
+               <a href="profile-preview.html" class="close-panel">
+                  <div style="align-self: center;">
+                     <img class="profile-photo" src="" />
+                     <p class="username"><b><span id="name"></span></b></p>
+                     <p class="occupation"><b>My Profile</b></p>
                   </div>
-                </div>
-                <p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">
-                  <small>Posted on January 21, 2015</small>
-                  <a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>
-                </p>
-                <div class="card-content" style="display: none">
-                  <div class="card-content-inner">
-                    <p class="project-description">Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla...</p>
-                    <p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>
-                    <div class='skills' style='margin-top: -10px'>
-                      <div class="chip">
-                        <div class="chip-label">iOS Developer</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">DBA</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Collaborator</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Funding</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                   <a href="#" class="link color-gray">
-                     <i class="f7-icons color-yellow" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN
-                   </a>
-                   <a href="#" class="link color-gray">
-                     <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
-                   </a>
-                  </div>
-                 </div>
-              </div>
-
-              <div class="card demo-card-header-pic">
-                <div style="background-image:url(http://www.profissionaldeecommerce.com.br/wp-content/uploads/2016/09/case-starbucks.jpg)" valign="center" class="card-header color-white no-border">
-                  <p class="project-name">Starbucks<br><span style="font-size: 15px">Cafeteria</span></p>
-                  <div class="project-owner">
-                    <img src="https://qt.azureedge.net/resources/authors-images-small/howard-schultz.jpg" />
-                    <span style="font-size: 13px; text-shadow: 1px 1px 2px #000000">Howard Schultz</span>
-                  </div>
-                </div>
-                <p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">
-                  <small>Posted on January 21, 2015</small>
-                  <a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>
-                </p>
-                <div class="card-content" style="display: none">
-                  <div class="card-content-inner">
-                    <p class="project-description">Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla...</p>
-                    <p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>
-                    <div class='skills' style='margin-top: -10px'>
-                      <div class="chip">
-                        <div class="chip-label">Backend Developer</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Mentorship</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Collaborator</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Funding</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> JOIN</a>
-                   <a href="#" class="link color-gray">
-                     <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
-                   </a>
-                  </div>
-                 </div>
-              </div>
-
-              <div class="card demo-card-header-pic">
-                <div style="background-image:url(https://media.licdn.com/media/AAEAAQAAAAAAAAfXAAAAJDlhMDM0NWE4LWZjNTUtNDNiMS1iN2M4LWY2YmU3ZTUwZjY3Mw.png)" valign="center" class="card-header color-white no-border">
-                  <p class="project-name">Spotify<br><span style="font-size: 15px">Music</span></p>
-                  <div class="project-owner">
-                    <img src="https://qph.ec.quoracdn.net/main-thumb-t-58039-50-l5YpwITkMJa17DKAl3uXUzqf3qHgji8a.jpeg" />
-                    <span style="font-size: 13px; text-shadow: 1px 1px 2px #000000">Daniel Ek</span>
-                  </div>
-                </div>
-                <p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">
-                  <small>Posted on January 21, 2015</small>
-                  <a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>
-                </p>
-                <div class="card-content" style="display: none">
-                  <div class="card-content-inner">
-                    <p class="project-description">Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla...</p>
-                    <p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>
-                    <div class='skills' style='margin-top: -10px'>
-                      <div class="chip">
-                        <div class="chip-label">Musician</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Collaborator</div>
-                      </div>
-                      <div class="chip">
-                        <div class="chip-label">Funding</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                   <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> JOIN</a>
-                   <a href="#" class="link color-gray">
-                     <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
-                   </a>
-                  </div>
-                 </div>
-              </div>
-              <br>
+               </a>
             </div>
-          </div>
-</div>
-
-					</div>
-
-				</div>
-
-        <!-- Floating Button -->
-        <a href="#" class="floating-button color-white open-popup none" data-popup=".popup-form" style="font-size: 30px">
-            +
-        </a>
-        <!-- About Popup -->
-        <div class="popup popup-form">
-          <div class="navbar">
-            <div class="navbar-inner">
-                <div class="left">
-                 <a href="#" class="link icon-only close-popup color-white">
-                        <i class="f7-icons" style="font-size: 25px">close</i>
-                 </a>
-                </div>
-              <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-              <div class="center logo">New Project</div>
-              <div class="right">
-                <a href="#" class="link icon-only open-panel">
-                       <i class="f7-icons" style="color: transparent">close</i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="content-block">
-            <div class="list-block">
-              <ul>
-                <li>
-                  <div class="item-content">
-                    <div class="item-inner">
-                      <div class="item-input">
-                        <input type="text" style="font-size: 24px" placeholder="Your project Name...">
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <br>
-                  <p class="label opt" style="padding-left: 10px; font-size: 12px">Wich category</p>
-                  <div class="item-content" style="margin-top: -12px">
-                    <div class="item-inner">
-                      <div class="item-input">
-                        <a href="#" class="item-link">
-                          <select>
-                            <option></option>
-                            <option>Education</option>
-                            <option>Heatlh</option>
-                            <option>Sharing Economy</option>
-                            <option>IoT</option>
-                          </select>
-
+            <div class="list-block no-hairlines" style="margin-top: 0px">
+               <ul id="ul-menu-lateral">
+                  <li style="text-align: center; padding-top: 17px">
+                     <div>
+                        <a href="favorites.html" class="item-link close-panel">
+                           <div class="item-title">
+                              <img width="22" height="22" src="img/home.png" />
+                           </div>
+                           <span class="subtitle2">Favorites</span>
                         </a>
-                      </div>
-                      <div class="item-after"><i class="f7-icons" style="font-size: 18px">right</i></div>
-                    </div>
-                  </div>
-                </li>
-                <li>
+                     </div>
+                  </li>
                   <br>
-                  <p class="label" style="padding-left: 10px; font-size: 12px">Describe your project</p>
-                  <div class="item-content" style="margin-top: -12px">
-                    <div class="item-inner">
-                      <div class="item-input">
-                          <textarea placeholder="lorem ipsum..."></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
+                  <li style="text-align: center;">
+                     <div id="icon-agenda">
+                        <a href="combinacoes.html" class="item-link close-panel">
+                           <div class="item-title">
+                              <img src="img/agenda_icon.png" />
+                           </div>
+                           <span class="subtitle2">Calendar</span>
+                        </a>
+                     </div>
+                  </li>
                   <br>
-                  <p class="label" style="padding-left: 10px; font-size: 12px"><i class="f7-icons" style="font-size: 12px; margin-right: 7px">search</i>Looking for</p>
-                  <div class="row">
-                    <div class="col-85">
-                      <div class="search-tags">
-            						<input class="rounded" id="create-tag" type="text" placeholder="Example: developer...">
-            					</div>
-                    </div>
-                    <div class="col-15">
-                      <a href="#" class="button add-tag">+</a>
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-              <div class="container-chip">
-                <div class="chip chip-form">
-                  <div class="chip-label">Musician</div>
-                  <a href="#" class="chip-delete"></a>
-                </div>
-              </div>
+                  <li style="text-align: center">
+                     <div id="icon-message">
+                        <a href="messages.html" class="item-link close-panel">
+                           <div class="item-title">
+                              <img src="img/message_icon.png" />
+                           </div>
+                           <span class="subtitle2">Messages</span>
+                        </a>
+                     </div>
+                  </li>
+                  <br>
+                  <li style="text-align: center">
+                     <div>
+                        <a href="settings.html" class="item-link close-panel">
+                           <div class="item-title">
+                              <img src="img/settings_icon.png" />
+                           </div>
+                           <span class="subtitle2">Settings</span>
+                        </a>
+                     </div>
+                  </li>
+                  <br><br>
+                  <li style="text-align: center">
+                     <div class="clear-ls">
+                        <a href="login2.html" class="item-link close-panel">
+                           <div class="item-title">
+                              <span style="color: #00d173">Logout</span> <img style="width: 11px; height: 11px; margin-left: 6px" src="img/logout_icon.png" />
+                           </div>
+                        </a>
+                     </div>
+                  </li>
+               </ul>
             </div>
-          </div>
-          <div class="container-toolbutton">
-            <a href="#" class="button button-big toolbutton">SAVE</a>
-        </div>
-        </div>
-
-
-		<div class="toolbar messagebar invisible" id="toolbar" style="background-color: white">
-			<div class="toolbar-inner" style="background-color: white">
-				<span style="margin-right: 15px"></span> <textarea style="border: none; background-color: white; margin: 0px" placeholder="Your message..."></textarea><a href="#" class="link" style="color: #00d173">Send</a>
-			</div>
-		</div>
-
+         </div>
       </div>
-    </div>
-	<!-- jQuery lib -->
-    <script src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="cordova.js"></script>
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/index.js"></script>
-	<script type="text/javascript" src="js/my-app.js"></script>
-	<!-- transform2d lib
-    <script type="text/javascript" src="js/jquery.transform2d.js"></script>
-     jTinder lib
-    <script type="text/javascript" src="js/jquery.jtinder.js"></script>
-	-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcs3g8j5yPjagkK-GH9rhLK7aYe-CYA3w" type="text/javascript"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-  </body>
+      <!-- Views -->
+      <div class="views">
+        <div class="view view-main">
+         <!-- Top Navbar-->
+         <div id="invisible-nav" class="navbar">
+            <div class="navbar-inner">
+               <div class="left">
+                  <a href="#" class="link icon-only open-panel color-white">
+                  <img class="icon" width="22" height="22" style="margin-left: 0px" src="img/menu_icon.png" />
+                  </a>
+               </div>
+               <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+               <div class="center sliding logo">The Coffee Match</div>
+               <div class="right ndv" id="icon-invite">
+                  <a href="convites.html" class="link icon-only color-white">
+                  <img class="icon" width="22" height="22" src="img/sino.PNG" />
+                  </a>
+               </div>
+            </div>
+         </div>
+         <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+         <div class="pages navbar-through toolbar-through">
+            <!-- Page, "data-page" contains page name -->
+            <div data-page="index" class="page blue-page">
+               <!-- Scrollable page content -->
+               <div class="page-content">
+                  <div class="tabs-container">
+                     <!-- Buttons row as tabs controller -->
+                     <div class="buttons-row">
+                        <!-- Link to 1st tab, active -->
+                        <a href='#tab1' class="dark-blue tab1 tab-link active button">People</a>
+                        <!-- Link to 2nd tab -->
+                        <a href='#tab2' class="tab-link tab2 button">Projects</a>
+                     </div>
+                  </div>
+                  <div class="tabs-animated-wrap" style="height: auto">
+                     <div class="tabs">
+                        <div id="tab1" class="tab active">
+                           <div id="columns">
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="http://static4.businessinsider.com/image/5229d0a4eab8eab37bad5a7e-100-100/elon-musk.jpg" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">Elon Musk</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">Chief Executive Officer at Tesla</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="https://pazh.net/fa/wp-content/uploads/2017/02/services-analyze4.jpg" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">Howard Schultz</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">CEO at Starbucks</p>
+                                       <hr>
+                                       <p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">1 Mutual connection</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="http://4827-presscdn.pagely.netdna-cdn.com/wp-content/uploads/2014/12/steve_jobs_thumb-100x100.jpg" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">Steve Jobs</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">Chief Executive Officer at Apple Inc.</p>
+                                       <hr>
+                                       <p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">3 Mutual connections</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">10km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/091/28a/31ed982.jpg" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">Erlich Bachman</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">Pied Piper</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="http://www.whosampled.com/static/artist_images/r2_2008910_18102452274.jpg" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">Snoop Dogg</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">Robin Hood</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="https://files.startupranking.com/person/thumb/992_d01ab99fc581fdeac97bee2708051402ea62a196_travis-kalanick_s.png" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">Travis Kalanick</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">Ex-CEO at Uber</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                              <figure>
+                                 <div class="user-card">
+                                    <div class="row">
+                                       <div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">9km</div>
+                                       <div class="col-60 user-card"><img class="img-circle-plus" src="http://img4.bdbphotos.com/images/50x50/c/c/ccrj3zg82p97zr8c.jpg?skj2io4l" /></div>
+                                       <div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>
+                                    </div>
+                                    <div style="text-align: center">
+                                       <h3 style="color: #596872; margin-bottom: 0">James Marshall Hendrix</h3>
+                                       <p style="color: #596872; margin-top: 5px; font-size: 13px">The Jimi Hendrix Experience</p>
+                                       <hr>
+                                       <p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">3 Mutual connections</p>
+                                    </div>
+                                 </div>
+                              </figure>
+                           </div>
+                        </div>
+                        <!-- Tab 2 -->
+                        <div id="tab2" class="tab" style="height: 100%">
+                           <div class="card demo-card-header-pic">
+                              <div style="background-image:url(https://www.oficinadanet.com.br/imagens/post/18350/nubank2.jpg)" valign="center" class="card-header color-white no-border">
+                                 <p class="project-name">Nubank<br><span style="font-size: 15px">Fintech</span></p>
+                                 <div class="project-owner">
+                                    <img src="https://i.pinimg.com/236x/c4/a9/6d/c4a96db9c0db24b1a6363a022f6399ba--mark-wahlberg-will-smith.jpg" />
+                                    <span style="font-size: 13px; text-shadow: 1px 1px 2px #000000">Fulano de Tal</span>
+                                 </div>
+                              </div>
+                              <p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">
+                                 <small>Posted on January 21, 2015</small>
+                                 <a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>
+                              </p>
+                              <div class="card-content" style="display: none">
+                                 <div class="card-content-inner">
+                                    <p class="project-description">Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla...</p>
+                                    <p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>
+                                    <div class='skills' style='margin-top: -10px'>
+                                       <div class="chip">
+                                          <div class="chip-label">iOS Developer</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">DBA</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Collaborator</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Funding</div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="card-footer">
+                                    <a href="#" class="link color-gray">
+                                    <i class="f7-icons color-yellow" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN
+                                    </a>
+                                    <a href="#" class="link color-gray">
+                                    <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward</i>SKIP
+                                    </a>
+                                    <a href="#" class="link color-gray">
+                                    <i class="f7-icons color-red" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="card demo-card-header-pic">
+                              <div style="background-image:url(http://www.profissionaldeecommerce.com.br/wp-content/uploads/2016/09/case-starbucks.jpg)" valign="center" class="card-header color-white no-border">
+                                 <p class="project-name">Starbucks<br><span style="font-size: 15px">Cafeteria</span></p>
+                                 <div class="project-owner">
+                                    <img src="https://qt.azureedge.net/resources/authors-images-small/howard-schultz.jpg" />
+                                    <span style="font-size: 13px; text-shadow: 1px 1px 2px #000000">Howard Schultz</span>
+                                 </div>
+                              </div>
+                              <p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">
+                                 <small>Posted on January 21, 2015</small>
+                                 <a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>
+                              </p>
+                              <div class="card-content" style="display: none">
+                                 <div class="card-content-inner">
+                                    <p class="project-description">Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla...</p>
+                                    <p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>
+                                    <div class='skills' style='margin-top: -10px'>
+                                       <div class="chip">
+                                          <div class="chip-label">Backend Developer</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Mentorship</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Collaborator</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Funding</div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="card-footer">
+                                    <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> JOIN</a>
+                                    <a href="#" class="link color-gray">
+                                    <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="card demo-card-header-pic">
+                              <div style="background-image:url(https://media.licdn.com/media/AAEAAQAAAAAAAAfXAAAAJDlhMDM0NWE4LWZjNTUtNDNiMS1iN2M4LWY2YmU3ZTUwZjY3Mw.png)" valign="center" class="card-header color-white no-border">
+                                 <p class="project-name">Spotify<br><span style="font-size: 15px">Music</span></p>
+                                 <div class="project-owner">
+                                    <img src="https://qph.ec.quoracdn.net/main-thumb-t-58039-50-l5YpwITkMJa17DKAl3uXUzqf3qHgji8a.jpeg" />
+                                    <span style="font-size: 13px; text-shadow: 1px 1px 2px #000000">Daniel Ek</span>
+                                 </div>
+                              </div>
+                              <p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">
+                                 <small>Posted on January 21, 2015</small>
+                                 <a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>
+                              </p>
+                              <div class="card-content" style="display: none">
+                                 <div class="card-content-inner">
+                                    <p class="project-description">Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla Quisque eget vestibulum nulla...</p>
+                                    <p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>
+                                    <div class='skills' style='margin-top: -10px'>
+                                       <div class="chip">
+                                          <div class="chip-label">Musician</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Collaborator</div>
+                                       </div>
+                                       <div class="chip">
+                                          <div class="chip-label">Funding</div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="card-footer">
+                                    <a href="#" class="link color-gray"><i class="f7-icons color-yellow" style="margin-right: 8px">star_fill</i> JOIN</a>
+                                    <a href="#" class="link color-gray">
+                                    <i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">trash</i>SKIP
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <br>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- Floating Button -->
+            <a href="#" class="floating-button color-white open-popup none" data-popup=".popup-form" style="font-size: 30px">
+            +
+            </a>
+            <!-- About Popup -->
+            <div class="popup popup-form">
+               <div class="content-block">
+                  <div class="list-block">
+                     <ul>
+                        <li>
+                           <div class="item-content">
+                              <div class="item-inner">
+                                 <div class="item-input">
+                                    <input type="text" id="project-name" style="font-size: 24px" placeholder="Your project Name...">
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <br>
+                           <p class="label opt" style="padding-left: 10px; font-size: 12px; font-weight: bold">Wich category</p>
+                           <div class="item-content" style="margin-top: -12px">
+                              <div class="item-inner">
+                                 <div class="item-input">
+                                    <a href="#" class="item-link">
+                                       <select id="project-category">
+                                          <option></option>
+                                          <option>Health</option>
+                                          <option>Fintech</option>
+                                       </select>
+                                    </a>
+                                 </div>
+                                 <div class="item-after"><i class="f7-icons" style="font-size: 18px">right</i></div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <br>
+                           <p class="label" style="padding-left: 10px; font-size: 12px; font-weight: bold">Describe your project</p>
+                           <div class="item-content" style="margin-top: -12px">
+                              <div class="item-inner">
+                                 <div class="item-input">
+                                    <textarea id="project-description" style="height: 150px" placeholder="lorem ipsum..."></textarea>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <br>
+                           <p class="label" style="padding-left: 10px; font-size: 12px"><i class="f7-icons" style="font-size: 12px; margin-right: 7px">search</i><b>Looking for</b></p>
+                           <div class="row">
+                              <div class="col-85">
+                                 <div class="search-tags">
+                                    <input class="rounded" id="create-tag" type="text" placeholder="Example: developer...">
+                                 </div>
+                              </div>
+                              <div class="col-15">
+                                 <a href="#" class="button add-tag">+</a>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                     <div class="container-chip">
+
+                     </div>
+                  </div>
+               </div>
+               <div class="buttons-row container-toolbutton">
+                  <a href="#" class="button button-big toolbutton close-popup"><span class="color-red">CANCEL</span></a>
+                  <a href="#" class="button button-big toolbutton save-project">SAVE</a>
+               </div>
+            </div>
+            <div class="toolbar messagebar invisible" id="toolbar" style="background-color: white">
+               <div class="toolbar-inner" style="background-color: white">
+                  <span style="margin-right: 15px"></span> <textarea style="border: none; background-color: white; margin: 0px" placeholder="Your message..."></textarea><a href="#" class="link" style="color: #00d173">Send</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      <!-- jQuery lib -->
+      <script src="js/jquery.min.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <!-- Path to Framework7 Library JS-->
+      <script type="text/javascript" src="js/framework7.min.js"></script>
+      <!-- Path to your app js-->
+      <script type="text/javascript" src="js/index.js"></script>
+      <script type="text/javascript" src="js/my-app.js"></script>
+      <!-- transform2d lib
+         <script type="text/javascript" src="js/jquery.transform2d.js"></script>
+          jTinder lib
+         <script type="text/javascript" src="js/jquery.jtinder.js"></script>
+         -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcs3g8j5yPjagkK-GH9rhLK7aYe-CYA3w" type="text/javascript"></script>
+      <script type="text/javascript">
+         app.initialize();
+      </script>
+   </body>
 </html>
