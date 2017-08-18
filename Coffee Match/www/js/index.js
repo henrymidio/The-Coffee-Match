@@ -118,41 +118,7 @@ var app = {
 			$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
 		}
 
-
-		myApp.onPageInit('index', function() {
-      //Configura barra de navegação
-			StatusBar.overlaysWebView(false);
-			StatusBar.styleLightContent();
-			StatusBar.backgroundColorByHexString("#2f3a41");
-
-      //Evento de clique nas tabs que exibe o floating button
-      var altura1 = $('#tab1').height();
-      var altura2 = $('#tab2').height();
-
-      $('.tab2').on('click', function () {
-          $$('.floating-button').removeClass('none');
-          $('.tabs-animated-wrap').height(altura2);
-      });
-
-      $('.tab1').on('click', function () {
-          $('.floating-button').addClass('none');
-          $('.tabs-animated-wrap').height(altura1);
-      });
-      $$('#tab2').on('tab:show', function () {
-          alert('Tab 1 is visible');
-      });
-      $$('#tab2').on('tab:hide', function () {
-          alert('Tab 1 is visible');
-      });
-
-      //Evento de click no float button para exibir/esconder a toolbutton
-      $('#button-new-project').on('click', function () {
-        $('#ctb').toggleClass('invisible');
-      });
-      $('.cancel-project').on('click', function () {
-        $('#ctb').toggleClass('invisible');
-      });
-
+    function setIndexEvents() {
       //Evento que expande projeto
       $(document.body).on('click', '.open-card', function () {
           $(this).siblings('.card-content').slideToggle('fast', function(){
@@ -161,15 +127,41 @@ var app = {
           $('.tabs-animated-wrap').height('auto')
       });
 
+      //Evento de clique nas tabs que exibe o floating button
+      var altura1 = $('#tab1').height();
+      var altura2 = $('#tab2').height();
+      /*
+      $('.tab2').on('click', function() {
+        myApp.showTab('#tab2');
+      });
+      */
+      $(document).on('tab:show', '#tab2', function () {
+          $$('.floating-button').removeClass('none');
+          $('.tabs-animated-wrap').height(altura2);
+      });
+      $(document).on('tab:hide', '#tab2', function () {
+          $$('.floating-button').addClass('none');
+          $('.tabs-animated-wrap').height(altura1);
+
+      });
+
+      //Evento de click no float button para exibir/esconder a toolbutton
+      $(document).on('click', '#button-new-project', function () {
+        $('#ctb').removeClass('invisible');
+      });
+      $(document).on('click', '.cancel-project', function () {
+        $('#ctb').addClass('invisible');
+      });
+
       //Evento que elimina card do user
-      $('.hide-user').on('click', function () {
+      $(document).on('click', '.hide-user', function () {
         $(this).parent().closest('figure').fadeOut(500,function(){
           $(this).css({"visibility":"hidden",display:'block'}).slideUp();
         });
       });
 
       //Evento que adiciona chips no form de criação do projeto
-      $('.add-tag').on('click', function () {
+      $(document).on('click', '.add-tag', function () {
         var conteudo = $('#create-tag').val();
         if(conteudo < 2) {return false}
         //Monta o DOM dos chips
@@ -275,6 +267,16 @@ var app = {
         $('#project-description').val('');
         $('.container-chip').empty()
       }
+
+    }
+
+    setIndexEvents();
+		myApp.onPageInit('index', function() {
+      //Configura barra de navegação
+			StatusBar.overlaysWebView(false);
+			StatusBar.styleLightContent();
+			StatusBar.backgroundColorByHexString("#2f3a41");
+
 
       //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");

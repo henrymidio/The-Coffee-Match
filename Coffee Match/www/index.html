@@ -125,7 +125,7 @@
                      <!-- Buttons row as tabs controller -->
                      <div class="buttons-row">
                         <!-- Link to 1st tab, active -->
-                        <a href='#tab1' class="dark-blue tab1 tab-link active button">People</a>
+                        <a href='#tab1' class="dark-blue tab1 tab-link button active">People</a>
                         <!-- Link to 2nd tab -->
                         <a href='#tab2' class="tab-link tab2 button">Projects</a>
                      </div>
@@ -428,12 +428,14 @@
                   </div>
                </div>
                <br>
+               <div id="ctb" class="buttons-row container-toolbutton" style="z-index: 7865768">
+                  <a href="#" class="button button-big toolbutton cancel-project close-popup"><span class="color-red">CANCEL</span></a>
+                  <a href="#" class="button button-big toolbutton save-project">SAVE</a>
+               </div>
             </div>
+
          </div>
-         <div id="ctb" class="buttons-row container-toolbutton invisible" style="z-index: 7865768">
-            <a href="#" class="button button-big toolbutton cancel-project close-popup"><span class="color-red">CANCEL</span></a>
-            <a href="#" class="button button-big toolbutton save-project">SAVE</a>
-         </div>
+
          <div class="toolbar messagebar invisible" id="toolbar" style="background-color: white">
             <div class="toolbar-inner" style="background-color: white">
                <span style="margin-right: 15px"></span> <textarea style="border: none; background-color: white; margin: 0px" placeholder="Your message..."></textarea><a href="#" class="link" style="color: #00d173">Send</a>

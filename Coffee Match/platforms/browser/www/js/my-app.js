@@ -16,6 +16,7 @@ var mainView = myApp.addView('.view-main', {
 });
 
 myApp.onPageInit('login2', function (page) {
+  $$('.floating-button').addClass('none');
 	var mySwiper = myApp.swiper('.swiper-container', {
 		speed: 400,
 		pagination: '.swiper-pagination'
@@ -388,6 +389,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 });
 
 myApp.onPageInit('convites', function (page) {
+  $$('.floating-button').addClass('none');
 	var user_id = localStorage.getItem("user_id");
 	var y = {user_id: user_id};
 
@@ -518,6 +520,7 @@ myApp.onPageInit('favorites', function (page) {
 });
 
 myApp.onPageInit('combinacoes', function (page) {
+  $$('.floating-button').addClass('none');
 	//gambs
 	localStorage.setItem("cancel", "f");
 
@@ -644,6 +647,7 @@ myApp.onPageInit('detail-calendar', function(page){
 });
 
 myApp.onPageInit('profile-preview', function (page) {
+  $$('.floating-button').addClass('none');
 	var metrica = localStorage.getItem("metrica");
 	$$("#preview-metrica").html(metrica);
 
@@ -778,7 +782,7 @@ myApp.onPageInit('profile-view', function (page) {
 });
 
 myApp.onPageInit('messages', function (page) {
-
+  $$('.floating-button').addClass('none');
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
 
@@ -1066,7 +1070,7 @@ myApp.onPageInit('user', function (page) {
 
 
 myApp.onPageBeforeInit('settings', function (page) {
-
+  $$('.floating-button').addClass('none');
 	var uid = localStorage.getItem("user_id");
 	var ud = {user_id: uid};
 	var dst = null;
