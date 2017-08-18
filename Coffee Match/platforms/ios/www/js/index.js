@@ -393,11 +393,9 @@ var app = {
                              +'<div class="col-60 user-card"><img class="img-circle-plus" src="'+data[i].picture+'" /></div>'
                              +'<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>'
                           +'</div>'
-                          +'<div style="text-align: center">'
+                          +'<div class="figure-body" style="text-align: center">'
                              +'<h4 style="color: #596872; margin-bottom: 0">'+data[i].name+'</h3>'
                              +'<p style="color: #596872; margin-top: 5px; font-size: 13px">'+data[i].occupation+'</p>'
-                             +'<hr>'
-                             +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px"><span class="f-number">0</span> Mutual connections</p>'
                           +'</div>'
                        +'</div>'
                     +'</figure>';
@@ -410,8 +408,13 @@ var app = {
 											dataType: 'json',
 											success: function (friendsData) {
 												var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-                        console.log(friends_number)
-												$("#"+data[i].id+" .f-number").html(friends_number);
+                        if(friends_number > 0) {
+                          var line = +'<hr>'
+                                     +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">'+friends_number+' Mutual connections</p>';
+                          $("#"+data[i].id+" .figure-body").append(line);
+                        }
+
+												//$("#"+data[i].id+" .f-number").html(friends_number);
 											},error: function (request, status, error) {
 												//alert(JSON.stringify(request));
                         console.log(error)
