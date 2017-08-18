@@ -324,6 +324,7 @@ var app = {
 		//Armazena as preferencias em variaveis
 
 		function getUserList(requester) {
+      myApp.showIndicator();
 			//Gambiarra pra não bugar no page back do chat
 			var cl = localStorage.getItem("cancel");
 			if(cl == "t") {
@@ -339,6 +340,7 @@ var app = {
 					requester: requester
 				}
 			localStorage.setItem("preview", localStorage.getItem('user_id'));
+
 			$.ajax({
 								url: 'http://api.thecoffeematch.com/v1/users',
 								type: 'get',
@@ -348,60 +350,58 @@ var app = {
 								success: function (data) {
 
 									if(data == null){
-										$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-										$$(".search-img").removeClass("search-effect");
+										//$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
+										//$$(".search-img").removeClass("search-effect");
 										getPendingNotifications();
 										return false;
 									}
 
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
-
+                  /*
 									var position = data.length - 1;
 									localStorage.setItem("shown_user_id", data[position].id);
-
+                  */
 									var classe;
 									for(i = 0; i < data.length; i++){
 
+                    /*
 										if (i == data.length - 1){
 											classe = "current";
 										} else {
 											classe = "next";
 										}
+                    */
 
 										if(data[i].distance < 1) {
-											data[i].distance = 0.5;
+											data[i].distance = '<1';
 										}
 
 										//Grava a distancia do usuário para exibir no perfil expandido
 										localStorage.setItem("shown_user_id_distance", data[i].distance);
-
+                    /*
 										var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
 										var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
 										var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
-
+                    */
 
 										//Monta o DOM
-										var line1 = "<li class="+classe+" id="+data[i].id+"><a href='user.html' data-animate-pages='false' class='no-animation'>"
-													+ "<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; padding-bottom: 1px; min-height: 45vh'>"
-													+ "<div class='row card-top'>"
-													+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173' id='distance'>"+data[i].distance+"</span><br><p class='subcol' id='distance'>"+metrica+"</p></div>"
-													+ "<div class='col-50'><img class='img' src="+data[i].picture+" /></div>"
-													+ "<div class='col-25' style='padding-top: 55px'><span style='color: #00d173'>"+data[i].age+"<br><p class='subcol'>Age</span></p></div>"
-													+ "</div>"
-													+ "<p class='username'>"+data[i].name+"</p>"
-													+ "<p class='college'>"+data[i].college+"</p>"
-													+ "<p class='college' style='margin-top: -15px; font-size: 14px'>"+data[i].occupation+"</p>"
-													+ "<p class='college' style='margin-top: -12px; font-size: 15px; color: #00d173'><b><span class='f-number'>0</span> mutual connections</b></p>"
-													+ "</div><br>"
-													+ "<p class='friends' style='margin-top: -15px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>"
-													+ "<div class='skills' style='margin-top: -15px; margin-left: 20px'>"+skill1+skill2+skill3+"</div><br>"
-													+ "<p class='friends' style='margin-top: -25px; color: #2f3a41'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About Me</b></span></p>"
-													+ "<p class='friends' style='color: #2f3a41; margin-top: -10px; margin-left: 24px'>"+data[i].description+"</p>"
-													+ "<div class='like'></div><div class='dislike'></div>"
-													+ "</div>"
-													+ "</a></li>";
-													$("#user-list").append(line1);
+										var line1 = '<figure id="'+data[i].id+'">'
+                       +'<div class="user-card">'
+                          +'<div class="row">'
+                             +'<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">'+data[i].distance+' Mi</div>'
+                             +'<div class="col-60 user-card"><img class="img-circle-plus" src="'+data[i].picture+'" /></div>'
+                             +'<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>'
+                          +'</div>'
+                          +'<div style="text-align: center">'
+                             +'<h4 style="color: #596872; margin-bottom: 0">'+data[i].name+'</h3>'
+                             +'<p style="color: #596872; margin-top: 5px; font-size: 13px">'+data[i].occupation+'</p>'
+                             +'<hr>'
+                             +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px"><span class="f-number">0</span> Mutual connections</p>'
+                          +'</div>'
+                       +'</div>'
+                    +'</figure>';
+													$("#columns").append(line1);
 
 										$.ajax({
 											url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data[i].fb_token + "&appsecret_proof=" + data[i].appsecret,
@@ -410,14 +410,16 @@ var app = {
 											dataType: 'json',
 											success: function (friendsData) {
 												var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
+                        console.log(friends_number)
 												$("#"+data[i].id+" .f-number").html(friends_number);
 											},error: function (request, status, error) {
 												//alert(JSON.stringify(request));
+                        console.log(error)
 											}
 										});
-
+                    myApp.hideIndicator();
 									}
-
+                  //myApp.hideIndicator();
 									//$$(".buttons-row").toggleClass("none visivel");
 
 									/**
