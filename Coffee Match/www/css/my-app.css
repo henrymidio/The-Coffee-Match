@@ -293,7 +293,7 @@ select.rounded {
   font-size: 16px;
   font-weight: bold;
   border: none;
-  border-top: 1px solid rgb(181, 194, 202);
+  border-top: 1px solid rgba(181, 194, 202, 0.5);
 }
 
 .add-tag {

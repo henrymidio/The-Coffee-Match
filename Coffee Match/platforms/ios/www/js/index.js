@@ -128,13 +128,21 @@ var app = {
       //Evento de clique nas tabs que exibe o floating button
       var altura1 = $('#tab1').height();
       var altura2 = $('#tab2').height();
+
       $('.tab2').on('click', function () {
           $$('.floating-button').removeClass('none');
           $('.tabs-animated-wrap').height(altura2);
       });
+
       $('.tab1').on('click', function () {
           $('.floating-button').addClass('none');
           $('.tabs-animated-wrap').height(altura1);
+      });
+      $$('#tab2').on('tab:show', function () {
+          alert('Tab 1 is visible');
+      });
+      $$('#tab2').on('tab:hide', function () {
+          alert('Tab 1 is visible');
       });
 
       //Evento de click no float button para exibir/esconder a toolbutton
