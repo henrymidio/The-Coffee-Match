@@ -144,6 +144,7 @@ var app = {
       $(document).on('click', '.join-project', function () {
         var self = $(this);
             myApp.confirm('Are you sure?', '', function () {
+                myApp.alert("Sua solicitação foi enviado ao responsável pelo projeto", '')
                 self.find('i').addClass('color-yellow');
             });
       });
@@ -155,6 +156,7 @@ var app = {
       $(document).on('click', '.report-project', function () {
         var self = $(this);
         myApp.confirm('Are you sure?', '', function () {
+            myApp.alert('Sua denúncia será revisada pelos nossos moderadores', '')
             self.find('i').addClass('color-red');
         });
       });
@@ -186,6 +188,11 @@ var app = {
 
       //Evento que adiciona chips no form de criação do projeto
       $(document).on('click', '.add-tag', function () {
+        var countChips = $('.container-chip div.chip').length;
+        if(countChips > 4) {
+          myApp.alert('Você somente pode adicionar 5 skills por projeto', '');
+          return false;
+        }
         var conteudo = $('#create-tag').val();
         if(conteudo < 2) {return false}
         //Monta o DOM dos chips
@@ -237,6 +244,7 @@ var app = {
       });
       function createNewProject(projeto) {
         var projectDate = new Date();
+        projectDate = formatDate(projectDate);
         var skills = '';
         projeto.projectSkills.forEach(function(entry) {
           skills += '<div class="chip" style="margin-right: 3px">'
@@ -254,7 +262,7 @@ var app = {
               +'</div>'
            +'</div>'
            +'<p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
-              +'<small>'+projectDate+'</small>'
+              +'<small>Posted on '+projectDate+'</small>'
               +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>'
            +'</p>'
            +'<div class="card-content" style="display: none">'
@@ -266,14 +274,14 @@ var app = {
                  +'</div>'
               +'</div>'
               +'<div class="card-footer">'
-                 +'<a href="#" class="link color-gray">'
-                 +'<i class="f7-icons color-yellow" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
+                 +'<a href="#" class="link join-project color-gray">'
+                 +'<i class="f7-icons color-gray" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
                  +'</a>'
-                 +'<a href="#" class="link color-gray">'
-                 +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward</i>SKIP'
+                 +'<a href="#" class="link discard-project color-gray">'
+                 +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward_fill</i>SKIP'
                  +'</a>'
-                 +'<a href="#" class="link color-gray">'
-                 +'<i class="f7-icons color-red" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
+                 +'<a href="#" class="link report-project color-gray">'
+                 +'<i class="f7-icons color-grey" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
                  +'</a>'
               +'</div>'
            +'</div>'
@@ -912,6 +920,8 @@ var app = {
 
 		  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 		}
+
+
 
 		}
 
