@@ -130,19 +130,33 @@ var app = {
       //Evento de clique nas tabs que exibe o floating button
       var altura1 = $('#tab1').height();
       var altura2 = $('#tab2').height();
-      /*
-      $('.tab2').on('click', function() {
-        myApp.showTab('#tab2');
-      });
-      */
+
       $(document).on('tab:show', '#tab2', function () {
           $$('.floating-button').removeClass('none');
-          $('.tabs-animated-wrap').height(altura2);
+          //$('.tabs-animated-wrap').height(altura2);
       });
       $(document).on('tab:hide', '#tab2', function () {
           $$('.floating-button').addClass('none');
-          $('.tabs-animated-wrap').height(altura1);
+          //$('.tabs-animated-wrap').height(altura1);
+      });
 
+      //Evento de JOIN ao projeto
+      $(document).on('click', '.join-project', function () {
+        var self = $(this);
+            myApp.confirm('Are you sure?', '', function () {
+                self.find('i').addClass('color-yellow');
+            });
+      });
+      //Evento que descarta projeto
+      $(document).on('click', '.discard-project', function () {
+          $(this).closest('.card').slideUp();
+      });
+      //Evento que deuncia projeto
+      $(document).on('click', '.report-project', function () {
+        var self = $(this);
+        myApp.confirm('Are you sure?', '', function () {
+            self.find('i').addClass('color-red');
+        });
       });
 
       //Evento de click no float button para exibir/esconder a toolbutton
@@ -157,6 +171,16 @@ var app = {
       $(document).on('click', '.hide-user', function () {
         $(this).parent().closest('figure').fadeOut(500,function(){
           $(this).css({"visibility":"hidden",display:'block'}).slideUp();
+        });
+      });
+
+      //Evento que expande card do user
+      $(document).on('click', '.open-profile', function () {
+        var suid = $(this).parent().closest('figure').attr('id');
+        localStorage.setItem("shown_user_id", suid);
+        mainView.router.load({
+          url: "user.html",
+          animatePages: false
         });
       });
 
@@ -350,28 +374,16 @@ var app = {
 								success: function (data) {
 
 									if(data == null){
-										//$$(".search-text").text("We are sorry! There’s no one registered near you. Come back later and try again.")
-										//$$(".search-img").removeClass("search-effect");
+
 										getPendingNotifications();
 										return false;
 									}
 
 									var metrica = localStorage.getItem("metrica");
 									metrica = metrica ? metrica : "Km";
-                  /*
-									var position = data.length - 1;
-									localStorage.setItem("shown_user_id", data[position].id);
-                  */
+
 									var classe;
 									for(i = 0; i < data.length; i++){
-
-                    /*
-										if (i == data.length - 1){
-											classe = "current";
-										} else {
-											classe = "next";
-										}
-                    */
 
 										if(data[i].distance < 1) {
 											data[i].distance = '<1';
@@ -379,21 +391,16 @@ var app = {
 
 										//Grava a distancia do usuário para exibir no perfil expandido
 										localStorage.setItem("shown_user_id_distance", data[i].distance);
-                    /*
-										var skill1 = data[i].skill1 ? "<span class='tag'>"+data[i].skill1+"</span>" : "";
-										var skill2 = data[i].skill2 ? "<span class='tag'>"+data[i].skill2+"</span>" : "";
-										var skill3 = data[i].skill3 ? "<span class='tag'>"+data[i].skill3+"</span>" : "";
-                    */
 
 										//Monta o DOM
 										var line1 = '<figure id="'+data[i].id+'">'
                        +'<div class="user-card">'
                           +'<div class="row">'
-                             +'<div class="col-20 user-card" style="font-size: 12px; #596872; opacity: 0.6">'+data[i].distance+' Mi</div>'
-                             +'<div class="col-60 user-card"><img class="img-circle-plus" src="'+data[i].picture+'" /></div>'
+                             +'<div class="col-20 user-card open-profile" style="font-size: 12px; #596872; opacity: 0.6">'+data[i].distance+' Mi</div>'
+                             +'<div class="col-60 user-card open-profile"><img class="img-circle-plus" src="'+data[i].picture+'" /></div>'
                              +'<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>'
                           +'</div>'
-                          +'<div class="figure-body" style="text-align: center">'
+                          +'<div class="figure-body open-profile" style="text-align: center">'
                              +'<h4 style="color: #596872; margin-bottom: 0">'+data[i].name+'</h3>'
                              +'<p style="color: #596872; margin-top: 5px; font-size: 13px">'+data[i].occupation+'</p>'
                           +'</div>'
@@ -420,21 +427,10 @@ var app = {
                         //console.log(error)
 											}
 										});
-                    myApp.hideIndicator();
 									}
-                  //myApp.hideIndicator();
-									//$$(".buttons-row").toggleClass("none visivel");
+                  myApp.hideIndicator();
 
-									/**
-									 * jTinder initialization
-									 */
-                   /*
-									$("#tinderslide").jTinder({
-
-									});
-                  */
 									getPendingNotifications();
-									//getLimitInvites();
 
 								}
 							});
