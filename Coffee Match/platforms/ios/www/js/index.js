@@ -93,7 +93,6 @@ var app = {
 			myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
         navigator.splashscreen.hide();
-        return false;
 			}).trigger();
 		} else {
       navigator.splashscreen.hide();
@@ -140,8 +139,9 @@ var app = {
 					data: locs,
 					success: function (data) {
             alert('set-location-success')
+            var requester = localStorage.getItem('user_id');
+            if(!requester) {return false}
             myApp.showIndicator();
-						var requester = localStorage.getItem('user_id');
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
