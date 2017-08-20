@@ -92,6 +92,7 @@ var app = {
 
 			myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
+        return false;
 			}).trigger();
 		} else {
 			var user_id = localStorage.getItem("user_id");
