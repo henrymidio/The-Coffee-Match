@@ -73,6 +73,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+      navigator.splashscreen.hide();
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
