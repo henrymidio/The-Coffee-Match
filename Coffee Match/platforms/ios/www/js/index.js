@@ -138,11 +138,14 @@ var app = {
 					type: 'post',
 					data: locs,
 					success: function (data) {
+            alert('set-location-success')
             myApp.showIndicator();
 						var requester = localStorage.getItem('user_id');
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
+            alert('set-location-success-fail')
+            myApp.showIndicator();
 						var requester = localStorage.getItem('user_id');
 						getUserList(requester);
             alert('GPS error')
