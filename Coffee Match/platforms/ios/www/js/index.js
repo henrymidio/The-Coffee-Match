@@ -92,8 +92,11 @@ var app = {
 
 			myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
+        navigator.splashscreen.hide();
+        return false;
 			}).trigger();
 		} else {
+      navigator.splashscreen.hide();
 			var user_id = localStorage.getItem("user_id");
 			//Atualiza última entrada no app
 			var tzoffset = (new Date()).getTimezoneOffset() * 60000;
@@ -107,8 +110,6 @@ var app = {
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-
-      navigator.splashscreen.hide();
 
       //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");
