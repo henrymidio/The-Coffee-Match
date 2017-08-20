@@ -35,7 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-
+        
 		var notificationOpenedCallback = function(jsonData) {
  			//alert(jsonData.notification.payload.additionalData.foo);
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -355,9 +355,9 @@ var app = {
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
-						//var requester = localStorage.getItem('user_id');
-						//getUserList();
-            alert(error)
+						var requester = localStorage.getItem('user_id');
+						getUserList(requester);
+            alert('GPS error')
 					}
 				});
 			}, function(){

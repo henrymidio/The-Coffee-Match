@@ -34,6 +34,9 @@ function getUserList(requester) {
               if(data == null){
 
                 getPendingNotifications();
+                myApp.hideIndicator();
+                myApp.pullToRefreshDone();
+                myApp.alert('We are sorry! There’s no one registered near you. Come back later and try again.', 'The Coffee Match');
                 return false;
               }
 
