@@ -4,9 +4,9 @@
     <description>Hello World sample application that responds to the deviceready event.</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
     <content src="index.html" />
-	
+
 	<gap:plugin name="onesignal-cordova-plugin" spec="^2.0.10" source="npm" />
-	
+
 	<plugin name="cordova-plugin-media-capture" source="npm" spec="*">
 	  <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
 	  <variable name="MICROPHONE_USAGE_DESCRIPTION" value="App would like to access the microphone." />
@@ -16,11 +16,12 @@
 	<!--Requires cli-5.1.1+ for gradle Android but we recommend using the latest version. -->
 	<preference name="phonegap-version" value="cli-6.4.0" />
 	<preference name="android-build-tool" value="gradle" />
+  <preference name="SplashScreenDelay" value="3000" />
 
 	<!-- Window Phone 8.1 builds must use cli-6.1.0+ above -->
 	<preference name="windows-appx-target" value="8.1-phone" />
 	<preference name="WindowsToastCapable" value="true" />
-		
+
 	<preference name="orientation" value="portrait" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
