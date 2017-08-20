@@ -73,7 +73,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-      navigator.splashscreen.hide();
+
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
@@ -92,22 +92,23 @@ var app = {
 
 			myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
-        return false;
 			}).trigger();
 		} else {
 			var user_id = localStorage.getItem("user_id");
-      setIndexEvents();
 			//Atualiza última entrada no app
-			//var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-			//var lastEntry = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T', ' ');
-			//$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
+			var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+			var lastEntry = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T', ' ');
+			$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
 		}
 
+    setIndexEvents();
 		myApp.onPageInit('index', function() {
       //Configura barra de navegação
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
+
+      navigator.splashscreen.hide();
 
       //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");
