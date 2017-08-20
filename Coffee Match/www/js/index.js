@@ -121,7 +121,6 @@ var app = {
 			var longitude;
 
 			navigator.geolocation.getCurrentPosition(function(position){
-        alert('navigator')
 				latitude  = position.coords.latitude;
 				longitude = position.coords.longitude;
 
@@ -136,7 +135,6 @@ var app = {
 					type: 'post',
 					data: locs,
 					success: function (data) {
-            alert('getUserList')
             myApp.showIndicator();
 						var requester = localStorage.getItem('user_id');
 						getUserList(requester);
