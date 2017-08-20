@@ -1,16 +1,20 @@
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 360px) {
   .card-top {
 	padding-top: 20px;
   }
-  
+
   .friends {
 	font-size: 15px;
   }
-  
+
+  .user-card-profile {
+    margin-right: 0px;
+  }
+
   .congrats {
 	margin-top: 40px;
   }
-  
+
 	#user-one-img {
 		position: absolute;
 		width: 65px;
@@ -30,7 +34,7 @@
 		border: 2px solid white;
 		border-radius: 100%;
 	}
-	
+
 	.btn-green {
 		margin-left: 110px;
 		margin-right: 110px;
@@ -40,7 +44,7 @@
 @media only screen and (min-width: 410px) {
 
 	.btn-starbucks {
-		margin-left: 125px; 
+		margin-left: 125px;
 		margin-right: 125px;
 	}
 

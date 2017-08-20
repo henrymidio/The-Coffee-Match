@@ -154,9 +154,12 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
 .user-card {
 	padding: 5px;
 	border-radius: 5px;
-	line-height: 20px;
 	text-align: center;
 	//background-image: -webkit-linear-gradient(top, grey, grey 30%, transparent 30%, transparent 100%);
+}
+
+.user-card-profile {
+  margin-right: 20px;
 }
 
 .user-card hr{
@@ -985,7 +988,7 @@ div#columns figure {
   }
 
   .project-owner span {
-    font-size: 14px; 
+    font-size: 14px;
     text-shadow: 1px 1px 2px #000000;
   }
 
