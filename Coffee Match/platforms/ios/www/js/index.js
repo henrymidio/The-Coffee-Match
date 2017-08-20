@@ -33,11 +33,10 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+      app.receivedEvent('deviceready');
 
-        
-		var notificationOpenedCallback = function(jsonData) {
- 			//alert(jsonData.notification.payload.additionalData.foo);
+		 var notificationOpenedCallback = function(jsonData) {
+
 			if(jsonData.notification.payload.additionalData.type == "invite") {
 				mainView.router.loadPage('convites.html');
 			}
@@ -46,20 +45,6 @@ var app = {
 			}
 			if(jsonData.notification.payload.additionalData.type == "message") {
 				mainView.router.loadPage('messages.html');
-			}
-			if(jsonData.notification.payload.additionalData.type == "rewards") {
-				var usid = localStorage.getItem("user_id");
-				var ndata = {
-								rewards: 0
-							};
-				$.ajax({
-										url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + usid,
-										type: 'post',
-										data: ndata,
-										success: function (data) {
-											mainView.router.loadPage("congratulations.html");
-										}
-								});
 			}
  		};
 
@@ -76,7 +61,6 @@ var app = {
 
 			}
 
-
  		};
 
  		window.plugins.OneSignal
@@ -89,8 +73,6 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-		//getLimitInvites();
-
 		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
 		localStorage.removeItem("starCount")
 		localStorage.setItem("first_time", 1);
@@ -112,208 +94,13 @@ var app = {
 			}).trigger();
 		} else {
 			var user_id = localStorage.getItem("user_id");
+      setIndexEvents();
 			//Atualiza última entrada no app
-			var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-			var lastEntry = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T', ' ');
-			$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
+			//var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+			//var lastEntry = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T', ' ');
+			//$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
 		}
 
-    function setIndexEvents() {
-      //Evento que expande projeto
-      $(document.body).on('click', '.open-card', function () {
-          $(this).siblings('.card-content').slideToggle('fast', function(){
-            altura2 = $('#tab2').height(); //Resize da tab
-          });
-          $('.tabs-animated-wrap').height('auto')
-      });
-
-      //Evento de clique nas tabs que exibe o floating button
-      var altura1 = $('#tab1').height();
-      var altura2 = $('#tab2').height();
-
-      $(document).on('tab:show', '#tab2', function () {
-          $$('.floating-button').removeClass('none');
-          //$('.tabs-animated-wrap').height(altura2);
-      });
-      $(document).on('tab:hide', '#tab2', function () {
-          $$('.floating-button').addClass('none');
-          //$('.tabs-animated-wrap').height(altura1);
-      });
-
-      //Evento de JOIN ao projeto
-      $(document).on('click', '.join-project', function () {
-        var self = $(this);
-            myApp.confirm('Are you sure?', '', function () {
-                myApp.alert("Sua solicitação foi enviado ao responsável pelo projeto", '')
-                self.find('i').addClass('color-yellow');
-            });
-      });
-      //Evento que descarta projeto
-      $(document).on('click', '.discard-project', function () {
-          $(this).closest('.card').slideUp();
-      });
-      //Evento que deuncia projeto
-      $(document).on('click', '.report-project', function () {
-        var self = $(this);
-        myApp.confirm('Are you sure?', '', function () {
-            myApp.alert('Sua denúncia será revisada pelos nossos moderadores', '')
-            self.find('i').addClass('color-red');
-        });
-      });
-
-      //Evento de click no float button para exibir/esconder a toolbutton
-      $(document).on('click', '#button-new-project', function () {
-        $('#ctb').removeClass('invisible');
-      });
-      $(document).on('click', '.cancel-project', function () {
-        $('#ctb').addClass('invisible');
-      });
-
-      //Evento que elimina card do user
-      $(document).on('click', '.hide-user', function () {
-        $(this).parent().closest('figure').fadeOut(500,function(){
-          $(this).css({"visibility":"hidden",display:'block'}).slideUp();
-        });
-      });
-
-      //Evento que expande card do user
-      $(document).on('click', '.open-profile', function () {
-        var suid = $(this).parent().closest('figure').attr('id');
-        localStorage.setItem("shown_user_id", suid);
-        mainView.router.load({
-          url: "user.html",
-          animatePages: false
-        });
-      });
-
-      //Evento que adiciona chips no form de criação do projeto
-      $(document).on('click', '.add-tag', function () {
-        var countChips = $('.container-chip div.chip').length;
-        if(countChips > 4) {
-          myApp.alert('Você somente pode adicionar 5 skills por projeto', '');
-          return false;
-        }
-        var conteudo = $('#create-tag').val();
-        if(conteudo < 2) {return false}
-        //Monta o DOM dos chips
-        var line = "<div class='chip chip-form'>"
-              + "<div class='chip-label project-skill'>"+conteudo+"</div>"
-              + "<a href='#' class='chip-delete'></a>"
-              + "</div>";
-              $(".container-chip").append(line);
-       $('#create-tag').val('');
-      });
-
-      //Seta pull refresh
-      // Pull to refresh content
-      var ptrContent = $$('.pull-to-refresh-content');
-      var requester = localStorage.getItem('user_id');
-      // Add 'refresh' listener on it
-      ptrContent.on('ptr:refresh', function (e) {
-
-          getUserList(requester)
-
-      });
-
-      //Evento que deleta chips
-      $(document.body).on('click', '.chip-delete', function (e) {
-        e.preventDefault();
-        var chip = $$(this).parents('.chip');
-        chip.remove();
-      });
-
-      //Evento de criação de novo projeto
-      $(document.body).on('click', '.save-project', function (e) {
-        var projectName        = $('#project-name').val();
-        var projectCategory    = $('#project-category').find(":selected").text();
-        var projectDescription = $('#project-description').val();
-        var projectSkills = $('.project-skill').map(function() {
-            return $(this).text();
-        }).get();
-        //projectSkills.join(',')
-
-        var projeto = {
-          projectName: projectName,
-          projectCategory: projectCategory,
-          projectDescription: projectDescription,
-          projectSkills: projectSkills
-        };
-        if(projectCategory == 'Health') {
-          projeto.background = 'http://hlknweb.tamu.edu/sites/hlknweb.tamu.edu/files/styles/main_page_photo/public/health%20check.jpg?itok=aAKbZUcC';
-        }
-        if(projectCategory == 'Fintech') {
-          projeto.background = 'http://magodomercado.com/wp-content/uploads/2014/08/como-investir-na-bolsa-de-valores.jpg';
-        }
-        //Valida os inputs
-        if(projectName < 1 || projectCategory < 1 || projectDescription < 1 || projectSkills < 1) {
-          alert("Preencha todos os campos");
-          return false;
-        }
-
-        createNewProject(projeto);
-
-      });
-      function createNewProject(projeto) {
-        var projectDate = new Date();
-        projectDate = formatDate(projectDate);
-        var skills = '';
-        projeto.projectSkills.forEach(function(entry) {
-          skills += '<div class="chip" style="margin-right: 3px">'
-                    +'<div class="chip-label">'+entry+'</div>'
-                    +'</div>';
-        });
-
-        //Monta o DOM dos chips
-        var line = '<div class="card demo-card-header-pic">'
-           +'<div style="background-image:url('+projeto.background+')" valign="center" class="card-header color-white no-border">'
-           +'<p class="project-name">'+projeto.projectName+'<br><span style="font-size: 15px">'+projeto.projectCategory+'</span></p>'
-           +'<div class="project-owner">'
-                 +'<img src="'+localStorage.getItem("picture")+'" />'
-                 +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+localStorage.getItem("name")+'</span>'
-              +'</div>'
-           +'</div>'
-           +'<p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
-              +'<small>Posted on '+projectDate+'</small>'
-              +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>'
-           +'</p>'
-           +'<div class="card-content" style="display: none">'
-              +'<div class="card-content-inner">'
-                 +'<p class="project-description">'+projeto.projectDescription+'</p>'
-                 +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
-                 +'<div class="skills" style="margin-top: -10px">'
-                 +skills
-                 +'</div>'
-              +'</div>'
-              +'<div class="card-footer">'
-                 +'<a href="#" class="link join-project color-gray">'
-                 +'<i class="f7-icons color-gray" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
-                 +'</a>'
-                 +'<a href="#" class="link discard-project color-gray">'
-                 +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward_fill</i>SKIP'
-                 +'</a>'
-                 +'<a href="#" class="link report-project color-gray">'
-                 +'<i class="f7-icons color-grey" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
-                 +'</a>'
-              +'</div>'
-           +'</div>'
-        +'</div>';
-       $("#tab2").prepend(line);
-
-       $('#ctb').toggleClass('invisible');
-       myApp.closeModal(".popup-form", true);
-       $('.tabs-animated-wrap').height('auto')
-       cleanProjectForm();
-      }
-      function cleanProjectForm() {
-        $('#project-name').val('');
-        $('#project-category option:eq(0)').prop('selected', true)
-        $('#project-description').val('');
-        $('.container-chip').empty()
-      }
-
-    }
-
-    setIndexEvents();
 		myApp.onPageInit('index', function() {
       //Configura barra de navegação
 			StatusBar.overlaysWebView(false);
@@ -323,7 +110,6 @@ var app = {
 
       //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");
-			//$$(".search-img").attr("src", pic);
 			$$(".profile-photo").attr("src", pic);
 			$$("#name").html(localStorage.getItem("name"));
 			$$("#age").html(localStorage.getItem("age"));
