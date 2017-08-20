@@ -106,7 +106,6 @@ var app = {
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-alert('index init')
 
       //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");
@@ -122,6 +121,7 @@ alert('index init')
 			var longitude;
 
 			navigator.geolocation.getCurrentPosition(function(position){
+        alert('navigator')
 				latitude  = position.coords.latitude;
 				longitude = position.coords.longitude;
 
@@ -136,6 +136,7 @@ alert('index init')
 					type: 'post',
 					data: locs,
 					success: function (data) {
+            alert('getUserList')
             myApp.showIndicator();
 						var requester = localStorage.getItem('user_id');
 						getUserList(requester);
