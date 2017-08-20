@@ -106,7 +106,7 @@ var app = {
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-
+alert('index init')
 
       //Seta informações do side-panel
 			var pic = localStorage.getItem("picture");
