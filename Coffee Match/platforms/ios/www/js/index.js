@@ -90,10 +90,9 @@ var app = {
 		//Verifica se usuário está logado
 		if(logged == null){
 
-			myApp.onPageInit('index', function() {
+
 				mainView.router.loadPage('login2.html');
-        navigator.splashscreen.hide();
-			}).trigger();
+        return false;
 		} else {
       navigator.splashscreen.hide();
 			var user_id = localStorage.getItem("user_id");
