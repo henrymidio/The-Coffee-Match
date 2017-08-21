@@ -90,11 +90,10 @@ var app = {
 		//Verifica se usuário está logado
 		if(logged == null){
 
-
+			myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
-        return false;
+			}).trigger();
 		} else {
-      navigator.splashscreen.hide();
 			var user_id = localStorage.getItem("user_id");
 			//Atualiza última entrada no app
 			var tzoffset = (new Date()).getTimezoneOffset() * 60000;
@@ -137,18 +136,16 @@ var app = {
 					type: 'post',
 					data: locs,
 					success: function (data) {
-            alert('set-location-success')
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
             myApp.showIndicator();
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
-            alert('set-location-success-fail')
+            var requester = localStorage.getItem('user_id');
+            if(!requester) {return false}
             myApp.showIndicator();
-						var requester = localStorage.getItem('user_id');
 						getUserList(requester);
-            alert('GPS error')
 					}
 				});
 			}, function(){
