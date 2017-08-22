@@ -138,13 +138,13 @@ var app = {
 					success: function (data) {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
-            myApp.showIndicator();
+            myApp.pullToRefreshTrigger('.pull-to-refresh-content');
 						getUserList(requester);
 					},
 					error: function (request, status, error) {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
-            myApp.showIndicator();
+            myApp.pullToRefreshTrigger('.pull-to-refresh-content');
 						getUserList(requester);
 					}
 				});

@@ -33,7 +33,6 @@ function getUserList(requester) {
               if(data == null){
 
                 getPendingNotifications();
-                myApp.hideIndicator();
                 myApp.pullToRefreshDone();
                 myApp.alert('We are sorry! There’s no one registered near you. Come back later and try again.', 'The Coffee Match');
                 return false;
@@ -82,24 +81,17 @@ function getUserList(requester) {
                       $("#"+data[i].id+" .figure-body").append(line);
                     }
                   },error: function (request, status, error) {
-                    myApp.hideIndicator();
                     myApp.pullToRefreshDone();
-                    //alert(JSON.stringify(request));
-                    console.log(error)
                   }
                 });
               }
 
-              myApp.hideIndicator();
               myApp.pullToRefreshDone();
 
               getPendingNotifications();
 
             },error: function (request, status, error) {
-              myApp.hideIndicator();
               myApp.pullToRefreshDone();
-              //alert(JSON.stringify(request));
-              console.log(error)
             }
           });
 

@@ -16,7 +16,7 @@ var mainView = myApp.addView('.view-main', {
 });
 
 myApp.onPageInit('login2', function (page) {
-  $$('.floating-button').addClass('none');
+  myApp.showTab('#tab1');
 	var mySwiper = myApp.swiper('.swiper-container', {
 		speed: 400,
 		pagination: '.swiper-pagination'
@@ -389,7 +389,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 });
 
 myApp.onPageInit('convites', function (page) {
-  $$('.floating-button').addClass('none');
+  myApp.showTab('#tab1');
 	var user_id = localStorage.getItem("user_id");
 	var y = {user_id: user_id};
 
@@ -520,7 +520,7 @@ myApp.onPageInit('favorites', function (page) {
 });
 
 myApp.onPageInit('combinacoes', function (page) {
-  $$('.floating-button').addClass('none');
+  myApp.showTab('#tab1');
 	//gambs
 	localStorage.setItem("cancel", "f");
 
@@ -647,7 +647,7 @@ myApp.onPageInit('detail-calendar', function(page){
 });
 
 myApp.onPageInit('profile-preview', function (page) {
-  $$('.floating-button').addClass('none');
+  myApp.showTab('#tab1');
 	var metrica = localStorage.getItem("metrica");
 	$$("#preview-metrica").html(metrica);
 
@@ -782,7 +782,7 @@ myApp.onPageInit('profile-view', function (page) {
 });
 
 myApp.onPageInit('messages', function (page) {
-  $$('.floating-button').addClass('none');
+  myApp.showTab('#tab1');
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
 
@@ -1012,6 +1012,7 @@ myApp.onPageInit('user', function (page) {
 
 									$$("#user-distance").html(data.distance);
 									$$("#user-view-img").attr("src", data.picture);
+                  $(".blur-back").css("background", 'url('+data.picture+')');
 									$$("#user-view-name").html(data.name);
 									$$("#user-view-age").html(data.age);
 									$$("#user-view-occupation").html(data.occupation);
@@ -1070,7 +1071,7 @@ myApp.onPageInit('user', function (page) {
 
 
 myApp.onPageBeforeInit('settings', function (page) {
-  $$('.floating-button').addClass('none');
+  myApp.showTab('#tab1');
 	var uid = localStorage.getItem("user_id");
 	var ud = {user_id: uid};
 	var dst = null;
@@ -1633,5 +1634,3 @@ function updateStatusUser(status){
 			}
 		});
 	}
-
-  

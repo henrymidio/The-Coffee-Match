@@ -1038,3 +1038,31 @@ div#columns figure {
 .float-button-wrapper {
 	position: absolute; bottom: 8%; left: 0; right: 0; margin: 0 auto; padding-left: 35px; padding-right: 35px; color: white;
 }
+
+.blur-back {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  //background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');
+  width: 100%;
+  height: 40vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1.1);
+
+  filter: brightness(60%) blur(7px);
+}
+
+.con {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  padding-top: 30px;
+  //margin-left: 20px;
+  //margin-right: 20px;
+}
