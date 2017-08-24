@@ -237,6 +237,7 @@ myApp.onPageInit('passo2', function (page) {
 				localStorage.setItem("user_id", response.data.id);
 				localStorage.setItem("logged", 1);
 				myApp.hideIndicator();
+        usuario = new User();
 				mainView.router.loadPage("index.html");
 			},
 			error: function (request, status, error) {

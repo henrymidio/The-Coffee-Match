@@ -74,33 +74,20 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 
-		//Variável que armazena a quantidade de vezes que foram carregadas as starbucks
-		localStorage.removeItem("starCount")
-		localStorage.setItem("first_time", 1);
-
-		localStorage.setItem("message", "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!");
-
-		//Variável que testa se o usuário está logado
+		//Variável que verifica se o usuário está logado
 		logged = localStorage.getItem("logged");
-
-		if(localStorage.getItem("lastLog") == null){
-			localStorage.setItem("lastLog", new Date());
-		}
 
 		//Verifica se usuário está logado
 		if(logged == null){
-
-			myApp.onPageInit('index', function() {
+			  myApp.onPageInit('index', function() {
 				mainView.router.loadPage('login2.html');
 			}).trigger();
 		} else {
-			var user_id = localStorage.getItem("user_id");
-			//Atualiza última entrada no app
-			var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-			var lastEntry = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T', ' ');
-			$.post( "http://thecoffeematch.com/webservice/update-entry.php?user_id=" + user_id, { last_entry: lastEntry} );
+      usuario = new User();
+			usuario.setLastLogin();
 		}
 
+    //Primeiramente seta todos os eventos do index no DOM
     setIndexEvents();
 		myApp.onPageInit('index', function() {
       //Configura barra de navegação
@@ -109,10 +96,7 @@ var app = {
 			StatusBar.backgroundColorByHexString("#2f3a41");
 
       //Seta informações do side-panel
-			var pic = localStorage.getItem("picture");
-			$$(".profile-photo").attr("src", pic);
-			$$("#name").html(localStorage.getItem("name"));
-			$$("#age").html(localStorage.getItem("age"));
+			configSidePanel();
 
 			$$("#invisible-container").removeClass("none");
 			$$("#invisible-nav").removeClass("navbar-hidden");
@@ -139,27 +123,22 @@ var app = {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
-						getUserList(requester);
+						usuario.searchPeople();
+            usuario.getPendingNotifications();
 					},
 					error: function (request, status, error) {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
-						getUserList(requester);
+						usuario.searchPeople();
+            usuario.getPendingNotifications();
 					}
 				});
 			}, function(){
-				myApp.alert('It was not possible to find your location. Check it out on settings.');
+				myApp.alert('It was not possible to find your location. Check it out on settings.', 'The Coffee Match');
 			});
 
-		/* INÍCIO DA BUSCA PROS OUTROS USER */
-
-		//Armazena as preferencias em variaveis
-
-
-
-		if(localStorage.getItem("starCount") <= 0){
-		 myApp.onPageInit('starbucks-proximas', function(){
+	  myApp.onPageInit('starbucks-proximas', function(){
 
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
@@ -199,7 +178,7 @@ var app = {
 										if(data[i].distance < 1){
 											data[i].distance = 1;
 										}
-
+                    $("#proximas-ul").empty();
 										var line1 = "<li>"
 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
 												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
@@ -255,8 +234,8 @@ var app = {
 
 
 		 });
-		}
-		localStorage.setItem("starCount", 1);
+
+
 
 		myApp.onPageInit('detail-calendar', function(){
 			//myApp.showPreloader();
