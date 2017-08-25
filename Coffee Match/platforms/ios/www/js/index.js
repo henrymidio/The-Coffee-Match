@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
       app.receivedEvent('deviceready');
-
+      
 		 var notificationOpenedCallback = function(jsonData) {
 
 			if(jsonData.notification.payload.additionalData.type == "invite") {
@@ -85,6 +85,7 @@ var app = {
 		} else {
       usuario = new User();
 			usuario.setLastLogin();
+      configSidePanel();
 		}
 
     //Primeiramente seta todos os eventos do index no DOM
@@ -94,9 +95,6 @@ var app = {
 			StatusBar.overlaysWebView(false);
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
-
-      //Seta informações do side-panel
-			configSidePanel();
 
 			$$("#invisible-container").removeClass("none");
 			$$("#invisible-nav").removeClass("navbar-hidden");

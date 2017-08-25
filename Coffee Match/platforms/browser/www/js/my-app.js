@@ -16,7 +16,7 @@ var mainView = myApp.addView('.view-main', {
 });
 
 myApp.onPageInit('login2', function (page) {
-  //myApp.showTab('#tab1');
+  myApp.showTab('#tab1');
 	var mySwiper = myApp.swiper('.swiper-container', {
 		speed: 400,
 		pagination: '.swiper-pagination'
