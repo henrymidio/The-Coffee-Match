@@ -139,7 +139,7 @@ this.getPreferences = function() {
 }
 
 //Realiza a busca por usuários próximos e chama a função que renderiza no DOM
-  this.searchPeople = function () {
+this.searchPeople = function () {
   //Faz request das informações dos users compatíveis
   var dados = {
       requester: _id
@@ -277,6 +277,7 @@ this.getPreferences = function() {
       type: 'post',
       data: projeto,
       success: function(data) {
+        console.log(data)
         renderNewProject(projeto);
         myApp.hideIndicator();
         myApp.closeModal(".popup-form", true);

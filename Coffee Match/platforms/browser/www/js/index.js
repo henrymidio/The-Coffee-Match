@@ -125,6 +125,7 @@ var app = {
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
 						usuario.searchPeople();
             usuario.getPendingNotifications();
+            retrieveProjects();
 					},
 					error: function (request, status, error) {
             var requester = localStorage.getItem('user_id');
@@ -132,6 +133,7 @@ var app = {
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
 						usuario.searchPeople();
             usuario.getPendingNotifications();
+            retrieveProjects();
 					}
 				});
 			}, function(){

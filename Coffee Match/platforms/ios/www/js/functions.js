@@ -135,15 +135,21 @@ function setIndexEvents() {
       category: projectCategory,
       description: projectDescription,
       looking_for: projectSkills,
-      owner: usuario.getID()
+      owner: usuario.getID(),
+      image: 'https://careers.adage.com/images/310/default/why-advertising-urgently-needs-more-weird-or-the-dark-side-of-agency-culture-_201705302125483.png'
     };
 
+    /*
+    if(projectCategory == 'Advertising, Content & Media') {
+      projeto.image = 'http://instratmedia.com/wp-content/uploads/2016/01/Social-media-advertising-trends-2014.jpg';
+    }
     if(projectCategory == 'Health') {
       projeto.image = 'http://hlknweb.tamu.edu/sites/hlknweb.tamu.edu/files/styles/main_page_photo/public/health%20check.jpg?itok=aAKbZUcC';
     }
     if(projectCategory == 'Fintech') {
       projeto.image = 'http://magodomercado.com/wp-content/uploads/2014/08/como-investir-na-bolsa-de-valores.jpg';
     }
+    */
     //Valida os inputs
     if(projectName < 1 || projectCategory < 1 || projectDescription < 1 || projectSkills < 1) {
       alert("Preencha todos os campos");
@@ -155,66 +161,88 @@ function setIndexEvents() {
 
   });
 
-  function createNewProject(projeto) {
-    var skills = '';
-    projeto.projectSkills.forEach(function(entry) {
+}
+
+function renderNewProject(projeto, fromBD) {
+  var projectDate = new Date();
+  projectDate = formatDate(projectDate);
+  var skills = '';
+  if(fromBD) {
+    projeto.looking_for = projeto.looking_for.split(",");
+  }
+    projeto.looking_for.forEach(function(entry) {
       skills += '<div class="chip" style="margin-right: 3px">'
                 +'<div class="chip-label">'+entry+'</div>'
                 +'</div>';
     });
 
-    //Monta o DOM dos chips
-    var line = '<div class="card demo-card-header-pic">'
-       +'<div style="background-image:url('+projeto.background+')" valign="center" class="card-header color-white no-border">'
-       +'<p class="project-name">'+projeto.projectName+'<br><span style="font-size: 15px">'+projeto.projectCategory+'</span></p>'
-       +'<div class="project-owner">'
-             +'<img src="'+localStorage.getItem("picture")+'" />'
-             +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+localStorage.getItem("name")+'</span>'
-          +'</div>'
-       +'</div>'
-       +'<p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
-          +'<small>Posted on '+projectDate+'</small>'
-          +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>'
-       +'</p>'
-       +'<div class="card-content" style="display: none">'
-          +'<div class="card-content-inner">'
-             +'<p class="project-description">'+projeto.projectDescription+'</p>'
-             +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
-             +'<div class="skills" style="margin-top: -10px">'
-             +skills
-             +'</div>'
-          +'</div>'
-          +'<div class="card-footer">'
-             +'<a href="#" class="link join-project color-gray">'
-             +'<i class="f7-icons color-gray" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
-             +'</a>'
-             +'<a href="#" class="link discard-project color-gray">'
-             +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward_fill</i>SKIP'
-             +'</a>'
-             +'<a href="#" class="link report-project color-gray">'
-             +'<i class="f7-icons color-grey" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
-             +'</a>'
-          +'</div>'
-       +'</div>'
-    +'</div>';
-   $("#tab2").prepend(line);
 
-   $('#ctb').toggleClass('invisible');
-   $('.tabs-animated-wrap').height('auto')
-   cleanProjectForm();
-  }
-  function cleanProjectForm() {
+  //Monta o DOM dos chips
+  var line = '<div class="card demo-card-header-pic">'
+     +'<div style="background-image:url('+projeto.image+')" valign="center" class="card-header color-white no-border">'
+     +'<p class="project-name">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
+     +'<div class="project-owner">'
+           +'<img src="'+usuario.getPicture()+'" />'
+           +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+usuario.getName()+'</span>'
+        +'</div>'
+     +'</div>'
+     +'<p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
+        +'<small>Posted on '+projectDate+'</small>'
+        +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>'
+     +'</p>'
+     +'<div class="card-content" style="display: none">'
+        +'<div class="card-content-inner">'
+           +'<p class="project-description">'+projeto.description+'</p>'
+           +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+           +'<div class="skills" style="margin-top: -10px">'
+           +skills
+           +'</div>'
+        +'</div>'
+        +'<div class="card-footer">'
+           +'<a href="#" class="link join-project color-gray">'
+           +'<i class="f7-icons color-gray" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
+           +'</a>'
+           +'<a href="#" class="link discard-project color-gray">'
+           +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward_fill</i>SKIP'
+           +'</a>'
+           +'<a href="#" class="link report-project color-gray">'
+           +'<i class="f7-icons color-grey" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
+           +'</a>'
+        +'</div>'
+     +'</div>'
+  +'</div>';
+ $("#tab2").prepend(line);
+
+ $('#ctb').toggleClass('invisible');
+ $('.tabs-animated-wrap').height('auto')
+ cleanProjectForm();
+}
+
+function cleanProjectForm() {
     $('#project-name').val('');
     $('#project-category option:eq(0)').prop('selected', true)
     $('#project-description').val('');
     $('.container-chip').empty()
   }
 
-}
-
 function configSidePanel() {
   var pic = usuario.getPicture();
   $$(".profile-photo").attr("src", pic);
   $$("#name").html(usuario.getName());
   $$("#age").html(usuario.getAge());
+}
+
+function retrieveProjects() {
+  $.ajax({
+    url: 'http://api.thecoffeematch.com/v1/projects',
+    type: 'get',
+    dataType: 'json',
+    success: function (data) {
+
+      for(i in data) {
+        console.log(data[i])
+        renderNewProject(data[i], true);
+      }
+    }
+  });
 }
