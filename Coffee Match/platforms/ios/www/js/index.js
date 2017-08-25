@@ -90,6 +90,7 @@ var app = {
 
     //Primeiramente seta todos os eventos do index no DOM
     setIndexEvents();
+
 		myApp.onPageInit('index', function() {
       //Configura barra de navegação
 			StatusBar.overlaysWebView(false);
@@ -121,17 +122,19 @@ var app = {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
-						usuario.searchPeople();
-            usuario.getPendingNotifications();
-            retrieveProjects();
+						//usuario.searchPeople();
+            //usuario.getPendingNotifications();
+            //$("#tab2").empty();
+            //retrieveProjects();
 					},
 					error: function (request, status, error) {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
-						usuario.searchPeople();
-            usuario.getPendingNotifications();
-            retrieveProjects();
+						//usuario.searchPeople();
+            //usuario.getPendingNotifications();
+            //$("#tab2").empty();
+            //retrieveProjects();
 					}
 				});
 			}, function(){

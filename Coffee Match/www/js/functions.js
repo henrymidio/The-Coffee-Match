@@ -101,15 +101,12 @@ function setIndexEvents() {
    $('#create-tag').val('');
   });
 
-  //Seta pull refresh
   // Pull to refresh content
-  var ptrContent = $$('.pull-to-refresh-content');
-
-  // Add 'refresh' listener on it
-  ptrContent.on('ptr:refresh', function (e) {
-
-      usuario.searchPeople();
-
+  $(document).on('ptr:refresh', '.pull-to-refresh-content', function (e) {
+    usuario.searchPeople();
+    usuario.getPendingNotifications();
+    $("#tab2").empty();
+    retrieveProjects();
   });
 
   //Evento que deleta chips
@@ -240,7 +237,7 @@ function retrieveProjects() {
     success: function (data) {
 
       for(i in data) {
-        console.log(data[i])
+        //console.log(data[i])
         renderNewProject(data[i], true);
       }
     }
