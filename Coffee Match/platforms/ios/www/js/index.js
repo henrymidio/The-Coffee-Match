@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
       app.receivedEvent('deviceready');
-      
+
 		 var notificationOpenedCallback = function(jsonData) {
 
 			if(jsonData.notification.payload.additionalData.type == "invite") {
