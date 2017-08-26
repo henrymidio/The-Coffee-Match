@@ -955,6 +955,9 @@ myApp.onPageInit('profile', function (page) {
 
 myApp.onPageInit('user', function (page) {
 
+  var altura = $('#inside-con').height();
+  $('.blur-back').height(altura + 60)
+
 	var metrica = localStorage.getItem("metrica");
 	$$("#user-metrica").html(metrica);
 
@@ -1008,12 +1011,13 @@ myApp.onPageInit('user', function (page) {
 									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
 
 									if(data.distance < 1) {
-											data.distance = 0.5;
+											data.distance = '<1';
 									}
 
-									$$("#user-distance").html(data.distance);
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="http://www.iconsdb.com/icons/preview/white/pin-9-xxl.png" />' + data.distance + ' Miles');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
+                  $(".blur-back").css("background-size", 'cover');
 									$$("#user-view-name").html(data.name);
 									$$("#user-view-age").html(data.age);
 									$$("#user-view-occupation").html(data.occupation);

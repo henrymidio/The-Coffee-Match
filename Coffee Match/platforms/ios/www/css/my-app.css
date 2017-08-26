@@ -950,8 +950,8 @@ div#columns figure {
 }
 
 .card {
-  margin: 7px !important;
-  border-radius: 4px !important;
+  margin: 7px;
+  border-radius: 4px;
 }
 
 .demo-card-header-pic .card-header {
@@ -1039,6 +1039,18 @@ div#columns figure {
 	position: absolute; bottom: 8%; left: 0; right: 0; margin: 0 auto; padding-left: 35px; padding-right: 35px; color: white;
 }
 
+.color-silver {
+  color: rgb(181, 194, 202);
+}
+
+p.user-label:after {
+  content: '';
+  width: 150px;
+  height: 2px;
+  background: red;
+  margin: 0 10px;
+}
+
 .blur-back {
   content: "";
   position: fixed;
@@ -1047,14 +1059,14 @@ div#columns figure {
   z-index: -1;
 
   display: block;
-  //background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');
+  //background-image: url('');
   width: 100%;
-  height: 40vh;
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 43vh;
+  //background-size: cover;
+  //background-repeat: no-repeat;
   transform: scale(1.1);
 
-  filter: brightness(60%) blur(7px);
+  filter: brightness(60%) blur(2px);
 }
 
 .con {
