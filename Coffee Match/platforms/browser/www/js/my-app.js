@@ -952,8 +952,12 @@ myApp.onPageInit('profile', function (page) {
 
 
 //SHOWN USER
+myApp.onPageBack('user', function (page) {
+  $$("#toolbar-user").toggleClass("none visivel");
+});
 
 myApp.onPageInit('user', function (page) {
+  $$("#toolbar-user").toggleClass("none visivel");
 
   var altura = $('#inside-con').height();
   $('.blur-back').height(altura + 60)
