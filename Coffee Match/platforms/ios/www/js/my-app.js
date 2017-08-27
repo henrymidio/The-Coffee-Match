@@ -982,6 +982,9 @@ myApp.onPageInit('user', function (page) {
 										success: function (friendsData) {
 											var loops = friendsData.context.all_mutual_friends.data.length;
 											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
+                      if(friends_number > 0) {
+                        $('#mutual-numbers').html(friends_number);
+                      }
 
 											for(i = 0; i < loops; i++){
 												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
@@ -1002,14 +1005,24 @@ myApp.onPageInit('user', function (page) {
 										}
 									});
 
-									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
-									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
-									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
+									//var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
+                  //var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
+									//var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
+                  var skill1 = data.skill1 ? '<div class="chip" style="margin-right: 3px">'
+                            +'<div class="chip-label">'+data.skill1+'</div>'
+                            +'</div>' : "";
+                  var skill2 = data.skill2 ? '<div class="chip" style="margin-right: 3px">'
+                            +'<div class="chip-label">'+data.skill2+'</div>'
+                            +'</div>' : "";
+                  var skill3 = data.skill3 ? '<div class="chip" style="margin-right: 3px">'
+                            +'<div class="chip-label">'+data.skill3+'</div>'
+                            +'</div>' : "";
 
+                  /*
 									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
 									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
 									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
-
+                  */
 									if(data.distance < 1) {
 											data.distance = '<1';
 									}
@@ -1024,9 +1037,6 @@ myApp.onPageInit('user', function (page) {
 									$(".skss").append(skill1, skill2, skill3);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
-									$$("#l1").html(l1);
-									$$("#l2").html(l2);
-									$$("#l3").html(l3);
 
 								}
 

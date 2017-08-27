@@ -162,6 +162,15 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
   margin-right: 20px;
 }
 
+.card hr {
+  color: #eee;
+  height: 1px;
+  margin-left: -5px;
+  margin-right: -5px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
 .user-card hr{
   margin-left: 16px;
   margin-right: 16px;
@@ -1070,7 +1079,9 @@ p.user-label:after {
 }
 
 .con {
-  position: fixed;
+  //position: fixed;
+  margin-left: -4px;
+  margin-right: -4px;
   left: 0;
   right: 0;
   z-index: 0;

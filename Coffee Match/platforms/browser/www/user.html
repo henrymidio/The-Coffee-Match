@@ -12,8 +12,11 @@
 <div class="pages">
 	<div data-page="user" class="page no-navbar">
 		<div class="page-content" style="background-color: rgb(245, 245, 247)">
-			<a href="" class="link back color-white" data-animate-pages="false" style="position: fixed; top: 3%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
-			<a href="" id="report" style="position: fixed; top: 2%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
+      <div class="toolbar" style="position: fixed; background: #00d173">
+            <a href="#" class="button button-big color-white" style="border: none">SEND A MESSAGE</a>
+      </div>
+			<a href="" class="link back color-white" data-animate-pages="false" style="position: fixed; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
+			<a href="" id="report" style="position: fixed; top: 4%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
       <div class="blur-back"></div>
       <div class="con">
 				<div id= "inside-con" class='text-center color-white'>
@@ -21,24 +24,49 @@
 					<p style="font-size: 30px; color: white; margin-top: 0px" id="user-view-name">...</p>
 					<p class='college' id="user-view-college">...</p>
 					<p class='college' id="user-view-occupation" style="margin-top: -15px; font-size: 14px; margin-left: 15px; margin-right: 15px">...</p>
-          <p id="user-distance" style="margin-top: -10px; font-size: 13px; margin-left: 15px; margin-right: 15px;">...</p>
+          <p id="user-distance" style="margin-top: -10px; font-size: 13px; margin-right: 15px;">...</p>
 				</div>
 
         <div class="card" style="border-radius: 0px; padding: 5px">
-  				<p class='friends user-label color-silver'>Skills</p>
-  				<div class='skss' style="margin-top: -10px; margin-left: 20px; margin-right: 10px"></div>
-          <br>
-				<p class='friends user-label color-silver'> <span style='line-height:22px;'>About Me</span></p>
-				<p class='friends' id="user-view-description" style='margin-top: -10px; margin-left: 20px; margin-right: 10px; color: #2f3a41'></p>
+    			<p class='friends user-label color-silver'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">tags</i>Skills</p>
+    			<div class='skss' style="margin-top: -10px; margin-left: 20px; margin-right: 10px"></div>
+          <hr>
+  				<p class='friends user-label color-silver'> <span style='line-height:22px;'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>About Me</span></p>
+  				<p class='friends' id="user-view-description" style='margin-top: -10px; margin-left: 20px; margin-right: 10px; color: #2f3a41'></p>
 				</div>
+
         <div class="card" style="border-radius: 0px; padding: 5px">
-				<p class='friends user-label color-silver'> <span style='line-height:22px;'>Mutual connections</span></p>
-				<div class="row text-center" id="friends-list" style="margin-left: 10px; margin-right: 10px">
+  				<p class='friends user-label color-silver'><span id="mutual-numbers">0</span> Mutual connections</p>
+  				<div class="row text-center" id="friends-list" style="margin-left: 10px; margin-right: 10px">
+          </div>
         </div>
-      </div>
 
-
+        <div class="card list-block" style="border-radius: 0px; padding: 5px">
+  				<p class='friends user-label color-silver'> <span style='line-height:22px;'>Projects & Ideas</span></p>
+            <ul style="padding: 10px; padding-top: 0px">
+              <li class="accordion-item"><a href="#" class="item-content item-link">
+                  <div class="item-inner">
+                    <div class="item-title">Project 1</div>
+                  </div></a>
+                <div class="accordion-item-content">
+                  <div class="content-block">
+                    <p>Item 1 content. Lorem ipsum dolor sit amet...</p>
+                  </div>
+                </div>
+              </li>
+              <li class="accordion-item"><a href="#" class="item-content item-link">
+                  <div class="item-inner">
+                    <div class="item-title">Project 2</div>
+                  </div></a>
+                <div class="accordion-item-content">
+                  <div class="content-block">
+                    <p>Item 2 content. Lorem ipsum dolor sit amet...</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
 			</div>
+
 		</div>
 
 	</div>
