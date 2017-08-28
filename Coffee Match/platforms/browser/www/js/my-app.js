@@ -957,6 +957,7 @@ myApp.onPageBack('user', function (page) {
 });
 
 myApp.onPageInit('user', function (page) {
+
   $$("#toolbar-user").toggleClass("none visivel");
 
   var altura = $('#inside-con').height();

@@ -958,6 +958,14 @@ div#columns figure {
   height: auto;
 }
 
+#inside-con {
+  position: fixed;
+  right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .card {
   margin: 7px;
   border-radius: 4px;
