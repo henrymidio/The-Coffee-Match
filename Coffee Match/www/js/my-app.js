@@ -950,7 +950,6 @@ myApp.onPageInit('profile', function (page) {
 
 });
 
-
 //SHOWN USER
 myApp.onPageBack('user', function (page) {
   $$("#toolbar-user").toggleClass("none visivel");

@@ -1,18 +1,19 @@
 <!-- Top Navbar-->
-        <div class="navbar" style="background-color: #8D7A4B">
-          <div class="navbar-inner">
-		    <div class="left">
-              <a href="#" class="link icon-only open-panel color-white" id="finalizar"><i class="icon color-white"></i></a>
-            </div>
-            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-            <div class="sliding center logo"></div>
-          </div>
-        </div>
+<div class="navbar" style="background-color: #8D7A4B">
+  <div class="navbar-inner">
+    <div class="left">
+      <a href="#" class="link icon-only open-panel color-white" id="finalizar"><i class="icon color-white"></i></a>
+    </div>
+    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+    <div class="sliding center logo"></div>
+  </div>
+</div>
 
 <div class="pages">
 	<div data-page="user" class="page no-navbar">
+
 		<div class="page-content" style="background-color: rgb(245, 245, 247)">
-			<a href="" class="link back color-white" data-animate-pages="false" style="position: fixed; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
+			<a href="#" class="link color-white" data-animate-pages="false" style="position: fixed; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
 			<a href="" id="report" style="position: fixed; top: 4%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
       <div class="blur-back"></div>
       <div class="con">
@@ -45,22 +46,22 @@
 
           <div class="list-block">
           <ul>
-            <li class='item-link item-content'>
-              <div class='item-media profile'>
+            <li class='item-link item-content open-popup' data-popup=".popup-project">
+              <div class='item-media'>
               <img class='icon icons8-Settings-Filled' src="https://seeklogo.com/images/U/uber-logo-2BB8EC4342-seeklogo.com.png"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>
               </div>
-              <div class='item-inner fav'>
+              <div class='item-inner'>
               <a href='#' class='item-link'>
-              <div class='item-title '><span id='matches-name'><b>Nome do projeto</b></span><br>
+              <div class='item-title'><span><b>Nome do projeto</b></span><br>
               <span class='subtitle'>Software</span></div></div></a>
             </li>
             <li class='item-link item-content'>
-              <div class='item-media profile'>
+              <div class='item-media'>
               <img class='icon icons8-Settings-Filled' src="https://lh3.googleusercontent.com/00APBMVQh3yraN704gKCeM63KzeQ-zHUi5wK6E9TjRQ26McyqYBt-zy__4i8GXDAfeys=w300"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>
               </div>
-              <div class='item-inner fav'>
+              <div class='item-inner'>
               <a href='#' class='item-link'>
-              <div class='item-title '><span id='matches-name'><b>Nome do projeto</b></span><br>
+              <div class='item-title '><span><b>Nome do projeto</b></span><br>
               <span class='subtitle'>Software</span></div></div></a>
             </li>
 				  </ul>
@@ -68,6 +69,12 @@
 			</div>
 
 		</div>
+
+    <div class="popup popup-project">
+       <div style="background-image:url(https://seeklogo.com/images/U/uber-logo-2BB8EC4342-seeklogo.com.png); margin-top: -40px" class="top-img-project color-white">
+       <div class="content-block">
+       </div>
+     </div>
 
 	</div>
 </div>
