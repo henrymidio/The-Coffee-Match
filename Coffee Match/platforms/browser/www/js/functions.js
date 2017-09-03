@@ -18,10 +18,10 @@ function formatDate(date) {
 function setIndexEvents() {
   //Evento que expande projeto
   $(document.body).on('click', '.open-card', function () {
-      $(this).siblings('.card-content').slideToggle('fast', function(){
-        altura2 = $('#tab2').height(); //Resize da tab
-      });
-      $('.tabs-animated-wrap').height('auto')
+      $$('.floating-button').addClass('none');
+      var project_id = $(this).attr('id');
+      localStorage.setItem("project_id", project_id);
+      mainView.router.loadPage("project.html");
   });
 
   //Evento de clique nas tabs que exibe o floating button
@@ -70,6 +70,8 @@ function setIndexEvents() {
   $(document).on('click', '.hide-user', function () {
     $(this).parent().closest('figure').fadeOut(500,function(){
       $(this).css({"visibility":"hidden",display:'block'}).slideUp();
+      var suid = $(this).attr('id');
+      usuario.dislike(suid)
     });
   });
 
@@ -161,7 +163,7 @@ function setIndexEvents() {
 }
 
 function renderNewProject(projeto, fromBD) {
-  var projectDate = new Date();
+  var projectDate = new Date(projeto.created);
   projectDate = formatDate(projectDate);
   var skills = '';
   if(fromBD) {
@@ -183,28 +185,17 @@ function renderNewProject(projeto, fromBD) {
            +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+projeto.owner_name+'</span>'
         +'</div>'
      +'</div>'
-     +'<p class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
+     +'<p id="'+projeto.id+'" class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
         +'<small>Posted on '+projectDate+'</small>'
-        +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_down</i></a>'
+        +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_right</i></a>'
      +'</p>'
-     +'<div class="card-content" style="display: none">'
+     +'<div class="card-content">'
         +'<div class="card-content-inner">'
-           +'<p class="project-description">'+projeto.description+'</p>'
+           +'<p class="project-description">'+projeto.description+'</p><hr>'
            +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
            +'<div class="skills" style="margin-top: -10px">'
            +skills
            +'</div>'
-        +'</div>'
-        +'<div class="card-footer">'
-           +'<a href="#" class="link join-project color-gray">'
-           +'<i class="f7-icons color-gray" style="margin-bottom: 2px; margin-right: 8px">star_fill</i> JOIN'
-           +'</a>'
-           +'<a href="#" class="link discard-project color-gray">'
-           +'<i class="f7-icons" style="margin-bottom: 2px; margin-right: 8px">forward_fill</i>SKIP'
-           +'</a>'
-           +'<a href="#" class="link report-project color-gray">'
-           +'<i class="f7-icons color-grey" style="margin-bottom: 2px; margin-right: 8px">flag_fill</i> REPORT'
-           +'</a>'
         +'</div>'
      +'</div>'
   +'</div>';

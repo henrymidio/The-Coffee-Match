@@ -230,6 +230,78 @@ var app = {
 
 		 });
 
+     myApp.onPageInit('starbucks-map', function(){
+      myApp.showTab('#tab1');
+ 			StatusBar.overlaysWebView(false);
+ 			var latLng = new google.maps.LatLng(latitude, longitude);
+ 			var mapOptions = {
+ 				center: latLng,
+ 				zoom: 12,
+ 				mapTypeId: google.maps.MapTypeId.ROADMAP
+ 			};
+ 			var map = new google.maps.Map(document.getElementById('starbucks-map'), mapOptions);
+
+ 			//Marker da localização do user
+ 			var marker = new google.maps.Marker({
+ 				position: latLng,
+ 				map: map
+ 			});
+
+ 			var latLngUser = {
+ 				lat_user: latitude,
+ 				lng_user: longitude
+ 				}
+
+ 			$.ajax({
+ 								url: 'http://thecoffeematch.com/webservice/get-starbucks-map.php',
+ 								type: 'post',
+ 								dataType: 'json',
+ 								data: latLngUser,
+ 								success: function (data) {
+
+ 									if (data.length < 2) {
+ 									  myApp.alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
+ 									}
+
+ 									var metrica = localStorage.getItem("metrica");
+ 									//Renderiza markers no mapa
+ 									for(i in data) {
+
+ 										if(data[i].distance < 1){
+ 											data[i].distance = 1;
+ 										}
+                     $("#map-ul").empty();
+ 										var line1 = "<li>"
+ 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
+ 												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
+ 												+ "<div class='item-inner'>"
+ 												+ "<div class='item-title-row'>"
+ 												+ "<div class='item-title'>"+data[i].name+"</div>"
+ 												+ "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " " + metrica + "</div>"
+ 												+ "</div>"
+ 												+ "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
+ 												+ "</div>"
+ 												+ "</a>";
+ 										$("#map-ul").append(line1);
+
+ 										var pin = data[i];
+ 										var lat = pin.lat;
+ 										var lng = pin.lng;
+
+ 										var coordenadas = new google.maps.LatLng(lat, lng);
+
+ 										var marker = new google.maps.Marker({
+ 											position: coordenadas,
+ 											map: map,
+ 											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
+ 										});
+ 									}
+ 								}
+ 							});
+
+
+ 		 });
+
 
 
 		myApp.onPageInit('detail-calendar', function(){

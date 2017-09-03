@@ -259,6 +259,7 @@ this.searchPeople = function () {
 
 
   this.dislike = function(shown_user_id) {
+
     var dados = {
       user_id: _id,
       shown_user_id: shown_user_id,
@@ -283,6 +284,24 @@ this.searchPeople = function () {
         myApp.closeModal(".popup-form", true);
       }, error: function (request, status, error) {
         myApp.hideIndicator();
+        alert(error)
+      }
+    });
+  }
+
+  this.joinProject = function(project_id) {
+    var user_id = _id;
+    var dadosJoin = {
+      project: project_id,
+      joined_user: user_id
+    }
+    $.ajax({
+      url: 'http://api.thecoffeematch.com/v1/users/join_project',
+      type: 'post',
+      data: dadosJoin,
+      success: function(data) {
+        console.log(data)
+      }, error: function (request, status, error) {
         alert(error)
       }
     });

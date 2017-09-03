@@ -782,6 +782,77 @@ myApp.onPageInit('profile-view', function (page) {
 
 });
 
+myApp.onPageInit('myprojects', function (page) {
+  myApp.showTab('#tab1');
+});
+
+myApp.onPageBack('project', function (page) {
+  $$('.floating-button').removeClass('none');
+});
+myApp.onPageInit('project', function (page) {
+  var project_id = localStorage.getItem('project_id');
+  $.ajax({
+    url: 'http://api.thecoffeematch.com/v1/projects/' + project_id,
+    type: 'get',
+    dataType: 'json',
+    success: function (data) {
+      for(i in data) {
+        $('.project-background').css('background', 'url('+data[i].image+')')
+        $('.p-name').text(data[i].name)
+        $('.p-description').text(data[i].description)
+        $('.p-category').text(data[i].category)
+        $(".p-owner-picture").attr("src", data[i].owner_picture);
+        $(".p-owner-name").text(data[i].owner_name);
+
+        var skills = '';
+        var looking_for = data[i].looking_for.split(",");
+
+        looking_for.forEach(function(entry) {
+            skills += '<div class="chip" style="margin-right: 3px">'
+                      +'<div class="chip-label">'+entry+'</div>'
+                      +'</div>';
+          });
+          $('.content-chips').append(skills)
+      }
+      //VERIFICAR SE O VIWER É O CRIADOR DO PROJETO PARA DESABILITAR BOTÃO JOIN
+      if(data[i].owner == usuario.getID()) {
+        $('#join-project').hide()
+      }
+    }
+  });
+
+  $('#join-project').on('click', function() {
+    myApp.confirm("Tem certeza que deseja fazer parte deste projeto?", "", function(){
+      usuario.joinProject(project_id);
+      myApp.alert("Sua solicitação foi enviada ao criador do projeto!", "")
+      mainView.router.back();
+    })
+  })
+
+  $$('#report-project').on('click', function () {
+
+				var buttons1 = [
+					{
+						text: 'Report',
+						onClick: function () {
+							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+								myApp.alert("Sua denúncia será avaliada por nossos moderadores", "Thank you")
+							})
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);
+	});
+
+});
+
 myApp.onPageInit('messages', function (page) {
   myApp.showTab('#tab1');
 	var user = localStorage.getItem("user_id");
@@ -1009,9 +1080,6 @@ myApp.onPageInit('user', function (page) {
 										}
 									});
 
-									//var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
-                  //var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
-									//var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
                   var skill1 = data.skill1 ? '<div class="chip" style="margin-right: 3px">'
                             +'<div class="chip-label">'+data.skill1+'</div>'
                             +'</div>' : "";

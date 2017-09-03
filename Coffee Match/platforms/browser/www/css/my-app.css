@@ -986,6 +986,10 @@ div#columns figure {
     margin-top: -18px !important;
   }
 
+  .p-category {
+    margin-top: -15px;
+  }
+
   .project-owner {
     position: absolute;
     bottom: 7%;
