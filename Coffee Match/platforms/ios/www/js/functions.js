@@ -175,6 +175,8 @@ function renderNewProject(projeto, fromBD) {
                 +'</div>';
     });
 
+    var shortDescription = projeto.description.replace(/^(.{11}[^\s]*).*/, "$1");; //replace with your string.
+
 
   //Monta o DOM dos chips
   var line = '<div class="card demo-card-header-pic">'
@@ -191,7 +193,7 @@ function renderNewProject(projeto, fromBD) {
      +'</p>'
      +'<div class="card-content">'
         +'<div class="card-content-inner">'
-           +'<p class="project-description">'+projeto.description+'</p><hr>'
+           +'<p class="project-description">'+shortDescription+'...</p><hr>'
            +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
            +'<div class="skills" style="margin-top: -10px">'
            +skills

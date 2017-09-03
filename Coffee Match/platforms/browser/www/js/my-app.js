@@ -814,9 +814,17 @@ myApp.onPageInit('project', function (page) {
           });
           $('.content-chips').append(skills)
       }
-      //VERIFICAR SE O VIWER É O CRIADOR DO PROJETO PARA DESABILITAR BOTÃO JOIN
+
       if(data[i].owner == usuario.getID()) {
         $('#join-project').hide()
+      } else {
+        data[i].joined_users.forEach(function(entry) {
+
+            if(entry.joined_user == usuario.getID()) {
+              myApp.alert('Você já se candidatou a este projeto', 'The Coffee Match')
+              $('#join-project').hide()
+            }
+        });
       }
     }
   });
@@ -1057,6 +1065,7 @@ myApp.onPageInit('user', function (page) {
 										success: function (friendsData) {
 											var loops = friendsData.context.all_mutual_friends.data.length;
 											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
+
                       if(friends_number > 0) {
                         $('#mutual-numbers').html(friends_number);
                       }
@@ -1076,7 +1085,8 @@ myApp.onPageInit('user', function (page) {
 
 
 										},error: function (request, status, error) {
-											//alert(JSON.stringify(request));
+                      //console.log(error)
+											$('.card-friends').hide();
 										}
 									});
 
