@@ -163,7 +163,7 @@ function setIndexEvents() {
 }
 
 function renderNewProject(projeto, fromBD) {
-  var projectDate = new Date(projeto.created);
+  var projectDate = new Date(projeto.created.replace(/\s/, 'T'));
   projectDate = formatDate(projectDate);
   var skills = '';
   if(fromBD) {
@@ -175,7 +175,7 @@ function renderNewProject(projeto, fromBD) {
                 +'</div>';
     });
 
-    var shortDescription = projeto.description.replace(/^(.{11}[^\s]*).*/, "$1");; //replace with your string.
+    var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1");; //replace with your string.
 
 
   //Monta o DOM dos chips

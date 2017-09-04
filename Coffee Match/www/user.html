@@ -13,8 +13,8 @@
 	<div data-page="user" class="page no-navbar">
 
 		<div class="page-content" style="background-color: rgb(245, 245, 247)">
-			<a href="#" class="link back color-white" data-animate-pages="false" style="position: fixed; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
-			<a href="#" id="report" style="position: fixed; top: 4%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
+			<a href="#" class="link back color-white" data-animate-pages="false" style="position: absolute; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
+			<a href="#" id="report" style="position: absolute; top: 4%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
       <div class="blur-back"></div>
       <div class="con">
 				<div id= "inside-con" class='text-center color-white'>
@@ -96,6 +96,18 @@
             <div class="chip-label">Partnership</div>'
          </div>
        </div>
+	  </div>
 
-	</div>
+    <div class="popup popup-message">
+      <a href="#" class="link close-popup color-white" style="position: absolute; top: 2.5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">close</i></a>
+      <div class="navbar-popup" style="text-align: center">
+        <p class="color-white">SEND A MESSAGE</p>
+      </div>
+      <div class="toolbar-popup messagebar" id="send-new-message" style="background-color: white">
+        <div class="toolbar-inner" style="background-color: white">
+           <span style="margin-right: 15px"></span> <textarea style="border: none; background-color: white; margin: 0px" placeholder="Your message..."></textarea>
+           <a href="#" class="link" style="color: #00d173; margin-bottom: 13px">Send</a>
+        </div>
+      </div>
+    </div>
 </div>

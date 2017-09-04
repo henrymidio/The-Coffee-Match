@@ -1035,8 +1035,11 @@ myApp.onPageBack('user', function (page) {
 });
 
 myApp.onPageInit('user', function (page) {
-
   $$("#toolbar-user").toggleClass("none visivel");
+  $$('#toolbar-user').on('click', function () {
+    myApp.popup('.popup-message');
+    setTimeout(function(){ $('textarea').focus() }, 1000);
+  });
 
   var altura = $('#inside-con').height();
   $('.blur-back').height(altura + 60)

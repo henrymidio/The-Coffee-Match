@@ -286,10 +286,17 @@ select.rounded {
 .navbar-popup {
   position: absolute;
   width: 100%;
-  top: 0;
-  background: #2f3a41;
+  height: 8vh;
+  top: 0%;
+  background: #00d173;
 }
 
+.toolbar-popup {
+  position: absolute;
+  width: 100%;
+  height: 8vh;
+  bottom: 0%;
+}
 
 .container-toolbutton {
   background: white;
