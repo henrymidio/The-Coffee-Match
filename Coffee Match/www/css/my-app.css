@@ -286,7 +286,7 @@ select.rounded {
 .navbar-popup {
   position: absolute;
   width: 100%;
-  height: 8vh;
+  height: 10vh;
   top: 0%;
   background: #00d173;
 }
