@@ -68,10 +68,13 @@ function setIndexEvents() {
 
   //Evento que elimina card do user
   $(document).on('click', '.hide-user', function () {
-    $(this).parent().closest('figure').fadeOut(500,function(){
-      $(this).css({"visibility":"hidden",display:'block'}).slideUp();
-      var suid = $(this).attr('id');
-      usuario.dislike(suid)
+    var self = $(this);
+    myApp.confirm('Você não poderá visualizar este perfil novamente', '', function () {
+     self.parent().closest('figure').fadeOut(500,function(){
+        $(this).css({"visibility":"hidden",display:'block'}).slideUp();
+        var suid = $(this).attr('id');
+        usuario.dislike(suid)
+      });
     });
   });
 
@@ -166,6 +169,8 @@ function renderNewProject(projeto, fromBD) {
   var projectDate = new Date(projeto.created.replace(/\s/, 'T'));
   projectDate = formatDate(projectDate);
   var skills = '';
+  var icon = '<i class="f7-icons color-gray">chevron_right</i>';
+
   if(fromBD) {
     projeto.looking_for = projeto.looking_for.split(",");
   }
@@ -174,6 +179,18 @@ function renderNewProject(projeto, fromBD) {
                 +'<div class="chip-label">'+entry+'</div>'
                 +'</div>';
     });
+
+    //Verifica se já deu join no projeto para marcar o check
+    try {
+      projeto.joined_users.forEach(function(entry) {
+          if(entry.joined_user == usuario.getID()) {
+            icon = '<i class="f7-icons" style="color: #00aced">check</i>';
+          }
+      });
+    } catch(error) {
+
+    }
+
 
     var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1");; //replace with your string.
 
@@ -189,7 +206,7 @@ function renderNewProject(projeto, fromBD) {
      +'</div>'
      +'<p id="'+projeto.id+'" class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
         +'<small>Posted on '+projectDate+'</small>'
-        +'<a href="#" style="float: right"> <i class="f7-icons color-gray">chevron_right</i></a>'
+        +'<a href="#" style="float: right">'+icon+'</a>'
      +'</p>'
      +'<div class="card-content">'
         +'<div class="card-content-inner">'
