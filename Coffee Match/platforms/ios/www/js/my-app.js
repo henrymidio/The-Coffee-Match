@@ -1033,6 +1033,39 @@ myApp.onPageInit('profile', function (page) {
 myApp.onPageBack('user', function (page) {
   $$("#toolbar-user").toggleClass("none visivel");
 });
+//Eventos da tela user setados de fora para não ocorrerem duas vezes
+$(document).on('popup:open', '.popup-project', function () {
+  var project_id = localStorage.getItem('project_id');
+  $.ajax({
+    url: 'http://api.thecoffeematch.com/v1/projects/' + project_id,
+    type: 'get',
+    dataType: 'json',
+    success: function (data) {
+      for(i in data) {
+        $('.projeto-background').css('background', 'url('+data[i].image+')')
+        $('.projeto-name').text(data[i].name)
+        $('.projeto-description').text(data[i].description)
+        $('.projeto-category').text(data[i].category)
+        $(".projeto-owner-picture").attr("src", data[i].owner_picture);
+        $(".projeto-owner-name").text(data[i].owner_name);
+
+        var skills = '';
+        var looking_for = data[i].looking_for.split(",");
+
+        looking_for.forEach(function(entry) {
+            skills += '<div class="chip" style="margin-right: 3px">'
+                      +'<div class="chip-label">'+entry+'</div>'
+                      +'</div>';
+          });
+          $('.content-chips').append(skills)
+      }
+    }
+  });
+});
+$(document).on('click', '.open-popup-project', function () {
+  localStorage.setItem('project_id', $(this).attr('id'));
+  myApp.popup('.popup-project');
+});
 
 myApp.onPageInit('user', function (page) {
   $$("#toolbar-user").toggleClass("none visivel");
@@ -1088,7 +1121,7 @@ myApp.onPageInit('user', function (page) {
 
 										},error: function (request, status, error) {
                       //console.log(error)
-											$('.card-friends').hide();
+											//$('.card-friends').hide();
 										}
 									});
 
@@ -1121,6 +1154,25 @@ myApp.onPageInit('user', function (page) {
 									$(".skss").append(skill1, skill2, skill3);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
+//console.log(data)
+                  if(data.projects.length > 0) {
+                    $('.card-projects').toggleClass('none');
+                    data.projects.forEach(function(entry) {
+                      //console.log(entry.name)
+
+                        var line = "<li id='"+entry.id+"' class='item-link item-content open-popup-project'>"
+                                 +"<div class='item-media'>"
+                                 +"<img class='icon icons8-Settings-Filled' src='"+entry.image+"'  style='border-radius: 100%; margin-top: 5px; width: 50px; height: 50px' />"
+                                 +"</div>"
+                                 +"<div class='item-inner'>"
+                                 +"<a href='#' class='item-link'>"
+                                 +"<div class='item-title'><span><b>"+entry.name+"</b></span><br>"
+                                 +"<span class='subtitle'>"+entry.category+"</span></div></div></a>"
+                                 +"</li>";
+                        $('.projects-list').append(line);
+
+                    });
+                  }
 
 								}
 

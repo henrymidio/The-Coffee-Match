@@ -132,7 +132,7 @@ this.getPreferences = function() {
           $("#"+data[i].id+" .figure-body").append(line);
         }
       },error: function (request, status, error) {
-        console.log(error);
+        myApp.pullToRefreshDone();
       }
     });
   }
