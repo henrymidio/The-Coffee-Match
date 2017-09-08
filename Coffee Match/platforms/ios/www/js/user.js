@@ -272,6 +272,49 @@ this.searchPeople = function () {
     });
   }
 
+  this.like = function(shown_user_id, message) {
+    var user_id  = _id;
+
+    var dados = {
+      user_id: user_id,
+      shown_user_id: shown_user_id,
+      message: message,
+      liked: 1
+    }
+
+    $.ajax({
+            url: 'http://thecoffeematch.com/webservice/put-like.php',
+            type: 'post',
+            data: dados,
+            dataType: 'json',
+            success: function (data) {
+              myApp.alert('Sua mensagem foi enviada com sucesso', '');
+            },
+            error: function (request, status, error) {
+              alert('Error');
+              console.log(error)
+            }
+
+          });
+  }
+
+  this.getProjects = function(callback) {
+    var user = {
+      user_id: _id
+    }
+    $.ajax({
+      url: 'http://api.thecoffeematch.com/v1/users/get_projects',
+      type: 'post',
+      data: user,
+      dataType: 'json',
+      success: function(data) {
+        callback(data);
+      }, error: function (request, status, error) {
+        alert(error)
+      }
+    });
+  }
+
   this.saveProject = function(projeto) {
     $.ajax({
       url: 'http://api.thecoffeematch.com/v1/projects',

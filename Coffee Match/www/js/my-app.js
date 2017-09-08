@@ -784,6 +784,21 @@ myApp.onPageInit('profile-view', function (page) {
 
 myApp.onPageInit('myprojects', function (page) {
   myApp.showTab('#tab1');
+  usuario.getProjects(function(data){
+    $('.ul-projects').empty();
+    for(i = 0; i < data.length; i++){
+      var line = "<li class='item-link item-content'>"
+        + "<div class='item-media profile'>"
+        + "<img class='icon icons8-Settings-Filled' src='"+data[i].image+"' style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
+        + "</div>"
+        + "<div class='item-inner'>"
+        + "<a href='#' class='item-link'>"
+        + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
+        + "<span class='subtitle'>"+data[i].joined_users.length+" joined</span></div></div></a>"
+        + "</li>";
+        $('.ul-projects').append(line);
+    }
+  })
 });
 
 myApp.onPageBack('project', function (page) {
@@ -1065,6 +1080,21 @@ $(document).on('popup:open', '.popup-project', function () {
 $(document).on('click', '.open-popup-project', function () {
   localStorage.setItem('project_id', $(this).attr('id'));
   myApp.popup('.popup-project');
+});
+$(document).on('click', '.send-invite', function () {
+  var message = $('.invite-message').val();
+  var shown_user_id = localStorage.getItem('shown_user_id');
+
+  if(message.length < 14) {
+    alert('Sua mensagem deve ter pelo menos 14 caracteres')
+    return false;
+  } else {
+    usuario.like(shown_user_id, message);
+    myApp.closeModal();
+    mainView.router.back();
+    $('figure#'+shown_user_id).css({"visibility":"hidden",display:'block'}).slideUp();
+  }
+
 });
 
 myApp.onPageInit('user', function (page) {
