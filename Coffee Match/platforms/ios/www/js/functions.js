@@ -196,7 +196,7 @@ function renderNewProject(projeto, fromBD) {
 
 
   //Monta o DOM dos chips
-  var line = '<div class="card demo-card-header-pic">'
+  var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'
      +'<div style="background-image:url('+projeto.image+')" valign="center" class="card-header color-white no-border">'
      +'<p class="project-name">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
      +'<div class="project-owner">'
@@ -204,7 +204,7 @@ function renderNewProject(projeto, fromBD) {
            +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+projeto.owner_name+'</span>'
         +'</div>'
      +'</div>'
-     +'<p id="'+projeto.id+'" class="color-gray open-card" style="padding: 8px 15px; padding-top: 0">'
+     +'<p class="color-gray" style="padding: 8px 15px; padding-top: 0">'
         +'<small>Posted on '+projectDate+'</small>'
         +'<a href="#" style="float: right">'+icon+'</a>'
      +'</p>'

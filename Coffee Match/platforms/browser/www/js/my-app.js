@@ -792,7 +792,7 @@ myApp.onPageInit('myprojects', function (page) {
         + "<img class='icon icons8-Settings-Filled' src='"+data[i].image+"' style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
         + "</div>"
         + "<div class='item-inner'>"
-        + "<a href='#' class='item-link'>"
+        + "<a href='joined-project.html' class='item-link'>"
         + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
         + "<span class='subtitle'>"+data[i].joined_users.length+" joined</span></div></div></a>"
         + "</li>";
@@ -803,8 +803,10 @@ myApp.onPageInit('myprojects', function (page) {
 
 myApp.onPageBack('project', function (page) {
   $$('.floating-button').removeClass('none');
+  StatusBar.overlaysWebView(false);
 });
 myApp.onPageInit('project', function (page) {
+  StatusBar.overlaysWebView(true);
   var project_id = localStorage.getItem('project_id');
   $.ajax({
     url: 'http://api.thecoffeematch.com/v1/projects/' + project_id,
@@ -1137,15 +1139,15 @@ myApp.onPageInit('user', function (page) {
 
 											for(i = 0; i < loops; i++){
 												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
-												$("#friends-list").append(line);
+												$(".friends-list").append(line);
 											}
 
 											if(friends_number > 5){
 												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
-												$("#friends-list").append(line);
+												$(".friends-list").append(line);
 											} else {
 												var line = '<div class="col-33"></div>';
-												$("#friends-list").append(line);
+												$(".friends-list").append(line);
 											}
 
 
