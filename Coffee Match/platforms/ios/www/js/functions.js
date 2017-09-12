@@ -106,6 +106,24 @@ function setIndexEvents() {
    $('#create-tag').val('');
   });
 
+  //PLUS TAG (POPUP DA EDIÇÃO DE PERFIL)
+  $(document).on('click', '.plus-tag', function () {
+    var countChips = $('.container2-chip div.chip').length;
+    if(countChips > 4) {
+      myApp.alert('Você somente pode adicionar 5 skills por projeto', '');
+      return false;
+    }
+    var conteudo = $('.create-tag').val();
+    if(conteudo < 2) {return false}
+    //Monta o DOM dos chips
+    var line = "<div class='chip chip-form'>"
+          + "<div class='chip-label project-skill'>"+conteudo+"</div>"
+          + "<a href='#' class='chip-delete'></a>"
+          + "</div>";
+          $(".container2-chip").append(line);
+   $('.create-tag').val('');
+  });
+
   // Pull to refresh content
   $(document).on('ptr:refresh', '.pull-to-refresh-content', function (e) {
     usuario.searchPeople();
@@ -169,7 +187,7 @@ function renderNewProject(projeto, fromBD) {
   var projectDate = new Date(projeto.created.replace(/\s/, 'T'));
   projectDate = formatDate(projectDate);
   var skills = '';
-  var icon = '<i class="f7-icons color-gray">chevron_right</i>';
+  var icon = '';
 
   if(fromBD) {
     projeto.looking_for = projeto.looking_for.split(",");
@@ -251,5 +269,28 @@ function retrieveProjects() {
         renderNewProject(data[i], true);
       }
     }
+  });
+}
+
+  function editProject(project_id, name, description, editSkills, callback) {
+    var id = project_id;
+    var fields = {
+      name: name,
+      description: description,
+      looking_for: editSkills
+    }
+
+    $.ajax({
+      url: 'http://api.thecoffeematch.com/v1/projects/' + id,
+      type: 'put',
+      data: fields,
+      dataType: 'json',
+      success: function (data) {
+        callback(data)
+      },
+      error: function() {
+        myApp.hideIndicator()
+        myApp.alert('Ocorreu um erro inesperado. Tente novamente')
+      }
   });
 }

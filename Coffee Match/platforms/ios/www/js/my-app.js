@@ -291,6 +291,9 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 	var user_id  = localStorage.getItem("user_id");
 	var other_id = localStorage.getItem("idc");
 
+  //Seta aqui para ver o perfil na confirmação
+  localStorage.setItem("shown_user_id", other_id)
+
 	var requester = {
 		requester: user_id
 	}
@@ -302,59 +305,13 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								dataType: 'json',
 								data: requester,
 								success: function (data) {
-									$.ajax({
-										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data.fb_token + "&appsecret_proof=" + data.appsecret,
-										type: 'get',
-										dataType: 'json',
-										success: function (friendsData) {
-											var loops = friendsData.context.all_mutual_friends.data.length;
-											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-
-											for(i = 0; i < loops; i++){
-												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
-												$("#confirmacao-friends-list").append(line);
-											}
-
-											if(friends_number > 5){
-												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
-												$("#confirmacao-friends-list").append(line);
-											} else {
-												var line = '<div class="col-33"></div>';
-												$("#confirmacao-friends-list").append(line);
-											}
-
-
-										},error: function (request, status, error) {
-											//alert(JSON.stringify(request));
-										}
-									});
-
-									var metrica = localStorage.getItem("metrica");
-									metrica = metrica ? metrica : "Km";
-
-									var skill1 = data.skill1 ? "<span class='tag'>"+data.skill1+"</span>" : "";
-									var skill2 = data.skill2 ? "<span class='tag'>"+data.skill2+"</span>" : "";
-									var skill3 = data.skill3 ? "<span class='tag'>"+data.skill3+"</span>" : "";
-
-									var message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
-									if(data.id == 193) {
+                  var message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
+									if(data.id == 293) {
 										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
 									}
-
-									$$("#name-confirm").html(data.name);
-									$$("#cc-distance").html(data.distance);
-									$$("#cc-metrica").html(metrica);
-									$$("#invite-age").html(data.age);
-									$$("#invite-college").html(data.college);
-									$$("#description-confirm").html(data.description);
-									$$("#occupation-confirm").html(data.occupation);
-									$$("#pic-confirm").attr("src", data.picture);
-									$(".skills").append(skill1, skill2, skill3);
-									$$("#message").html(message);
-									$$("#cc-l1").html('<span style="margin-right: 10px">●</span>' + data.l1);
-									$$("#cc-l2").html('<span style="margin-right: 10px">●</span>' + data.l2);
-									$$("#cc-l3").html('<span style="margin-right: 10px">●</span>' + data.l3);
-								}
+                  $$(".user-name").html(data.name);
+                  $$("#message").html(message);
+                }
 							});
 
 
@@ -820,25 +777,83 @@ myApp.onPageInit('joined-project', function (page) {
 
         var skills = '';
         var looking_for = data[i].looking_for.split(",");
+        var linha = '';
 
+        $('.content-chips').empty();
+        $('.container2-chip').empty();
         looking_for.forEach(function(entry) {
             skills += '<div class="chip" style="margin-right: 3px">'
                       +'<div class="chip-label">'+entry+'</div>'
                       +'</div>';
+            linha += "<div class='chip chip-form'>"
+                  + "<div class='chip-label project-skill'>"+entry+"</div>"
+                  + "<a href='#' class='chip-delete'></a>"
+                  + "</div>";
           });
           $('.content-chips').append(skills);
+          $(".container2-chip").append(linha);
 
         var joined = '';
+        $('.mutual-connections-list').empty();
         data[i].joined_users.forEach(function(entry){
-          joined += '<div class="col-33" style="position: relative">'
-                 + '<img src="https://www.biography.com/.image/c_fill%2Ccs_srgb%2Cg_face%2Ch_300%2Cq_80%2Cw_300/MTE5NTU2MzE2MTY4Njg1MDY3/warren-buffett-9230729-1-402.jpg" />'
-                 + '<br><span>Warren Buffet</span>'
-                 + '</div>';
+          $.ajax({
+            url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+              joined = '<div id='+data.id+' class="col-33 open-profile" style="position: relative">'
+                     + '<img src='+data.picture+' />'
+                     + '<br><span>'+data.name+'</span>'
+                     + '</div>';
+              $('.mutual-connections-list').append(joined);
+            }
+          });
         });
-        $('.friends-list').append(joined);
+
+        //Valores da popup de edição do perfil
+        $('.edit-name').val(data[i].name);
+        $('.edit-description').val(data[i].description);
       }
+      $(document).on('click', '.open-profile', function () {
+        var shown_user_id = $(this).attr('id');
+        localStorage.setItem('shown_user_id', shown_user_id);
+        mainView.router.loadPage('user.html');
+      })
     }
   });
+
+  var name;
+  var description;
+  $('.edit-project').on('click', function(){
+    myApp.showIndicator()
+    var project_id = localStorage.getItem('project_id');
+    name = $('.edit-name').val();
+    description = $('.edit-description').val();
+    var editSkills = $('.project-skill').map(function() {
+        return $(this).text();
+    }).get();
+
+    $('.content-chips').empty();
+    var skills = '';
+    editSkills.forEach(function(entry) {
+        skills += '<div class="chip" style="margin-right: 3px">'
+                  +'<div class="chip-label">'+entry+'</div>'
+                  +'</div>';
+      });
+      console.log(skills)
+      $(".content-chips").append(skills);
+
+    editSkills = editSkills.join(',')
+
+    editProject(project_id, name, description, editSkills, function(data) {
+      myApp.hideIndicator();
+      myApp.closeModal(".popup-edit-form", true);
+      myApp.alert('Suas informaçãoes foram atualizadas com sucesso!', '')
+      $('.j-name').html(name);
+      $('.j-description').html(description);
+    });
+  })
+
 });
 
 myApp.onPageBack('project', function (page) {
@@ -1078,7 +1093,10 @@ myApp.onPageInit('profile', function (page) {
 		localStorage.setItem("college", faculdade);
 
 		//Para dar tempo de atuaizar antes de exibir novamete o preview do perfil
-		setTimeout(function(){ mainView.router.loadPage('profile-preview.html'); }, 1000);
+		setTimeout(function(){
+      myApp.alert('Seu perfil foi atualizado com sucesso')
+      //mainView.router.loadPage('profile-preview.html');
+    }, 1000);
 
 	})
 
@@ -1661,8 +1679,8 @@ myApp.onPageInit('match', function (page) {
 									$$("#user-two-img").attr("src", data.picture);
 								}
 							});
-	$$("#select-starbucks").on("click", function(){
-		mainView.router.loadPage('starbucks-proximas.html');
+	$$("#send-message").on("click", function(){
+		mainView.router.loadPage('chat.html');
 	})
 });
 

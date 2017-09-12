@@ -316,7 +316,7 @@ select.rounded {
   border-top: 1px solid rgba(181, 194, 202, 0.5);
 }
 
-.add-tag {
+.add-tag, .plus-tag {
   width: 30px;
   height: 31px;
   font-size: 20px;
@@ -440,9 +440,8 @@ color: white;
 letter-spacing:0.09em;
 }
 
-.navbar {
-	background-color: #2f3a41 !important;
-	//height: 54px !important;
+.navbar-white {
+  background-color: white !important;
 }
 
 .navbar:after {
@@ -670,6 +669,13 @@ input:focus {
 }
 
 .friends-list img {
+	width: 65px;
+	height: 65px;
+	border-radius: 100%;
+	margin-top: 8px
+}
+
+.mutual-connections-list img {
 	width: 65px;
 	height: 65px;
 	border-radius: 100%;
@@ -975,7 +981,7 @@ div#columns figure {
 }
 
 .demo-card-header-pic .card-header {
-    height: 48vw;
+    height: 40vw;
     background-size: cover;
     background-position: center;
     border-radius: 4px !important;
