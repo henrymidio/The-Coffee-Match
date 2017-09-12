@@ -782,23 +782,63 @@ myApp.onPageInit('profile-view', function (page) {
 
 });
 
+
 myApp.onPageInit('myprojects', function (page) {
   myApp.showTab('#tab1');
   usuario.getProjects(function(data){
     $('.ul-projects').empty();
     for(i = 0; i < data.length; i++){
-      var line = "<li class='item-link item-content'>"
+      var line = "<li class='item-link item-content open-myproject' id='"+data[i].id+"'>"
         + "<div class='item-media profile'>"
         + "<img class='icon icons8-Settings-Filled' src='"+data[i].image+"' style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
         + "</div>"
         + "<div class='item-inner'>"
-        + "<a href='joined-project.html' class='item-link'>"
+        + "<a href='#' class='item-link'>"
         + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
         + "<span class='subtitle'>"+data[i].joined_users.length+" joined</span></div></div></a>"
         + "</li>";
         $('.ul-projects').append(line);
     }
   })
+  $(document).on('click', '.open-myproject', function () {
+    var project_id = $(this).attr('id');
+    localStorage.setItem('project_id', project_id);
+    mainView.router.loadPage('joined-project.html');
+  })
+});
+
+myApp.onPageInit('joined-project', function (page) {
+  var project_id = localStorage.getItem('project_id');
+  $.ajax({
+    url: 'http://api.thecoffeematch.com/v1/projects/' + project_id,
+    type: 'get',
+    dataType: 'json',
+    success: function (data) {
+      for(i in data) {
+        $('.j-name').html(data[i].name);
+        $('.j-description').text(data[i].description);
+
+        var skills = '';
+        var looking_for = data[i].looking_for.split(",");
+
+        looking_for.forEach(function(entry) {
+            skills += '<div class="chip" style="margin-right: 3px">'
+                      +'<div class="chip-label">'+entry+'</div>'
+                      +'</div>';
+          });
+          $('.content-chips').append(skills);
+
+        var joined = '';
+        data[i].joined_users.forEach(function(entry){
+          joined += '<div class="col-33" style="position: relative">'
+                 + '<img src="https://www.biography.com/.image/c_fill%2Ccs_srgb%2Cg_face%2Ch_300%2Cq_80%2Cw_300/MTE5NTU2MzE2MTY4Njg1MDY3/warren-buffett-9230729-1-402.jpg" />'
+                 + '<br><span>Warren Buffet</span>'
+                 + '</div>';
+        });
+        $('.friends-list').append(joined);
+      }
+    }
+  });
 });
 
 myApp.onPageBack('project', function (page) {
