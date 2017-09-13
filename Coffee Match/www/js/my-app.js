@@ -1363,15 +1363,11 @@ myApp.onPageBeforeInit('settings', function (page) {
 									if(data.notification_emails == false){
 										$('#check-emails').prop('checked', false);
 									}
-									if(data.metrica == 'k'){
-										$('#check-km').prop('checked', true);
-										$('#check-mile').prop('checked', false);
-										$$("#valBox").html(data.distance + " Km");
-									} else {
-										$('#check-km').prop('checked', false);
-										$('#check-mile').prop('checked', true);
-										$$("#valBox").html(data.distance + " Mi")
+                  if(data.available == false){
+										$('#change-status').prop('checked', false);
 									}
+
+										$$("#valBox").html(data.distance + " Mi")
 
 								},
 								error: function (request, status, error) {
@@ -1379,31 +1375,6 @@ myApp.onPageBeforeInit('settings', function (page) {
 								}
 	});
 
-	$('#check-mile:checkbox').change(function() {
-		if($(this).is(":checked")) {
-			$('#check-km').prop('checked', false);
-			$$("#valBox").html(dst + " Mi");
-			localStorage.setItem("medida", "Mi")
-		} else {
-			$('#check-km').prop('checked', true);
-			$$("#valBox").html(dst + " km");
-			localStorage.setItem("medida", "Km")
-		}
-	});
-
-	$('#check-km:checkbox').change(function() {
-
-		if($(this).is(":checked")) {
-			$('#check-mile').prop('checked', false);
-			$$("#valBox").html(dst + " km");
-			localStorage.setItem("medida", "Km")
-		} else {
-			$('#check-mile').prop('checked', true);
-			$$("#valBox").html(dst + " Mi");
-			localStorage.setItem("medida", "Mi")
-		}
-
-	});
 
 	$$('#salvar').on('click', function(){
 		var convites = 0;
@@ -1414,18 +1385,16 @@ myApp.onPageBeforeInit('settings', function (page) {
 		if($('#check-emails').is(":checked")){
 			emails= 1;
 		};
-		var metrica = 'k';
-		localStorage.setItem("metrica", "Km");
-		if($('#check-mile').is(":checked")){
-			metrica = 'm';
-			localStorage.setItem("metrica", "Mi");
+    var status = 0;
+    if($('#change-status').is(":checked")){
+			status = 1;
 		};
 
 		var distance = $$("#ranger").val();
 		localStorage.setItem("distance", distance);
 
 		var user_id = localStorage.getItem("user_id");
-		setPreferences(metrica, distance, convites, emails, user_id);
+		setPreferences(status, distance, convites, emails, user_id);
 		mainView.router.loadPage('index.html');
 	})
 
@@ -1800,16 +1769,16 @@ function showVal(newVal){
 }
 
 //Seta preferências
-function setPreferences(metrica, distance, convites, emails, user_id){
+function setPreferences(status, distance, convites, emails, user_id){
 	//myApp.showPreloader();
-	var pref = {metrica: metrica, distance: distance, convites: convites, emails: emails, user_id: user_id};
+	var pref = {status: status, distance: distance, convites: convites, emails: emails, user_id: user_id};
 
 	$.ajax({
 								url: 'http://thecoffeematch.com/webservice/set-preferences.php',
 								type: 'post',
 								data: pref,
 								success: function (data) {
-
+console.log(data)
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
 										//myApp.hidePreloader();
