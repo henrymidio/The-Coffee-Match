@@ -306,8 +306,8 @@ var app = {
 
 		myApp.onPageInit('detail-calendar', function(){
 			//myApp.showPreloader();
-			var userPicture = localStorage.getItem("picture");
-			var userName    = localStorage.getItem("name");
+			var userPicture = usuario.getPicture()
+			var userName    = usuario.getName()
 			var match       = localStorage.getItem("match");
 
 			//Renderiza o mapa
@@ -336,7 +336,6 @@ var app = {
 								dataType: 'json',
 								data: matchData,
 								success: function (data) {
-
 										//Seta starbucks no mapa
 										var lat = data.starbucks_lat;
 										var lng = data.starbucks_lng;
@@ -366,7 +365,7 @@ var app = {
 									//myApp.hidePreloader();
 								},
 								error: function (request, status, error) {
-									//myApp.hidePreloader();
+
 									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});

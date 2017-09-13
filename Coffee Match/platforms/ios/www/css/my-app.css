@@ -988,6 +988,10 @@ div#columns figure {
     border: 1px solid white;
   }
 
+  .picker-item {
+    padding: 0px !important;
+  }
+
   .project-name {
     margin: 0 auto;
     font-size: 30px;

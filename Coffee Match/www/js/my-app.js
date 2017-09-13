@@ -310,6 +310,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
 									}
                   $$(".user-name").html(data.name);
+                  $$(".confirmacao-img").attr("src", data.picture);
                   $$("#message").html(message);
                 }
 							});
@@ -531,7 +532,7 @@ myApp.onPageInit('combinacoes', function (page) {
 									}
 
 									$(".match").on("click", function(){
-										localStorage.setItem("match", this.id);
+										localStorage.setItem("match", $(this).attr('id'));
 										mainView.router.loadPage("detail-calendar.html");
 										var suid = $(this).siblings("div.swipeout").attr("id");
 										localStorage.setItem("shown_user_id", this.id);
@@ -795,31 +796,40 @@ myApp.onPageInit('joined-project', function (page) {
 
         var joined = '';
         $('.mutual-connections-list').empty();
+        var contador = 0;
+        var total = data[i].joined_users.length;
         data[i].joined_users.forEach(function(entry){
           $.ajax({
             url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
             type: 'get',
             dataType: 'json',
             success: function (data) {
-              joined = '<div id='+data.id+' class="col-33 open-profile" style="position: relative">'
+              contador += 1;
+              joined += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
                      + '<img src='+data.picture+' />'
                      + '<br><span>'+data.name+'</span>'
                      + '</div>';
-              $('.mutual-connections-list').append(joined);
+              if(contador == total) {
+                joined += '<div class="col-33" style="position: relative"></div>';
+                $('.mutual-connections-list').append(joined);
+              }
+
             }
           });
         });
+
 
         //Valores da popup de edição do perfil
         $('.edit-name').val(data[i].name);
         $('.edit-description').val(data[i].description);
       }
-      $(document).on('click', '.open-profile', function () {
+      $(document).on('click', '.op-profile', function () {
         var shown_user_id = $(this).attr('id');
         localStorage.setItem('shown_user_id', shown_user_id);
         mainView.router.loadPage('user.html');
       })
     }
+
   });
 
   var name;
@@ -1661,7 +1671,7 @@ myApp.onPageBack('chat', function (page) {
 
 
 myApp.onPageInit('match', function (page) {
-	var user_id = localStorage.getItem("user_id");
+	var user_id = usuario.getID()
 	var suid = localStorage.getItem("idc");
 	var d = {
 		requester: user_id
@@ -1674,10 +1684,13 @@ myApp.onPageInit('match', function (page) {
 								dataType: 'json',
 								data: d,
 								success: function (data) {
-
-									$$("#user-one-img").attr("src", localStorage.getItem("picture"));
+                  console.log(data)
+									$$("#user-one-img").attr("src", usuario.getPicture());
 									$$("#user-two-img").attr("src", data.picture);
-								}
+								},
+                error: function(err) {
+                  console.log(err)
+                }
 							});
 	$$("#send-message").on("click", function(){
 		mainView.router.loadPage('chat.html');
