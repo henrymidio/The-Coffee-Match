@@ -530,14 +530,14 @@ myApp.onPageInit('combinacoes', function (page) {
 
 
 									}
-
+                  /*
 									$(".match").on("click", function(){
 										localStorage.setItem("match", $(this).attr('id'));
 										mainView.router.loadPage("detail-calendar.html");
 										var suid = $(this).siblings("div.swipeout").attr("id");
 										localStorage.setItem("shown_user_id", this.id);
 									});
-
+                  */
 									$(".unmatch").on("click", function(){
 										var self   = $(this);
 										var idMatch = self.parent().siblings(".match").attr("id");
@@ -567,8 +567,12 @@ myApp.onPageInit('combinacoes', function (page) {
 
 });
 
-myApp.onPageInit('detail-calendar', function(page){
+myApp.onPageBack('detail-calendar', function(page){
+  $$("#toolbar").toggleClass("none visivel");
+});
 
+myApp.onPageInit('detail-calendar', function(page){
+  $$("#toolbar").toggleClass("none visivel");
 	$$(".btn-green").on("click", function(){
 		mainView.router.loadPage("chat.html");
 	});
@@ -1409,6 +1413,13 @@ myApp.onPageInit('chat', function (page) {
 	$$('.overflow').on('click', function () {
 
 				var buttons1 = [
+          {
+						text: 'Schedule',
+						color: 'blue',
+						onClick: function () {
+							  mainView.router.loadPage('detail-calendar.html');
+						}
+					},
 					{
 						text: 'Report',
 						color: 'red',
