@@ -166,21 +166,21 @@ var app = {
 									  myApp.alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
 									}
 
-									var metrica = localStorage.getItem("metrica");
+									$("#proximas-ul").empty();
 									//Renderiza markers no mapa
 									for(i in data) {
 
 										if(data[i].distance < 1){
 											data[i].distance = 1;
 										}
-                    $("#proximas-ul").empty();
+
 										var line1 = "<li>"
 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
 												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
 												+ "<div class='item-inner'>"
 												+ "<div class='item-title-row'>"
 												+ "<div class='item-title'>"+data[i].name+"</div>"
-												+ "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " " + metrica + "</div>"
+												+ "<div class='item-after' style='color: #00d173'>"+data[i].distance+" Mi</div>"
 												+ "</div>"
 												+ "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
 												+ "</div>"
@@ -263,21 +263,21 @@ var app = {
  									  myApp.alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
  									}
 
- 									var metrica = localStorage.getItem("metrica");
+ 									$("#map-ul").empty();
  									//Renderiza markers no mapa
  									for(i in data) {
 
  										if(data[i].distance < 1){
  											data[i].distance = 1;
  										}
-                     $("#map-ul").empty();
+
  										var line1 = "<li>"
  												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
  												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
  												+ "<div class='item-inner'>"
  												+ "<div class='item-title-row'>"
  												+ "<div class='item-title'>"+data[i].name+"</div>"
- 												+ "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " " + metrica + "</div>"
+ 												+ "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " Mi</div>"
  												+ "</div>"
  												+ "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
  												+ "</div>"
@@ -296,7 +296,10 @@ var app = {
  											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
  										});
  									}
- 								}
+ 								},
+                error: function(a, b, c) {
+                  console.log(c)
+                }
  							});
 
 
