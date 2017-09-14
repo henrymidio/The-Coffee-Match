@@ -1258,3 +1258,149 @@ p.user-label:after {
 .range-slider input[type="range"]::-ms-fill-upper {
   background: #b7b8b7;
 }
+
+.floating-button-toolbar,
+.speed-dial {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  z-index: 1500;
+}
+.toolbar-fixed .floating-button-toolbar,
+.toolbar-fixed .speed-dial,
+.toolbar-through .floating-button-toolbar,
+.toolbar-through .speed-dial {
+  bottom: 16px;
+}
+.tabbar-labels-fixed .floating-button-toolbar,
+.tabbar-labels-fixed .speed-dial,
+.tabbar-labels-through .floating-button-toolbar,
+.tabbar-labels-through .speed-dial {
+  bottom: 65px;
+}
+@media (min-width: 768px) {
+  .tabbar-labels-fixed .floating-button-toolbar,
+  .tabbar-labels-fixed .speed-dial,
+  .tabbar-labels-through .floating-button-toolbar,
+  .tabbar-labels-through .speed-dial {
+    bottom: 71px;
+  }
+}
+.floating-button-toolbar .floating-button,
+.speed-dial .floating-button {
+  right: 0;
+  bottom: 0;
+  position: relative;
+}
+.speed-dial .floating-button i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(1);
+  transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(1);
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+}
+.speed-dial .floating-button i + i {
+  -webkit-transform: translate3d(-50%, -50%, 0) rotate(-90deg) scale(0.5);
+  transform: translate3d(-50%, -50%, 0) rotate(-90deg) scale(0.5);
+  opacity: 0;
+}
+.speed-dial.speed-dial-opened .floating-button i {
+  -webkit-transform: translate3d(-50%, -50%, 0) rotate(90deg) scale(0.5);
+  transform: translate3d(-50%, -50%, 0) rotate(90deg) scale(0.5);
+  opacity: 0;
+}
+.speed-dial.speed-dial-opened .floating-button i + i {
+  -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(1);
+  transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(1);
+  opacity: 1;
+}
+.speed-dial-buttons {
+  position: absolute;
+  width: 40px;
+  left: 50%;
+  margin-left: -20px;
+  bottom: 100%;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -moz-box-orient: vertical;
+  -moz-box-direction: reverse;
+  -ms-flex-direction: column-reverse;
+  -webkit-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+  visibility: hidden;
+  pointer-events: none;
+}
+.speed-dial-buttons a {
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  color: #fff;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #007aff;
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-transform: translate3d(0, 8px, 0) scale(0.3);
+  transform: translate3d(0, 8px, 0) scale(0.3);
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.speed-dial-buttons a + a {
+  margin-bottom: 16px;
+}
+html:not(.watch-active-state) .speed-dial-buttons a:active,
+.speed-dial-buttons a.active-state {
+  -webkit-transition-duration: 0ms;
+  transition-duration: 0ms;
+  background: #0066d6;
+}
+.speed-dial-opened .speed-dial-buttons {
+  visibility: visible;
+  pointer-events: auto;
+}
+.speed-dial-opened .speed-dial-buttons a {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0) scaleY(1);
+  transform: translate3d(0, 0, 0) scaleY(1);
+}
+.speed-dial-opened .speed-dial-buttons a:nth-child(2) {
+  -webkit-transition-delay: 50ms;
+  transition-delay: 50ms;
+}
+.speed-dial-opened .speed-dial-buttons a:nth-child(3) {
+  -webkit-transition-delay: 100ms;
+  transition-delay: 100ms;
+}
+.speed-dial-opened .speed-dial-buttons a:nth-child(4) {
+  -webkit-transition-delay: 150ms;
+  transition-delay: 150ms;
+}
+.speed-dial-opened .speed-dial-buttons a:nth-child(5) {
+  -webkit-transition-delay: 200ms;
+  transition-delay: 200ms;
+}
+.speed-dial-opened .speed-dial-buttons a:nth-child(6) {
+  -webkit-transition-delay: 250ms;
+  transition-delay: 250ms;
+}

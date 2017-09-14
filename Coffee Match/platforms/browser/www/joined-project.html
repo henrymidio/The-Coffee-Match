@@ -5,14 +5,14 @@
       <a href="#" class="link back color-white"><i class="icon icon-back color-white"></i><span style="margin-left: 8px">Back</span></a>
     </div>
     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-    <div class="sliding center logo">My Projects</div>
+    <div class="sliding j-name center logo">Projects</div>
   </div>
 </div>
 
 <div class="pages">
 	<div data-page="joined-project" class="page">
     <div class="content-block">
-      <h2 class="j-name" style="margin-left: 18px; margin-top: 60px">...</h2>
+      <br>
       <p class="j-description" style="margin-left: 18px">...</p>
       <p class="label" style="font-size: 12px"><i class="f7-icons" style="font-size: 12px; margin-right: 7px">search</i><b>Looking for</b></p>
       <div style="margin-left: 18px" class="content-chips">
@@ -24,10 +24,28 @@
 
       </div>
     </div>
-    <!-- Floating Button -->
-    <a href="#" class="floating-button color-white open-popup" data-popup=".popup-edit-form" style="font-size: 30px">
-    <i class="f7-icons" style="font-size: 26px; margin-top: -5px; margin-left: 5px">compose</i>
+    <!-- Speed Dial Wrap -->
+  <div class="speed-dial">
+    <!-- FAB inside will open Speed Dial actions -->
+    <a href="#" class="floating-button">
+      <!-- First icon is visible when Speed Dial actions are closed -->
+      <i class="f7-icons">add</i>
+      <!-- Second icon is visible when Speed Dial actions are opened -->
+      <i class="f7-icons">close</i>
     </a>
+    <!-- Speed Dial Actions -->
+    <div class="speed-dial-buttons">
+      <!-- First Speed Dial button -->
+      <a href="#" class="open-popup" data-popup=".popup-edit-form">
+        <i class="f7-icons">compose</i>
+      </a>
+      <!-- Second Speed Dial  button -->
+      <a href="#" class="delete-project">
+        <i class="f7-icons">trash</i>
+      </a>
+    </div>
+  </div>
+  <!-- End of Speed Dial -->
 
     <div class="popup popup-edit-form">
        <div class="content-block">

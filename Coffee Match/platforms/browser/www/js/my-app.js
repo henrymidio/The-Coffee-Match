@@ -750,6 +750,10 @@ myApp.onPageInit('myprojects', function (page) {
   usuario.getProjects(function(data){
     $('.ul-projects').empty();
     for(i = 0; i < data.length; i++){
+      var number_joined_users = 0;
+      if(data[i].joined_users) {
+        number_joined_users = data[i].joined_users.length;
+      }
       var line = "<li class='item-link item-content open-myproject' id='"+data[i].id+"'>"
         + "<div class='item-media profile'>"
         + "<img class='icon icons8-Settings-Filled' src='"+data[i].image+"' style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
@@ -757,7 +761,7 @@ myApp.onPageInit('myprojects', function (page) {
         + "<div class='item-inner'>"
         + "<a href='#' class='item-link'>"
         + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
-        + "<span class='subtitle'>"+data[i].joined_users.length+" joined</span></div></div></a>"
+        + "<span class='subtitle'>"+number_joined_users+" joined</span></div></div></a>"
         + "</li>";
         $('.ul-projects').append(line);
     }
@@ -769,6 +773,18 @@ myApp.onPageInit('myprojects', function (page) {
   })
 });
 
+
+$(document).on('click', '.delete-project', function () {
+  myApp.confirm("Tem certeza que deseja deletar este projeto?", "", function(){
+    myApp.showIndicator()
+    var project_id = localStorage.getItem('project_id');
+    deleteProject(project_id, function() {
+      mainView.router.reloadPage('myprojects.html')
+      mainView.router.back()
+      myApp.hideIndicator()
+    });
+  })
+})
 myApp.onPageInit('joined-project', function (page) {
   var project_id = localStorage.getItem('project_id');
   $.ajax({

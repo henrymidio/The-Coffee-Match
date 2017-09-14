@@ -294,3 +294,18 @@ function retrieveProjects() {
       }
   });
 }
+
+function deleteProject(project_id, callback) {
+  $.ajax({
+    url: 'http://api.thecoffeematch.com/v1/projects/' + project_id,
+    type: 'DELETE',
+    dataType: 'json',
+    success: function (data) {
+      callback()
+    },
+    error: function(a, b, c) {
+      console.log(c)
+      myApp.hideIndicator()
+    }
+});
+}
