@@ -288,7 +288,7 @@ this.searchPeople = function () {
             data: dados,
             dataType: 'json',
             success: function (data) {
-              myApp.alert('Sua mensagem foi enviada com sucesso', '');
+              myApp.alert('Message successfully delivered', '');
             },
             error: function (request, status, error) {
               alert('Error');
@@ -319,10 +319,11 @@ this.searchPeople = function () {
     $.ajax({
       url: 'http://api.thecoffeematch.com/v1/projects',
       type: 'post',
+      dataType: 'json',
       data: projeto,
       success: function(data) {
         console.log(data)
-        renderNewProject(projeto);
+        renderNewProject(data[0], true);
         myApp.hideIndicator();
         myApp.closeModal(".popup-form", true);
       }, error: function (request, status, error) {

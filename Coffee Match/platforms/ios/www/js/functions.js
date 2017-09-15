@@ -69,7 +69,7 @@ function setIndexEvents() {
   //Evento que elimina card do user
   $(document).on('click', '.hide-user', function () {
     var self = $(this);
-    myApp.confirm('Você não poderá visualizar este perfil novamente', '', function () {
+    myApp.confirm('You will not be able to view this profile again.', '', function () {
      self.parent().closest('figure').fadeOut(500,function(){
         $(this).css({"visibility":"hidden",display:'block'}).slideUp();
         var suid = $(this).attr('id');
@@ -172,7 +172,7 @@ function setIndexEvents() {
     */
     //Valida os inputs
     if(projectName < 1 || projectCategory < 1 || projectDescription < 1 || projectSkills < 1) {
-      alert("Preencha todos os campos");
+      myApp.alert("Please, fill in all required fields.", '');
       myApp.hideIndicator();
       return false;
     } else {

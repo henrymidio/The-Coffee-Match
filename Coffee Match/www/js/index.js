@@ -133,8 +133,10 @@ var app = {
 				myApp.alert('It was not possible to find your location. Check it out on settings.', 'The Coffee Match');
 			});
 
+    myApp.onPageBack('starbucks-proximas', function(){
+      $$("#toolbar").toggleClass("none visivel");
+    });
 	  myApp.onPageInit('starbucks-proximas', function(){
-
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
 			var mapOptions = {
@@ -163,7 +165,7 @@ var app = {
 								success: function (data) {
 
 									if (data.length < 2) {
-									  myApp.alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
+									  myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
 									}
 
 									$("#proximas-ul").empty();
@@ -223,11 +225,6 @@ var app = {
 								}
 							});
 
-
-
-
-
-
 		 });
 
      myApp.onPageInit('starbucks-map', function(){
@@ -260,7 +257,7 @@ var app = {
  								success: function (data) {
 
  									if (data.length < 2) {
- 									  myApp.alert("We are sorry! There’s no Starbucks stores registered near you.", "The Coffee Match")
+ 									  myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
  									}
 
  									$("#map-ul").empty();
@@ -339,6 +336,10 @@ var app = {
 								dataType: 'json',
 								data: matchData,
 								success: function (data) {
+                  if(data.status == 400){
+                    mainView.router.loadPage("starbucks-proximas.html");
+                  } else {
+
 										//Seta starbucks no mapa
 										var lat = data.starbucks_lat;
 										var lng = data.starbucks_lng;
@@ -366,9 +367,10 @@ var app = {
 											document.getElementById("sec-user-name").innerHTML= data[0][1].name;
 										}
 									//myApp.hidePreloader();
+                 }
 								},
 								error: function (request, status, error) {
-
+                  myApp.alert('Error', '')
 									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});

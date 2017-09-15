@@ -573,10 +573,11 @@ myApp.onPageBack('detail-calendar', function(page){
 
 myApp.onPageInit('detail-calendar', function(page){
   $$("#toolbar").toggleClass("none visivel");
+  /*
 	$$(".btn-green").on("click", function(){
 		mainView.router.loadPage("chat.html");
 	});
-
+  */
 	$$('.edit').on('click', function () {
 
 				var buttons1 = [
@@ -775,7 +776,7 @@ myApp.onPageInit('myprojects', function (page) {
 
 
 $(document).on('click', '.delete-project', function () {
-  myApp.confirm("Tem certeza que deseja deletar este projeto?", "", function(){
+  myApp.confirm("Are you sure you want to delete the project?", "", function(){
     myApp.showIndicator()
     var project_id = localStorage.getItem('project_id');
     deleteProject(project_id, function() {
@@ -923,7 +924,7 @@ myApp.onPageInit('project', function (page) {
         data[i].joined_users.forEach(function(entry) {
 
             if(entry.joined_user == usuario.getID()) {
-              myApp.alert('Você já se candidatou a este projeto', 'The Coffee Match')
+              myApp.alert('You already applied to this project', '')
               $('#join-project').hide()
             }
         });
@@ -932,9 +933,9 @@ myApp.onPageInit('project', function (page) {
   });
 
   $('#join-project').on('click', function() {
-    myApp.confirm("Tem certeza que deseja fazer parte deste projeto?", "", function(){
+    myApp.confirm("Are you sure you want to join this project?", "", function(){
       usuario.joinProject(project_id);
-      myApp.alert("Sua solicitação foi enviada ao criador do projeto!", "")
+      myApp.alert("Your request has been successfully delivered to the project owner", "")
       mainView.router.back();
     })
   })
@@ -1025,10 +1026,11 @@ myApp.onPageInit('messages', function (page) {
 
 
 myApp.onPageInit('profile', function (page) {
-
+  /*
 	$("a.close-popup").on("click touchstart", function(event){
 		alert("close")
 	});
+  */
 
 	$(".cms").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
@@ -1176,7 +1178,7 @@ $(document).on('click', '.send-invite', function () {
   var shown_user_id = localStorage.getItem('shown_user_id');
 
   if(message.length < 14) {
-    alert('Sua mensagem deve ter pelo menos 14 caracteres')
+    myApp.alert('Your message must have at least 15 characters.', '')
     return false;
   } else {
     usuario.like(shown_user_id, message);
@@ -1348,7 +1350,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 	var dst = null;
 
 	$$('#delete-account').on('click', function(){
-		myApp.confirm("You will lose all its data", "Are you sure you want to delete your profile?", function(){
+		myApp.confirm("All your data will be lost", "Are you sure you want to delete your account?", function(){
 			myApp.showIndicator()
 			$.ajax({
 				url: 'http://thecoffeematch.com/webservice/delete-user.php',
@@ -1433,7 +1435,25 @@ myApp.onPageInit('chat', function (page) {
 						text: 'Schedule',
 						color: 'blue',
 						onClick: function () {
-							  mainView.router.loadPage('detail-calendar.html');
+              var matchData = {
+        				match: match
+        				}
+              $.ajax({
+        								url: 'http://thecoffeematch.com/webservice/get-detail-calendar.php',
+        								type: 'post',
+        								dataType: 'json',
+        								data: matchData,
+        								success: function (data) {
+                          if(data.status == 400){
+                            $$("#toolbar").toggleClass("none visivel");
+                            mainView.router.loadPage("starbucks-proximas.html");
+                          } else {
+                            mainView.router.loadPage('detail-calendar.html');
+                          }
+                        }, error: function() {
+                          myApp.alert('Error')
+                        }
+                      });
 						}
 					},
 					{
@@ -1693,6 +1713,9 @@ myApp.onPageInit('match', function (page) {
 	})
 });
 
+myApp.onPageBack('calendario', function(){
+  $$("#toolbar").toggleClass("none visivel");
+});
 myApp.onPageInit('calendario', function(page){
 	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'];
 
