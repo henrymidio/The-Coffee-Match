@@ -568,7 +568,7 @@ myApp.onPageInit('combinacoes', function (page) {
 });
 
 myApp.onPageBack('detail-calendar', function(page){
-  $$("#toolbar").toggleClass("none visivel");
+  $$("#toolbar").addClass("visivel");
 });
 
 myApp.onPageInit('detail-calendar', function(page){
@@ -1790,8 +1790,10 @@ $("#confirmar-data").one("click", function(e){
 								type: 'post',
 								data: d2,
 								success: function (data) {
-
-									mainView.router.loadPage('detail-calendar.html');
+                  mainView.router.reloadPage('detail-calendar.html')
+                  mainView.router.back()
+									//mainView.router.loadPage('detail-calendar.html');
+                  //$$("#toolbar").toggleClass("none visivel");
 
 								}
 	});

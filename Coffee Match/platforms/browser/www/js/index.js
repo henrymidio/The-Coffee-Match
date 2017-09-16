@@ -134,7 +134,7 @@ var app = {
 			});
 
     myApp.onPageBack('starbucks-proximas', function(){
-      $$("#toolbar").toggleClass("none visivel");
+      $$("#toolbar").addClass("none visivel");
     });
 	  myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
