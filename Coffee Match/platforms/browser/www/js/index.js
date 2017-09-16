@@ -599,6 +599,14 @@ var app = {
 			    StatusBar.overlaysWebView(false);
 			});
 
+      myApp.onPageInit('user-sem-connect', function() {
+  			    StatusBar.overlaysWebView(true);
+  			});
+
+  		myApp.onPageBack('user-sem-connect', function() {
+  			    StatusBar.overlaysWebView(false);
+  			});
+
 		myApp.onPageInit('passo2', function() {
 			    StatusBar.overlaysWebView(false);
 			});
