@@ -134,7 +134,7 @@ var app = {
 			});
 
     myApp.onPageBack('starbucks-proximas', function(){
-      $$("#toolbar").addClass("none visivel");
+      $$("#toolbar").toggleClass("none visivel");
     });
 	  myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
@@ -163,11 +163,11 @@ var app = {
 								dataType: 'json',
 								data: latLngUser,
 								success: function (data) {
-
+                  /*
 									if (data.length < 2) {
 									  myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
 									}
-
+                  */
 									$("#proximas-ul").empty();
 									//Renderiza markers no mapa
 									for(i in data) {
@@ -255,11 +255,11 @@ var app = {
  								dataType: 'json',
  								data: latLngUser,
  								success: function (data) {
-
+                  /*
  									if (data.length < 2) {
  									  myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
  									}
-
+                  */
  									$("#map-ul").empty();
  									//Renderiza markers no mapa
  									for(i in data) {
@@ -268,9 +268,16 @@ var app = {
  											data[i].distance = 1;
  										}
 
+                    //Logo
+                    var logo = "starbucks-logo.png";
+                    var icon = "https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg";
+                    if(data[i].id == 202) {
+                      logo = "octavio.jpg";
+                      icon = "http://www.atendevoce.com.br/itaim/images/octavio-cafe-atendevoce-logo-220X200.jpg";
+                    }
  										var line1 = "<li>"
  												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
- 												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
+ 												+ "<div class='item-media'><img src='img/"+logo+"' width='70'></div>"
  												+ "<div class='item-inner'>"
  												+ "<div class='item-title-row'>"
  												+ "<div class='item-title'>"+data[i].name+"</div>"
@@ -290,7 +297,7 @@ var app = {
  										var marker = new google.maps.Marker({
  											position: coordenadas,
  											map: map,
- 											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
+ 											icon: icon
  										});
  									}
  								},
@@ -351,7 +358,7 @@ var app = {
 											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
 										});
 
-										document.getElementById("starbucks-name").innerHTML = "Starbucks " + data.starbucks_name;
+										document.getElementById("starbucks-name").innerHTML = data.starbucks_name;
 										document.getElementById("starbucks-address").innerHTML = data.street + ", " + data.num;
 										document.getElementById("first-user-pic").src= userPicture;
 										document.getElementById("first-user-name").innerHTML = userName;

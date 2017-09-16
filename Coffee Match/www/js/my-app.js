@@ -568,7 +568,7 @@ myApp.onPageInit('combinacoes', function (page) {
 });
 
 myApp.onPageBack('detail-calendar', function(page){
-  $$("#toolbar").addClass("visivel");
+  $$("#toolbar").toggleClass("none visivel");
 });
 
 myApp.onPageInit('detail-calendar', function(page){
@@ -1793,7 +1793,7 @@ $("#confirmar-data").one("click", function(e){
                   mainView.router.reloadPage('detail-calendar.html')
                   mainView.router.back()
 									//mainView.router.loadPage('detail-calendar.html');
-                  //$$("#toolbar").toggleClass("none visivel");
+                  $$("#toolbar").toggleClass("none visivel");
 
 								}
 	});
