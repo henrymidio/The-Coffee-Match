@@ -291,6 +291,14 @@ select.rounded {
   background: #00d173;
 }
 
+.message-card {
+  background-color: rgb(245, 245, 247);
+  margin: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  color: rgb(47, 58, 65);
+}
+
 .toolbar-popup {
   position: absolute;
   width: 100%;
