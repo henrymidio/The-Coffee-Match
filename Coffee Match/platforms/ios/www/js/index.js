@@ -176,9 +176,28 @@ var app = {
 											data[i].distance = 1;
 										}
 
+                    //Logo e ícone do marker
+                    var logo = "starbucks-logo.png";
+                    var icon = {
+                        url: "https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg", // url
+                        scaledSize: new google.maps.Size(30, 30), // scaled size
+                        origin: new google.maps.Point(0,0), // origin
+                        anchor: new google.maps.Point(0, 0) // anchor
+                    };
+
+                    if(data[i].id == 202) {
+                      logo = "octavio.jpg";
+                      icon = {
+                          url: "http://www.atendevoce.com.br/itaim/images/octavio-cafe-atendevoce-logo-220X200.jpg", // url
+                          scaledSize: new google.maps.Size(30, 30), // scaled size
+                          origin: new google.maps.Point(0,0), // origin
+                          anchor: new google.maps.Point(0, 0) // anchor
+                      };
+                    }
+
 										var line1 = "<li>"
 												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
-												+ "<div class='item-media'><img src='img/starbucks-logo.png' width='70'></div>"
+												+ "<div class='item-media'><img src='img/"+logo+"' width='70'></div>"
 												+ "<div class='item-inner'>"
 												+ "<div class='item-title-row'>"
 												+ "<div class='item-title'>"+data[i].name+"</div>"
@@ -198,7 +217,7 @@ var app = {
 										var marker = new google.maps.Marker({
 											position: coordenadas,
 											map: map,
-											icon: 'https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg'
+											icon: icon
 										});
 									}
 
@@ -268,12 +287,23 @@ var app = {
  											data[i].distance = 1;
  										}
 
-                    //Logo
+                    //Logo e ícone do marker
                     var logo = "starbucks-logo.png";
-                    var icon = "https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg";
+                    var icon = {
+                        url: "https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg", // url
+                        scaledSize: new google.maps.Size(30, 30), // scaled size
+                        origin: new google.maps.Point(0,0), // origin
+                        anchor: new google.maps.Point(0, 0) // anchor
+                    };
+
                     if(data[i].id == 202) {
                       logo = "octavio.jpg";
-                      icon = "http://www.atendevoce.com.br/itaim/images/octavio-cafe-atendevoce-logo-220X200.jpg";
+                      icon = {
+                          url: "http://www.atendevoce.com.br/itaim/images/octavio-cafe-atendevoce-logo-220X200.jpg", // url
+                          scaledSize: new google.maps.Size(30, 30), // scaled size
+                          origin: new google.maps.Point(0,0), // origin
+                          anchor: new google.maps.Point(0, 0) // anchor
+                      };
                     }
  										var line1 = "<li>"
  												+ "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
