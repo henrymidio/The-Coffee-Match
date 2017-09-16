@@ -286,7 +286,9 @@ myApp.onPageInit('passo2', function (page) {
 });
 });
 
+
 myApp.onPageInit('confirmacao-convite', function (page) {
+  StatusBar.backgroundColorByHexString("#ffffff");
 	var user_id  = localStorage.getItem("user_id");
 	var other_id = localStorage.getItem("idc");
 
