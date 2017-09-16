@@ -815,6 +815,10 @@ myApp.onPageInit('joined-project', function (page) {
           $('.content-chips').append(skills);
           $(".container2-chip").append(linha);
 
+          //Valores da popup de edição do perfil
+          $('.edit-name').val(data[i].name);
+          $('.edit-description').val(data[i].description);
+
         var joined = '';
         $('.mutual-connections-list').empty();
         var contador = 0;
@@ -838,11 +842,6 @@ myApp.onPageInit('joined-project', function (page) {
             }
           });
         });
-
-
-        //Valores da popup de edição do perfil
-        $('.edit-name').val(data[i].name);
-        $('.edit-description').val(data[i].description);
       }
       $(document).on('click', '.op-profile', function () {
         var shown_user_id = $(this).attr('id');
