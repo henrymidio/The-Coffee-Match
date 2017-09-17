@@ -1738,7 +1738,7 @@ $$('.messagebar .link').on('click', function () {
 
 									var user; //shown_user
 									var message_id;
-
+                  $(".messages").empty()
 									for(i = 0; i < data.length; i++){
 
 										if(data[i].id === user_id){
