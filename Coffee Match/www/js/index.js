@@ -133,9 +133,10 @@ var app = {
 				myApp.alert('It was not possible to find your location. Check it out on settings.', 'The Coffee Match');
 			});
 
-    myApp.onPageBack('starbucks-proximas', function(){
-      $$("#toolbar").toggleClass("none visivel");
-    });
+      $(document).on('click', '.back-call', function () {
+        mainView.router.reloadPage('detail-calendar.html')
+        mainView.router.back();
+      })
 	  myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);
