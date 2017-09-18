@@ -15,10 +15,20 @@ function User() {
   var _email = localStorage.getItem("email");
   var _lastLogin = localStorage.getItem("lastLog");
   var _logged = localStorage.getItem("logged");
+  var _latitude = localStorage.getItem("latitude");
+  var _longitude = localStorage.getItem("longitude");
   var _preferences = {
     metrica: localStorage.getItem("metrica"),
     distance: localStorage.getItem("distance")
   };
+
+  this.getLatitude = function() {
+    return _latitude;
+  }
+
+  this.getLongitude = function() {
+    return _longitude;
+  }
 
 this.getID = function() {
   return _id;
@@ -152,14 +162,14 @@ this.searchPeople = function () {
             data: dados,
             crossDomain: true,
             success: function (data) {
-
               //Renderiza no DOM
               renderPeople(data);
               myApp.pullToRefreshDone();
 
             },error: function (request, status, error) {
-              console.log(error)
               myApp.pullToRefreshDone();
+              console.log(error)
+              //myApp.alert('We are sorry! There’s no one registered near you. Come back later and try again.', '')
             }
     });
 }
@@ -175,7 +185,7 @@ this.searchPeople = function () {
       dataType: 'json',
       data: pnss,
       success: function (data) {
-
+console.log(data)
         if(data.invite == 1){
           $$("#icon-invite img").attr("src", "img/sino_notification.png");
           $$("#icon-invite").on("click", function(){
@@ -197,9 +207,9 @@ this.searchPeople = function () {
         }
 
         if(data.message == 1){
-          $$("#icon-message img").attr("src", "img/message_notification.png");
+          $$("#icon-message img").attr("src", "img/messages_notification.png");
           $$("#icon-message").on("click", function(){
-            $$(this).attr("src", "img/message_icon.png");
+            $$("#icon-message img").attr("src", "img/icChatWhite.png");
             var ndata = {
               message: 0
             };
@@ -213,13 +223,13 @@ this.searchPeople = function () {
 
           })
         }else {
-          $$("#icon-message img").attr("src", "img/message_icon.png");
+          $$("#icon-message img").attr("src", "img/icChatWhite.png");
         }
 
         if(data.booking == 1){
           $$("#icon-agenda img").attr("src", "img/agenda_notification.png");
           $$("#icon-agenda").on("click", function(){
-            $$(this).attr("src", "img/agenda_icon.png");
+            $$("#icon-agenda img").attr("src", "img/icCalendarWhite.png");
             var ndata = {
               booking: 0
             };
@@ -234,7 +244,7 @@ this.searchPeople = function () {
 
           })
         } else {
-          $$("#icon-agenda img").attr("src", "img/agenda_icon.png");
+          $$("#icon-agenda img").attr("src", "img/icCalendarWhite.png");
         }
 
         if(data.rewards == 1){

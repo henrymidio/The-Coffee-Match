@@ -2060,3 +2060,95 @@ function updateStatusUser(status){
 			}
 		});
 	}
+
+  myApp.onPageInit('starbucks-map', function(){
+   myApp.showTab('#tab1');
+   StatusBar.overlaysWebView(false);
+   var latLng = new google.maps.LatLng(usuario.getLatitude(), usuario.getLongitude());
+   var mapOptions = {
+     center: latLng,
+     zoom: 12,
+     mapTypeId: google.maps.MapTypeId.ROADMAP
+   };
+   var map = new google.maps.Map(document.getElementById('starbucks-map'), mapOptions);
+
+   //Marker da localização do user
+   var marker = new google.maps.Marker({
+     position: latLng,
+     map: map
+   });
+
+   var latLngUser = {
+     lat_user: usuario.getLatitude(),
+     lng_user: usuario.getLongitude()
+     }
+
+   $.ajax({
+             url: 'http://thecoffeematch.com/webservice/get-starbucks-map.php',
+             type: 'post',
+             dataType: 'json',
+             data: latLngUser,
+             success: function (data) {
+
+               if (data.length < 2) {
+                 myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
+               }
+
+               $("#map-ul").empty();
+               //Renderiza markers no mapa
+               for(i in data) {
+
+                 if(data[i].distance < 1){
+                   data[i].distance = 1;
+                 }
+
+                 //Logo e ícone do marker
+                 var logo = "starbucks-logo.png";
+                 var icon = {
+                     url: "https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg", // url
+                     scaledSize: new google.maps.Size(30, 30), // scaled size
+                     origin: new google.maps.Point(0,0), // origin
+                     anchor: new google.maps.Point(0, 0) // anchor
+                 };
+
+                 if(data[i].id == 202) {
+                   logo = "octavio.jpg";
+                   icon = {
+                       url: "http://www.atendevoce.com.br/itaim/images/octavio-cafe-atendevoce-logo-220X200.jpg", // url
+                       scaledSize: new google.maps.Size(30, 30), // scaled size
+                       origin: new google.maps.Point(0,0), // origin
+                       anchor: new google.maps.Point(0, 0) // anchor
+                   };
+                 }
+                 var line1 = "<li>"
+                     + "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
+                     + "<div class='item-media'><img src='img/"+logo+"' width='70'></div>"
+                     + "<div class='item-inner'>"
+                     + "<div class='item-title-row'>"
+                     + "<div class='item-title'>"+data[i].name+"</div>"
+                     + "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " Mi</div>"
+                     + "</div>"
+                     + "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
+                     + "</div>"
+                     + "</a>";
+                 $("#map-ul").append(line1);
+
+                 var pin = data[i];
+                 var lat = pin.lat;
+                 var lng = pin.lng;
+
+                 var coordenadas = new google.maps.LatLng(lat, lng);
+
+                 var marker = new google.maps.Marker({
+                   position: coordenadas,
+                   map: map,
+                   icon: icon
+                 });
+               }
+             },
+             error: function(a, b, c) {
+               console.log(c)
+             }
+           });
+
+  });

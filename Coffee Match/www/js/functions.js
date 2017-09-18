@@ -141,6 +141,7 @@ function setIndexEvents() {
 
   //Evento de criação de novo projeto
   $(document.body).on('click', '.save-project', function (e) {
+
     myApp.showIndicator();
     var projectName        = $('#project-name').val();
     var projectCategory    = $('#project-category').find(":selected").text();
@@ -171,11 +172,17 @@ function setIndexEvents() {
     }
     */
     //Valida os inputs
-    if(projectName < 1 || projectCategory < 1 || projectDescription < 1 || projectSkills < 1) {
+    if(projectName < 1 || projectCategory < 1 ||  projectSkills < 1) {
       myApp.alert("Please, fill in all required fields.", '');
       myApp.hideIndicator();
       return false;
-    } else {
+    }
+    else if (projectDescription.length < 25) {
+      myApp.alert('Your description must have at least 25 characters.', '')
+      myApp.hideIndicator();
+      return false;
+    }
+    else {
       usuario.saveProject(projeto);
     }
 
