@@ -33,6 +33,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+
       app.receivedEvent('deviceready');
 
 		 var notificationOpenedCallback = function(jsonData) {
@@ -97,7 +98,7 @@ var app = {
 			StatusBar.styleLightContent();
 			StatusBar.backgroundColorByHexString("#2f3a41");
 
-			$$("#invisible-container").removeClass("none");
+			//$$("#invisible-container").removeClass("none");
 			$$("#invisible-nav").removeClass("navbar-hidden");
 
 			//Pega localização do usuário
@@ -124,7 +125,10 @@ var app = {
 					success: function (data) {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
-            myApp.pullToRefreshTrigger('.pull-to-refresh-content');
+
+              myApp.pullToRefreshTrigger('.pull-to-refresh-content');
+
+
 					},
 					error: function (request, status, error) {
             var requester = localStorage.getItem('user_id');
@@ -338,7 +342,7 @@ var app = {
 				notification_key = null;
 
 				//Push Notifications
-        
+
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});

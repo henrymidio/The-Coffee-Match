@@ -185,7 +185,7 @@ this.searchPeople = function () {
       dataType: 'json',
       data: pnss,
       success: function (data) {
-console.log(data)
+//console.log(data)
         if(data.invite == 1){
           $$("#icon-invite img").attr("src", "img/sino_notification.png");
           $$("#icon-invite").on("click", function(){

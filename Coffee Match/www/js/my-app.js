@@ -776,6 +776,7 @@ myApp.onPageInit('myprojects', function (page) {
 });
 
 
+
 $(document).on('click', '.delete-project', function () {
   myApp.confirm("Are you sure you want to delete the project?", "", function(){
     myApp.showIndicator()
@@ -1575,6 +1576,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
+  StatusBar.overlaysWebView(true);
 	myApp.showIndicator()
 
 	var match = localStorage.getItem("match");
