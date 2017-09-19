@@ -127,13 +127,11 @@ var app = {
             if(!requester) {return false}
 
             var cache = usuario.getCache();
-            console.log(cache)
             if(cache) {
               usuario.renderPeople(cache);
             } else {
               myApp.pullToRefreshTrigger('.pull-to-refresh-content');
             }
-
 
 					},
 					error: function (request, status, error) {

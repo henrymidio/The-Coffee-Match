@@ -24,7 +24,7 @@ function User() {
   };
 
   this.getCache = function() {
-    return JSON.parse(_cache);
+    return JSON.parse(localStorage.getItem("cache"));
   }
 
   this.setCache = function(newCache) {
