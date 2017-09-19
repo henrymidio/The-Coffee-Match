@@ -123,10 +123,13 @@ this.getPreferences = function() {
     FUNÇÕES DE ORDEM PRÁTICA
 */
 
-//Função privada que apenas renderiza os cards de usu´rios
+
   this.renderPeople = function(data) {
-  $("#columns").empty();
-  for(i = 0; i < data.length; i++){
+    //Pega o número de usuários que já está renderizado
+    var index = $$('#columns figure').length;
+
+    //Loop limitado pelo número de usuários q se quer visualizar
+    for(i = index; i < (index + 10); i++){
 
     if(data[i].distance < 1) {
       data[i].distance = '<1';

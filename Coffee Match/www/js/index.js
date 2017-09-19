@@ -129,6 +129,7 @@ var app = {
             var cache = usuario.getCache();
             if(cache) {
               usuario.renderPeople(cache);
+              retrieveProjects()
             } else {
               myApp.pullToRefreshTrigger('.pull-to-refresh-content');
             }

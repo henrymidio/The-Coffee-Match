@@ -19,15 +19,24 @@ function setIndexEvents() {
   // Loading flag
   var loading = false;
   $$('.infinite-scroll').on('infinite', function () {
+    console.log(loading);
     // Exit, if loading in progress
     if (loading) return;
 
     // Set loading flag
     loading = true;
 
-    usuario.searchPeople();
+    // Emulate 1s loading
+    setTimeout(function () {
+      // Reset loading flag
+      loading = false;
+    }, 2000);
+
+    usuario.renderPeople(usuario.getCache());
 
   })
+
+
   //Evento que expande projeto
   $(document.body).on('click', '.open-card', function () {
       $$('.floating-button').addClass('none');
@@ -145,8 +154,10 @@ function setIndexEvents() {
 
   // Pull to refresh content
   $(document).on('ptr:refresh', '.pull-to-refresh-content', function (e) {
+    $("#columns").empty();
     usuario.searchPeople();
     usuario.getPendingNotifications();
+
     $("#tab2").empty();
     retrieveProjects();
   });
