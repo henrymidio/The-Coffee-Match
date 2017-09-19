@@ -289,7 +289,7 @@ myApp.onPageInit('passo2', function (page) {
 
 myApp.onPageInit('confirmacao-convite', function (page) {
   StatusBar.backgroundColorByHexString("#ffffff");
-  StatusBar.styleLightContent();
+  StatusBar.styleDefault();
 	var user_id  = localStorage.getItem("user_id");
 	var other_id = localStorage.getItem("idc");
 
@@ -1830,8 +1830,10 @@ $$('.messagebar .link').on('click', function () {
 
 
 myApp.onPageBack('chat', function (page) {
+    StatusBar.styleLightContent();
+    StatusBar.backgroundColorByHexString("#2f3a41");
 		localStorage.setItem("cancel", "t");
-		$$("#toolbar").toggleClass("visivel none");
+
 		updateStatusUser(0)
 		try {
 			clearInterval(myInterval);
