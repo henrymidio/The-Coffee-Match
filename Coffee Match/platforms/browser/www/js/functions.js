@@ -18,7 +18,7 @@ function formatDate(date) {
 function setIndexEvents() {
   // Loading flag
   var loading = false;
-  $$('.infinite-scroll').on('infinite', function () {
+  $(document.body).on('infinite', '.infinite-scroll', function () {
     console.log(loading);
     // Exit, if loading in progress
     if (loading) return;
