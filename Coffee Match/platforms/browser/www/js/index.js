@@ -478,15 +478,21 @@ var app = {
 			});
 
 
-
+      myApp.onPageAfterBack('messages', function() {
+            StatusBar.overlaysWebView(false);
+        });
 
 		myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
+          StatusBar.styleLightContent();
+          StatusBar.backgroundColorByHexString("#2f3a41");
 
 			});
 
 		myApp.onPageBeforeRemove('match', function() {
-			    StatusBar.overlaysWebView(false);
+      StatusBar.overlaysWebView(false);
+      StatusBar.styleLightContent();
+      StatusBar.backgroundColorByHexString("#2f3a41");
 			});
 
 		myApp.onPageInit('congratulations', function() {
