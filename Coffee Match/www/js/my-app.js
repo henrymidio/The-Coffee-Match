@@ -1577,6 +1577,8 @@ myApp.onPageBeforeInit('settings', function (page) {
 
 myApp.onPageInit('chat', function (page) {
   StatusBar.overlaysWebView(false);
+  StatusBar.styleLightContent();
+  StatusBar.backgroundColorByHexString("#2f3a41");
 	myApp.showIndicator()
 
 	var match = localStorage.getItem("match");
