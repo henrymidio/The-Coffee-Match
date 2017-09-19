@@ -992,6 +992,16 @@ div#columns figure {
   border-radius: 4px;
 }
 
+.infinite-scroll-preloader {
+  margin-top:-20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.infinite-scroll-preloader .preloader {
+  width:34px;
+  height:34px;
+}
+
 .demo-card-header-pic .card-header {
     height: 42vw;
     background-size: cover;

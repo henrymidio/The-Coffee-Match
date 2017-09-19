@@ -16,6 +16,18 @@ function formatDate(date) {
 }
 
 function setIndexEvents() {
+  // Loading flag
+  var loading = false;
+  $$('.infinite-scroll').on('infinite', function () {
+    // Exit, if loading in progress
+    if (loading) return;
+
+    // Set loading flag
+    loading = true;
+
+    usuario.searchPeople();
+
+  })
   //Evento que expande projeto
   $(document.body).on('click', '.open-card', function () {
       $$('.floating-button').addClass('none');
@@ -74,6 +86,7 @@ function setIndexEvents() {
         $(this).css({"visibility":"hidden",display:'block'}).slideUp();
         var suid = $(this).attr('id');
         usuario.dislike(suid)
+        usuario.removeUserFromCache(suid)
       });
     });
   });
@@ -90,13 +103,19 @@ function setIndexEvents() {
 
   //Evento que adiciona chips no form de criação do projeto
   $(document).on('click', '.add-tag', function () {
+    var conteudo = $('#create-tag').val();
+    if(conteudo.length < 2) {
+      return false
+    } else if (conteudo.length > 30) {
+      myApp.alert('Maximum 30 characters', '');
+    }
+
     var countChips = $('.container-chip div.chip').length;
     if(countChips > 4) {
-      myApp.alert('Você somente pode adicionar 5 skills por projeto', '');
+      myApp.alert('You can add only 5 skills', '');
       return false;
     }
-    var conteudo = $('#create-tag').val();
-    if(conteudo < 2) {return false}
+
     //Monta o DOM dos chips
     var line = "<div class='chip chip-form'>"
           + "<div class='chip-label project-skill'>"+conteudo+"</div>"

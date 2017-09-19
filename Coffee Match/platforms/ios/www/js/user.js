@@ -17,10 +17,29 @@ function User() {
   var _logged = localStorage.getItem("logged");
   var _latitude = localStorage.getItem("latitude");
   var _longitude = localStorage.getItem("longitude");
+  var _cache = localStorage.getItem("cache");
   var _preferences = {
     metrica: localStorage.getItem("metrica"),
     distance: localStorage.getItem("distance")
   };
+
+  this.getCache = function() {
+    return JSON.parse(_cache);
+  }
+
+  this.setCache = function(newCache) {
+    localStorage.setItem("cache", JSON.stringify(newCache));
+  }
+
+  this.removeUserFromCache = function(uid) {
+    var c = usuario.getCache()
+    for(i = 0; i < c.length; i++){
+      if(c[i].id == uid) {
+        c.splice(i, 1);
+        usuario.setCache(c);
+      }
+    }
+  }
 
   this.getLatitude = function() {
     return _latitude;
@@ -105,7 +124,7 @@ this.getPreferences = function() {
 */
 
 //Função privada que apenas renderiza os cards de usu´rios
-  var renderPeople = function(data) {
+  this.renderPeople = function(data) {
   $("#columns").empty();
   for(i = 0; i < data.length; i++){
 
@@ -162,14 +181,15 @@ this.searchPeople = function () {
             data: dados,
             crossDomain: true,
             success: function (data) {
+              localStorage.setItem("cache", JSON.stringify(data));
               //Renderiza no DOM
-              renderPeople(data);
+              usuario.renderPeople(data);
               myApp.pullToRefreshDone();
 
             },error: function (request, status, error) {
-              myApp.pullToRefreshDone();
+              //myApp.pullToRefreshDone();
               console.log(error)
-              //myApp.alert('We are sorry! There’s no one registered near you. Come back later and try again.', '')
+              myApp.alert('Error', '')
             }
     });
 }
@@ -332,13 +352,13 @@ this.searchPeople = function () {
       dataType: 'json',
       data: projeto,
       success: function(data) {
-        console.log(data)
+        //console.log(data)
         renderNewProject(data[0], true);
         myApp.hideIndicator();
         myApp.closeModal(".popup-form", true);
       }, error: function (request, status, error) {
         myApp.hideIndicator();
-        alert(error)
+        myApp.alert(error, '');
       }
     });
   }

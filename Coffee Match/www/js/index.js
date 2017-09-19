@@ -126,7 +126,13 @@ var app = {
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
 
+            var cache = usuario.getCache();
+            console.log(cache)
+            if(cache) {
+              usuario.renderPeople(cache);
+            } else {
               myApp.pullToRefreshTrigger('.pull-to-refresh-content');
+            }
 
 
 					},
@@ -478,28 +484,7 @@ var app = {
 			});
 
 
-      myApp.onPageAfterBack('messages', function() {
-            StatusBar.overlaysWebView(false);
-        });
 
-		myApp.onPageInit('match', function() {
-			    //StatusBar.overlaysWebView(true);
-
-			});
-
-		myApp.onPageBeforeRemove('match', function() {
-      StatusBar.overlaysWebView(false);
-      StatusBar.styleLightContent();
-      StatusBar.backgroundColorByHexString("#2f3a41");
-			});
-
-		myApp.onPageInit('congratulations', function() {
-			    StatusBar.overlaysWebView(true);
-			});
-
-		myApp.onPageBeforeRemove('congratulations', function() {
-			    StatusBar.overlaysWebView(false);
-			});
 
 		myApp.onPageInit('login2', function() {
 			    StatusBar.overlaysWebView(true);
