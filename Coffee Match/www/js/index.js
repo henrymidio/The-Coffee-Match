@@ -478,10 +478,14 @@ var app = {
 			});
 
 
-
+      myApp.onPageBack('messages', function() {
+            StatusBar.overlaysWebView(false);
+        });
 
 		myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
+          StatusBar.styleLightContent();
+          StatusBar.backgroundColorByHexString("#2f3a41");
 
 			});
 
