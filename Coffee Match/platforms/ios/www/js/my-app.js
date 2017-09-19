@@ -1576,7 +1576,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
-
+  StatusBar.overlaysWebView(false);
 	myApp.showIndicator()
 
 	var match = localStorage.getItem("match");

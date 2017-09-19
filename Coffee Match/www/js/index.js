@@ -484,8 +484,6 @@ var app = {
 
 		myApp.onPageInit('match', function() {
 			    StatusBar.overlaysWebView(true);
-          StatusBar.styleLightContent();
-          StatusBar.backgroundColorByHexString("#2f3a41");
 
 			});
 
