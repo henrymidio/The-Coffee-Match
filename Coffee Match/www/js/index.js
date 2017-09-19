@@ -478,7 +478,7 @@ var app = {
 			});
 
 
-      myApp.onPageBack('messages', function() {
+      myApp.onPageAfterBack('messages', function() {
             StatusBar.overlaysWebView(false);
         });
 
