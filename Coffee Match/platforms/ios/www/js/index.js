@@ -483,7 +483,7 @@ var app = {
         });
 
 		myApp.onPageInit('match', function() {
-			    StatusBar.overlaysWebView(true);
+			    //StatusBar.overlaysWebView(true);
 
 			});
 
