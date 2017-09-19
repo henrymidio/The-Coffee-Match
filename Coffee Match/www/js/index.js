@@ -486,7 +486,9 @@ var app = {
 			});
 
 		myApp.onPageBeforeRemove('match', function() {
-			    StatusBar.overlaysWebView(false);
+      StatusBar.overlaysWebView(false);
+      StatusBar.styleLightContent();
+      StatusBar.backgroundColorByHexString("#2f3a41");
 			});
 
 		myApp.onPageInit('congratulations', function() {
