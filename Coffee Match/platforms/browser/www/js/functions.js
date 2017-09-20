@@ -56,7 +56,7 @@ function setIndexEvents() {
   });
   $(document).on('tab:hide', '#tab2', function () {
       $$('.floating-button').addClass('none');
-      myApp.attachInfiniteScroll($$('.infinite-scroll')) 
+      myApp.attachInfiniteScroll($$('.infinite-scroll'))
       //$('.tabs-animated-wrap').height(altura1);
   });
 
@@ -248,7 +248,7 @@ function renderNewProject(projeto, fromBD) {
 
     }
 
-    var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1");; //replace with your string.
+    var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1"); //replace with your string.
 
   //Monta o DOM dos chips
   var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'

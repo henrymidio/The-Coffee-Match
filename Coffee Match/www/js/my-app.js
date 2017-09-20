@@ -306,7 +306,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								dataType: 'json',
 								data: requester,
 								success: function (data) {
-                  var message = "Hey! It seems we have similar interests. Let's have a coffee at Starbucks?!";
+                  var message = localStorage.getItem("mess")
 									if(data.id == 293) {
 										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
 									}
@@ -361,6 +361,7 @@ myApp.onPageInit('convites', function (page) {
 								dataType: 'json',
 								data: y,
 								success: function (data) {
+
 									if(data == null){
 										//myApp.hidePreloader();
 										return false;
@@ -369,6 +370,9 @@ myApp.onPageInit('convites', function (page) {
 
 									//Seta id da confirmacao-convite
 									var idc = localStorage.setItem("idc", data[i].id);
+
+                  //Elipse da mensagem
+                  var message = data[i].message.replace(/^(.{25}[^\s]*).*/, "$1");
 
 									//Monta o DOM
 									var line1 = "<li class='swipeout'>"
@@ -380,7 +384,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle'>This invitation expires soon!</span>"
+												+ "<span class='subtitle' id='mess'>"+message+"...</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
@@ -420,6 +424,7 @@ myApp.onPageInit('convites', function (page) {
 
 									$(".match").on("click touch", function(){
 										localStorage.setItem("idc", $(this).attr("id"));
+                    localStorage.setItem("mess", $(this).find("#mess").text());
 									})
 									$(".div-match").on("click touch", function(){
 										localStorage.setItem("invite", $(this).attr("id"));

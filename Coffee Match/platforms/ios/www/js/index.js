@@ -430,6 +430,7 @@ var app = {
 
 											myApp.onPageBack('user', function() {
 												StatusBar.overlaysWebView(false);
+                        StatusBar.show()
 											});
 
 											myApp.hideIndicator()
@@ -509,10 +510,12 @@ var app = {
 
       myApp.onPageInit('user-sem-connect', function() {
   			    StatusBar.overlaysWebView(true);
+            StatusBar.hide();
   			});
 
   		myApp.onPageBack('user-sem-connect', function() {
   			    StatusBar.overlaysWebView(false);
+            StatusBar.show()
   			});
 
 		myApp.onPageInit('passo2', function() {
