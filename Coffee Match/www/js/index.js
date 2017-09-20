@@ -499,10 +499,12 @@ var app = {
 
 		myApp.onPageInit('user', function() {
 			    StatusBar.overlaysWebView(true);
+          StatusBar.hide();
 			});
 
 		myApp.onPageBack('user', function() {
 			    StatusBar.overlaysWebView(false);
+          StatusBar.show()
 			});
 
       myApp.onPageInit('user-sem-connect', function() {
