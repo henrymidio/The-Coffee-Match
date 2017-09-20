@@ -18,6 +18,7 @@ function User() {
   var _latitude = localStorage.getItem("latitude");
   var _longitude = localStorage.getItem("longitude");
   var _cache = localStorage.getItem("cache");
+  var _cacheProjects = localStorage.getItem("cacheProjects");
   var _preferences = {
     metrica: localStorage.getItem("metrica"),
     distance: localStorage.getItem("distance")
@@ -31,12 +32,30 @@ function User() {
     localStorage.setItem("cache", JSON.stringify(newCache));
   }
 
+  this.getCacheProjects = function() {
+    return JSON.parse(localStorage.getItem("cacheProjects"));
+  }
+
+  this.setCacheProjects = function(newCache) {
+    localStorage.setItem("cacheProjects", JSON.stringify(newCache));
+  }
+
   this.removeUserFromCache = function(uid) {
     var c = usuario.getCache()
     for(i = 0; i < c.length; i++){
       if(c[i].id == uid) {
         c.splice(i, 1);
         usuario.setCache(c);
+      }
+    }
+  }
+
+  this.removeProjectFromCache = function(pid) {
+    var c = usuario.getCacheProjects()
+    for(i = 0; i < c.length; i++){
+      if(c[i].id == pid) {
+        c.splice(i, 1);
+        usuario.setCacheProjects(c);
       }
     }
   }

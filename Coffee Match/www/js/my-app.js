@@ -978,6 +978,7 @@ myApp.onPageInit('messages', function (page) {
 								success: function (data) {
 
 									for(i = 0; i < data.length; i++){
+                    $("#messages-li").empty();
 										var replyArrow = "";
 										var weight = "bold";
 										if(data[i].last_message === null){

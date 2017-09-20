@@ -30,7 +30,7 @@ function setIndexEvents() {
     setTimeout(function () {
       // Reset loading flag
       loading = false;
-    }, 2000);
+    }, 3000);
 
     usuario.renderPeople(usuario.getCache());
 
@@ -51,10 +51,12 @@ function setIndexEvents() {
 
   $(document).on('tab:show', '#tab2', function () {
       $$('.floating-button').removeClass('none');
+      myApp.detachInfiniteScroll($$('.infinite-scroll'));
       //$('.tabs-animated-wrap').height(altura2);
   });
   $(document).on('tab:hide', '#tab2', function () {
       $$('.floating-button').addClass('none');
+      myApp.attachInfiniteScroll($$('.infinite-scroll')) 
       //$('.tabs-animated-wrap').height(altura1);
   });
 
@@ -246,9 +248,7 @@ function renderNewProject(projeto, fromBD) {
 
     }
 
-
     var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1");; //replace with your string.
-
 
   //Monta o DOM dos chips
   var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'
@@ -276,7 +276,7 @@ function renderNewProject(projeto, fromBD) {
  $("#tab2").prepend(line);
 
  $('#ctb').toggleClass('invisible');
- $('.tabs-animated-wrap').height('auto')
+ //$('.tabs-animated-wrap').height('auto')
  cleanProjectForm();
 }
 
@@ -300,7 +300,7 @@ function retrieveProjects() {
     type: 'get',
     dataType: 'json',
     success: function (data) {
-
+      localStorage.setItem("cacheProjects", JSON.stringify(data));
       for(i in data) {
         //console.log(data[i])
         renderNewProject(data[i], true);
