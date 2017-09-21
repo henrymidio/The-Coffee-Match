@@ -169,7 +169,7 @@ this.getPreferences = function() {
        +'</div>'
     +'</figure>';
     $("#columns").append(line1);
-
+/*
     $.ajax({
       url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data[i].fb_token + "&appsecret_proof=" + data[i].appsecret,
       type: 'get',
@@ -186,6 +186,7 @@ this.getPreferences = function() {
         myApp.pullToRefreshDone();
       }
     });
+    */
   }
 }
 

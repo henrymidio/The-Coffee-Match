@@ -592,7 +592,7 @@ myApp.onPageInit('detail-calendar', function(page){
 						label: true
 					},
 					{
-						text: 'Starbucks',
+						text: 'Coffee Stores',
 						onClick: function () {
 							mainView.router.loadPage("starbucks-proximas.html");
 						}
@@ -750,7 +750,6 @@ myApp.onPageInit('profile-view', function (page) {
 		});
 
 });
-
 
 myApp.onPageInit('myprojects', function (page) {
   myApp.showTab('#tab1');
@@ -971,6 +970,7 @@ myApp.onPageInit('project', function (page) {
 });
 
 myApp.onPageInit('messages', function (page) {
+  myApp.showIndicator()
   myApp.showTab('#tab1');
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
@@ -981,7 +981,17 @@ myApp.onPageInit('messages', function (page) {
 								dataType: 'json',
 								data: x,
 								success: function (data) {
-
+                  if(data.length == 0) {
+                    var line = '<li>'
+                      +'<div class="text-center" style="margin-top: 200px">'
+                      +'<img src="img/icChatBig.png" />'
+                        +'<br>'
+                        +'<p style="color: rgb(89, 104, 114); font-size: 22px">No conversation started yet...</p>'
+                      +'</div>'
+                    +'</li>';
+                    $("#messages-li").append(line);
+                    myApp.hideIndicator()
+                  }
 									for(i = 0; i < data.length; i++){
                     $("#messages-li").empty();
 										var replyArrow = "";
@@ -1031,13 +1041,57 @@ myApp.onPageInit('messages', function (page) {
 
 });
 
+$$(document).on("click", "#finalizar-edicao", function(){
+  var tags = [];
+  var looking = [];
+  var descricao = $$("#description").val();
+  var profissao = $$("#occupation").val();
+  var faculdade = $$("#graduation").val();
 
+  if (profissao.length == 0) {
+    document.getElementById("occupation").focus();
+    return false;
+  }
+
+  if (faculdade.length == 0) {
+    document.getElementById("graduation").focus();
+    return false;
+  }
+
+  if (descricao.length == 0) {
+    document.getElementById("description").focus();
+    return false;
+  }
+
+  $('#skills select option:selected').each(function(){
+    tags.push($(this).text());
+  });
+  tags = tags.join();
+
+  $('#looking-for select option:selected').each(function(){
+      looking.push($(this).text());
+  });
+  looking = looking.join();
+
+  var user_id = localStorage.getItem("user_id");
+
+  var birthday = localStorage.getItem("age");
+	var age = getAge(birthday);
+  //Chamada ao servidor para atualização de informações de perfil
+  setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
+
+  localStorage.setItem("description", descricao);
+  localStorage.setItem("occupation", profissao);
+  localStorage.setItem("college", faculdade);
+
+  //Para dar tempo de atuaizar antes de exibir novamete o preview do perfil
+  setTimeout(function(){
+    myApp.alert('Your profile has been updated', "")
+    mainView.router.loadPage('index.html');
+  }, 1000);
+
+})
 myApp.onPageInit('profile', function (page) {
-  /*
-	$("a.close-popup").on("click touchstart", function(event){
-		alert("close")
-	});
-  */
 
 	$(".cms").on("click touchstart", function(event){
 		myApp.smartSelectOpen("#skills")
@@ -1090,56 +1144,6 @@ myApp.onPageInit('profile', function (page) {
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#occupation").val(localStorage.getItem("occupation"));
 	$$("#graduation").val(localStorage.getItem("college"));
-
-	$$("#finalizar-edicao").on("click", function(){
-		var tags = [];
-		var looking = [];
-		var descricao = $$("#description").val();
-		var profissao = $$("#occupation").val();
-		var faculdade = $$("#graduation").val();
-
-		if (profissao.length == 0) {
-			document.getElementById("occupation").focus();
-			return false;
-		}
-
-		if (faculdade.length == 0) {
-			document.getElementById("graduation").focus();
-			return false;
-		}
-
-		if (descricao.length == 0) {
-			document.getElementById("description").focus();
-			return false;
-		}
-
-		$('#skills select option:selected').each(function(){
-			tags.push($(this).text());
-		});
-		tags = tags.join();
-
-		$('#looking-for select option:selected').each(function(){
-				looking.push($(this).text());
-		});
-		looking = looking.join();
-
-		var user_id = localStorage.getItem("user_id");
-		//Chamada ao servidor para atualização de informações de perfil
-		setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
-
-		localStorage.setItem("description", descricao);
-		localStorage.setItem("occupation", profissao);
-		localStorage.setItem("college", faculdade);
-
-		//Para dar tempo de atuaizar antes de exibir novamete o preview do perfil
-		setTimeout(function(){
-      myApp.alert('Seu perfil foi atualizado com sucesso')
-      //mainView.router.loadPage('profile-preview.html');
-    }, 1000);
-
-	})
-
-
 
 });
 
@@ -1590,6 +1594,7 @@ myApp.onPageInit('chat', function (page) {
 	$$('.overflow').on('click', function () {
 
 				var buttons1 = [
+          /*
           {
 						text: 'Schedule',
 						color: 'blue',
@@ -1615,6 +1620,7 @@ myApp.onPageInit('chat', function (page) {
                       });
 						}
 					},
+          */
 					{
 						text: 'Report',
 						color: 'red',
@@ -1869,7 +1875,7 @@ myApp.onPageInit('match', function (page) {
                 }
 							});
 	$$("#send-message").on("click", function(){
-		mainView.router.loadPage('chat.html');
+		mainView.router.loadPage('messages.html');
 	})
 });
 
@@ -2100,7 +2106,7 @@ function updateStatusUser(status){
              success: function (data) {
 
                if (data.length < 2) {
-                 myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
+                 //myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
                }
 
                $("#map-ul").empty();
