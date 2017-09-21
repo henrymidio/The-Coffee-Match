@@ -319,6 +319,8 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 
 	$('#confirmar-cafe').on("click", function(){
 		myApp.showIndicator()
+
+    usuario.removeUserFromCache(other_id)
 		//Faz o PUT LIKE
 
 		var dados = {
@@ -992,8 +994,9 @@ myApp.onPageInit('messages', function (page) {
                     $("#messages-li").append(line);
                     myApp.hideIndicator()
                   }
+
+                  $("#messages-li").empty();
 									for(i = 0; i < data.length; i++){
-                    $("#messages-li").empty();
 										var replyArrow = "";
 										var weight = "bold";
 										if(data[i].last_message === null){
@@ -1087,11 +1090,8 @@ $$(document).on("click", "#finalizar-edicao", function(){
   localStorage.setItem("occupation", profissao);
   localStorage.setItem("college", faculdade);
 
-  //Para dar tempo de atuaizar antes de exibir novamete o preview do perfil
-  setTimeout(function(){
-    myApp.alert('Your profile has been updated', "")
-    mainView.router.loadPage('index.html');
-  }, 1000);
+  myApp.alert('Your profile has been updated', "")
+  mainView.router.loadPage('index.html');
 
 })
 myApp.onPageInit('profile', function (page) {

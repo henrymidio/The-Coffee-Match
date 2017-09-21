@@ -250,18 +250,6 @@ function renderNewProject(projeto, fromBD) {
 
     var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1"); //replace with your string.
 
-    //Adiciona na listview da tela My Projects
-    var linha2 = "<li class='item-link item-content open-myproject' id='"+projeto.id+"'>"
-      + "<div class='item-media profile'>"
-      + "<img class='icon icons8-Settings-Filled' src='"+projeto.image+"' style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
-      + "</div>"
-      + "<div class='item-inner'>"
-      + "<a href='#' class='item-link'>"
-      + "<div class='item-title'><span><b>"+projeto.name+"</b></span><br>"
-      + "<span class='subtitle'>0 joined</span></div></div></a>"
-      + "</li>";
-      $('.ul-projects').append(linha2);
-
   //Monta o DOM dos chips
   var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'
      +'<div style="background-image:url('+projeto.image+')" valign="center" class="card-header color-white no-border">'
