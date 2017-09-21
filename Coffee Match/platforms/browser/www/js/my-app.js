@@ -1031,8 +1031,11 @@ myApp.onPageInit('messages', function (page) {
 										*/
 									}
 
+                  myApp.hideIndicator()
+
 								},
 								error: function (request, status, error) {
+                  myApp.hideIndicator()
 									alert(request.responseText);
 								}
 
