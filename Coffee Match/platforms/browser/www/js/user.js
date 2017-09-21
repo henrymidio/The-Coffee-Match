@@ -149,7 +149,7 @@ this.getPreferences = function() {
 
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
-
+$(".center-load").hide()
     if(data[i].distance < 1) {
       data[i].distance = '<1';
     }

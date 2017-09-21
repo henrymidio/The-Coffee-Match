@@ -972,7 +972,7 @@ myApp.onPageInit('project', function (page) {
 });
 
 myApp.onPageInit('messages', function (page) {
-  myApp.showIndicator()
+  //myApp.showIndicator()
   myApp.showTab('#tab1');
 	var user = localStorage.getItem("user_id");
 	var x = {user_id: user}
@@ -992,7 +992,7 @@ myApp.onPageInit('messages', function (page) {
                       +'</div>'
                     +'</li>';
                     $("#messages-li").append(line);
-                    myApp.hideIndicator()
+                    //myApp.hideIndicator()
                   }
 
                   $("#messages-li").empty();
@@ -1034,11 +1034,11 @@ myApp.onPageInit('messages', function (page) {
 										*/
 									}
 
-                  myApp.hideIndicator()
+                  //myApp.hideIndicator()
 
 								},
 								error: function (request, status, error) {
-                  myApp.hideIndicator()
+                  //myApp.hideIndicator()
 									alert(request.responseText);
 								}
 
