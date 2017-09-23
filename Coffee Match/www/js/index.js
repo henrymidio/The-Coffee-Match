@@ -101,6 +101,9 @@ var app = {
 			//$$("#invisible-container").removeClass("none");
 			$$("#invisible-nav").removeClass("navbar-hidden");
 
+      var pic = usuario.getPicture();
+      $$(".profile-photo").attr("src", pic);
+
 			//Pega localização do usuário
 			var latitude;
 			var longitude;
@@ -139,6 +142,7 @@ var app = {
 
 					},
 					error: function (request, status, error) {
+            console.log(error)
             var requester = localStorage.getItem('user_id');
             if(!requester) {return false}
             myApp.pullToRefreshTrigger('.pull-to-refresh-content');
@@ -329,7 +333,7 @@ var app = {
                  }
 								},
 								error: function (request, status, error) {
-                  myApp.alert('Error', '')
+                  //myApp.alert('Error', '')
 									mainView.router.loadPage("starbucks-proximas.html");
 								}
 			});
@@ -455,7 +459,7 @@ var app = {
 
 										else {
 											myApp.hideIndicator();
-											myApp.alert(error, "The Coffee Match");
+											//myApp.alert(error, "The Coffee Match");
 										}
 
 
@@ -464,7 +468,7 @@ var app = {
 									},
 									error: function (request, status, error) {
 										myApp.hideIndicator();
-										myApp.alert(error, "The Coffee Match");
+										//myApp.alert(error, "The Coffee Match");
 									}
 
 								});

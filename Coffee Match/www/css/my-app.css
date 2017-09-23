@@ -1125,6 +1125,35 @@ p.user-label:after {
   filter: brightness(60%) blur(2px);
 }
 
+.btn-2c {
+    border-radius: 5px;
+}
+.btn-2 {
+    background: rgb(67, 233, 160);
+    color: #fff;
+    box-shadow: 0 6px rgb(61, 195, 135);
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+.btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 12px 40px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
 .con {
   //position: fixed;
   margin-left: -4px;

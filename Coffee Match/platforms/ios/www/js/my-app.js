@@ -288,7 +288,6 @@ myApp.onPageInit('passo2', function (page) {
 
 
 myApp.onPageInit('confirmacao-convite', function (page) {
-
 	var user_id  = localStorage.getItem("user_id");
 	var other_id = localStorage.getItem("idc");
 
@@ -307,12 +306,13 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								data: requester,
 								success: function (data) {
                   var message = localStorage.getItem("mess")
-									if(data.id == 293) {
-										message = "Hi, I am Nicolas Romano, CEO of The Coffee Match, and it would be a pleasure to have a coffee with you at Starbucks, my treat! So, feel free to schedule our coffee meeting. I am sure this new connection will be amazing! Onward!";
-									}
+
                   $$(".user-name").html(data.name);
                   $$(".confirmacao-img").attr("src", data.picture);
                   $$("#message").html(message);
+                },
+                error: function(a, b, c) {
+                  console.log(c)
                 }
 							});
 
@@ -337,7 +337,7 @@ myApp.onPageInit('confirmacao-convite', function (page) {
 								success: function (data) {
 									myApp.hideIndicator();
 									localStorage.setItem("match", data.combinacao);
-									mainView.router.loadPage("match.html");
+									mainView.router.loadPage("chat.html");
 								},
 								error: function (request, status, error) {
 									myApp.hideIndicator();
@@ -365,7 +365,14 @@ myApp.onPageInit('convites', function (page) {
 								success: function (data) {
 
 									if(data == null){
-										//myApp.hidePreloader();
+                      var line = '<li>'
+                        +'<div class="text-center" style="margin-top: 180px">'
+                        +'<img src="img/icNotificationBig.png" />'
+                          +'<br>'
+                          +'<p style="color: rgb(89, 104, 114); font-size: 21px">No new invites...</p>'
+                        +'</div>'
+                      +'</li>';
+                      $("#invites-li").append(line);
 										return false;
 									}
 									for(i = 0; i < data.length; i++){
@@ -757,6 +764,27 @@ myApp.onPageInit('myprojects', function (page) {
   myApp.showTab('#tab1');
   usuario.getProjects(function(data){
     $('.ul-projects').empty();
+    if(data.length == 0) {
+      var line = '<li class="empty-li">'
+        +'<div class="text-center" style="margin-top: 120px">'
+        +'<img src="img/icProjectsBig.png" />'
+          +'<br>'
+          +'<p style="color: rgb(89, 104, 114); font-size: 21px">Start a new project!</p>'
+        +'</div>'
+        + '<div class="text-center">'
+        + '<a href="#" id="button-new-project" class="btn btn-2 btn-2c open-popup" data-popup=".popup-form">New Project</a>'
+        + '</div>'
+      +'</li>';
+      $(".ul-projects").append(line);
+      return false;
+    }
+
+    //Adiciona o floating button de criação do projeto
+    var line = '<a href="#" id="button-new-project" class="floating-button color-white open-popup" data-popup=".popup-form" style="font-size: 30px">'
+      + '+'
+      + '</a>';
+      $(".ul-projects").append(line);
+
     for(i = 0; i < data.length; i++){
       var number_joined_users = 0;
       if(data[i].joined_users) {
@@ -774,6 +802,7 @@ myApp.onPageInit('myprojects', function (page) {
         $('.ul-projects').append(line);
     }
   })
+
   $(document).on('click', '.open-myproject', function () {
     var project_id = $(this).attr('id');
     localStorage.setItem('project_id', project_id);
@@ -898,6 +927,7 @@ myApp.onPageBack('project', function (page) {
   $$('.floating-button').removeClass('none');
   StatusBar.overlaysWebView(false);
 });
+
 myApp.onPageInit('project', function (page) {
   StatusBar.overlaysWebView(true);
   var project_id = localStorage.getItem('project_id');
@@ -971,6 +1001,9 @@ myApp.onPageInit('project', function (page) {
 
 });
 
+$(document).on('click', '.back-m', function () {
+  mainView.router.back({url: 'index.html', force: true})
+});
 myApp.onPageInit('messages', function (page) {
   //myApp.showIndicator()
   myApp.showTab('#tab1');
@@ -983,19 +1016,20 @@ myApp.onPageInit('messages', function (page) {
 								dataType: 'json',
 								data: x,
 								success: function (data) {
+                  $("#messages-li").empty();
+
                   if(data.length == 0) {
                     var line = '<li>'
-                      +'<div class="text-center" style="margin-top: 200px">'
+                      +'<div class="text-center" style="margin-top: 180px">'
                       +'<img src="img/icChatBig.png" />'
                         +'<br>'
-                        +'<p style="color: rgb(89, 104, 114); font-size: 22px">No conversation started yet...</p>'
+                        +'<p style="color: rgb(89, 104, 114); font-size: 21px">No conversation started yet...</p>'
                       +'</div>'
                     +'</li>';
                     $("#messages-li").append(line);
                     //myApp.hideIndicator()
                   }
 
-                  $("#messages-li").empty();
 									for(i = 0; i < data.length; i++){
 										var replyArrow = "";
 										var weight = "bold";
@@ -1039,7 +1073,7 @@ myApp.onPageInit('messages', function (page) {
 								},
 								error: function (request, status, error) {
                   //myApp.hideIndicator()
-									alert(request.responseText);
+									//alert(request.responseText);
 								}
 
 							});
@@ -1597,33 +1631,6 @@ myApp.onPageInit('chat', function (page) {
 	$$('.overflow').on('click', function () {
 
 				var buttons1 = [
-          /*
-          {
-						text: 'Schedule',
-						color: 'blue',
-						onClick: function () {
-              var matchData = {
-        				match: match
-        				}
-              $.ajax({
-        								url: 'http://thecoffeematch.com/webservice/get-detail-calendar.php',
-        								type: 'post',
-        								dataType: 'json',
-        								data: matchData,
-        								success: function (data) {
-                          if(data.status == 400){
-                            $$("#toolbar").toggleClass("none visivel");
-                            mainView.router.loadPage("starbucks-proximas.html");
-                          } else {
-                            mainView.router.loadPage('detail-calendar.html');
-                          }
-                        }, error: function() {
-                          myApp.alert('Error')
-                        }
-                      });
-						}
-					},
-          */
 					{
 						text: 'Report',
 						color: 'red',

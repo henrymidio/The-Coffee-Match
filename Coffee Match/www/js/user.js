@@ -149,10 +149,10 @@ this.getPreferences = function() {
 
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
-$(".center-load").hide()
-    if(data[i].distance < 1) {
-      data[i].distance = '<1';
-    }
+      $(".center-load").hide()
+      if(data[i].distance < 1) {
+        data[i].distance = '<1';
+      }
 
     //Monta o DOM
     var line1 = '<figure id="'+data[i].id+'">'
@@ -169,6 +169,13 @@ $(".center-load").hide()
        +'</div>'
     +'</figure>';
     $("#columns").append(line1);
+
+    var projects_number = data[i].projects.length;
+    if(projects_number > 0) {
+      var lineP = '<hr>'
+                 +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">'+projects_number+' Projects</p>';
+      $("#"+data[i].id+" .figure-body").append(lineP);
+    }
 /*
     $.ajax({
       url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data[i].fb_token + "&appsecret_proof=" + data[i].appsecret,
@@ -212,7 +219,7 @@ this.searchPeople = function () {
             },error: function (request, status, error) {
               //myApp.pullToRefreshDone();
               console.log(error)
-              myApp.alert('Error', '')
+              //myApp.alert('Error', '')
             }
     });
 }
@@ -344,7 +351,7 @@ this.searchPeople = function () {
               myApp.alert('Message successfully delivered', '');
             },
             error: function (request, status, error) {
-              alert('Error');
+              //alert('Error');
               console.log(error)
             }
 
@@ -363,7 +370,7 @@ this.searchPeople = function () {
       success: function(data) {
         callback(data);
       }, error: function (request, status, error) {
-        alert(error)
+        //alert(error)
       }
     });
   }
@@ -386,12 +393,13 @@ this.searchPeople = function () {
           + "<div class='item-title'><span><b>"+data[0].name+"</b></span><br>"
           + "<span class='subtitle'>0 joined</span></div></div></a>"
           + "</li>";
+          $('.empty-li').hide()
           $('.ul-projects').append(linha2);
         myApp.hideIndicator();
         myApp.closeModal(".popup-form", true);
       }, error: function (request, status, error) {
         myApp.hideIndicator();
-        myApp.alert(error, '');
+        //myApp.alert(error, '');
       }
     });
   }
@@ -409,7 +417,7 @@ this.searchPeople = function () {
       success: function(data) {
         console.log(data)
       }, error: function (request, status, error) {
-        alert(error)
+        //alert(error)
       }
     });
   }
