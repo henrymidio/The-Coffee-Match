@@ -766,7 +766,7 @@ myApp.onPageInit('myprojects', function (page) {
     $('.ul-projects').empty();
     if(data.length == 0) {
       var line = '<li class="empty-li">'
-        +'<div class="text-center" style="margin-top: 120px">'
+        +'<div class="text-center" style="margin-top: 90px">'
         +'<img src="img/icProjectsBig.png" />'
           +'<br>'
           +'<p style="color: rgb(89, 104, 114); font-size: 21px">Start a new project!</p>'
