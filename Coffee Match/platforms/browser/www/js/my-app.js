@@ -937,7 +937,7 @@ myApp.onPageInit('project', function (page) {
     dataType: 'json',
     success: function (data) {
       for(i in data) {
-        $('.project-background').css('background', 'url('+data[i].image+')')
+        $('.project-background').css('background-image', 'url('+data[i].image+')')
         $('.p-name').text(data[i].name)
         $('.p-description').text(data[i].description)
         $('.p-category').text(data[i].category)

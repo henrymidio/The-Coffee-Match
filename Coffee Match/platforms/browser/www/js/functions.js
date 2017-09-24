@@ -233,7 +233,7 @@ function setIndexEvents() {
               projeto.image = 'http://thecoffeematch.com/webservice/assets/img/medtech.jpeg';
             break;
         case 'Philanthropy & Social Good':
-              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/philanthropy.png';
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/philanthropy.jpg';
             break;
         case 'Security':
               projeto.image = 'http://thecoffeematch.com/webservice/assets/img/security.png';
