@@ -1117,6 +1117,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
 
   var birthday = localStorage.getItem("age");
 	var age = getAge(birthday);
+  console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + tags + ' ' + looking + ' ' + user_id);
   //Chamada ao servidor para atualização de informações de perfil
   setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
 
@@ -2033,7 +2034,6 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 		dataType: 'json',
 		data: info,
 		success: function (data) {
-
 			if(data.status == 'success'){
 
 				//Atualiza preferências e executa função de callback
@@ -2042,7 +2042,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 			}
 		},
 		error: function (request, status, error) {
-			//alert(error);
+			console.log(JSON.stringify(request))
 		}
 	});
 }
