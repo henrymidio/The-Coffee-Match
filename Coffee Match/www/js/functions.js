@@ -296,7 +296,8 @@ function renderNewProject(projeto, fromBD) {
 
     }
 
-    var shortDescription = projeto.description.replace(/^(.{90}[^\s]*).*/, "$1"); //replace with your string.
+    var shortDescription = projeto.description.replace(/^(.{50}[^\s]*).*/, "$1"); //replace with your string.
+    console.log(shortDescription)
 
   //Monta o DOM dos chips
   var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'

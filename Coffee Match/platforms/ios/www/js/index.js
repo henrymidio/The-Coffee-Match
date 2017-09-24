@@ -88,7 +88,6 @@ var app = {
 			usuario.setLastLogin();
       configSidePanel();
 		}
-
     //Primeiramente seta todos os eventos do index no DOM
     setIndexEvents();
 
@@ -101,7 +100,7 @@ var app = {
 			//$$("#invisible-container").removeClass("none");
 			$$("#invisible-nav").removeClass("navbar-hidden");
 
-      var pic = usuario.getPicture();
+      var pic = localStorage.getItem("picture");
       $$(".profile-photo").attr("src", pic);
 
 			//Pega localização do usuário
@@ -156,6 +155,7 @@ var app = {
         mainView.router.reloadPage('detail-calendar.html')
         mainView.router.back();
       })
+
 	  myApp.onPageInit('starbucks-proximas', function(){
 			StatusBar.overlaysWebView(false);
 			var latLng = new google.maps.LatLng(latitude, longitude);

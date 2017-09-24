@@ -915,7 +915,7 @@ myApp.onPageInit('joined-project', function (page) {
     editProject(project_id, name, description, editSkills, function(data) {
       myApp.hideIndicator();
       myApp.closeModal(".popup-edit-form", true);
-      myApp.alert('Suas informaçãoes foram atualizadas com sucesso!', '')
+      myApp.alert('Your information has been successfully updated', '')
       $('.j-name').html(name);
       $('.j-description').html(description);
     });
@@ -961,7 +961,7 @@ myApp.onPageInit('project', function (page) {
         data[i].joined_users.forEach(function(entry) {
 
             if(entry.joined_user == usuario.getID()) {
-              myApp.alert('You already applied to this project', '')
+              myApp.alert('You have already applied to this project', '')
               $('#join-project').hide()
             }
         });
