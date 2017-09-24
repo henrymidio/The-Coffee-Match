@@ -772,7 +772,7 @@ myApp.onPageInit('myprojects', function (page) {
           +'<p style="color: rgb(89, 104, 114); font-size: 21px">Start a new project!</p>'
         +'</div>'
         + '<div class="text-center">'
-        + '<a href="#" id="button-new-project" class="btn btn-2 btn-2c open-popup" data-popup=".popup-form">New Project</a>'
+        + '<a href="#" id="button-new-project" class="btn-0 btn-2 btn-2c open-popup" data-popup=".popup-form">New Project</a>'
         + '</div>'
       +'</li>';
       $(".ul-projects").append(line);

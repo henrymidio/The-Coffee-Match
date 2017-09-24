@@ -192,17 +192,65 @@ function setIndexEvents() {
       image: 'https://careers.adage.com/images/310/default/why-advertising-urgently-needs-more-weird-or-the-dark-side-of-agency-culture-_201705302125483.png'
     };
 
-    /*
-    if(projectCategory == 'Advertising, Content & Media') {
-      projeto.image = 'http://instratmedia.com/wp-content/uploads/2016/01/Social-media-advertising-trends-2014.jpg';
+    switch(projectCategory) {
+        case 'Advertising, Content & Media':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/advertising.jpg';
+            break;
+        case 'Big Data':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/big-data.jpg';
+            break;
+        case 'eCommerce':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/ecommerce.jpg';
+            break;
+        case 'Education':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/education.jpg';
+            break;
+        case 'Enterprise':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/enterprise.jpg';
+            break;
+        case 'Entertainment':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/entertainment.jpg';
+            break;
+        case 'Fashion':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/fashion.png';
+            break;
+        case 'Fintech':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/fintech.jpg';
+            break;
+        case 'Gaming & VR':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/gaming.jpg';
+            break;
+        case 'Hardware & IOT':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/hardware.jpg';
+            break;
+        case 'HR & Recruitment':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/hr.png';
+            break;
+        case 'Lifestyle, Recreation & Wellness':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/lifestyle.jpg';
+            break;
+        case 'MedTech':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/medtech.jpeg';
+            break;
+        case 'Philanthropy & Social Good':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/philanthropy.png';
+            break;
+        case 'Security':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/security.png';
+            break;
+        case 'Social':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/social.jpg';
+            break;
+        case 'Software':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/software.jpg';
+            break;
+        case 'Sports & Fitness':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/sports.jpg';
+            break;
+        case 'Travel':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/travel.jpg';
+            break;
     }
-    if(projectCategory == 'Health') {
-      projeto.image = 'http://hlknweb.tamu.edu/sites/hlknweb.tamu.edu/files/styles/main_page_photo/public/health%20check.jpg?itok=aAKbZUcC';
-    }
-    if(projectCategory == 'Fintech') {
-      projeto.image = 'http://magodomercado.com/wp-content/uploads/2014/08/como-investir-na-bolsa-de-valores.jpg';
-    }
-    */
     //Valida os inputs
     if(projectName < 1 || projectCategory < 1 ||  projectSkills < 1) {
       myApp.alert("Please, fill in all required fields.", '');

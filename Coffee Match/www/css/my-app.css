@@ -1136,7 +1136,7 @@ p.user-label:after {
     -moz-transition: none;
     transition: none;
 }
-.btn {
+.btn-0 {
     border: none;
     font-family: inherit;
     font-size: inherit;
