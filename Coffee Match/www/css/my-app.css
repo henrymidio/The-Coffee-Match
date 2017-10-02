@@ -476,7 +476,7 @@ letter-spacing:0.09em;
 
 .blue-page {
 	//background-color: #2f3a41 !important;
-	background: -webkit-linear-gradient(top, #2f3a41, #2f3a41 21%, #eee 21%, #eee);
+	background: -webkit-linear-gradient(top, #2f3a41, #2f3a41 23%, #eee 23%, #eee);
   //background-image: -webkit-linear-gradient(104deg, #eee 70%, #2f3a41 70%);
 }
 

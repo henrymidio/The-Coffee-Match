@@ -1316,7 +1316,7 @@ myApp.onPageInit('user', function (page) {
 									$$("#user-view-description").html(data.description);
 //console.log(data)
                   if(data.projects.length > 0) {
-                    $('.card-projects').toggleClass('none');
+                    //$('.card-projects').toggleClass('none');
                     data.projects.forEach(function(entry) {
                       //console.log(entry.name)
 
