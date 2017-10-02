@@ -144,6 +144,7 @@ this.getPreferences = function() {
 
 
   this.renderPeople = function(data) {
+    //console.log(data)
     //Pega o número de usuários que já está renderizado
     var index = $$('#columns figure').length;
 
@@ -203,7 +204,7 @@ this.searchPeople = function () {
   var dados = {
       requester: _id
     }
-
+console.log(dados)
   $.ajax({
             url: 'http://api.thecoffeematch.com/v1/users',
             type: 'get',
@@ -211,15 +212,17 @@ this.searchPeople = function () {
             data: dados,
             crossDomain: true,
             success: function (data) {
+              //console.log(data)
               localStorage.setItem("cache", JSON.stringify(data));
               //Renderiza no DOM
               usuario.renderPeople(data);
               myApp.pullToRefreshDone();
 
             },error: function (request, status, error) {
-              //myApp.pullToRefreshDone();
-              console.log(error)
-              //myApp.alert('Error', '')
+              myApp.pullToRefreshDone();
+              console.log("searchPeople Error")
+              console.log(request)
+              myApp.alert('Server Error', '')
             }
     });
 }
@@ -235,7 +238,7 @@ this.searchPeople = function () {
       dataType: 'json',
       data: pnss,
       success: function (data) {
-//console.log(data)
+
         if(data.invite == 1){
           $$("#icon-invite img").attr("src", "img/sino_notification.png");
           $$("#icon-invite").on("click", function(){
@@ -312,7 +315,7 @@ this.searchPeople = function () {
         }
       },
       error: function (request, status, error) {
-       console.log(error)
+       console.log("pending-notification "  + error)
       }
     });
 }

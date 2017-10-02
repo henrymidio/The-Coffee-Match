@@ -1801,14 +1801,14 @@ $$('.messagebar .link').on('click', function () {
 
 									updateStatusUser(1);
 
-									myInterval = setInterval(function(){
-										getLastMessage(user, match);
-									}, 3000);
-
 								}
 	});
 
-
+  $('textarea').on({input: function(){
+    var totalHeight = $(this).prop('scrollHeight') - parseInt($(this).css('padding-top')) - parseInt($(this).css('padding-bottom'));
+    $(this).css({'height':totalHeight});
+}
+});
 
 	function getLastMessage(user, combinacao){
 
@@ -1845,21 +1845,6 @@ $$('.messagebar .link').on('click', function () {
 		});
 	}
 
-});
-
-
-
-myApp.onPageBack('chat', function (page) {
-
-		localStorage.setItem("cancel", "t");
-
-		updateStatusUser(0)
-		try {
-			clearInterval(myInterval);
-		}
-		catch(err) {
-			alert('chat onBack error')
-		}
 });
 
 

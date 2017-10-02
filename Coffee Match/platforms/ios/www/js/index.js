@@ -266,7 +266,7 @@ var app = {
 
 		 });
 
-
+/*
 		myApp.onPageInit('detail-calendar', function(){
 			//myApp.showPreloader();
 			var userPicture = usuario.getPicture()
@@ -340,7 +340,7 @@ var app = {
 
 
 		});
-
+*/
 	}).trigger();
 
 
