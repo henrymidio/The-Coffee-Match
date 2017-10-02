@@ -186,11 +186,6 @@ myApp.onPageInit('passo2', function (page) {
 			return false;
 		}
 
-		if (descricao.length == 0) {
-			document.getElementById("passo2-description").focus();
-			return false;
-		}
-
 		myApp.showIndicator();
 
 		$('#skills select option:selected').each(function(){
@@ -1098,11 +1093,6 @@ $$(document).on("click", "#finalizar-edicao", function(){
     return false;
   }
 
-  if (descricao.length == 0) {
-    document.getElementById("description").focus();
-    return false;
-  }
-
   $('#skills select option:selected').each(function(){
     tags.push($(this).text());
   });
@@ -1176,8 +1166,7 @@ myApp.onPageInit('profile', function (page) {
 	});
 	var birthday = localStorage.getItem("age");
 	var age = getAge(birthday);
-	$$(".profile-name").html(localStorage.getItem("name") + ", ");
-	$$("#profile-age").html(age);
+	$$(".profile-name").html(localStorage.getItem("name"));
 	$$("#description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#occupation").val(localStorage.getItem("occupation"));
