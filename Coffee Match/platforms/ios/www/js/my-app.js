@@ -1807,7 +1807,8 @@ $$('.messagebar .link').on('click', function () {
   $('textarea').on({input: function(){
     var totalHeight = $(this).prop('scrollHeight') - parseInt($(this).css('padding-top')) - parseInt($(this).css('padding-bottom'));
     $(this).css({'height':totalHeight});
-}
+    $(".toolbar-popup").css({'height':totalHeight + 25});
+  }
 });
 
 	function getLastMessage(user, combinacao){
