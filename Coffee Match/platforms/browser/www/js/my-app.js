@@ -386,9 +386,9 @@ myApp.onPageInit('convites', function (page) {
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
-												+ "<a href='confirmacao-convite.html' class='item-link match' id="+data[i].id+">"
+												+ "<a href='user.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle' id='mess'>"+message+"...</span>"
+												+ "<span class='subtitle' id='mess'>Wants to connect to you!</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
@@ -427,8 +427,8 @@ myApp.onPageInit('convites', function (page) {
 
 
 									$(".match").on("click touch", function(){
-										localStorage.setItem("idc", $(this).attr("id"));
-                    localStorage.setItem("mess", $(this).find("#mess").text());
+										localStorage.setItem("shown_user_id", $(this).attr("id"));
+                    //localStorage.setItem("mess", $(this).find("#mess").text());
 									})
 									$(".div-match").on("click touch", function(){
 										localStorage.setItem("invite", $(this).attr("id"));
@@ -619,9 +619,8 @@ myApp.onPageInit('detail-calendar', function(page){
 
 	});
 });
-
+/*
 myApp.onPageInit('profile-preview', function (page) {
-  myApp.showTab('#tab1');
 	var metrica = localStorage.getItem("metrica");
 	$$("#preview-metrica").html(metrica);
 
@@ -652,12 +651,8 @@ myApp.onPageInit('profile-preview', function (page) {
 
 	});
 
-	$("#to-edit-profile").on("click", function(){
-		mainView.router.loadPage('profile.html');
-	});
-
 });
-
+*/
 myApp.onPageInit('profile-view', function (page) {
 	var metrica = localStorage.getItem("metrica");
 	$$("#view-metrica").html(metrica);
@@ -999,6 +994,7 @@ myApp.onPageInit('project', function (page) {
 $(document).on('click', '.back-m', function () {
   mainView.router.back({url: 'index.html', force: true})
 });
+
 myApp.onPageInit('messages', function (page) {
   //myApp.showIndicator()
   myApp.showTab('#tab1');
@@ -1176,8 +1172,10 @@ myApp.onPageInit('profile', function (page) {
 
 //SHOWN USER
 myApp.onPageBack('user', function (page) {
-  $$("#toolbar-user").toggleClass("none visivel");
+  $$("#toolbar-user").removeClass("visivel");
+  $$("#toolbar-user").addClass("none");
 });
+
 //Eventos da tela user setados de fora para não ocorrerem duas vezes
 $(document).on('popup:open', '.popup-project', function () {
   var project_id = localStorage.getItem('project_id');
@@ -1212,18 +1210,13 @@ $(document).on('click', '.open-popup-project', function () {
   myApp.popup('.popup-project');
 });
 $(document).on('click', '.send-invite', function () {
-  var message = $('.invite-message').val();
-  var shown_user_id = localStorage.getItem('shown_user_id');
+    //var message = $('.invite-message').val();
+    var shown_user_id = localStorage.getItem('shown_user_id');
 
-  if(message.length < 14) {
-    myApp.alert('Your message must have at least 15 characters.', '')
-    return false;
-  } else {
-    usuario.like(shown_user_id, message);
+    usuario.like(shown_user_id, "");
     myApp.closeModal();
-    mainView.router.back();
+    usuario.removeUserFromCache(shown_user_id)
     $('figure#'+shown_user_id).css({"visibility":"hidden",display:'block'}).slideUp();
-  }
 
 });
 
@@ -1380,10 +1373,7 @@ myApp.onPageInit('user', function (page) {
 
 });
 
-myApp.onPageInit('user-sem-connect', function (page) {
-  $$('#toolbar-user').on('click', function () {
-    myApp.popup('.popup-message');
-  });
+myApp.onPageInit('profile-preview', function (page) {
 
   var altura = $('#inside-con').height();
   $('.blur-back').height(altura + 60)
@@ -1613,6 +1603,9 @@ myApp.onPageBeforeInit('settings', function (page) {
 });
 
 myApp.onPageInit('chat', function (page) {
+  $$("#toolbar-user").removeClass("visivel");
+  $$("#toolbar-user").addClass("none");
+
   StatusBar.overlaysWebView(false);
 	myApp.showIndicator()
 
@@ -1770,7 +1763,7 @@ $$('.messagebar .link').on('click', function () {
 												var line1 = "<div class='message message-with-avatar message-received message-last message-with-tail message-first' id="+data[i].message_id+">"
 																+ "<div class='message-name'>"+data[i].name+"</div>"
 																+ "<div class='message-text'>"+data[i].message+"</div>"
-																+ "<div style='background-image:url("+data[i].picture+")' class='message-avatar'></div>"
+																+ "<div style='background-image:url("+data[i].picture+")' id='"+data[i].id+"' class='message-avatar avatar-click'></div>"
 																//+ "<div class='message-label'>"+data[i].data+"</div>"
 																+ "</div>";
 												$(".messages").append(line1);
@@ -1782,6 +1775,12 @@ $$('.messagebar .link').on('click', function () {
 										}
 
 										myApp.hideIndicator();
+
+                    $('.avatar-click').on('click', function(){
+                      var id = $(this).attr('id');
+                      localStorage.setItem("shown_user_id", id);
+                      mainView.router.loadPage('profile-preview.html');
+                    });
 
 									}
 

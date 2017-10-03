@@ -131,6 +131,7 @@ var app = {
             var cache = usuario.getCache();
             if(cache) {
               usuario.renderPeople(cache);
+              usuario.getPendingNotifications();
 
               $("#tab2").empty();
               retrieveProjects()

@@ -279,12 +279,12 @@ console.log(dados)
           $$("#icon-message img").attr("src", "img/icChatWhite.png");
         }
 
-        if(data.booking == 1){
-          $$("#icon-agenda img").attr("src", "img/agenda_notification.png");
-          $$("#icon-agenda").on("click", function(){
-            $$("#icon-agenda img").attr("src", "img/icCalendarWhite.png");
+        if(data.projects == 1){
+          $$("#icon-projects img").attr("src", "img/projects_notification.png");
+          $$("#icon-projects").on("click", function(){
+            $$("#icon-projects img").attr("src", "img/icProjectsWhite.png");
             var ndata = {
-              booking: 0
+              projects: 0
             };
             $.ajax({
                 url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + _id,
@@ -297,26 +297,14 @@ console.log(dados)
 
           })
         } else {
-          $$("#icon-agenda img").attr("src", "img/icCalendarWhite.png");
+          $$("#icon-projects img").attr("src", "img/icProjectsWhite.png");
         }
 
-        if(data.rewards == 1){
-          var ndata = {
-              rewards: 0
-            };
-          $.ajax({
-                url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + _id,
-                type: 'post',
-                data: ndata,
-                success: function (data) {
-                  mainView.router.loadPage("congratulations.html");
-                }
-            });
-        }
       },
       error: function (request, status, error) {
        console.log("pending-notification "  + error)
       }
+
     });
 }
 
@@ -336,6 +324,7 @@ console.log(dados)
   }
 
   this.like = function(shown_user_id, message) {
+    myApp.showIndicator()
     var user_id  = _id;
 
     var dados = {
@@ -351,10 +340,18 @@ console.log(dados)
             data: dados,
             dataType: 'json',
             success: function (data) {
-              myApp.alert('Message successfully delivered', '');
+              myApp.hideIndicator()
+              if(data.message == "match") {
+                localStorage.setItem("match", data.combinacao)
+                mainView.router.loadPage("chat.html")
+              } else {
+                mainView.router.back();
+              }
+              //myApp.alert('Message successfully delivered', '');
             },
             error: function (request, status, error) {
-              //alert('Error');
+              myApp.hideIndicator()
+              myAlert('Error', "");
               console.log(error)
             }
 

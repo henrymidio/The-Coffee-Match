@@ -1,49 +1,75 @@
 <!-- Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-			<div class="left sliding">
-				<a href="#" class="link back color-white"><i class="icon icon-back color-white"></i><span style="margin-left: 8px">Back</span></a>
-			</div>
-            <div class="sliding center color-white">
-				My Profile
-			</div>
-			<div class="right">
-				<a href="#" id="to-edit-profile" class="link icon-only color-white">
-				  <img class="icon" width="22" height="22" src="img/ic_action_edit.png" />
-				 </a>
-			</div>
+<div class="navbar" style="background-color: #8D7A4B">
+  <div class="navbar-inner">
+    <div class="left">
+      <a href="#" class="link icon-only open-panel color-white" id="finalizar"><i class="icon color-white"></i></a>
+    </div>
+    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+    <div class="sliding center logo"></div>
+  </div>
+</div>
+
+<div class="pages">
+	<div data-page="profile-preview" class="page no-navbar">
+
+		<div class="page-content" style="background-color: rgb(245, 245, 247)">
+			<a href="#" class="link back color-white" data-animate-pages="false" style="position: absolute; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
+			<a href="#" id="report" style="position: absolute; top: 4%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
+      <div class="blur-back"></div>
+      <div class="con">
+				<div id= "inside-con" class='text-center color-white'>
+					<img class='img' id="user-view-img" src="img/anonimo.jpg" />
+					<p style="font-size: 30px; color: white; margin-top: 0px" id="user-view-name">...</p>
+					<p class='college' id="user-view-college">...</p>
+					<p class='college' id="user-view-occupation" style="margin-top: -15px; font-size: 14px; margin-left: 15px; margin-right: 15px">...</p>
+          <p id="user-distance" style="margin-top: -10px; font-size: 13px; margin-right: 15px;">...</p>
+				</div>
+
+        <div class="card" style="padding: 5px">
+    			<p class='friends user-label color-silver'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">tags</i>Skills</p>
+
+    			<div class='skss' style="margin-left: 20px; margin-right: 10px"></div>
+          <br>
+          <p class='friends user-label color-silver'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>About Me</p>
+
+  				<p class='friends' id="user-view-description" style='margin-left: 20px; margin-right: 10px; color: #2f3a41'></p>
+				  <br>
+        </div>
+        <div class="card card-projects" style="padding: 5px; margin-top: 10px">
+    				<p class='friends user-label color-silver'> <span style='line-height:22px;'>Projects & Ideas</span></p>
+            <div class="list-block" style="margin-top: -10px">
+            <ul class="projects-list">
+
+  				  </ul>
+          </div>
+  			</div>
+        <div class="card card-friends" style="padding: 5px; margin-top: 10px">
+  				<p class='friends user-label color-silver'><span id="mutual-numbers">0</span> Mutual connections</p>
+
+  				<div class="row text-center friends-list" style="margin-left: 10px; margin-right: 10px">
           </div>
         </div>
 
-<div class="pages">
-	<div data-page="profile-preview" class="page">
-		<div class="page-content" style="background-color: white">
-			<div>
-				<div class='text-center' style='background: url(img/background_profile.png); background-size: cover; margin: -10px; margin-right: 0px; padding-bottom: 1px; padding-top: 45px'>
-					<div class='row'>
-						<div class='col-30' style='padding-top: 55px'><span style='color: #00d173; font-size: 20px'>00</span><br><p class='subcol' id="preview-metrica"></p></div>
-						<div class='col-40'><img class='img' id="preview-img" src="img/anonimo.jpg" /></div>
-						<div class='col-30' style='padding-top: 55px'><span style='color: #00d173; font-size: 20px'><span id="preview-age">00</span><br><p class='subcol'>Age</span></p></div>
-					</div>
-					<p style="font-size: 30px; color: white; margin-top: 0px" id="preview-name">...</p>
-					<p class='college' id="preview-occupation">...</p>
-					<p class='college' id="preview-college" style="margin-top: -15px; font-size: 14px">...</p>
-					<br>
-				</div>
-				<div style="background: #00d173; padding-top: 1px; padding-bottom: 1px">
-					<p class='friends' style='color: white; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/profile_looking.png' /> <span style='line-height:22px;'>What I'm looking for</span></p>
-					<ul style="list-style-type: none; color: white; margin-top: -15px; margin-left: 8px; font-size: 13px">
-						<li id="profile-l1">...</li>
-						<li id="profile-l2">...</li>
-						<li id="profile-l3">...</li>
-					</ul>
-				</div>
-				<p class='friends' style='color: #2f3a41; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/skills.png' /> <span style='line-height:22px;'><b>My Skills</b></span></p>
-				<div class='habilidades' style="margin-top: -10px; margin-left: 40px; margin-right: 10px"></div><br>
-				<p class='friends' style='color: #2f3a41; padding-left: 20px'><img style='vertical-align: middle; width: 22px; height: 22px' src='img/tellme.png' /> <span style='line-height:22px;'><b>About Me</b></span></p>
-				<p class='friends' id="preview-description" style='margin-top: -10px; margin-left: 45px; margin-right: 10px; color: #2f3a41'></p>
-
-			</div>
 		</div>
-	</div>
+
+    <div class="popup popup-project">
+      <a href="#" class="link color-white close-popup" style="position: fixed; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 30px">close</i></a>
+       <div style="margin-top: -40px; position: relative" class="projeto-background top-img-project color-white">
+         <div style="text-align: center">
+           <p class="projeto-name" style="font-size: 35px; padding-top: 60px; text-shadow: 1px 1px 2px #000000"></p>
+         </div>
+         <div class="project-owner">
+               <img class="projeto-owner-picture" src="img/anonimo.jpg" />
+               <span class="projeto-owner-name" style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px"></span>
+         </div>
+      </div>
+       <div class="content-block content-chips">
+         <h2 class="projeto-name"></h2>
+         <p class="projeto-category"></p>
+         <p class="projeto-description"></p>
+         <p class="label" style="font-size: 12px"><i class="f7-icons" style="font-size: 12px; margin-right: 7px">search</i><b>Looking for</b></p>
+
+       </div>
+	  </div>
+
 </div>
