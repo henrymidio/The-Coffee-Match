@@ -948,8 +948,7 @@ myApp.onPageInit('project', function (page) {
       if(data[i].owner == usuario.getID()) {
         $('#join-project').hide()
       } else {
-        data[i].joined_users.forEach(function(entry) {
-
+        data[i].all_joined_users.forEach(function(entry) {
             if(entry.joined_user == usuario.getID()) {
               myApp.alert('You have already applied to this project', '')
               $('#join-project').hide()
@@ -974,7 +973,7 @@ myApp.onPageInit('project', function (page) {
 						text: 'Report',
 						onClick: function () {
 							myApp.prompt("For what reason?", "The Coffee Match", function(value){
-								myApp.alert("Your report will be verified", "Thank you")
+								myApp.alert("The user has been reported", "Thank you")
 							})
 						}
 					}
@@ -994,7 +993,25 @@ myApp.onPageInit('project', function (page) {
 $(document).on('click', '.back-m', function () {
   mainView.router.back({url: 'index.html', force: true})
 });
+$(document).on("click", ".erase", function(){
+  var self = $(this);
+  var idMatch = self.parent().siblings().children(".chat").attr("id");
+  var swipeout = self.closest(".swipeout");
 
+  myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
+    myApp.swipeoutDelete(swipeout, function() {
+        var abc = {
+          match: idMatch
+        };
+        $.ajax({
+          url: 'http://thecoffeematch.com/webservice/unmatch.php',
+          type: 'post',
+          data: abc
+        });
+      });
+    });
+    
+});
 myApp.onPageInit('messages', function (page) {
   //myApp.showIndicator()
   myApp.showTab('#tab1');
@@ -1034,14 +1051,22 @@ myApp.onPageInit('messages', function (page) {
 										}
 
 										//Monta o DOM
-									    var line1 = "<li class='item-content'>"
-												+ "<div class='item-media perfil' id="+data[i].suid+">"
+									    var line1 = "<li class='item-content swipeout'>"
+												+ "<div class='item-media perfil swipeout' id="+data[i].suid+">"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
 												+ "<a href='#' class='item-link chat' id="+data[i].id+">"
-												+ "<div class='item-title' style='width: 200px'><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span></div></div></a></li>";
+												+ "<div class='item-title' style='width: 200px'>"
+                        + "<span id='matches-name'><b>"+data[i].name+"</b></span><br>"
+												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span>"
+                        + "</div>"
+                        + "</a>"
+                        + "</div>"
+                        + "<div class='swipeout-actions-right'>"
+												+ "<a href='#' class='bg-red erase'>Delete</a>"
+												+ "</div>"
+                        + "</li>";
 									    $("#messages-li").append(line1);
 
 										$(".chat").on("click", function(){

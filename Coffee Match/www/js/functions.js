@@ -355,7 +355,7 @@ function retrieveProjects() {
     type: 'get',
     dataType: 'json',
     success: function (data) {
-      localStorage.setItem("cacheProjects", JSON.stringify(data));
+      console.log(data)
       for(i in data) {
         //console.log(data[i])
         renderNewProject(data[i], true);

@@ -204,7 +204,7 @@ this.searchPeople = function () {
   var dados = {
       requester: _id
     }
-console.log(dados)
+
   $.ajax({
             url: 'http://api.thecoffeematch.com/v1/users',
             type: 'get',
