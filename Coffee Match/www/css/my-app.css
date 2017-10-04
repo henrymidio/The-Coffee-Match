@@ -151,6 +151,16 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
 	padding-right: 15px;
 }
 
+.tabs-container .button.active {
+    background: #2F3A41 !important;
+    color: white !important;
+}
+
+.tabs-container .button {
+    border: 1px solid #2F3A41 !important;
+    color: #2F3A41 !important;
+  }
+
 .user-card {
 	padding: 5px;
 	border-radius: 5px;
@@ -476,7 +486,7 @@ letter-spacing:0.09em;
 
 .blue-page {
 	//background-color: #2f3a41 !important;
-	background: -webkit-linear-gradient(top, #2f3a41, #2f3a41 25%, #eee 25%, #eee);
+	background: -webkit-linear-gradient(top, #2f3a41, #2f3a41 5%, #eee 5%, #eee);
   //background-image: -webkit-linear-gradient(104deg, #eee 70%, #2f3a41 70%);
 }
 

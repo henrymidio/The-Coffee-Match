@@ -787,7 +787,7 @@ myApp.onPageInit('myprojects', function (page) {
         + "<div class='item-inner'>"
         + "<a href='#' class='item-link'>"
         + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
-        + "<span class='subtitle'>"+number_joined_users+" joined</span></div></div></a>"
+        + "<span class='subtitle'>"+number_joined_users+" interested</span></div></div></a>"
         + "</li>";
         $('.ul-projects').append(line);
     }
@@ -960,7 +960,7 @@ myApp.onPageInit('project', function (page) {
   });
 
   $('#join-project').on('click', function() {
-    myApp.confirm("Are you sure you want to join this project?", "", function(){
+    myApp.confirm("Are you sure you interested this project?", "", function(){
       usuario.joinProject(project_id);
       myApp.alert("Your request has been successfully delivered to the project owner", "")
       mainView.router.back();
@@ -974,7 +974,7 @@ myApp.onPageInit('project', function (page) {
 						text: 'Report',
 						onClick: function () {
 							myApp.prompt("For what reason?", "The Coffee Match", function(value){
-								myApp.alert("Sua denúncia será avaliada por nossos moderadores", "Thank you")
+								myApp.alert("Your report will be verified", "Thank you")
 							})
 						}
 					}
@@ -1602,6 +1602,9 @@ myApp.onPageBeforeInit('settings', function (page) {
 
 });
 
+$(document).on('click', '.chat-back', function () {
+  mainView.router.back({url: 'messages.html', force: true})
+});
 myApp.onPageInit('chat', function (page) {
   $$("#toolbar-user").removeClass("visivel");
   $$("#toolbar-user").addClass("none");

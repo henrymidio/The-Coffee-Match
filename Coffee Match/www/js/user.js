@@ -417,7 +417,7 @@ console.log(dados)
       success: function(data) {
         console.log(data)
       }, error: function (request, status, error) {
-        //alert(error)
+        myAlert(error, "")
       }
     });
   }
