@@ -144,12 +144,12 @@ this.getPreferences = function() {
 
 
   this.renderPeople = function(data) {
-    //console.log(data)
     //Pega o número de usuários que já está renderizado
     var index = $$('#columns figure').length;
 
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
+      console.log(data[i].id)
       $(".center-load").hide()
       if(data[i].distance < 1) {
         data[i].distance = '<1';
@@ -212,16 +212,14 @@ this.searchPeople = function () {
             data: dados,
             crossDomain: true,
             success: function (data) {
-              //console.log(data)
+              console.log(data)
               localStorage.setItem("cache", JSON.stringify(data));
               //Renderiza no DOM
               usuario.renderPeople(data);
               myApp.pullToRefreshDone();
 
             },error: function (request, status, error) {
-              myApp.pullToRefreshDone();
-              console.log("searchPeople Error")
-              console.log(request)
+              //myApp.pullToRefreshDone();
               myApp.alert('Server Error', '')
             }
     });
@@ -302,7 +300,7 @@ this.searchPeople = function () {
 
       },
       error: function (request, status, error) {
-       console.log("pending-notification "  + error)
+       //console.log("pending-notification "  + error)
       }
 
     });
@@ -346,8 +344,8 @@ this.searchPeople = function () {
                 mainView.router.loadPage("chat.html")
               } else {
                 mainView.router.back();
+                myApp.alert('Your invite was successfully sent', '');
               }
-              //myApp.alert('Message successfully delivered', '');
             },
             error: function (request, status, error) {
               myApp.hideIndicator()

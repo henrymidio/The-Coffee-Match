@@ -959,9 +959,9 @@ myApp.onPageInit('project', function (page) {
   });
 
   $('#join-project').on('click', function() {
-    myApp.confirm("Are you sure you interested this project?", "", function(){
+    myApp.confirm("Are you sure that you are interested in this project?!", "", function(){
       usuario.joinProject(project_id);
-      myApp.alert("Your request has been successfully delivered to the project owner", "")
+      myApp.alert("Your request has been successfully delivered to the project owner!", "")
       mainView.router.back();
     })
   })
@@ -1010,7 +1010,7 @@ $(document).on("click", ".erase", function(){
         });
       });
     });
-    
+
 });
 myApp.onPageInit('messages', function (page) {
   //myApp.showIndicator()
@@ -1242,6 +1242,7 @@ $(document).on('click', '.send-invite', function () {
     myApp.closeModal();
     usuario.removeUserFromCache(shown_user_id)
     $('figure#'+shown_user_id).css({"visibility":"hidden",display:'block'}).slideUp();
+    //myApp.alert("Your ")
 
 });
 

@@ -19,7 +19,6 @@ function setIndexEvents() {
   // Loading flag
   var loading = false;
   $(document.body).on('infinite', '.infinite-scroll', function () {
-    console.log(loading);
     // Exit, if loading in progress
     if (loading) return;
 
@@ -355,7 +354,7 @@ function retrieveProjects() {
     type: 'get',
     dataType: 'json',
     success: function (data) {
-      console.log(data)
+
       for(i in data) {
         //console.log(data[i])
         renderNewProject(data[i], true);
