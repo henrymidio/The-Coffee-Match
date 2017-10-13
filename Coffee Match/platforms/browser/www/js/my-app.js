@@ -1320,7 +1320,7 @@ myApp.onPageInit('profile', function (page) {
 	});
 	var birthday = localStorage.getItem("age");
 	//var age = getAge(birthday);
-	$$("#p-name").val(localStorage.getItem("name"));
+	$$("#p-name").html(localStorage.getItem("name"));
 	$$("#p-description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#p-occupation").val(localStorage.getItem("occupation"));
