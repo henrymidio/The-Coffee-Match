@@ -1214,11 +1214,11 @@ myApp.onPageInit('messages', function (page) {
 });
 
 $$(document).on("click", "#finalizar-edicao", function(){
-  var tags = [];
-  var looking = [];
-  var descricao = $$("#description").val();
-  var profissao = $$("#occupation").val();
-  var faculdade = $$("#graduation").val();
+  var topSkill = [];
+  var skillsSecundarias = [];
+  var descricao = $$("#p-description").val();
+  var profissao = $$("#p-occupation").val();
+  var faculdade = $$("#p-graduation").val();
 
   if (profissao.length == 0) {
     document.getElementById("occupation").focus();
@@ -1231,22 +1231,27 @@ $$(document).on("click", "#finalizar-edicao", function(){
   }
 
   $('#skills select option:selected').each(function(){
-    tags.push($(this).text());
+    topSkill.push($(this).text());
   });
-  tags = tags.join();
+  topSkill = topSkill.join();
 
-  $('#looking-for select option:selected').each(function(){
-      looking.push($(this).text());
+  $('#skills-secundarias select option:selected').each(function(){
+      skillsSecundarias.push($(this).text());
   });
-  looking = looking.join();
+  skillsSecundarias = skillsSecundarias.join();
+
+  //Junta top skill com skills secundárias
+  var skills = topSkill + "," + skillsSecundarias;
 
   var user_id = localStorage.getItem("user_id");
 
-  var birthday = localStorage.getItem("age");
+  var birthday = null;
+  var interest = localStorage.getItem("interest") + ", null, null";
 	//var age = getAge(birthday);
-  //console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + tags + ' ' + looking + ' ' + user_id);
+  //console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + skills + ' ' + interest + ' ' + user_id);
+
   //Chamada ao servidor para atualização de informações de perfil
-  setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
+  setProfile(descricao, profissao, birthday, faculdade, skills, interest, user_id);
 
   localStorage.setItem("description", descricao);
   localStorage.setItem("occupation", profissao);
@@ -1277,7 +1282,7 @@ myApp.onPageInit('profile', function (page) {
 								success: function (data) {
 
 									for(i = 1; i < data.length; i++){
-										if(data[i].nome === data[0].skill1 || data[i].nome === data[0].skill2 || data[i].nome === data[0].skill3){
+										if(data[i].nome === data[0].skill1){
 												myApp.smartSelectAddOption('#skills select', "<option selected>"+data[i].nome+"</option>");
 										} else {
 											if (typeof data[i].nome === 'undefined'){
@@ -1287,14 +1292,26 @@ myApp.onPageInit('profile', function (page) {
 											}
 
 										}
+
+                    if(data[i].nome === data[0].skill2 || data[i].nome === data[0].skill3){
+												myApp.smartSelectAddOption('#skills-secundarias select', "<option selected>"+data[i].nome+"</option>");
+										} else {
+											if (typeof data[i].nome === 'undefined'){
+												//Não faz nada
+											}else {
+												myApp.smartSelectAddOption('#skills-secundarias select', "<option>"+data[i].nome+"</option>");
+											}
+
+										}
 									}
 									/*
 										INSERIR CONDIÇÃO PARA VERIFICAR SE OS LOOKING-FOR ESTÃO SETADOS
 									*/
-									if(data[1].l1.length > 0){ $("#looking-for select option:contains("+data[1].l1+")").prop('selected', true) }
+                  /*
+									if(data[1].l1.length > 0){ $("#looking-fo select option:contains("+data[1].l1+")").prop('selected', true) }
 									if(data[1].l2.length > 0){ $("#looking-for select option:contains("+data[1].l2+")").prop('selected', true) }
 									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
-
+                  */
 									//$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
 
 									//$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
@@ -1303,11 +1320,11 @@ myApp.onPageInit('profile', function (page) {
 	});
 	var birthday = localStorage.getItem("age");
 	//var age = getAge(birthday);
-	$$(".profile-name").html(localStorage.getItem("name"));
-	$$("#description").val(localStorage.getItem("description"));
+	$$("#p-name").val(localStorage.getItem("name"));
+	$$("#p-description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
-	$$("#occupation").val(localStorage.getItem("occupation"));
-	$$("#graduation").val(localStorage.getItem("college"));
+	$$("#p-occupation").val(localStorage.getItem("occupation"));
+	$$("#p-graduation").val(localStorage.getItem("college"));
 
 });
 
@@ -2161,7 +2178,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 			}
 		},
 		error: function (request, status, error) {
-			console.log(JSON.stringify(request))
+			console.log(request)
 		}
 	});
 }
