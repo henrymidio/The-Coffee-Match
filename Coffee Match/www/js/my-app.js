@@ -1464,6 +1464,7 @@ myApp.onPageInit('user', function (page) {
 									$$("#user-view-age").html(data.age);
 									$$("#user-view-occupation").html(data.occupation);
 									$(".skss").append(skill1, skill2, skill3);
+                  $$("#top-skill").html(data.skill1);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
 //console.log(data)

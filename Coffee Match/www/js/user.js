@@ -146,7 +146,7 @@ this.getPreferences = function() {
   this.renderPeople = function(data) {
     //Pega o número de usuários que já está renderizado
     var index = $$('#columns figure').length;
-console.log(data)
+
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
       //console.log(data[i].id)
