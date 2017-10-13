@@ -190,6 +190,7 @@ myApp.onPageInit('login-final', function (page) {
       myApp.alert('Select yout secondary skills', '')
       return false;
     }
+    myApp.showIndicator();
 
     var skills = topSkill + ', ' + secondarySkills;
 
@@ -209,8 +210,26 @@ myApp.onPageInit('login-final', function (page) {
 			skills: skills,
 			looking: interest
 		}
+    $.ajax({
+			url: 'http://api.thecoffeematch.com/v1/users',
+			type: 'post',
+			dataType: 'json',
+			data: userObj,
+			success: function(response) {
+				localStorage.setItem("user_id", response.data.id);
+				localStorage.setItem("logged", 1);
+				myApp.hideIndicator();
+        usuario = new User();
+				mainView.router.loadPage("index.html");
+			},
+			error: function (request, status, error) {
+				myApp.hideIndicator();
+				myApp.alert("There was an error processing your request, please try again.", "The Coffee Match");
+				mainView.router.loadPage("login2.html");
+			}
+		});
 
-    console.log(userObj)
+
 
   })
 });
