@@ -149,7 +149,7 @@ this.getPreferences = function() {
 
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
-      console.log(data[i].id)
+      //console.log(data[i].id)
       $(".center-load").hide()
       if(data[i].distance < 1) {
         data[i].distance = '<1';
@@ -212,7 +212,7 @@ this.searchPeople = function () {
             data: dados,
             crossDomain: true,
             success: function (data) {
-              console.log(data)
+              //console.log(data)
               localStorage.setItem("cache", JSON.stringify(data));
               //Renderiza no DOM
               usuario.renderPeople(data);
@@ -413,7 +413,7 @@ this.searchPeople = function () {
       type: 'post',
       data: dadosJoin,
       success: function(data) {
-        console.log(data)
+        //console.log(data)
       }, error: function (request, status, error) {
         myAlert(error, "")
       }

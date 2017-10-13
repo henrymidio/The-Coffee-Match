@@ -131,6 +131,90 @@ myApp.onPageInit('address', function (page) {
             }
 });
 
+myApp.onPageInit('login-informations', function (page) {
+  document.getElementById('picture').src = localStorage.getItem("picture");
+  $$(".login-name").html(localStorage.getItem("name"));
+  $$("#passo2-profissao").val(localStorage.getItem("occupation"));
+  $$("#passo2-faculdade").val(localStorage.getItem("college"));
+  $('.next').on('click', function(){
+    if ($$("#passo2-faculdade").val().length < 3) {
+			document.getElementById("passo2-faculdade").focus();
+			return false;
+		}
+		if ($$("#passo2-profissao").val().length < 3) {
+			document.getElementById("passo2-profissao").focus();
+			return false;
+		}
+
+    localStorage.setItem("occupation", $$("#passo2-profissao").val())
+    localStorage.setItem("college", $$("#passo2-faculdade").val())
+    mainView.router.loadPage('login-plan.html')
+  })
+});
+
+$(document).on('click', '.btn-interest', function(){
+  var interesse = $(this).text()
+  localStorage.setItem("interest", interesse)
+  mainView.router.loadPage('login-final.html')
+})
+
+myApp.onPageInit('login-final', function (page) {
+  $.ajax({
+								url: 'http://thecoffeematch.com/webservice/get-tags.php',
+								dataType: 'json',
+								success: function (data) {
+									for(i = 0; i < data.length; i++){
+										myApp.smartSelectAddOption('#skills select', "<option>"+data[i].nome+"</option>");
+                    myApp.smartSelectAddOption('#skills-secundarias select', "<option>"+data[i].nome+"</option>");
+									}
+								}
+	});
+  var birthday = localStorage.getItem("birthday");
+	var picture = localStorage.getItem("picture");
+	var name    = localStorage.getItem("name");
+	var work = localStorage.getItem("occupation");
+	var education = localStorage.getItem("college");
+  var interest = localStorage.getItem("interest");
+
+  $('.btn-ready').on('click', function(){
+
+    var topSkill = $('#skills .item-after').text();
+    var secondarySkills = $('#skills-secundarias .item-after').text();
+		var descricao = $$("#final-description").val();
+
+    if(topSkill.length < 1) {
+      myApp.alert('Select yout top skill', '')
+      return false;
+    }
+    if(secondarySkills.length < 1) {
+      myApp.alert('Select yout secondary skills', '')
+      return false;
+    }
+
+    var skills = topSkill + ', ' + secondarySkills;
+
+    //Chamada o servidor para cadastro/atualização de informações de perfil
+		var userObj = {
+			fbid: localStorage.getItem("fbid"),
+			fb_token: localStorage.getItem("access_token"),
+			notification_key: localStorage.getItem("notification_key"),
+			name: localStorage.getItem("name"),
+			gender: localStorage.getItem("gender"),
+			email: localStorage.getItem("email"),
+			picture: localStorage.getItem("picture"),
+			nascimento: birthday,
+			description: descricao,
+			occupation: work,
+			college: education,
+			skills: skills,
+			looking: interest
+		}
+
+    console.log(userObj)
+
+  })
+});
+
 myApp.onPageInit('passo2', function (page) {
 
 
@@ -897,7 +981,7 @@ myApp.onPageInit('joined-project', function (page) {
                   +'<div class="chip-label">'+entry+'</div>'
                   +'</div>';
       });
-      console.log(skills)
+      //console.log(skills)
       $(".content-chips").append(skills);
 
     editSkills = editSkills.join(',')
@@ -934,6 +1018,8 @@ myApp.onPageInit('project', function (page) {
         $(".p-owner-picture").attr("src", data[i].owner_picture);
         $(".p-owner-name").text(data[i].owner_name);
 
+        //$('.project-owner').attr('id', data[i].owner)
+
         var skills = '';
         var looking_for = data[i].looking_for.split(",");
 
@@ -965,7 +1051,12 @@ myApp.onPageInit('project', function (page) {
       mainView.router.back();
     })
   })
-
+/*
+  $('.project-owner').on('click', function() {
+    localStorage.setItem("shown_user_id", $(this).attr("id"))
+    mainView.router.loadPage("profile-preview.html")
+  })
+*/
   $$('#report-project').on('click', function () {
 
 				var buttons1 = [
@@ -1012,6 +1103,12 @@ $(document).on("click", ".erase", function(){
     });
 
 });
+$(document).on("click", ".chat", function(){
+  localStorage.setItem("match", this.id);
+  var idp = $(this).closest(".swipeout").attr('id');
+  localStorage.setItem("shown_user_id", idp);
+  mainView.router.loadPage("chat.html");
+});
 myApp.onPageInit('messages', function (page) {
   //myApp.showIndicator()
   myApp.showTab('#tab1');
@@ -1024,6 +1121,7 @@ myApp.onPageInit('messages', function (page) {
 								dataType: 'json',
 								data: x,
 								success: function (data) {
+
                   $("#messages-li").empty();
 
                   if(data.length == 0) {
@@ -1039,10 +1137,11 @@ myApp.onPageInit('messages', function (page) {
                   }
 
 									for(i = 0; i < data.length; i++){
+
 										var replyArrow = "";
 										var weight = "bold";
 										if(data[i].last_message === null){
-											data[i].last_message = "Matched in "+data[i].date;
+											data[i].last_message = "Connected in "+data[i].date;
 										}
 
 										if(data[i].user == x.user_id) {
@@ -1051,8 +1150,10 @@ myApp.onPageInit('messages', function (page) {
 										}
 
 										//Monta o DOM
-									    var line1 = "<li class='item-content swipeout'>"
-												+ "<div class='item-media perfil swipeout' id="+data[i].suid+">"
+									    var line1 = "<li class='swipeout' id="+data[i].suid+">"
+												+ "<div class='swipeout-content'>"
+                        + "<div class='item-content'>"
+                        + "<div class='item-media cont'>"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -1060,6 +1161,8 @@ myApp.onPageInit('messages', function (page) {
 												+ "<div class='item-title' style='width: 200px'>"
                         + "<span id='matches-name'><b>"+data[i].name+"</b></span><br>"
 												+ "<span class='subtitle " + weight + "'>"+replyArrow+data[i].last_message+"</span>"
+                        + "</div>"
+                        + "</div>"
                         + "</div>"
                         + "</a>"
                         + "</div>"
@@ -1069,12 +1172,6 @@ myApp.onPageInit('messages', function (page) {
                         + "</li>";
 									    $("#messages-li").append(line1);
 
-										$(".chat").on("click", function(){
-											localStorage.setItem("match", this.id);
-											var idp = $('.perfil').attr("id");
-											localStorage.setItem("shown_user_id", idp);
-											mainView.router.loadPage("chat.html");
-										});
 										/*
 										$(".perfil").on("click", function(){
 											var idp = $(this).attr("id");
@@ -1128,7 +1225,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
 
   var birthday = localStorage.getItem("age");
 	var age = getAge(birthday);
-  console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + tags + ' ' + looking + ' ' + user_id);
+  //console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + tags + ' ' + looking + ' ' + user_id);
   //Chamada ao servidor para atualização de informações de perfil
   setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
 
@@ -1448,8 +1545,7 @@ myApp.onPageInit('profile-preview', function (page) {
 
 
 										},error: function (request, status, error) {
-                      //console.log(error)
-											//$('.card-friends').hide();
+
 										}
 									});
 
@@ -1463,11 +1559,6 @@ myApp.onPageInit('profile-preview', function (page) {
                             +'<div class="chip-label">'+data.skill3+'</div>'
                             +'</div>' : "";
 
-                  /*
-									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
-									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
-									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
-                  */
 									if(data.distance < 1) {
 											data.distance = '<1';
 									}
@@ -1482,9 +1573,9 @@ myApp.onPageInit('profile-preview', function (page) {
 									$(".skss").append(skill1, skill2, skill3);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
-//console.log(data)
+
                   if(data.projects.length > 0) {
-                    $('.card-projects').toggleClass('none');
+                    //$('.card-projects').toggleClass('none');
                     data.projects.forEach(function(entry) {
                       //console.log(entry.name)
 
@@ -1643,6 +1734,12 @@ myApp.onPageInit('chat', function (page) {
 	$$('.overflow').on('click', function () {
 
 				var buttons1 = [
+          {
+						text: 'View Profile',
+						onClick: function () {
+              mainView.router.loadPage('profile-preview.html')
+						}
+					},
 					{
 						text: 'Report',
 						color: 'red',
@@ -1880,7 +1977,7 @@ myApp.onPageInit('match', function (page) {
 								dataType: 'json',
 								data: d,
 								success: function (data) {
-                  console.log(data)
+                  //console.log(data)
 									$$("#user-one-img").attr("src", usuario.getPicture());
 									$$("#user-two-img").attr("src", data.picture);
 								},
@@ -2010,7 +2107,7 @@ function setPreferences(status, distance, convites, emails, user_id){
 								type: 'post',
 								data: pref,
 								success: function (data) {
-console.log(data)
+//console.log(data)
 										//Atualiza preferências e executa função de callback
 										localStorage.setItem("distance", distance);
 										//myApp.hidePreloader();

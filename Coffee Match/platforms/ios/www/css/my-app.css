@@ -9,6 +9,12 @@ body {
 	background: #2f3a41;
 }
 
+.clickable {
+  display: block;
+  width: 35px;
+  height: 35px;
+}
+
 @font-face {
   font-family: 'Framework7 Icons';
   font-style: normal;
@@ -195,6 +201,13 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
 	height: 75px;
 	margin-top: 10px;
 	box-shadow:  0 0 10px  rgba(0,0,0,0.6);
+}
+
+.img-circle-plus-plus {
+	width: 160px;
+	height: 160px;
+  border-radius: 100%;
+	vertical-align: middle;
 }
 
 input.rounded {
@@ -488,6 +501,15 @@ letter-spacing:0.09em;
 	//background-color: #2f3a41 !important;
 	background: -webkit-linear-gradient(top, #2f3a41, #2f3a41 5%, #eee 5%, #eee);
   //background-image: -webkit-linear-gradient(104deg, #eee 70%, #2f3a41 70%);
+}
+
+.btn-interest {
+  margin-right: 50px;
+  margin-left: 50px;
+  background-color: #E6FAF1 !important;
+  border-color: #E6FAF1 !important;
+  color: #00d173 !important;
+  font-weight: bold;
 }
 
 .layout-white .content-block-inner {
