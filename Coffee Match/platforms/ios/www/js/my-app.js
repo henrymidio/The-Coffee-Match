@@ -174,7 +174,7 @@ myApp.onPageInit('login-final', function (page) {
 	var name    = localStorage.getItem("name");
 	var work = localStorage.getItem("occupation");
 	var education = localStorage.getItem("college");
-  var interest = localStorage.getItem("interest");
+  var interest = localStorage.getItem("interest") + ', null, null';
 
   $('.btn-ready').on('click', function(){
 
@@ -225,7 +225,7 @@ myApp.onPageInit('login-final', function (page) {
 			error: function (request, status, error) {
 				myApp.hideIndicator();
 				myApp.alert(error, "The Coffee Match");
-				mainView.router.loadPage("login2.html");
+				//mainView.router.loadPage("login2.html");
 			}
 		});
 
