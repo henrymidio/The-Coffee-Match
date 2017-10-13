@@ -1243,7 +1243,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
   var user_id = localStorage.getItem("user_id");
 
   var birthday = localStorage.getItem("age");
-	var age = getAge(birthday);
+	//var age = getAge(birthday);
   //console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + tags + ' ' + looking + ' ' + user_id);
   //Chamada ao servidor para atualização de informações de perfil
   setProfile(descricao, profissao, birthday, faculdade, tags, looking, user_id);
@@ -1302,7 +1302,7 @@ myApp.onPageInit('profile', function (page) {
 								}
 	});
 	var birthday = localStorage.getItem("age");
-	var age = getAge(birthday);
+	//var age = getAge(birthday);
 	$$(".profile-name").html(localStorage.getItem("name"));
 	$$("#description").val(localStorage.getItem("description"));
 	$$("#picture").attr("src", localStorage.getItem("picture"));
