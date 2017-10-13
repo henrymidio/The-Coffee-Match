@@ -146,7 +146,7 @@ this.getPreferences = function() {
   this.renderPeople = function(data) {
     //Pega o número de usuários que já está renderizado
     var index = $$('#columns figure').length;
-
+console.log(data)
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
       //console.log(data[i].id)
@@ -165,7 +165,7 @@ this.getPreferences = function() {
           +'</div>'
           +'<div class="figure-body open-profile" style="text-align: center">'
              +'<h4 style="color: #596872; margin-bottom: 0">'+data[i].name+'</h3>'
-             +'<p style="color: #596872; margin-top: 5px; font-size: 13px">'+data[i].occupation+'</p>'
+             +'<p style="color: #596872; margin-top: 5px; font-size: 13px">'+data[i].skill1+'</p>'
           +'</div>'
        +'</div>'
     +'</figure>';
