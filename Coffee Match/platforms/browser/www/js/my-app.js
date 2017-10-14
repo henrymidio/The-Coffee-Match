@@ -192,7 +192,7 @@ myApp.onPageInit('login-final', function (page) {
     }
     myApp.showIndicator();
 
-    var skills = topSkill + ', ' + secondarySkills;
+    var skills = topSkill + ',' + secondarySkills.replace(/\s*,\s*/g, ",");;
 
     //Chamada o servidor para cadastro/atualização de informações de perfil
 		var userObj = {
@@ -218,6 +218,7 @@ myApp.onPageInit('login-final', function (page) {
 			success: function(response) {
 				localStorage.setItem("user_id", response.data.id);
 				localStorage.setItem("logged", 1);
+        localStorage.setItem("description", descricao);
 				myApp.hideIndicator();
         usuario = new User();
 				mainView.router.loadPage("index.html");
@@ -233,7 +234,7 @@ myApp.onPageInit('login-final', function (page) {
 
   })
 });
-
+/*
 myApp.onPageInit('passo2', function (page) {
 
 
@@ -383,7 +384,7 @@ myApp.onPageInit('passo2', function (page) {
     ]
 });
 });
-
+*/
 
 myApp.onPageInit('confirmacao-convite', function (page) {
 	var user_id  = localStorage.getItem("user_id");
@@ -923,6 +924,7 @@ myApp.onPageInit('joined-project', function (page) {
     type: 'get',
     dataType: 'json',
     success: function (data) {
+      //console.log(data)
       for(i in data) {
         $('.j-name').html(data[i].name);
         $('.j-description').text(data[i].description);
@@ -949,6 +951,7 @@ myApp.onPageInit('joined-project', function (page) {
           $('.edit-name').val(data[i].name);
           $('.edit-description').val(data[i].description);
 
+        //Novos interessados
         var joined = '';
         $('.mutual-connections-list').empty();
         var contador = 0;
@@ -967,6 +970,32 @@ myApp.onPageInit('joined-project', function (page) {
               if(contador == total) {
                 joined += '<div class="col-33" style="position: relative"></div>';
                 $('.mutual-connections-list').append(joined);
+              }
+
+            }
+          });
+        });
+
+        //Todos interessados
+        var j = '';
+        $('.all-connections-list').empty();
+        var c = 0;
+        var t = data[i].all_joined_users.length;
+        data[i].all_joined_users.forEach(function(entry){
+          $.ajax({
+            url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+              $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>All')
+              c += 1;
+              j += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
+                     + '<img src='+data.picture+' />'
+                     + '<br><span>'+data.name+'</span>'
+                     + '</div>';
+              if(c == t) {
+                j += '<div class="col-33" style="position: relative"></div>';
+                $('.all-connections-list').append(j);
               }
 
             }
@@ -1293,7 +1322,7 @@ myApp.onPageInit('profile', function (page) {
 
 										}
 
-                    if(data[i].nome === data[0].skill2 || data[i].nome === data[0].skill3){
+                    if(data[i].nome == data[0].skill2 || data[i].nome == data[0].skill3){
 												myApp.smartSelectAddOption('#skills-secundarias select', "<option selected>"+data[i].nome+"</option>");
 										} else {
 											if (typeof data[i].nome === 'undefined'){

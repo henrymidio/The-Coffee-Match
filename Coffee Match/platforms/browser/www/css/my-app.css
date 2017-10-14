@@ -719,7 +719,7 @@ input:focus {
 	margin-top: 8px
 }
 
-.mutual-connections-list img {
+.mutual-connections-list img, .all-connections-list img {
 	width: 65px;
 	height: 65px;
 	border-radius: 100%;
