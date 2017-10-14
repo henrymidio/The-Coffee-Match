@@ -118,6 +118,7 @@ function setIndexEvents() {
       return false
     } else if (conteudo.length > 30) {
       myApp.alert('Maximum 30 characters', '');
+      return false;
     }
 
     var countChips = $('.container-chip div.chip').length;
