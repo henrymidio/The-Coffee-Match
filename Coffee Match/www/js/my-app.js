@@ -48,9 +48,11 @@ myApp.onPageInit('login-informations', function (page) {
 });
 
 $(document).on('click', '.btn-interest', function(){
+  $('.btn-interest').removeClass('interest-selected')
+  $(this).addClass('interest-selected')
   var interesse = $(this).text()
   localStorage.setItem("interest", interesse)
-  mainView.router.loadPage('login-final.html')
+  //mainView.router.loadPage('login-final.html')
 })
 
 myApp.onPageInit('login-final', function (page) {

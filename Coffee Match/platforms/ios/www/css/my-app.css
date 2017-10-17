@@ -755,6 +755,11 @@ input:focus {
 	color: #596872;
 }
 
+.interest-selected {
+  background: #00d173 !important;
+  color: white !important;
+}
+
 .img-circle-plus {
 	width: 110px;
 	height: 110px;
