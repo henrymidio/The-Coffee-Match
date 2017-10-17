@@ -119,6 +119,18 @@ body {
 	margin-top: 0px;
 }
 
+.menu-icon {
+  vertical-align: bottom;
+  width: 25px;
+  height: 25px;
+}
+
+.menu-title {
+  padding-left: 20px;
+  font-size: 18px;
+  color: white;
+}
+
 .layout-white .list-block #ul-menu-lateral:before, .list-block.layout-white #ul-menu-lateral:before {
     background-color: #2f3a41;
 }
@@ -542,7 +554,7 @@ letter-spacing:0.09em;
 }
 
 .navigation-drawer {
-	padding: 0px !important;
+	padding-left: 30px !important;
 	margin: 0px !important;
 	height: 100%;
 }
@@ -561,9 +573,9 @@ letter-spacing:0.09em;
 .header-panel {
 	//height: 33%;
 	background: #2f3a41;
-	text-align: center;
+	//text-align: center;
 	display: flex;
-	justify-content: center;
+	//justify-content: center;
 	margin-bottom: 0px;
 }
 
@@ -752,12 +764,11 @@ input:focus {
 
 .profile-photo {
     margin-top: 30px;
-	margin-bottom: 10px;
-    width: 80px;
-    height: 80px;
-    -webkit-border-radius: 80px;
-    -moz-border-radius: 80px;
-    border-radius: 40px;
+	  margin-bottom: 10px;
+    width: 86px;
+    height: 86px;
+    border-radius: 100%;
+    border: 2px solid white;
 
 }
 
