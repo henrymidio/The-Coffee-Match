@@ -1143,8 +1143,8 @@ myApp.onPageInit('messages', function (page) {
 });
 
 $$(document).on("click", "#finalizar-edicao", function(){
-  var topSkill = [];
-  var skillsSecundarias = [];
+  var topSkill;
+  var skillsSecundarias;
   var descricao = $$("#p-description").val();
   var profissao = $$("#p-occupation").val();
   var faculdade = $$("#p-graduation").val();
@@ -1159,19 +1159,24 @@ $$(document).on("click", "#finalizar-edicao", function(){
     return false;
   }
 
-  $('#skills select option:selected').each(function(){
-    topSkill.push($(this).text());
-  });
-  topSkill = topSkill.join();
+  var topSkill = $('#skills .item-after').text();
+  var skillsSecundarias = $('#skills-secundarias .item-after').text();
 
-  $('#skills-secundarias select option:selected').each(function(){
-      skillsSecundarias.push($(this).text());
-  });
-  skillsSecundarias = skillsSecundarias.join();
+  //Verifica Quantas skills secundárias foram selecionadas
+  var ssqnt = skillsSecundarias.split(',')
+
+  if(topSkill.length < 1) {
+    myApp.alert('Select yout top skill', '')
+    return false;
+  }
+  if(skillsSecundarias.length < 1 || ssqnt.length < 2) {
+    myApp.alert('Select two secondary skills', '')
+    return false;
+  }
 
   //Junta top skill com skills secundárias
-  var skills = topSkill + "," + skillsSecundarias;
-
+  var skills = topSkill + "," + skillsSecundarias.replace(/\s*,\s*/g, ",");
+console.log(skills)
   var user_id = localStorage.getItem("user_id");
 
   var birthday = null;
