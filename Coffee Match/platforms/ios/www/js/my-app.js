@@ -995,7 +995,7 @@ myApp.onPageInit('project', function (page) {
   $('#join-project').on('click', function() {
     myApp.confirm("Are you sure that you are interested in this project?!", "", function(){
       usuario.joinProject(project_id);
-      myApp.alert("Your request has been successfully delivered to the project owner!", "")
+      myApp.alert("Your request has been successfully delivered. Awaiting for the contact of the Project Owner", "")
       mainView.router.back();
     })
   })
@@ -1176,7 +1176,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
 
   //Junta top skill com skills secundárias
   var skills = topSkill + "," + skillsSecundarias.replace(/\s*,\s*/g, ",");
-console.log(skills)
+
   var user_id = localStorage.getItem("user_id");
 
   var birthday = null;
