@@ -47,6 +47,9 @@ var app = {
 			if(jsonData.notification.payload.additionalData.type == "message") {
 				mainView.router.loadPage('messages.html');
 			}
+      if(jsonData.notification.payload.additionalData.type == "project") {
+				mainView.router.loadPage('myprojects.html');
+			}
  		};
 
 		var notificationReceivedCallback = function(json) {
@@ -55,10 +58,12 @@ var app = {
 			}
 			if(json.payload.rawPayload.custom.a.type == "message") {
 				$$("#icon-message").attr("src", "img/message_notification.png");
+        $$(".menu-notification img").attr("src", "img/ic_menu_notification_1.png");
 
 			}
 			if(json.payload.rawPayload.custom.a.type == "booking") {
 				$$("#icon-agenda").attr("src", "img/agenda_notification.png");
+        $$(".menu-notification img").attr("src", "img/ic_menu_notification_1.png");
 
 			}
 

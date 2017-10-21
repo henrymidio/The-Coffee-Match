@@ -905,7 +905,7 @@ myApp.onPageInit('joined-project', function (page) {
       $(document).on('click', '.op-profile', function () {
         var shown_user_id = $(this).attr('id');
         localStorage.setItem('shown_user_id', shown_user_id);
-        mainView.router.loadPage('user.html');
+        mainView.router.loadPage('user-com-chat.html');
       })
     }
 
@@ -1318,6 +1318,162 @@ myApp.onPageInit('user', function (page) {
   $$('#toolbar-user').on('click', function () {
     myApp.popup('.popup-message');
   });
+
+  var altura = $('#inside-con').height();
+  $('.blur-back').height(altura + 60)
+
+	var metrica = localStorage.getItem("metrica");
+	$$("#user-metrica").html(metrica);
+
+	var suid = localStorage.getItem("shown_user_id");
+	var user_id = localStorage.getItem("user_id");
+
+	var requesterObj = {
+		requester: user_id
+	};
+
+	$.ajax({
+								url: 'http://api.thecoffeematch.com/v1/users/' + suid,
+								type: 'get',
+								data: requesterObj,
+								dataType: 'json',
+								success: function (data) {
+
+									$.ajax({
+										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data.fb_token + "&appsecret_proof=" + data.appsecret,
+										type: 'get',
+										dataType: 'json',
+										success: function (friendsData) {
+											var loops = friendsData.context.all_mutual_friends.data.length;
+											var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
+
+                      if(friends_number > 0) {
+                        $('#mutual-numbers').html(friends_number);
+                      }
+
+											for(i = 0; i < loops; i++){
+												var line = '<div class="col-33"><img src="'+friendsData.context.all_mutual_friends.data[i].picture.data.url+'" /><br><span>'+ friendsData.context.all_mutual_friends.data[i].name +'</span></div>';
+												$(".friends-list").append(line);
+											}
+
+											if(friends_number > 5){
+												var line = '<div class="col-33" style="position: relative"><img src="img/more-friends.png" /><div class="more color-white">+'+(friends_number - 5)+ '</div></div>';
+												$(".friends-list").append(line);
+											} else {
+												var line = '<div class="col-33"></div>';
+												$(".friends-list").append(line);
+											}
+
+
+										},error: function (request, status, error) {
+                      //console.log(error)
+											//$('.card-friends').hide();
+										}
+									});
+
+                  var skill1 = data.skill1 ? '<div class="chip" style="margin-right: 3px">'
+                            +'<div class="chip-label">'+data.skill1+'</div>'
+                            +'</div>' : "";
+                  var skill2 = data.skill2 ? '<div class="chip" style="margin-right: 3px">'
+                            +'<div class="chip-label">'+data.skill2+'</div>'
+                            +'</div>' : "";
+                  var skill3 = data.skill3 ? '<div class="chip" style="margin-right: 3px">'
+                            +'<div class="chip-label">'+data.skill3+'</div>'
+                            +'</div>' : "";
+
+                  /*
+									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
+									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
+									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
+                  */
+									if(data.distance < 1) {
+											data.distance = '<1';
+									}
+
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-view-img").attr("src", data.picture);
+                  $(".blur-back").css("background", 'url('+data.picture+')');
+                  $(".blur-back").css("background-size", 'cover');
+									$$("#user-view-name").html(data.name);
+									$$("#user-view-age").html(data.age);
+									$$("#user-view-occupation").html(data.occupation);
+									$(".skss").append(skill1, skill2, skill3);
+                  $$("#top-skill").html(data.skill1);
+									$$("#user-view-college").html(data.college);
+									$$("#user-view-description").html(data.description);
+//console.log(data)
+                  if(data.projects.length > 0) {
+                    //$('.card-projects').toggleClass('none');
+                    data.projects.forEach(function(entry) {
+                      //console.log(entry.name)
+
+                        var line = "<li id='"+entry.id+"' class='item-link item-content open-popup-project'>"
+                                 +"<div class='item-media'>"
+                                 +"<img class='icon icons8-Settings-Filled' src='"+entry.image+"'  style='border-radius: 100%; margin-top: 5px; width: 50px; height: 50px' />"
+                                 +"</div>"
+                                 +"<div class='item-inner'>"
+                                 +"<a href='#' class='item-link'>"
+                                 +"<div class='item-title'><span><b>"+entry.name+"</b></span><br>"
+                                 +"<span class='subtitle'>"+entry.category+"</span></div></div></a>"
+                                 +"</li>";
+                        $('.projects-list').append(line);
+
+                    });
+                  }
+
+								}
+
+	});
+
+	$$('#report').on('click', function () {
+
+				var buttons1 = [
+					{
+						text: 'Report',
+						onClick: function () {
+							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+								var dataReport = {
+									user_id: suid,
+									reason: value
+								}
+								$.ajax({
+										url: 'http://thecoffeematch.com/webservice/phpmailer/report.php',
+										type: 'post',
+										data: dataReport,
+										success: function(data){
+											myApp.alert("User has been reported", "Thank you", function(){
+												mainView.router.back();
+											})
+										},error: function (request, status, error) {
+											myApp.alert("User has been reported", "Thank you", function(){
+												mainView.router.back();
+											})
+										}
+								});
+
+							})
+						}
+					}
+				];
+				var buttons2 = [
+					{
+						text: 'Cancel',
+						color: 'red'
+					}
+				];
+				var groups = [buttons1, buttons2];
+				myApp.actions(groups);
+	});
+
+});
+
+myApp.onPageBack('user-com-chat', function (page) {
+  $$("#toolbar-user-chat").removeClass("visivel");
+  $$("#toolbar-user-chat").addClass("none");
+});
+
+myApp.onPageInit('user-com-chat', function (page) {
+  $$("#toolbar-user-chat").toggleClass("none visivel");
 
   var altura = $('#inside-con').height();
   $('.blur-back').height(altura + 60)

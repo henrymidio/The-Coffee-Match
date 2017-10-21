@@ -13,15 +13,14 @@
 	<div data-page="user-sem-connect" class="page no-navbar">
 
 		<div class="page-content" style="background-color: rgb(245, 245, 247)">
-			<a href="#" class="link back color-white" data-animate-pages="false" style="position: absolute; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
+			<a href="#" class="link back color-white clickable" data-animate-pages="false" style="position: absolute; top: 5%; left: 4%; z-index: 13"><i class="f7-icons" style="font-size: 25px">arrow_left</i></a>
 			<a href="#" id="report" style="position: absolute; top: 4%; right: 4%; z-index: 13"><img width="25" height="25" src="img/ic_action_overflow.png" /></a>
       <div class="blur-back"></div>
       <div class="con">
 				<div id= "inside-con" class='text-center color-white'>
 					<img class='img' id="user-view-img" src="img/anonimo.jpg" />
 					<p style="font-size: 30px; color: white; margin-top: 0px" id="user-view-name">...</p>
-					<p class='college' id="user-view-college">...</p>
-					<p class='college' id="user-view-occupation" style="margin-top: -15px; font-size: 14px; margin-left: 15px; margin-right: 15px">...</p>
+					<p class='college' id="top-skill">...</p>
           <p id="user-distance" style="margin-top: -10px; font-size: 13px; margin-right: 15px;">...</p>
 				</div>
 
@@ -33,23 +32,29 @@
           <p class='friends user-label color-silver'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>About Me</p>
 
   				<p class='friends' id="user-view-description" style='margin-left: 20px; margin-right: 10px; color: #2f3a41'></p>
+          <br>
+          <p class='friends user-label color-silver'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">bag</i>Title and company</p>
+
+  				<p class='friends' id="user-view-occupation" style='margin-left: 20px; margin-right: 10px; color: #2f3a41'></p>
+          <br>
+          <p class='friends user-label color-silver'><i class="f7-icons" style="font-size: 14px; margin-right: 5px">book</i>Academic Education</p>
+
+  				<p class='friends' id="user-view-college" style='margin-left: 20px; margin-right: 10px; color: #2f3a41'></p>
 				  <br>
         </div>
+        <div class="card card-projects" style="padding: 5px; margin-top: 10px">
+    				<p class='friends user-label color-silver'> <span style='line-height:22px;'>Projects & Ideas</span></p>
+            <div class="list-block" style="margin-top: -10px">
+            <ul class="projects-list">
+
+  				  </ul>
+          </div>
+  			</div>
         <div class="card card-friends" style="padding: 5px; margin-top: 10px">
   				<p class='friends user-label color-silver'><span id="mutual-numbers">0</span> Mutual connections</p>
-
   				<div class="row text-center friends-list" style="margin-left: 10px; margin-right: 10px">
           </div>
         </div>
-        <div class="card card-projects none" style="padding: 5px; margin-top: 10px">
-  				<p class='friends user-label color-silver'> <span style='line-height:22px;'>Projects & Ideas</span></p>
-          <div class="list-block" style="margin-top: -10px">
-          <ul class="projects-list">
-
-				  </ul>
-        </div>
-			</div>
-
 		</div>
 
     <div class="popup popup-project">
@@ -71,5 +76,23 @@
 
        </div>
 	  </div>
-
+<!--
+    <div class="popup popup-message">
+      <div class="navbar-popup" style="text-align: center">
+        <p class="color-white" style="margin-top: 30px">
+          <a href="#" class="link close-popup color-white" style="float: left; padding-left: 12px"><i class="f7-icons" style="font-size: 30px">close</i></a>
+          <span style="margin-right: 18px; font-weight: bold">SEND A MESSAGE</span>
+        </p>
+      </div>
+      <div class="text-center" style="margin-top: 200px">
+        <img src="img/icChatBig.png" />
+      </div>
+      <div class="toolbar-popup messagebar" style="background-color: white">
+        <div class="toolbar-inner" style="background-color: white">
+           <span style="margin-right: 15px"></span> <textarea class="invite-message" style="border: none; background-color: white; margin: 0px" placeholder="Your message..."></textarea>
+           <a href="#" class="link send-invite" style="color: #00d173; margin-bottom: 13px; font-weight: bold">Send</a>
+        </div>
+      </div>
+    </div>
+  -->
 </div>

@@ -18,11 +18,19 @@ function User() {
   var _latitude = localStorage.getItem("latitude");
   var _longitude = localStorage.getItem("longitude");
   var _cache = localStorage.getItem("cache");
+  var _notificationCount = localStorage.getItem("notificationCount");
   var _cacheProjects = localStorage.getItem("cacheProjects");
   var _preferences = {
     metrica: localStorage.getItem("metrica"),
     distance: localStorage.getItem("distance")
   };
+
+  this.getNotificationCount = function() {
+    return localStorage.getItem("notificationCount");
+  }
+  this.setNotificationCount = function(value) {
+    return localStorage.setItem("notificationCount", value);
+  }
 
   this.getCache = function() {
     return JSON.parse(localStorage.getItem("cache"));
@@ -227,6 +235,7 @@ this.searchPeople = function () {
 
 //Busca no BD se há notificações pendentes e coloca as bolinhas vermelhas nos ícones caso haja pendência
   this.getPendingNotifications = function(){
+    var notificationCount = 0;
   var pnss = {
     user: _id
   };
@@ -258,7 +267,9 @@ this.searchPeople = function () {
         }
 
         if(data.message == 1){
+          notificationCount++;
           $$("#icon-message img").attr("src", "img/messages_notification.png");
+
           $$("#icon-message").on("click", function(){
             $$("#icon-message img").attr("src", "img/icChatWhite.png");
             var ndata = {
@@ -278,7 +289,9 @@ this.searchPeople = function () {
         }
 
         if(data.projects == 1){
+          notificationCount++;
           $$("#icon-projects img").attr("src", "img/projects_notification.png");
+
           $$("#icon-projects").on("click", function(){
             $$("#icon-projects img").attr("src", "img/icProjectsWhite.png");
             var ndata = {
@@ -296,6 +309,13 @@ this.searchPeople = function () {
           })
         } else {
           $$("#icon-projects img").attr("src", "img/icProjectsWhite.png");
+        }
+
+        if(notificationCount == 1) {
+          $$(".menu-notification img").attr("src", "img/ic_menu_notification_1.png");
+        }
+        if(notificationCount == 2) {
+          $$(".menu-notification img").attr("src", "img/ic_menu_notification_2.png");
         }
 
       },
