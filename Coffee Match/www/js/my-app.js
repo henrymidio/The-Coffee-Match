@@ -657,6 +657,7 @@ myApp.onPageInit('profile-preview', function (page) {
 
 });
 */
+/*
 myApp.onPageInit('profile-view', function (page) {
 	var metrica = localStorage.getItem("metrica");
 	$$("#view-metrica").html(metrica);
@@ -753,6 +754,7 @@ myApp.onPageInit('profile-view', function (page) {
 		});
 
 });
+*/
 
 myApp.onPageInit('myprojects', function (page) {
   myApp.showTab('#tab1');
@@ -851,58 +853,70 @@ myApp.onPageInit('joined-project', function (page) {
           $('.edit-name').val(data[i].name);
           $('.edit-description').val(data[i].description);
 
+          //Todos interessados
+          var j = '';
+          $('.all-connections-list').empty();
+          var c = 0;
+          var t = data[i].all_joined_users.length;
+          data[i].all_joined_users.forEach(function(entry){
+            $.ajax({
+              url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
+              type: 'get',
+              dataType: 'json',
+              success: function (data) {
+                $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>All')
+                c += 1;
+                j += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
+                       + '<img src='+data.picture+' />'
+                       + '<br><span>'+data.name+'</span>'
+                       + '</div>';
+                if(c == t) {
+                  j += '<div class="col-33" style="position: relative"></div>';
+                  $('.all-connections-list').append(j);
+                }
+
+              }
+            });
+          });
+
         //Novos interessados
         var joined = '';
         $('.mutual-connections-list').empty();
         var contador = 0;
-        var total = data[i].joined_users.length;
-        data[i].joined_users.forEach(function(entry){
-          $.ajax({
-            url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-              contador += 1;
-              joined += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
-                     + '<img src='+data.picture+' />'
-                     + '<br><span>'+data.name+'</span>'
-                     + '</div>';
-              if(contador == total) {
-                joined += '<div class="col-33" style="position: relative"></div>';
-                $('.mutual-connections-list').append(joined);
+        try {
+          var total = data[i].joined_users.length;
+          data[i].joined_users.forEach(function(entry){
+            $.ajax({
+              url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
+              type: 'get',
+              dataType: 'json',
+              success: function (data) {
+                contador += 1;
+                joined += '<div id='+data.id+' class="col-33 op-chat-profile" style="position: relative">'
+                       + '<img src='+data.picture+' />'
+                       + '<br><span>'+data.name+'</span>'
+                       + '</div>';
+                if(contador == total) {
+                  joined += '<div class="col-33" style="position: relative"></div>';
+                  $('.mutual-connections-list').append(joined);
+                }
+
               }
-
-            }
+            });
           });
-        });
+        } catch (e) {
 
-        //Todos interessados
-        var j = '';
-        $('.all-connections-list').empty();
-        var c = 0;
-        var t = data[i].all_joined_users.length;
-        data[i].all_joined_users.forEach(function(entry){
-          $.ajax({
-            url: 'http://api.thecoffeematch.com/v1/users/' + entry.joined_user,
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-              $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>All')
-              c += 1;
-              j += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
-                     + '<img src='+data.picture+' />'
-                     + '<br><span>'+data.name+'</span>'
-                     + '</div>';
-              if(c == t) {
-                j += '<div class="col-33" style="position: relative"></div>';
-                $('.all-connections-list').append(j);
-              }
+        } finally {
 
-            }
-          });
-        });
+        }
+
       }
       $(document).on('click', '.op-profile', function () {
+        var shown_user_id = $(this).attr('id');
+        localStorage.setItem('shown_user_id', shown_user_id);
+        mainView.router.loadPage('profile-view.html');
+      })
+      $(document).on('click', '.op-chat-profile', function () {
         var shown_user_id = $(this).attr('id');
         localStorage.setItem('shown_user_id', shown_user_id);
         mainView.router.loadPage('user-com-chat.html');
@@ -1623,8 +1637,7 @@ myApp.onPageInit('user-com-chat', function (page) {
 
 });
 
-myApp.onPageInit('profile-preview', function (page) {
-
+myApp.onPageInit('profile-view', function (page) {
   var altura = $('#inside-con').height();
   $('.blur-back').height(altura + 60)
 
@@ -1672,7 +1685,8 @@ myApp.onPageInit('profile-preview', function (page) {
 
 
 										},error: function (request, status, error) {
-
+                      //console.log(error)
+											//$('.card-friends').hide();
 										}
 									});
 
@@ -1686,6 +1700,11 @@ myApp.onPageInit('profile-preview', function (page) {
                             +'<div class="chip-label">'+data.skill3+'</div>'
                             +'</div>' : "";
 
+                  /*
+									var l1 = data.l1 ? '<span style="margin-right: 10px">●</span>' + data.l1 : "";
+									var l2 = data.l2 ? '<span style="margin-right: 10px">●</span>' + data.l2 : "";
+									var l3 = data.l3 ? '<span style="margin-right: 10px">●</span>' + data.l3 : "";
+                  */
 									if(data.distance < 1) {
 											data.distance = '<1';
 									}
@@ -1698,9 +1717,10 @@ myApp.onPageInit('profile-preview', function (page) {
 									$$("#user-view-age").html(data.age);
 									$$("#user-view-occupation").html(data.occupation);
 									$(".skss").append(skill1, skill2, skill3);
+                  $$("#top-skill").html(data.skill1);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
-
+//console.log(data)
                   if(data.projects.length > 0) {
                     //$('.card-projects').toggleClass('none');
                     data.projects.forEach(function(entry) {
@@ -1852,6 +1872,8 @@ $(document).on('click', '.chat-back', function () {
 myApp.onPageInit('chat', function (page) {
   $$("#toolbar-user").removeClass("visivel");
   $$("#toolbar-user").addClass("none");
+  $$("#toolbar-user-chat").removeClass("visivel");
+  $$("#toolbar-user-chat").addClass("none");
 
   StatusBar.overlaysWebView(false);
 	myApp.showIndicator()
@@ -1864,7 +1886,7 @@ myApp.onPageInit('chat', function (page) {
           {
 						text: 'View Profile',
 						onClick: function () {
-              mainView.router.loadPage('profile-preview.html')
+              mainView.router.loadPage('profile-view.html')
 						}
 					},
 					{
@@ -2032,7 +2054,7 @@ $$('.messagebar .link').on('click', function () {
                     $('.avatar-click').on('click', function(){
                       var id = $(this).attr('id');
                       localStorage.setItem("shown_user_id", id);
-                      mainView.router.loadPage('profile-preview.html');
+                      mainView.router.loadPage('profile-view.html');
                     });
 
 									}
