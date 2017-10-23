@@ -107,7 +107,7 @@ function setIndexEvents() {
     localStorage.setItem("shown_user_id", suid);
     mainView.router.load({
       url: "user.html",
-      animatePages: false
+      animatePages: true
     });
   });
 
