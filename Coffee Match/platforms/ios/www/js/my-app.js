@@ -29,21 +29,22 @@ myApp.onPageInit('login2', function (page) {
 myApp.onPageInit('login-informations', function (page) {
   document.getElementById('picture').src = localStorage.getItem("picture");
   $$(".login-name").html(localStorage.getItem("name"));
-  $$("#passo2-profissao").val(localStorage.getItem("occupation"));
-  $$("#passo2-faculdade").val(localStorage.getItem("college"));
+  $$("#information-profissao").val(localStorage.getItem("occupation"));
+  $$("#information-faculdade").val(localStorage.getItem("college"));
   $('.next').on('click', function(){
-    if ($$("#passo2-faculdade").val().length < 3) {
-			document.getElementById("passo2-faculdade").focus();
+    if ($$("#information-faculdade").val().length < 3) {
+			document.getElementById("information-faculdade").focus();
 			return false;
 		}
-		if ($$("#passo2-profissao").val().length < 3) {
-			document.getElementById("passo2-profissao").focus();
+		if ($$("#information-profissao").val().length < 3) {
+			document.getElementById("information-profissao").focus();
 			return false;
 		}
 
-    localStorage.setItem("occupation", $$("#passo2-profissao").val())
-    localStorage.setItem("college", $$("#passo2-faculdade").val())
-    mainView.router.loadPage('login-plan.html')
+    localStorage.setItem("occupation", $$("#information-profissao").val())
+    localStorage.setItem("college", $$("#information-faculdade").val())
+    localStorage.setItem("personal-link", $$("#information-link").val())
+    mainView.router.loadPage('login-final.html')
   })
 });
 
@@ -72,6 +73,7 @@ myApp.onPageInit('login-final', function (page) {
 	var work = localStorage.getItem("occupation");
 	var education = localStorage.getItem("college");
   var interest = localStorage.getItem("interest") + ', null, null';
+  var link = localStorage.getItem("personal-link");
 
   $('.btn-ready').on('click', function(){
 
@@ -108,7 +110,8 @@ myApp.onPageInit('login-final', function (page) {
 			occupation: work,
 			college: education,
 			skills: skills,
-			looking: interest
+			looking: interest,
+      link: link
 		}
     $.ajax({
 			url: 'http://api.thecoffeematch.com/v1/users',
@@ -1162,6 +1165,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
   var descricao = $$("#p-description").val();
   var profissao = $$("#p-occupation").val();
   var faculdade = $$("#p-graduation").val();
+  var link = $$("#p-link").val();
 
   if (profissao.length == 0) {
     document.getElementById("occupation").focus();
@@ -1194,16 +1198,17 @@ $$(document).on("click", "#finalizar-edicao", function(){
   var user_id = localStorage.getItem("user_id");
 
   var birthday = null;
-  var interest = localStorage.getItem("interest") + ", null, null";
+  var interest = "null,null,null";
 	//var age = getAge(birthday);
   //console.log(descricao + ' ' + profissao + ' ' + birthday + ' ' + skills + ' ' + interest + ' ' + user_id);
 
   //Chamada ao servidor para atualização de informações de perfil
-  setProfile(descricao, profissao, birthday, faculdade, skills, interest, user_id);
+  setProfile(descricao, profissao, birthday, faculdade, skills, interest, user_id, link);
 
   localStorage.setItem("description", descricao);
   localStorage.setItem("occupation", profissao);
   localStorage.setItem("college", faculdade);
+  localStorage.setItem("personal-link", link);
 
   myApp.alert('Your profile has been updated', "")
   mainView.router.loadPage('index.html');
@@ -1273,6 +1278,7 @@ myApp.onPageInit('profile', function (page) {
 	$$("#picture").attr("src", localStorage.getItem("picture"));
 	$$("#p-occupation").val(localStorage.getItem("occupation"));
 	$$("#p-graduation").val(localStorage.getItem("college"));
+  $$("#p-link").val(localStorage.getItem("personal-link"));
 
 });
 
@@ -1328,10 +1334,6 @@ $(document).on('click', '.send-invite', function () {
 });
 
 myApp.onPageInit('user', function (page) {
-  $$("#toolbar-user").toggleClass("none visivel");
-  $$('#toolbar-user').on('click', function () {
-    myApp.popup('.popup-message');
-  });
 
   var altura = $('#inside-con').height();
   $('.blur-back').height(altura + 60)
@@ -1353,6 +1355,10 @@ myApp.onPageInit('user', function (page) {
 								dataType: 'json',
 								success: function (data) {
 
+                  $$("#toolbar-user").toggleClass("none visivel");
+                  $$('#toolbar-user').on('click', function () {
+                    myApp.popup('.popup-message');
+                  });
 									$.ajax({
 										url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data.fb_token + "&appsecret_proof=" + data.appsecret,
 										type: 'get',
@@ -1414,8 +1420,21 @@ myApp.onPageInit('user', function (page) {
 									$(".skss").append(skill1, skill2, skill3);
                   $$("#top-skill").html(data.skill1);
 									$$("#user-view-college").html(data.college);
-									$$("#user-view-description").html(data.description);
-//console.log(data)
+									//$$("#user-view-description").html(data.description);
+                  if(data.description.length > 0) {
+                    var lineAbout = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>About Me</p>'
+                                  + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41">'+data.description+'</p>'
+                                  + '<br>';
+                    $('.tc').before(lineAbout)
+                  }
+                  
+                  if(data.urlink) {
+                    var lineLink = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>Website</p>'
+                                  + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41"><a class="external" href=http://'+data.urlink+'>'+data.urlink+'</a></p>'
+                                  + '<br>';
+                    $('.tc').before(lineLink)
+                  }
+
                   if(data.projects.length > 0) {
                     //$('.card-projects').toggleClass('none');
                     data.projects.forEach(function(entry) {
@@ -2266,13 +2285,14 @@ function setPreferences(status, distance, convites, emails, user_id){
 }
 
 //Seta informações do perfil (somente descrição por enquanto)
-function setProfile(description, occupation, nascimento, college, skills, looking, user_id){
+function setProfile(description, occupation, nascimento, college, skills, looking, user_id, urlink){
 
 	var info = {
 		description: description,
 		occupation: occupation,
 		nascimento: nascimento,
 		college: college,
+    urlink: urlink,
 		skills: skills,
 		looking: looking
 		}
@@ -2283,6 +2303,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 		dataType: 'json',
 		data: info,
 		success: function (data) {
+      //console.log(data)
 			if(data.status == 'success'){
 
 				//Atualiza preferências e executa função de callback
@@ -2291,7 +2312,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 			}
 		},
 		error: function (request, status, error) {
-			console.log(request)
+			console.log(error)
 		}
 	});
 }

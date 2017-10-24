@@ -44,6 +44,68 @@ function setIndexEvents() {
       mainView.router.loadPage("project.html");
   });
 
+  //Evento de criação do search
+  var searchVisibility = false;
+  $(document.body).on('click', '#search', function () {
+    if(!searchVisibility) {
+      $(".page-content").children().hide();
+      var searchLine = '<form class="searchbar" style="background: #2f3a41">'
+                      + '<div class="searchbar-input">'
+                      + '<input type="search" placeholder="Filter by skill">'
+                      + '<a href="#" class="searchbar-clear"></a>'
+                      + '</div>'
+                      + '<a href="#" class="searchbar-cancel">Cancel</a>'
+                      + '</form>';
+      $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
+
+      var ulSkills = '<div class="list-block list-block-search searchbar-found" style="margin-top: 90px">'
+                      + '<ul class="ul-skills">'
+                      + '</ul>'
+                      + '</div>';
+      $(".searchbar").after(ulSkills);
+
+      var skills = ["Advertising", "Marketing", "Communication", "gjughj"];
+      var acu = '';
+      skills.forEach(function(entry) {
+        acu += '<li class="item-content li-skill">'
+                  +'<div class="item-inner">'
+                  +'<div class="item-title">'+entry+'</div>'
+                  + '</div>'
+                  + '</ul>';
+      });
+      $('.ul-skills').append(acu);
+
+      var mySearchbar = myApp.searchbar('.searchbar', {
+          searchList: '.list-block-search',
+          searchIn: '.item-title'
+      });
+
+      searchVisibility = true;
+    } else {
+      $('.searchbar').remove();
+      $('.searchbar-found').remove();
+      $(".page-content").children().show();
+      searchVisibility = false;
+    }
+  });
+  /*
+  $(document).on('searchbar:search', '.searchbar', function () {
+      console.log('kj')
+  });
+  */
+
+  $(document.body).on('click', '.li-skill', function () {
+    var filter = $(this).find('.item-title').text();
+    $("#columns").empty();
+    searchPeopleBySkill(filter)
+
+    $('.searchbar').remove();
+    $('.searchbar-found').remove();
+    $(".page-content").children().show();
+    searchVisibility = false;
+
+  });
+
   //Evento de clique nas tabs que exibe o floating button
   var altura1 = $('#tab1').height();
   var altura2 = $('#tab2').height();
@@ -400,4 +462,32 @@ function deleteProject(project_id, callback) {
       myApp.hideIndicator()
     }
 });
+}
+
+function searchPeopleBySkill(filterSkill) {
+  var dados = {
+      requester: usuario.getID(),
+      filter: filterSkill
+    }
+  myApp.showIndicator()
+  $.ajax({
+            url: 'http://api.thecoffeematch.com/v1/users',
+            type: 'get',
+            dataType: 'json',
+            data: dados,
+            crossDomain: true,
+            success: function (data) {
+              if(!data) {
+                myApp.hideIndicator()
+                myApp.alert('Nenhum usuário encontrado', '')
+                return false;
+              }
+              //Renderiza no DOM
+              usuario.renderPeople(data);
+              myApp.hideIndicator()
+            },error: function (request, status, error) {
+              myApp.hideIndicator()
+              myApp.alert('Server Error', '')
+            }
+    });
 }

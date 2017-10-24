@@ -655,7 +655,7 @@ input:focus {
 	width: 220px;
 }
 
-#occupation, #passo2-profissao {
+#occupation, #passo2-profissao, #passo2-link {
 	background: url('../img/icon_business.png') no-repeat #eaf0f3 10px 8px !important;
 	width: 220px;
 }

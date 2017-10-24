@@ -20,6 +20,7 @@ function User() {
   var _cache = localStorage.getItem("cache");
   var _notificationCount = localStorage.getItem("notificationCount");
   var _cacheProjects = localStorage.getItem("cacheProjects");
+  var _link = localStorage.getItem("personal-link");
   var _preferences = {
     metrica: localStorage.getItem("metrica"),
     distance: localStorage.getItem("distance")
@@ -78,6 +79,10 @@ function User() {
 
 this.getID = function() {
   return _id;
+}
+
+this.getLink = function() {
+  return _link;
 }
 
 this.getPicture = function() {
