@@ -111,7 +111,7 @@ myApp.onPageInit('login-final', function (page) {
 			college: education,
 			skills: skills,
 			looking: interest,
-      link: link
+      urlink: link
 		}
     $.ajax({
 			url: 'http://api.thecoffeematch.com/v1/users',
@@ -128,6 +128,7 @@ myApp.onPageInit('login-final', function (page) {
 			},
 			error: function (request, status, error) {
 				myApp.hideIndicator();
+        console.log(request)
 				myApp.alert(error, "The Coffee Match");
 				//mainView.router.loadPage("login2.html");
 			}
