@@ -48,6 +48,7 @@ function setIndexEvents() {
   var searchVisibility = false;
   $(document.body).on('click', '#search', function () {
     if(!searchVisibility) {
+      myApp.detachInfiniteScroll($$('.infinite-scroll'));
       $(".page-content").children().hide();
       var searchLine = '<form class="searchbar" style="background: #2f3a41">'
                       + '<div class="searchbar-input">'
@@ -58,11 +59,11 @@ function setIndexEvents() {
                       + '</form>';
       $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
 
-      var ulSkills = '<div class="list-block list-block-search searchbar-found" style="margin-top: 90px">'
+      var ulSkills = '<div class="list-block list-block-search searchbar-found">'
                       + '<ul class="ul-skills">'
                       + '</ul>'
                       + '</div>';
-      $(".searchbar").after(ulSkills);
+      $(".page-content").append(ulSkills);
 
       var acu = '';
       $.ajax({
@@ -89,6 +90,7 @@ function setIndexEvents() {
 
       searchVisibility = true;
     } else {
+      myApp.attachInfiniteScroll($$('.infinite-scroll'));
       $('.searchbar').remove();
       $('.searchbar-found').remove();
       $(".page-content").children().show();
@@ -227,6 +229,7 @@ function setIndexEvents() {
 
   // Pull to refresh content
   $(document).on('ptr:refresh', '.pull-to-refresh-content', function (e) {
+    myApp.attachInfiniteScroll($$('.infinite-scroll'));
     $("#columns").empty();
     usuario.searchPeople();
     usuario.getPendingNotifications();
