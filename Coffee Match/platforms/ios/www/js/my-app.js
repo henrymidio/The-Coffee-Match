@@ -982,6 +982,7 @@ myApp.onPageInit('project', function (page) {
         $('.p-category').text(data[i].category)
         $(".p-owner-picture").attr("src", data[i].owner_picture);
         $(".p-owner-name").text(data[i].owner_name);
+        $(".p-owner-occupation").text(data[i].owner_occupation);
 
         //$('.project-owner').attr('id', data[i].owner)
 
@@ -1427,7 +1428,7 @@ myApp.onPageInit('user', function (page) {
                                   + '<br>';
                     $('.tc').before(lineAbout)
                   }
-                  
+
                   if(data.urlink) {
                     var lineLink = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>Website</p>'
                                   + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41"><a class="external" href=http://'+data.urlink+'>'+data.urlink+'</a></p>'

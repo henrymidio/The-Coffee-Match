@@ -64,16 +64,23 @@ function setIndexEvents() {
                       + '</div>';
       $(".searchbar").after(ulSkills);
 
-      var skills = ["Advertising", "Marketing", "Communication", "gjughj"];
       var acu = '';
-      skills.forEach(function(entry) {
-        acu += '<li class="item-content li-skill">'
-                  +'<div class="item-inner">'
-                  +'<div class="item-title">'+entry+'</div>'
-                  + '</div>'
-                  + '</ul>';
-      });
-      $('.ul-skills').append(acu);
+      $.ajax({
+    								url: 'http://thecoffeematch.com/webservice/get-tags.php',
+    								type: 'post',
+    								dataType: 'json',
+    								success: function (data) {
+                      data.forEach(function(entry) {
+                        acu += '<li class="item-content li-skill">'
+                                  +'<div class="item-inner">'
+                                  +'<div class="item-title">'+entry.nome+'</div>'
+                                  + '</div>'
+                                  + '</ul>';
+                      });
+                      $('.ul-skills').append(acu);
+                    }
+      })
+
 
       var mySearchbar = myApp.searchbar('.searchbar', {
           searchList: '.list-block-search',
@@ -111,11 +118,13 @@ function setIndexEvents() {
   var altura2 = $('#tab2').height();
 
   $(document).on('tab:show', '#tab2', function () {
+      $('#search img').hide()
       $$('.floating-button-np').removeClass('none');
       myApp.detachInfiniteScroll($$('.infinite-scroll'));
       //$('.tabs-animated-wrap').height(altura2);
   });
   $(document).on('tab:hide', '#tab2', function () {
+    $('#search img').show()
       $$('.floating-button-np').addClass('none');
       myApp.attachInfiniteScroll($$('.infinite-scroll'))
       //$('.tabs-animated-wrap').height(altura1);
@@ -370,7 +379,7 @@ var shortDescription = trimmedString.substr(0, Math.min(trimmedString.length, tr
   //Monta o DOM dos chips
   var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'
      +'<div style="background-image:url('+projeto.image+')" valign="center" class="card-header color-white no-border">'
-     +'<p class="project-name">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
+     +'<p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
      +'<div class="project-owner">'
            +'<img src="'+projeto.owner_picture+'" />'
            +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+projeto.owner_name+'</span>'
@@ -477,17 +486,52 @@ function searchPeopleBySkill(filterSkill) {
             data: dados,
             crossDomain: true,
             success: function (data) {
+              console.log(data)
               if(!data) {
                 myApp.hideIndicator()
                 myApp.alert('Nenhum usuário encontrado', '')
                 return false;
               }
               //Renderiza no DOM
-              usuario.renderPeople(data);
+              renderPeopleFiltered(data);
               myApp.hideIndicator()
             },error: function (request, status, error) {
               myApp.hideIndicator()
               myApp.alert('Server Error', '')
             }
     });
+}
+
+renderPeopleFiltered = function(data) {
+  //Loop limitado pelo número de usuários q se quer visualizar
+  for(i = 0; i < data.length; i++){
+    //console.log(data[i].id)
+    $(".center-load").hide()
+    if(data[i].distance < 1) {
+      data[i].distance = '<1';
+    }
+
+  //Monta o DOM
+  var line1 = '<figure id="'+data[i].id+'">'
+     +'<div class="user-card">'
+        +'<div class="row">'
+           +'<div class="col-20 user-card open-profile" style="font-size: 12px; #596872; opacity: 0.6">'+data[i].distance+' Mi</div>'
+           +'<div class="col-60 user-card user-card-profile open-profile"><img class="img-circle-plus" src="'+data[i].picture+'" /></div>'
+           +'<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>'
+        +'</div>'
+        +'<div class="figure-body open-profile" style="text-align: center">'
+           +'<h4 style="color: #596872; margin-bottom: 0">'+data[i].name+'</h3>'
+           +'<p style="color: #596872; margin-top: 5px; font-size: 13px">'+data[i].skill1+'</p>'
+        +'</div>'
+     +'</div>'
+  +'</figure>';
+  $("#columns").append(line1);
+
+  var projects_number = data[i].projects.length;
+  if(projects_number > 0) {
+    var lineP = '<hr>'
+               +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">'+projects_number+' Projects</p>';
+    $("#"+data[i].id+" .figure-body").append(lineP);
+  }
+}
 }

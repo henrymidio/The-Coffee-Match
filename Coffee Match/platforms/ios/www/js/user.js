@@ -190,24 +190,6 @@ this.getPreferences = function() {
                  +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">'+projects_number+' Projects</p>';
       $("#"+data[i].id+" .figure-body").append(lineP);
     }
-/*
-    $.ajax({
-      url: "https://graph.facebook.com/v2.9/" + localStorage.getItem("fbid") + "?fields=context{all_mutual_friends.fields(picture.width(90).height(90), name).limit(5)}&access_token=" + data[i].fb_token + "&appsecret_proof=" + data[i].appsecret,
-      type: 'get',
-      async: false,
-      dataType: 'json',
-      success: function (friendsData) {
-        var friends_number = friendsData.context.all_mutual_friends.summary.total_count;
-        if(friends_number > 0) {
-          var line = '<hr>'
-                     +'<p style="color: #596872; opacity: 0.8; margin: 5px; font-size: 13px">'+friends_number+' Mutual connections</p>';
-          $("#"+data[i].id+" .figure-body").append(line);
-        }
-      },error: function (request, status, error) {
-        myApp.pullToRefreshDone();
-      }
-    });
-    */
   }
 }
 

@@ -355,16 +355,16 @@ var app = {
 
 		myApp.onPageInit('login2', function() {
 
-			  facebookConnectPlugin.browserInit("1647443792236383");
+			  //facebookConnectPlugin.browserInit("1647443792236383");
 
 				notification_key = null;
 
 				//Push Notifications
-/*
+
 				window.plugins.OneSignal.getIds(function(ids) {
 					notification_key = ids.userId;
 				});
-*/
+
 
 				var fbLoginSuccess = function (userData) {
 
