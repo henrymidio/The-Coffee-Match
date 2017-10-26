@@ -250,7 +250,7 @@ this.searchPeople = function () {
             });
           });
         } else {
-          $$("#icon-invite img").attr("src", "img/sino.PNG");
+          $$("#icon-invite img").attr("src", "img/ic_invite@3x.png");
         }
 
         if(data.message == 1){
@@ -272,7 +272,7 @@ this.searchPeople = function () {
 
           })
         }else {
-          $$("#icon-message img").attr("src", "img/icChatWhite.png");
+          $$("#icon-message img").attr("src", "img/ic_chat@3x.png");
         }
 
         if(data.projects == 1){
@@ -295,7 +295,7 @@ this.searchPeople = function () {
 
           })
         } else {
-          $$("#icon-projects img").attr("src", "img/icProjectsWhite.png");
+          $$("#icon-projects img").attr("src", "img/ic_ideia@3x.png");
         }
 
         if(notificationCount == 1) {

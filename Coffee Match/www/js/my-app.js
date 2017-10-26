@@ -787,6 +787,7 @@ myApp.onPageInit('myprojects', function (page) {
 
     for(i = 0; i < data.length; i++){
       var number_joined_users = 0;
+      console.log(data)
       if(data[i].joined_users) {
         number_joined_users = data[i].joined_users.length;
       }
