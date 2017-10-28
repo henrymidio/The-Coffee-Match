@@ -234,9 +234,9 @@ this.searchPeople = function () {
       success: function (data) {
 
         if(data.invite == 1){
-          $$("#icon-invite img").attr("src", "img/sino_notification.png");
+          $$("#icon-invite img").attr("src", "img/ic_invite_notification.png");
           $$("#icon-invite").on("click", function(){
-            $$(this).find("img").attr("src", "img/sino.PNG");
+            $$(this).find("img").attr("src", "img/ic_invite.png");
             var ndata = {
               invite: 0
             };
@@ -250,15 +250,15 @@ this.searchPeople = function () {
             });
           });
         } else {
-          $$("#icon-invite img").attr("src", "img/ic_invite@3x.png");
+          $$("#icon-invite img").attr("src", "img/ic_invite.png");
         }
 
         if(data.message == 1){
           notificationCount++;
-          $$("#icon-message img").attr("src", "img/messages_notification.png");
+          $$("#icon-message img").attr("src", "img/ic_chat_notification.png");
 
           $$("#icon-message").on("click", function(){
-            $$("#icon-message img").attr("src", "img/icChatWhite.png");
+            $$("#icon-message img").attr("src", "img/ic_chat.png");
             var ndata = {
               message: 0
             };
@@ -272,15 +272,15 @@ this.searchPeople = function () {
 
           })
         }else {
-          $$("#icon-message img").attr("src", "img/ic_chat@3x.png");
+          $$("#icon-message img").attr("src", "img/ic_chat.png");
         }
 
         if(data.projects == 1){
           notificationCount++;
-          $$("#icon-projects img").attr("src", "img/projects_notification.png");
+          $$("#icon-projects img").attr("src", "img/ic_ideia_notification.png");
 
           $$("#icon-projects").on("click", function(){
-            $$("#icon-projects img").attr("src", "img/icProjectsWhite.png");
+            $$("#icon-projects img").attr("src", "img/ic_idea.png");
             var ndata = {
               projects: 0
             };
@@ -295,7 +295,7 @@ this.searchPeople = function () {
 
           })
         } else {
-          $$("#icon-projects img").attr("src", "img/ic_ideia@3x.png");
+          $$("#icon-projects img").attr("src", "img/ic_idea.png");
         }
 
         if(notificationCount == 1) {

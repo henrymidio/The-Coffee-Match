@@ -396,7 +396,7 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='user.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle' id='mess'>Wants to connect to you!</span>"
+												+ "<span class='subtitle' id='mess'>Wants to grab a coffee!</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
