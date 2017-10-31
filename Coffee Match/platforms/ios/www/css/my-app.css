@@ -1176,8 +1176,7 @@ p.user-label:after {
   right: 0;
   z-index: -1;
 
-  display: flex;
-  overflow: hidden;
+  display: block;
   //background-image: url('');
   width: 100%;
   height: 43vh;
