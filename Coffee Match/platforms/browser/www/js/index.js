@@ -418,6 +418,7 @@ var app = {
 											localStorage.setItem("description", response.data.user.description);
 											localStorage.setItem("occupation", response.data.user.occupation);
 											localStorage.setItem("college", response.data.user.college);
+                      localStorage.setItem("personal-link", response.data.user.urlink);
 											localStorage.setItem("metrica", "Mi");
 											localStorage.setItem("distance", 10);
 											localStorage.setItem("picture", 'https://graph.facebook.com/' + result.id + '/picture?width=350&height=350');

@@ -1121,7 +1121,7 @@ myApp.onPageInit('messages', function (page) {
 									    var line1 = "<li class='swipeout' id="+data[i].suid+">"
 												+ "<div class='swipeout-content'>"
                         + "<div class='item-content'>"
-                        + "<div class='item-media cont'>"
+                        + "<div class='item-media cont perfil'>"
 												+ "<img class='icon icons8-Settings-Filled' src="+data[i].picture+"  style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"
 												+ "</div>"
 												+ "<div class='item-inner'>"
@@ -1140,13 +1140,13 @@ myApp.onPageInit('messages', function (page) {
                         + "</li>";
 									    $("#messages-li").append(line1);
 
-										/*
+
 										$(".perfil").on("click", function(){
-											var idp = $(this).attr("id");
+											var idp = $(this).closest('.swipeout').attr("id");
 											localStorage.setItem("shown_user_id", idp);
-											mainView.router.loadPage("user.html");
+											mainView.router.loadPage("profile-view.html");
 										});
-										*/
+
 									}
 
                   //myApp.hideIndicator()
@@ -1905,12 +1905,6 @@ myApp.onPageInit('chat', function (page) {
 	$$('.overflow').on('click', function () {
 
 				var buttons1 = [
-          {
-						text: 'View Profile',
-						onClick: function () {
-              mainView.router.loadPage('profile-view.html')
-						}
-					},
 					{
 						text: 'Report',
 						color: 'red',
@@ -2419,7 +2413,7 @@ function updateStatusUser(status){
                    };
                  }
                  var line1 = "<li>"
-                     + "<a href='#' class='item-link item-content starbucks' id="+data[i].id+">"
+                     + "<a href='cafeteria.html' class='item-link item-content starbucks' id="+data[i].id+">"
                      + "<div class='item-media'><img src='img/"+logo+"' width='70'></div>"
                      + "<div class='item-inner'>"
                      + "<div class='item-title-row'>"
