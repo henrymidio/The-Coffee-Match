@@ -422,6 +422,10 @@ select.rounded {
   color: white !important;
 }
 
+.color-green {
+  color: #00d173;
+}
+
 .btn-confirm {
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
@@ -1196,6 +1200,10 @@ p.user-label:after {
   width: 70px;
   height: 70px;
   border-radius: 100%;
+}
+
+.popup-voucher {
+  background-color: #2f3a41;
 }
 
 .blur-back {

@@ -380,6 +380,23 @@ this.searchPeople = function () {
     });
   }
 
+  this.getRewards = function(callback) {
+    var user = {
+      user_id: _id
+    }
+    $.ajax({
+      url: 'http://api.thecoffeematch.com/v1/users/rewards',
+      type: 'post',
+      data: user,
+      dataType: 'json',
+      success: function(data) {
+        callback(data);
+      }, error: function (request, status, error) {
+        console.log(error)
+      }
+    });
+  }
+
   this.saveProject = function(projeto) {
     $.ajax({
       url: 'http://api.thecoffeematch.com/v1/projects',

@@ -2467,3 +2467,26 @@ function updateStatusUser(status){
 			}
   	});
   })
+
+  myApp.onPageInit('rewards', function(){
+    myApp.showTab('#tab1');
+    var renderRewards = function(rewards) {
+      $('#rewards-ul').empty()
+      for(i in rewards) {
+        var line = '<li>'
+          +'<div class="item-content">'
+          +'<div class="item-media"><img src="img/ic_coffee.png" width="40"></div>'
+          +'<div class="item-inner">'
+              +'<div class="item-title-row">'
+                +'<div class="item-title">'+rewards[i].name+'</div>'
+                +'<div class="item-after"><small>'+rewards[i].granted+'</small></div>'
+              +'</div>'
+              +'<div class="item-subtitle">Espresso</div>'
+            +'</div>'
+          +'</div>'
+        +'</li>';
+        $('#rewards-ul').append(line)
+      }
+    }
+    usuario.getRewards(renderRewards)
+  })
