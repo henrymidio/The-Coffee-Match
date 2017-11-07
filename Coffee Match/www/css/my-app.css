@@ -1186,10 +1186,16 @@ p.user-label:after {
 }
 
 .cafeteria-background {
-  background-image: url('http://cidadegourmet.com/wp-content/uploads/2015/06/Octavio-1.jpg');
+  //background-image: url('');
   background-size: cover;
   width: 100%;
   height: 23vh;
+}
+
+.cafeteria-mini-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
 }
 
 .blur-back {

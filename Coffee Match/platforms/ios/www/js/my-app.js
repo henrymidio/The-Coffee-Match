@@ -966,11 +966,9 @@ myApp.onPageInit('joined-project', function (page) {
 
 myApp.onPageBack('project', function (page) {
   $$('.floating-button').removeClass('none');
-  StatusBar.overlaysWebView(false);
 });
 
 myApp.onPageInit('project', function (page) {
-  StatusBar.overlaysWebView(true);
   var project_id = localStorage.getItem('project_id');
   $.ajax({
     url: 'http://api.thecoffeematch.com/v1/projects/' + project_id,
@@ -1054,7 +1052,7 @@ $(document).on('click', '.back-m', function () {
 });
 $(document).on("click", ".erase", function(){
   var self = $(this);
-  var idMatch = self.parent().siblings().children(".chat").attr("id");
+  var idMatch = self.parent().siblings().find(".chat").attr("id");
   var swipeout = self.closest(".swipeout");
 
   myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
@@ -2383,7 +2381,13 @@ function updateStatusUser(status){
              success: function (data) {
 
                if (data.length < 2) {
-                 //myApp.alert("We are sorry! There’s no coffee stores registered near you.", "The Coffee Match")
+                 var lineEmpty = "<div class='text-center' style='margin: 20px'>"
+                     + "<br><br>"
+                     + "<h3>Nenhuma cafeteria encontrada próximo a você</h3>"
+                     + "<p class='color-silver'>Indique-nos a sua cafeteria preferida para ela aparecer aqui</p>"
+                     + "</div>";
+                 $("#map-ul").html(lineEmpty);
+                 return false;
                }
 
                $("#map-ul").empty();
@@ -2395,26 +2399,16 @@ function updateStatusUser(status){
                  }
 
                  //Logo e ícone do marker
-                 var logo = "starbucks-logo.png";
                  var icon = {
-                     url: "https://d18oqubxk77ery.cloudfront.net/df/6d/23/38/imagen-starbucks-0mini_comments.jpg", // url
+                     url: "img/ic_marker.png", // url
                      scaledSize: new google.maps.Size(30, 30), // scaled size
                      origin: new google.maps.Point(0,0), // origin
                      anchor: new google.maps.Point(0, 0) // anchor
                  };
 
-                 if(data[i].id == 202) {
-                   logo = "octavio.jpg";
-                   icon = {
-                       url: "http://www.atendevoce.com.br/itaim/images/octavio-cafe-atendevoce-logo-220X200.jpg", // url
-                       scaledSize: new google.maps.Size(30, 30), // scaled size
-                       origin: new google.maps.Point(0,0), // origin
-                       anchor: new google.maps.Point(0, 0) // anchor
-                   };
-                 }
                  var line1 = "<li>"
-                     + "<a href='cafeteria.html' class='item-link item-content starbucks' id="+data[i].id+">"
-                     + "<div class='item-media'><img src='img/"+logo+"' width='70'></div>"
+                     + "<a href='#' class='item-link item-content cafeteria' id="+data[i].id+">"
+                     + "<div class='item-media'><img class='cafeteria-mini-logo' src='"+data[i].logo+"'></div>"
                      + "<div class='item-inner'>"
                      + "<div class='item-title-row'>"
                      + "<div class='item-title'>"+data[i].name+"</div>"
@@ -2444,3 +2438,32 @@ function updateStatusUser(status){
            });
 
   });
+  $(document).on('click', '.cafeteria', function(){
+    var cafeteria = $(this).attr('id')
+    localStorage.setItem("cafeteria", cafeteria)
+    mainView.router.loadPage('cafeteria.html')
+  })
+
+  myApp.onPageInit('cafeteria', function(){
+    var cafeteria = localStorage.getItem("cafeteria")
+    $.ajax({
+			url: 'http://api.thecoffeematch.com/v1/cafeterias/' + cafeteria,
+			dataType: 'json',
+			success: function (data) {
+
+				$('.cafeteria-background').css('background-image', 'url('+data[0].cover+')')
+        $('.cafeteria-logo').attr('src', data[0].logo)
+        $('.cafeteria-name').text(data[0].name)
+        $('.cafeteria-endereco').text(data[0].street + ', ' + data[0].num + ' - ' + data[0].bairro)
+        $('.cafeteria-description').text(data[0].description)
+
+        data['horarios'].forEach(function(entry){
+          if(entry.open_time == null) {
+            $('.horarios').append('<p>Closed</p>')
+          } else {
+            $('.horarios').append('<p>'+entry.open_time + ' at ' + entry.close_time+'</p>')
+          }
+        });
+			}
+  	});
+  })

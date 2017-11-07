@@ -533,6 +533,16 @@ var app = {
 			    StatusBar.overlaysWebView(false);
 			});
 
+      myApp.onPageInit('project', function() {
+  			    StatusBar.overlaysWebView(true);
+            StatusBar.hide();
+  			});
+
+  		myApp.onPageBack('project', function() {
+  			    StatusBar.overlaysWebView(false);
+            StatusBar.show()
+  			});
+
 		//Função que verifica se o usuário atingiu o limite de usuários visualizados por dia
 		function getLimitInvites(){
 			var dataSalva = localStorage.getItem("dataSalva");
