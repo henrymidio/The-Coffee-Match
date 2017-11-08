@@ -1983,7 +1983,7 @@ $$('.messagebar .link').on('click', function () {
 	var myMessagebar = myApp.messagebar('.messagebar');
 
   // Message text
-  var messageText = myMessagebar.value().trim();
+  var messageText = myMessagebar.value().trim().replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '');
   // Exit if empy message
   if (messageText.length === 0) return;
 
