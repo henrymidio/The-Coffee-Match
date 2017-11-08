@@ -2466,6 +2466,31 @@ function updateStatusUser(status){
         });
 			}
   	});
+    //Seta Horário e data do voucher
+    var date = new Date();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    $('.voucher-date').text(day + '/' + (monthIndex + 1) + '/' + year)
+    $('.voucher-hour').text(date.toTimeString().substr(0,5))
+  })
+  $(document).on('click', '.free-coffee', function(){
+    var reward = {
+      'user_id': usuario.getID(),
+      'cafeteria': localStorage.getItem("cafeteria")
+    }
+    $.ajax({
+              url: 'http://api.thecoffeematch.com/v1/rewards',
+              type: 'post',
+              dataType: 'json',
+              data: reward,
+              success: function (data) {
+                console.log(data)
+              },
+              error: function(a, b, c) {
+                console.log(a)
+              }
+            })
   })
 
   myApp.onPageInit('rewards', function(){
