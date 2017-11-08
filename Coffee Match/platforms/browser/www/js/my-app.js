@@ -2479,18 +2479,22 @@ function updateStatusUser(status){
       'user_id': usuario.getID(),
       'cafeteria': localStorage.getItem("cafeteria")
     }
-    $.ajax({
-              url: 'http://api.thecoffeematch.com/v1/rewards',
-              type: 'post',
-              dataType: 'json',
-              data: reward,
-              success: function (data) {
-                console.log(data)
-              },
-              error: function(a, b, c) {
-                console.log(a)
-              }
-            })
+
+    myApp.confirm('Mensagem avisando que ao clicar em ok o usuário estará utilizando seu voucher', '', function () {
+      $.ajax({
+                url: 'http://api.thecoffeematch.com/v1/rewards',
+                type: 'post',
+                dataType: 'json',
+                data: reward,
+                success: function (data) {
+                  myApp.popup('.popup-voucher');
+                },
+                error: function(a, b, c) {
+                  console.log(a)
+                }
+              })
+    });
+
   })
 
   myApp.onPageInit('rewards', function(){
