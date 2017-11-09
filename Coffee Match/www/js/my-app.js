@@ -2463,7 +2463,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
       'cafeteria': localStorage.getItem("cafeteria")
     }
 
-    myApp.confirm('Esse voucher possui validade diária e somente poderá ser visualizado uma única vez. Clique em ok, caso já esteja pronto para retirar a sua recompensa', 'Ateção!', function () {
+    myApp.confirm('Esse voucher possui validade diária e somente poderá ser visualizado uma única vez. Clique em ok, caso já esteja pronto para retirar a sua recompensa', 'Atenção!', function () {
       $.ajax({
                 url: 'http://api.thecoffeematch.com/v1/rewards',
                 type: 'post',
