@@ -298,11 +298,37 @@ this.searchPeople = function () {
           $$("#icon-projects img").attr("src", "img/ic_idea.png");
         }
 
+        if(data.rewards == 1){
+          notificationCount++;
+          $$("#icon-rewards img").attr("src", "img/ic_recompensa_notify.png");
+
+          $$("#icon-rewards").on("click", function(){
+            $$("#icon-rewards img").attr("src", "img/ic_recompensa.png");
+            var ndata = {
+              rewards: 0
+            };
+            $.ajax({
+                url: 'http://thecoffeematch.com/webservice/update-pending-notifications.php?user=' + _id,
+                type: 'post',
+                data: ndata,
+                success: function (data) {
+
+                }
+            });
+
+          })
+        } else {
+          $$("#icon-rewards img").attr("src", "img/ic_recompensa.png");
+        }
+
         if(notificationCount == 1) {
           $$(".menu-notification img").attr("src", "img/ic_menu_notification_1.png");
         }
         if(notificationCount == 2) {
           $$(".menu-notification img").attr("src", "img/ic_menu_notification_2.png");
+        }
+        if(notificationCount == 3) {
+          $$(".menu-notification img").attr("src", "img/ic_menu_notification_3.png");
         }
 
       },

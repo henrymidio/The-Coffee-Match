@@ -2312,45 +2312,6 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 	});
 }
 
-function convertTo24(date){
-	var data = new Date(date.replace(/-/g, "/"));
-    var ano = data.getFullYear();
-	var mes = data.getMonth() + 1;
-	var dia = data.getDate();
-	var hora = data.getHours();
-	var minutos = data.getMinutes();
-
-	return ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":00";
-}
-
-function getAge(dateString) {
-    var today = new Date();
-    var birthDate = new Date(dateString.replace(/-/g, "/"));
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
-}
-
-function updateStatusUser(status){
-		var usid = localStorage.getItem("user_id");
-		var statusData = {
-			online: status
-		}
-		$.ajax({
-			url: 'http://thecoffeematch.com/webservice/update-status.php?user=' + usid,
-			type: 'post',
-			data: statusData,
-			success: function (data) {
-			},
-			error: function (request, status, error) {
-				alert(error);
-			}
-		});
-	}
-
   myApp.onPageInit('starbucks-map', function(){
    myApp.showTab('#tab1');
    StatusBar.overlaysWebView(false);
@@ -2466,6 +2427,7 @@ function updateStatusUser(status){
         });
 			}
   	});
+
     //Seta Horário e data do voucher
     var date = new Date();
     var day = date.getDate();
@@ -2473,6 +2435,23 @@ function updateStatusUser(status){
     var year = date.getFullYear();
     $('.voucher-date').text(day + '/' + (monthIndex + 1) + '/' + year)
     $('.voucher-hour').text(date.toTimeString().substr(0,5))
+
+    //Request que verifica se já foi resgatada uma recompensa no dia atual
+    usuario.getRewards(function(dados) {
+      var rewardsAvailable = true;
+      for(i in dados) {
+        var d1 = new Date(dados[i].granted);
+        var d2 = new Date(day + '-' + (monthIndex + 1) + '-' + year);
+        var same = d1.getTime() === d2.getTime();
+        if(same) {
+          rewardsAvailable = false;
+          return false;
+        }
+      }
+      $('#fc-button').removeClass('free-coffee-disabled')
+      $('#fc-button').addClass('free-coffee')
+    })
+
   })
   $(document).on('click', '.free-coffee', function(){
     var reward = {

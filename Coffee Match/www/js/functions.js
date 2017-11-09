@@ -537,3 +537,42 @@ renderPeopleFiltered = function(data) {
   }
 }
 }
+
+function convertTo24(date){
+	var data = new Date(date.replace(/-/g, "/"));
+    var ano = data.getFullYear();
+	var mes = data.getMonth() + 1;
+	var dia = data.getDate();
+	var hora = data.getHours();
+	var minutos = data.getMinutes();
+
+	return ano + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":00";
+}
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString.replace(/-/g, "/"));
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+function updateStatusUser(status){
+		var usid = localStorage.getItem("user_id");
+		var statusData = {
+			online: status
+		}
+		$.ajax({
+			url: 'http://thecoffeematch.com/webservice/update-status.php?user=' + usid,
+			type: 'post',
+			data: statusData,
+			success: function (data) {
+			},
+			error: function (request, status, error) {
+				alert(error);
+			}
+		});
+	}
