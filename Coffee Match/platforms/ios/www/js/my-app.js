@@ -2441,8 +2441,8 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
       var rewardsAvailable = true;
       for(i in dados) {
         var d1 = new Date(dados[i].granted.replace(/\s/, 'T'));
-        var d2 = new Date((day + '-' + (monthIndex + 1) + '-' + year).replace(/\s/, 'T'));
-        alert(d1 + "///" + d2)
+        var d2 = new Date((year + '-' + (monthIndex + 1) + '-' + day).replace(/\s/, 'T'));
+        
         var same = d1.getTime() === d2.getTime();
         if(same) {
           rewardsAvailable = false;
