@@ -293,6 +293,9 @@ function setIndexEvents() {
             break;
         case 'Gaming & VR':
               projeto.image = 'http://thecoffeematch.com/webservice/assets/img/gaming.jpg';
+              break;
+        case 'Gastronomy':
+              projeto.image = 'http://thecoffeematch.com/webservice/assets/img/gastronomia.jpg';
             break;
         case 'Hardware & IOT':
               projeto.image = 'http://thecoffeematch.com/webservice/assets/img/hardware.jpg';
