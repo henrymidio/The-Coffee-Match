@@ -2438,11 +2438,14 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
     //Request que verifica se já foi resgatada uma recompensa no dia atual
     usuario.getRewards(function(dados) {
+      if(day<10) {
+          day = '0'+day
+      }
       var rewardsAvailable = true;
       for(i in dados) {
         var d1 = new Date(dados[i].granted.replace(/\s/, 'T'));
         var d2 = new Date((year + '-' + (monthIndex + 1) + '-' + day).replace(/\s/, 'T'));
-        
+
         var same = d1.getTime() === d2.getTime();
         if(same) {
           rewardsAvailable = false;
@@ -2476,7 +2479,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
     });
 
   })
-
+/*
   myApp.onPageInit('rewards', function(){
     myApp.showTab('#tab1');
     var renderRewards = function(rewards) {
@@ -2499,3 +2502,4 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
     }
     usuario.getRewards(renderRewards)
   })
+  */
