@@ -2440,7 +2440,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
     usuario.getRewards(function(dados) {
       var rewardsAvailable = true;
       for(i in dados) {
-        var d1 = new Date(dados[i].granted);
+        var d1 = new Date(dados[i].granted.replace(/\s/, 'T'));
         var d2 = new Date(day + '-' + (monthIndex + 1) + '-' + year);
         var same = d1.getTime() === d2.getTime();
         if(same) {
