@@ -297,7 +297,7 @@ this.searchPeople = function () {
         } else {
           $$("#icon-projects img").attr("src", "img/ic_idea.png");
         }
-
+/*
         if(data.rewards == 1){
           notificationCount++;
           $$("#icon-rewards img").attr("src", "img/ic_recompensa_notify.png");
@@ -320,7 +320,7 @@ this.searchPeople = function () {
         } else {
           $$("#icon-rewards img").attr("src", "img/ic_recompensa.png");
         }
-
+*/
         if(notificationCount == 1) {
           $$(".menu-notification img").attr("src", "img/ic_menu_notification_1.png");
         }
