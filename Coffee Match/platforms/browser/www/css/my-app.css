@@ -1202,10 +1202,6 @@ p.user-label:after {
   border-radius: 100%;
 }
 
-.popup-voucher {
-  background-color: #2f3a41;
-}
-
 .free-coffee-disabled {
   opacity: 0.5;
 }
