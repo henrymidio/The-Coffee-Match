@@ -1011,11 +1011,9 @@ myApp.onPageInit('project', function (page) {
   });
 
   $('#join-project').on('click', function() {
-    myApp.confirm("Are you sure that you are interested in this project?!", "", function(){
       usuario.joinProject(project_id);
       myApp.alert("Your request has been successfully delivered. Awaiting for the contact of the Project Owner", "")
       mainView.router.back();
-    })
   })
 /*
   $('.project-owner').on('click', function() {
@@ -1298,7 +1296,7 @@ $(document).on('popup:open', '.popup-project', function () {
     dataType: 'json',
     success: function (data) {
       for(i in data) {
-        $('.projeto-background').css('background', 'url('+data[i].image+')')
+        $('.projeto-background').css('background-image', 'url('+data[i].image+')')
         $('.projeto-name').text(data[i].name)
         $('.projeto-description').text(data[i].description)
         $('.projeto-category').text(data[i].category)
@@ -1308,6 +1306,7 @@ $(document).on('popup:open', '.popup-project', function () {
         var skills = '';
         var looking_for = data[i].looking_for.split(",");
 
+        $('.chip').remove()
         looking_for.forEach(function(entry) {
             skills += '<div class="chip" style="margin-right: 3px">'
                       +'<div class="chip-label">'+entry+'</div>'

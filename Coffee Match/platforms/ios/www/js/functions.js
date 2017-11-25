@@ -97,11 +97,56 @@ function setIndexEvents() {
       searchVisibility = false;
     }
   });
-  /*
-  $(document).on('searchbar:search', '.searchbar', function () {
-      console.log('kj')
+
+
+  $(document.body).on('click', '#filter-projects', function () {
+    if(!searchVisibility) {
+      myApp.detachInfiniteScroll($$('.infinite-scroll'));
+      $(".page-content").children().hide();
+      var searchLine = '<form class="searchbar" style="background: #2f3a41">'
+                      + '<div class="searchbar-input">'
+                      + '<input type="search" placeholder="Filter by skill">'
+                      + '<a href="#" class="searchbar-clear"></a>'
+                      + '</div>'
+                      + '<a href="#" class="searchbar-cancel">Cancel</a>'
+                      + '</form>';
+      $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
+
+      var ulCategorias = '<div class="list-block list-block-search searchbar-found">'
+                      + '<ul class="ul-categorias">'
+                      + '</ul>'
+                      + '</div>';
+      $(".page-content").append(ulCategorias);
+
+      var acu = '';
+      var categorias = ['Advertising, Content & Media', 'Big Data', 'eCommerce', 'Education', 'Enterprise', 'Entertainment', 'Fashion',
+      'Fintech', 'Gaming & VR', 'Gastronomy', 'Hardware & IOT', 'HR & Recruitment', 'Lifestyle, Recreation & Wellness',
+      'MedTech', 'Philanthropy & Social Good', 'Security', 'Social', 'Software', 'Sports & Fitness', 'Travel']
+      categorias.forEach(function(entry) {
+        //console.log(entry)
+        acu += '<li class="item-content li-categoria">'
+                  +'<div class="item-inner">'
+                  +'<div class="item-title">'+entry+'</div>'
+                  + '</div>'
+                  + '</ul>';
+      });
+      $('.ul-categorias').append(acu);
+
+      var mySearchbar = myApp.searchbar('.searchbar', {
+          searchList: '.list-block-search',
+          searchIn: '.item-title'
+      });
+
+      searchVisibility = true;
+    } else {
+      myApp.attachInfiniteScroll($$('.infinite-scroll'));
+      $('.searchbar').remove();
+      $('.searchbar-found').remove();
+      $(".page-content").children().show();
+      searchVisibility = false;
+    }
   });
-  */
+
 
   $(document.body).on('click', '.li-skill', function () {
     var filter = $(this).find('.item-title').text();
@@ -115,21 +160,31 @@ function setIndexEvents() {
 
   });
 
+  $(document.body).on('click', '.li-categoria', function () {
+    var filter = $(this).find('.item-title').text();
+    //$("#columns").empty();
+    searchProjectsByCategory(filter)
+
+    $('.searchbar').remove();
+    $('.searchbar-found').remove();
+    $(".page-content").children().show();
+    searchVisibility = false;
+
+  });
+
   //Evento de clique nas tabs que exibe o floating button
   var altura1 = $('#tab1').height();
   var altura2 = $('#tab2').height();
 
   $(document).on('tab:show', '#tab2', function () {
-      $('#search img').hide()
+      $('#search').attr('id','filter-projects');
       $$('.floating-button-np').removeClass('none');
       myApp.detachInfiniteScroll($$('.infinite-scroll'));
-      //$('.tabs-animated-wrap').height(altura2);
   });
   $(document).on('tab:hide', '#tab2', function () {
-    $('#search img').show()
+      $('#filter-projects').attr('id','search');
       $$('.floating-button-np').addClass('none');
       myApp.attachInfiniteScroll($$('.infinite-scroll'))
-      //$('.tabs-animated-wrap').height(altura1);
   });
 
   //Evento de JOIN ao projeto
@@ -382,30 +437,32 @@ var trimmedString = projeto.description.substr(0, 140);
 //re-trim if we are in the middle of a word
 var shortDescription = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
 
-  //Monta o DOM dos chips
-  var line = '<div id="'+projeto.id+'" class="card demo-card-header-pic open-card">'
-     +'<div style="background-image:url('+projeto.image+')" valign="center" class="card-header color-white no-border">'
-     +'<p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
-     +'<div class="project-owner">'
-           +'<img src="'+projeto.owner_picture+'" />'
-           +'<span style="font-size: 13px; text-shadow: 1px 1px 2px #000000; margin-left: 3px">'+projeto.owner_name+'</span>'
-        +'</div>'
-     +'</div>'
-     +'<p class="color-gray" style="padding: 8px 15px; padding-top: 0">'
-        +'<small>Posted on '+projectDate+'</small>'
-        +'<a href="#" style="float: right">'+icon+'</a>'
-     +'</p>'
-     +'<div class="card-content">'
-        +'<div class="card-content-inner">'
-           +'<p class="project-description">'+shortDescription+'...</p><hr>'
-           +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
-           +'<div class="skills" style="margin-top: -10px">'
-           +skills
-           +'</div>'
-        +'</div>'
-     +'</div>'
+  var line = '<div class="card facebook-card">'
+    +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
+      +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
+      +'<div class="facebook-name">'+projeto.owner_name+'</div>'
+      +'<div class="facebook-date">Posted on '+projectDate+'</div>'
+    +'</div>'
+    +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
+      +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
+    +'</div>'
+    +'<div class="card-content">'
+       +'<div class="card-content-inner">'
+          +'<p class="project-description">'+shortDescription+'...</p><hr>'
+          +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+          +'<div class="skills" style="margin-top: -10px">'
+            +skills
+          +'</div>'
+       +'</div>'
+    +'</div>'
   +'</div>';
  $("#tab2").prepend(line);
+
+ $('.avatar-click').on('click', function(){
+   var id = $(this).attr('id');
+   localStorage.setItem("shown_user_id", id);
+   mainView.router.loadPage('profile-view.html');
+ });
 
  $('#ctb').toggleClass('invisible');
  //$('.tabs-animated-wrap').height('auto')
@@ -432,7 +489,6 @@ function retrieveProjects() {
     type: 'get',
     dataType: 'json',
     success: function (data) {
-
       for(i in data) {
         //console.log(data[i])
         renderNewProject(data[i], true);
@@ -499,6 +555,39 @@ function searchPeopleBySkill(filterSkill) {
               }
               //Renderiza no DOM
               renderPeopleFiltered(data);
+              myApp.hideIndicator()
+            },error: function (request, status, error) {
+              myApp.hideIndicator()
+              myApp.alert('Server Error', '')
+            }
+    });
+}
+
+function searchProjectsByCategory(category) {
+  var dados = {
+      filter: category
+    }
+  myApp.showIndicator()
+  $.ajax({
+            url: 'http://api.thecoffeematch.com/v1/projects',
+            type: 'get',
+            dataType: 'json',
+            data: dados,
+            crossDomain: true,
+            success: function (data) {
+              console.log(data)
+              if(!data) {
+                myApp.hideIndicator()
+                myApp.alert('Sorry! No projects were found.', '')
+                return false;
+              }
+
+              $("#tab2").empty();
+              //Renderiza no DOM
+              for(i in data) {
+                //console.log(data[i])
+                renderNewProject(data[i], true);
+              }
               myApp.hideIndicator()
             },error: function (request, status, error) {
               myApp.hideIndicator()

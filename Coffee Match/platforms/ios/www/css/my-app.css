@@ -1080,7 +1080,7 @@ div#columns figure {
   }
 
   .project-description {
-    margin-top: -18px !important;
+    margin-top: -5px !important;
   }
 
   .p-category {
@@ -1558,3 +1558,34 @@ html:not(.watch-active-state) .speed-dial-buttons a:active,
   -webkit-transition-delay: 250ms;
   transition-delay: 250ms;
 }
+
+.facebook-card .card-header {
+    display: block;
+    padding: 10px;
+  }
+  .facebook-card .facebook-avatar {
+    float: left;
+  }
+  .facebook-card .facebook-name {
+    margin-left: 44px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .facebook-card .facebook-date {
+    margin-left: 44px;
+    font-size: 13px;
+    color: #8e8e93;
+  }
+  .facebook-card .card-footer {
+    background: #fafafa;
+  }
+  .facebook-card .card-footer a {
+    color: #81848b;
+    font-weight: 500;
+  }
+  .facebook-card .card-content img {
+    display: block;
+  }
+  .facebook-card .card-content-inner {
+    padding: 15px 10px;
+  }
