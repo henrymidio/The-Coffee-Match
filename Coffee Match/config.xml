@@ -122,22 +122,14 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <plugin name="org.apache.cordova.camera" spec="~3.0.0">
-            <variable name="CAMERA_USAGE_DESCRIPTION" value="Leer codigos QR." />
-            <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Acceder a la fototeca." />
-        </plugin>
-        <plugin name="cordova-plugin-media-capture" source="npm" spec="*">
-            <variable name="CAMERA_USAGE_DESCRIPTION" value="Leer codigos QR." />
-            <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Acceder a la fototeca." />
-        </plugin>
     </platform>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.2">
         <variable name="APP_ID" value="1647443792236383" />
         <variable name="APP_NAME" value="Coffee Match" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="~3.0.0">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
-        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
+        <param name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
+        <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
     </plugin>
     <plugin name="cordova-plugin-media-capture" source="npm" spec="*">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
