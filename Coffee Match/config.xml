@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.henrique.coffeematch" version="37.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.henrique.coffeematch" version="38.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Coffee Match</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
@@ -10,7 +10,7 @@
         <variable name="MICROPHONE_USAGE_DESCRIPTION" value="App would like to access the microphone." />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
     </plugin>
-    
+
     <preference name="phonegap-version" value="cli-7.0.1" />
     <preference name='pgb-builder-version' value='1' />
 
@@ -122,14 +122,26 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <plugin name="org.apache.cordova.camera" spec="~3.0.0">
+            <variable name="CAMERA_USAGE_DESCRIPTION" value="Leer codigos QR." />
+            <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Acceder a la fototeca." />
+        </plugin>
+        <plugin name="cordova-plugin-media-capture" source="npm" spec="*">
+            <variable name="CAMERA_USAGE_DESCRIPTION" value="Leer codigos QR." />
+            <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Acceder a la fototeca." />
+        </plugin>
     </platform>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.2">
         <variable name="APP_ID" value="1647443792236383" />
         <variable name="APP_NAME" value="Coffee Match" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="~3.0.0">
-        <param name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
-        <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
+    </plugin>
+    <plugin name="cordova-plugin-media-capture" source="npm" spec="*">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
     </plugin>
 
 </widget>
