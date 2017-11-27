@@ -6,16 +6,16 @@
     <content src="index.html" />
     <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="^2.0.10" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="*">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
         <variable name="MICROPHONE_USAGE_DESCRIPTION" value="App would like to access the microphone." />
-        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="~3.0.0">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for taking pictures for your profile" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Need access to edit profile picture" />
     </plugin>
     <preference name="phonegap-version" value="cli-7.0.1" />
-    
+    <preference name="pgb-builder-version" value="1" />
     <preference name="android-build-tool" value="gradle" />
     <preference name="windows-appx-target" value="8.1-phone" />
     <preference name="WindowsToastCapable" value="true" />
@@ -23,7 +23,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
-    <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
+    
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
     <plugin name="cordova-plugin-contacts" source="npm" spec="~2.0.1" />
     <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
