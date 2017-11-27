@@ -1,27 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.henrique.coffeematch" version="34.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.henrique.coffeematch" version="35.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Coffee Match</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
     <content src="index.html" />
-
-	<gap:plugin name="onesignal-cordova-plugin" spec="^2.0.10" source="npm" />
-
-	<plugin name="cordova-plugin-media-capture" source="npm" spec="*">
-	  <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
-	  <variable name="MICROPHONE_USAGE_DESCRIPTION" value="App would like to access the microphone." />
-	  <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
-	</plugin>
-
-	<!--Requires cli-5.1.1+ for gradle Android but we recommend using the latest version. -->
-	<preference name="phonegap-version" value="cli-6.5.0" />
-	<preference name="android-build-tool" value="gradle" />
-
-	<!-- Window Phone 8.1 builds must use cli-6.1.0+ above -->
-	<preference name="windows-appx-target" value="8.1-phone" />
-	<preference name="WindowsToastCapable" value="true" />
-
-	<preference name="orientation" value="portrait" />
+    <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="^2.0.10" />
+    <plugin name="cordova-plugin-media-capture" source="npm" spec="*">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
+        <variable name="MICROPHONE_USAGE_DESCRIPTION" value="App would like to access the microphone." />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
+    </plugin>
+    <preference name="phonegap-version" value="cli-6.5.0" />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="windows-appx-target" value="8.1-phone" />
+    <preference name="WindowsToastCapable" value="true" />
+    <preference name="orientation" value="portrait" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
@@ -63,7 +56,7 @@
         <splash density="port-xxxhdpi" src="www/res/screen/android/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
-		<preference name="target-device" value="handset" />
+        <preference name="target-device" value="handset" />
         <icon height="57" platform="ios" src="www/res/icon/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="www/res/icon/ios/icon@2x.png" width="114" />
         <icon height="40" platform="ios" src="www/res/icon/ios/icon-40.png" width="40" />
@@ -130,5 +123,8 @@
     <plugin name="cordova-plugin-facebook4" spec="~1.7.2">
         <variable name="APP_ID" value="1647443792236383" />
         <variable name="APP_NAME" value="Coffee Match" />
+    </plugin>
+    <plugin name="cordova-plugin-camera" spec="~3.0.0">
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="need access to edit profile picture" />
     </plugin>
 </widget>
