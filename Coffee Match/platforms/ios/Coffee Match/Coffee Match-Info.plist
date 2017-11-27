@@ -97,7 +97,7 @@
     <key>NSCameraUsageDescription</key>
     <string/>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Need to access camera to profile pic</string>
+    <string/>
     <key>NSMicrophoneUsageDescription</key>
     <string/>
   </dict>

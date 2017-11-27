@@ -34,7 +34,7 @@
   "cordova-plugin-file-transfer": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-file-transfer@~1.5.0"
+      "id": "cordova-plugin-file-transfer"
     },
     "is_top_level": true,
     "variables": {}
@@ -66,7 +66,7 @@
   "cordova-plugin-media": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-media@~2.2.0"
+      "id": "cordova-plugin-media@4.0.0"
     },
     "is_top_level": true,
     "variables": {}
@@ -120,6 +120,14 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-media-capture@*"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-ios-camera-permissions": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ios-camera-permissions"
     },
     "is_top_level": true,
     "variables": {}
