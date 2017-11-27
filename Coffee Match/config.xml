@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.henrique.coffeematch" version="35.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.henrique.coffeematch" version="36.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Coffee Match</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
@@ -127,4 +127,7 @@
     <plugin name="cordova-plugin-camera" spec="~3.0.0">
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="need access to edit profile picture" />
     </plugin>
+    <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need to photo library access to get pictures from there</string>
+    </edit-config>
 </widget>
