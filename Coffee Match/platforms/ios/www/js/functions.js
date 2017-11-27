@@ -575,8 +575,8 @@ function searchProjectsByCategory(category) {
             data: dados,
             crossDomain: true,
             success: function (data) {
-              console.log(data)
-              if(!data) {
+              //console.log(data.length)
+              if(data.length < 1) {
                 myApp.hideIndicator()
                 myApp.alert('Sorry! No projects were found.', '')
                 return false;
