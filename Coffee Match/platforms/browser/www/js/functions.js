@@ -669,6 +669,10 @@ function updateStatusUser(status){
 		});
 	}
 
+  function onPhotoError() {
+    console.log('photo error')
+  }
+
   // Called when a photo is successfully retrieved
   //
   function onPhotoURISuccess(imageURI) {
@@ -684,7 +688,7 @@ function updateStatusUser(status){
     destinationType = navigator.camera.DestinationType;
 
     // Retrieve image file location from specified source
-    navigator.camera.getPicture(onPhotoURISuccess, alert('photo error'), {
+    navigator.camera.getPicture(onPhotoURISuccess, onPhotoError, {
       quality: 50,
       allowEdit: true,
       destinationType: destinationType.FILE_URI,

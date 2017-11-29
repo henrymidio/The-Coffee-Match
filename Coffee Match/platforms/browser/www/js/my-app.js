@@ -1279,11 +1279,10 @@ myApp.onPageInit('profile', function (page) {
 	$$("#p-graduation").val(localStorage.getItem("college"));
   $$("#p-link").val(localStorage.getItem("personal-link"));
 
-  $('#picture').on('click', function(){
-    getPhoto()
-  })
-
 });
+$(document).on('click', '#picture', function(){
+  getPhoto()
+})
 
 //SHOWN USER
 myApp.onPageBack('user', function (page) {
