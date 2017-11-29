@@ -672,7 +672,7 @@ function updateStatusUser(status){
   // Called when a photo is successfully retrieved
   //
   function onPhotoURISuccess(imageURI) {
-
+    alert('sucesso foto')
       // Show the selected image
       var smallImage = document.getElementById('picture');
       smallImage.src = imageURI;
@@ -681,6 +681,8 @@ function updateStatusUser(status){
   // A button will call this function
   //
   function getPhoto() {
+    pictureSource = navigator.camera.PictureSourceType;
+    destinationType = navigator.camera.DestinationType;
     // Retrieve image file location from specified source
     navigator.camera.getPicture(onPhotoURISuccess, alert('photo error'), { quality: 50,
       destinationType: destinationType.FILE_URI,

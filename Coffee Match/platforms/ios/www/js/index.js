@@ -40,9 +40,6 @@ var app = {
 
       app.receivedEvent('deviceready');
 
-      pictureSource = navigator.camera.PictureSourceType;
-      destinationType = navigator.camera.DestinationType;
-
 		 var notificationOpenedCallback = function(jsonData) {
 
 			if(jsonData.notification.payload.additionalData.type == "invite") {
