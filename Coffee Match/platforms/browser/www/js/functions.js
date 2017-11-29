@@ -683,6 +683,7 @@ function updateStatusUser(status){
   function getPhoto() {
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
+    alert(pictureSource)
     // Retrieve image file location from specified source
     navigator.camera.getPicture(onPhotoURISuccess, alert('photo error'), { quality: 50,
       destinationType: destinationType.FILE_URI,
