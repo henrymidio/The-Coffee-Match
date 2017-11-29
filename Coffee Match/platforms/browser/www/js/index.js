@@ -16,6 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+ var pictureSource;   // picture source
+ var destinationType; // sets the format of returned values
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -35,6 +39,9 @@ var app = {
     onDeviceReady: function() {
 
       app.receivedEvent('deviceready');
+
+      pictureSource = navigator.camera.PictureSourceType;
+      destinationType = navigator.camera.DestinationType;
 
 		 var notificationOpenedCallback = function(jsonData) {
 

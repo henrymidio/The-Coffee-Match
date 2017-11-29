@@ -668,3 +668,21 @@ function updateStatusUser(status){
 			}
 		});
 	}
+
+  // Called when a photo is successfully retrieved
+  //
+  function onPhotoURISuccess(imageURI) {
+
+      // Show the selected image
+      var smallImage = document.getElementById('picture');
+      smallImage.src = imageURI;
+  }
+
+  // A button will call this function
+  //
+  function getPhoto() {
+    // Retrieve image file location from specified source
+    navigator.camera.getPicture(onPhotoURISuccess, alert('photo error'), { quality: 50,
+      destinationType: destinationType.FILE_URI,
+      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
+  }

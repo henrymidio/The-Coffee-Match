@@ -1279,6 +1279,10 @@ myApp.onPageInit('profile', function (page) {
 	$$("#p-graduation").val(localStorage.getItem("college"));
   $$("#p-link").val(localStorage.getItem("personal-link"));
 
+  $('#picture').on('click', function(){
+    getPhoto()
+  })
+
 });
 
 //SHOWN USER
