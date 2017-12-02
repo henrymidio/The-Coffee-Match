@@ -680,6 +680,7 @@ function updateStatusUser(status){
       // Show the selected image
       var smallImage = document.getElementById('picture');
       smallImage.src = imageURI;
+      localStorage.setItem('picture', imageURI)
 
       var options = new FileUploadOptions();
       options.fileKey="file";
@@ -693,7 +694,7 @@ function updateStatusUser(status){
       options.chunkedMode = false;
 
       var ft = new FileTransfer();
-      ft.upload(imageURI, "http://thecoffeematch.com/webservice/upload-photo.php", win, fail, options);
+      ft.upload(imageURI, "http://thecoffeematch.com/webservice/upload-photo.php", win, failF, options);
   }
 
   // A button will call this function
@@ -718,6 +719,6 @@ function win(r) {
     alert(r.response);
 }
 
-function fail(error) {
-    alert("An error has occurred: Code = ");
+function failF(error) {
+    console.log("An error has occurred: Code = ");
 }

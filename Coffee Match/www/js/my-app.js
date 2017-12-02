@@ -1256,18 +1256,7 @@ myApp.onPageInit('profile', function (page) {
 
 										}
 									}
-									/*
-										INSERIR CONDIÇÃO PARA VERIFICAR SE OS LOOKING-FOR ESTÃO SETADOS
-									*/
-                  /*
-									if(data[1].l1.length > 0){ $("#looking-fo select option:contains("+data[1].l1+")").prop('selected', true) }
-									if(data[1].l2.length > 0){ $("#looking-for select option:contains("+data[1].l2+")").prop('selected', true) }
-									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
-                  */
-									//$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
 
-									//$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
-									//$("#call-smart-select2").val(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3)
 								}
 	});
 	var birthday = localStorage.getItem("age");
