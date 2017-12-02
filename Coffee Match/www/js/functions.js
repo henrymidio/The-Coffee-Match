@@ -676,6 +676,7 @@ function updateStatusUser(status){
   // Called when a photo is successfully retrieved
   //
   function onPhotoURISuccess(imageURI) {
+      var user_id = usuario.getID()
       // Show the selected image
       var smallImage = document.getElementById('picture');
       smallImage.src = imageURI;
@@ -686,8 +687,7 @@ function updateStatusUser(status){
       options.mimeType="image/jpeg";
 
       var params = new Object();
-      params.value1 = "test";
-      params.value2 = "param";
+      params.user_id = user_id;
 
       options.params = params;
       options.chunkedMode = false;
@@ -704,7 +704,7 @@ function updateStatusUser(status){
 
     // Retrieve image file location from specified source
     navigator.camera.getPicture(onPhotoURISuccess, onPhotoError, {
-      quality: 50,
+      quality: 25,
       allowEdit: true,
       destinationType: destinationType.FILE_URI,
       sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
