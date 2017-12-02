@@ -680,7 +680,6 @@ function updateStatusUser(status){
       // Show the selected image
       var smallImage = document.getElementById('picture');
       smallImage.src = imageURI;
-      localStorage.setItem('picture', imageURI)
 
       var options = new FileUploadOptions();
       options.fileKey="file";
@@ -716,7 +715,7 @@ function win(r) {
     console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
-    alert(r.response);
+    localStorage.setItem('picture', r.response);
 }
 
 function failF(error) {
