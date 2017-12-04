@@ -157,12 +157,21 @@ this.getPreferences = function() {
 
 
   this.renderPeople = function(data) {
+    function compare(a,b) {
+      if (a.projects.length > b.projects.length)
+        return -1;
+      if (a.projects.length < b.projects.length)
+        return 1;
+      return 0;
+    }
+    data.sort(compare);
+
     //Pega o número de usuários que já está renderizado
     var index = $$('#columns figure').length;
 
     //Loop limitado pelo número de usuários q se quer visualizar
     for(i = index; i < (index + 10); i++){
-      //console.log(data[i].id)
+      //console.log(data[i].projects.length)
       $(".center-load").hide()
       if(data[i].distance < 1) {
         data[i].distance = '<1';
