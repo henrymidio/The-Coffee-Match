@@ -1256,18 +1256,7 @@ myApp.onPageInit('profile', function (page) {
 
 										}
 									}
-									/*
-										INSERIR CONDIÇÃO PARA VERIFICAR SE OS LOOKING-FOR ESTÃO SETADOS
-									*/
-                  /*
-									if(data[1].l1.length > 0){ $("#looking-fo select option:contains("+data[1].l1+")").prop('selected', true) }
-									if(data[1].l2.length > 0){ $("#looking-for select option:contains("+data[1].l2+")").prop('selected', true) }
-									if(data[1].l3.length > 0){ $("#looking-for select option:contains("+data[1].l3+")").prop('selected', true) }
-                  */
-									//$("#looking-for .item-after").text(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3);
 
-									//$("#call-smart-select").val(data[0].skill1 + ", " + data[0].skill2 + ", " + data[0].skill3)
-									//$("#call-smart-select2").val(data[1].l1 + ", " + data[1].l2 + ", " + data[1].l3)
 								}
 	});
 	var birthday = localStorage.getItem("age");
@@ -1742,7 +1731,14 @@ myApp.onPageInit('profile-view', function (page) {
                   $$("#top-skill").html(data.skill1);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
-//console.log(data)
+
+                  if(data.urlink) {
+                    var lineLink = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>Website</p>'
+                                  + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41"><a class="external" href=http://'+data.urlink+'>'+data.urlink+'</a></p>'
+                                  + '<br>';
+                    $('.tc').before(lineLink)
+                  }
+
                   if(data.projects.length > 0) {
                     //$('.card-projects').toggleClass('none');
                     data.projects.forEach(function(entry) {
@@ -2363,10 +2359,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
                  //Logo e ícone do marker
                  var icon = {
-                     url: "img/ic_marker.png", // url
-                     scaledSize: new google.maps.Size(30, 30), // scaled size
-                     origin: new google.maps.Point(0,0), // origin
-                     anchor: new google.maps.Point(0, 0) // anchor
+                     url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00d173"
                  };
 
                  var line1 = "<li>"

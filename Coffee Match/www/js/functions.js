@@ -177,11 +177,13 @@ function setIndexEvents() {
   var altura2 = $('#tab2').height();
 
   $(document).on('tab:show', '#tab2', function () {
+      $('#search img').attr('src', 'img/ic_filter.png')
       $('#search').attr('id','filter-projects');
       $$('.floating-button-np').removeClass('none');
       myApp.detachInfiniteScroll($$('.infinite-scroll'));
   });
   $(document).on('tab:hide', '#tab2', function () {
+      $('#filter-projects img').attr('src', 'img/ic_search_white.png')
       $('#filter-projects').attr('id','search');
       $$('.floating-button-np').addClass('none');
       myApp.attachInfiniteScroll($$('.infinite-scroll'))

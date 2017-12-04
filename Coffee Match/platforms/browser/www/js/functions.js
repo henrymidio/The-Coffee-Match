@@ -177,11 +177,13 @@ function setIndexEvents() {
   var altura2 = $('#tab2').height();
 
   $(document).on('tab:show', '#tab2', function () {
+      $('#search img').attr('src', 'img/ic_filter.png')
       $('#search').attr('id','filter-projects');
       $$('.floating-button-np').removeClass('none');
       myApp.detachInfiniteScroll($$('.infinite-scroll'));
   });
   $(document).on('tab:hide', '#tab2', function () {
+      $('#filter-projects img').attr('src', 'img/ic_search_white.png')
       $('#filter-projects').attr('id','search');
       $$('.floating-button-np').addClass('none');
       myApp.attachInfiniteScroll($$('.infinite-scroll'))
@@ -676,6 +678,7 @@ function updateStatusUser(status){
   // Called when a photo is successfully retrieved
   //
   function onPhotoURISuccess(imageURI) {
+      var user_id = usuario.getID()
       // Show the selected image
       var smallImage = document.getElementById('picture');
       smallImage.src = imageURI;
@@ -686,14 +689,13 @@ function updateStatusUser(status){
       options.mimeType="image/jpeg";
 
       var params = new Object();
-      params.value1 = "test";
-      params.value2 = "param";
+      params.user_id = user_id;
 
       options.params = params;
       options.chunkedMode = false;
 
       var ft = new FileTransfer();
-      ft.upload(imageURI, "http://thecoffeematch.com/webservice/upload-photo.php", win, fail, options);
+      ft.upload(imageURI, "http://thecoffeematch.com/webservice/upload-photo.php", win, failF, options);
   }
 
   // A button will call this function
@@ -704,7 +706,7 @@ function updateStatusUser(status){
 
     // Retrieve image file location from specified source
     navigator.camera.getPicture(onPhotoURISuccess, onPhotoError, {
-      quality: 50,
+      quality: 25,
       allowEdit: true,
       destinationType: destinationType.FILE_URI,
       sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY });
@@ -715,9 +717,9 @@ function win(r) {
     console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
-    alert(r.response);
+    localStorage.setItem('picture', r.response);
 }
 
-function fail(error) {
-    alert("An error has occurred: Code = ");
+function failF(error) {
+    console.log("An error has occurred: Code = ");
 }

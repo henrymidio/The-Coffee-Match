@@ -1731,7 +1731,14 @@ myApp.onPageInit('profile-view', function (page) {
                   $$("#top-skill").html(data.skill1);
 									$$("#user-view-college").html(data.college);
 									$$("#user-view-description").html(data.description);
-//console.log(data)
+
+                  if(data.urlink) {
+                    var lineLink = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>Website</p>'
+                                  + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41"><a class="external" href=http://'+data.urlink+'>'+data.urlink+'</a></p>'
+                                  + '<br>';
+                    $('.tc').before(lineLink)
+                  }
+
                   if(data.projects.length > 0) {
                     //$('.card-projects').toggleClass('none');
                     data.projects.forEach(function(entry) {
@@ -2352,10 +2359,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
                  //Logo e ícone do marker
                  var icon = {
-                     url: "img/ic_marker.png", // url
-                     scaledSize: new google.maps.Size(30, 30), // scaled size
-                     origin: new google.maps.Point(0,0), // origin
-                     anchor: new google.maps.Point(0, 0) // anchor
+                     url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00d173"
                  };
 
                  var line1 = "<li>"
