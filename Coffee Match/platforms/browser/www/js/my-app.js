@@ -2344,6 +2344,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
                      + "<br><br>"
                      + "<h3>Nenhuma cafeteria encontrada próximo a você</h3>"
                      + "<p class='color-silver'>Indique-nos a sua cafeteria preferida para ela aparecer aqui</p>"
+                     + "<p class='color-silver'>nicolas@thecoffeematch.com</p>"
                      + "</div>";
                  $("#map-ul").html(lineEmpty);
                  return false;
