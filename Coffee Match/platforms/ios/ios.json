@@ -168,6 +168,22 @@
                         }
                     ]
                 }
+            },
+            "undefined": {
+                "parents": {
+                    "NSPhotoLibraryUsageDescription": [
+                        {
+                            "xml": "<string>Allows access to photo library</string>",
+                            "count": 1
+                        }
+                    ],
+                    "NSCameraUsageDescription": [
+                        {
+                            "xml": "<string>Allows usage of the camera</string>",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },

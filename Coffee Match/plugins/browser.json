@@ -7,34 +7,13 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
     "cordova-plugin-device-orientation": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
     },
     "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-globalization": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-media": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
     },
     "cordova-plugin-facebook4": {
@@ -42,18 +21,30 @@
       "APP_NAME": "Coffee Match",
       "PACKAGE_NAME": "com.henrique.coffeematch"
     },
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-file": {
+    "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
     }
   },
   "dependent_plugins": {
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
     "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-plugin-file": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
     }
   }
