@@ -21,9 +21,6 @@
       "APP_NAME": "Coffee Match",
       "PACKAGE_NAME": "com.henrique.coffeematch"
     },
-    "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
     }

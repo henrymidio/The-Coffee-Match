@@ -131,6 +131,5 @@
         <variable name="APP_ID" value="1647443792236383" />
         <variable name="APP_NAME" value="Coffee Match" />
     </plugin>
-    <plugin name="cordova-plugin-file-transfer" spec="~1.7.0" />
     <plugin name="cordova-plugin-file" spec="~5.0.0" />
 </widget>
