@@ -23,6 +23,9 @@
     },
     "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
     }
   },
   "dependent_plugins": {
@@ -42,9 +45,6 @@
       "PACKAGE_NAME": "com.henrique.coffeematch"
     },
     "cordova-plugin-device-motion": {
-      "PACKAGE_NAME": "com.henrique.coffeematch"
-    },
-    "cordova-plugin-file": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
     }
   }

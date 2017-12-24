@@ -1,27 +1,27 @@
 {
-  "_from": "cordova-plugin-file@latest",
-  "_id": "cordova-plugin-file@6.0.0",
+  "_from": "cordova-plugin-file@5.0.0",
+  "_id": "cordova-plugin-file@5.0.0",
   "_inBundle": false,
-  "_integrity": "sha1-muCN27wM8z6gbsMD1evFVpjXYKo=",
+  "_integrity": "sha1-05doIyFmnAAL6McfjvRDiq6Pkl0=",
   "_location": "/cordova-plugin-file",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "cordova-plugin-file@latest",
+    "raw": "cordova-plugin-file@5.0.0",
     "name": "cordova-plugin-file",
     "escapedName": "cordova-plugin-file",
-    "rawSpec": "latest",
+    "rawSpec": "5.0.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "5.0.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-file/-/cordova-plugin-file-6.0.0.tgz",
-  "_shasum": "9ae08ddbbc0cf33ea06ec303d5ebc55698d760aa",
-  "_spec": "cordova-plugin-file@latest",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-file/-/cordova-plugin-file-5.0.0.tgz",
+  "_shasum": "d397682321669c000be8c71f8ef4438aae8f925d",
+  "_spec": "cordova-plugin-file@5.0.0",
   "_where": "/Users/usuario/Desktop/The Coffee Match/The-Coffee-Match/Coffee Match",
   "author": {
     "name": "Apache Software Foundation"
@@ -34,10 +34,16 @@
     "id": "cordova-plugin-file",
     "platforms": [
       "android",
-      "browser",
+      "amazon-fireos",
+      "ubuntu",
       "ios",
       "osx",
-      "windows"
+      "wp7",
+      "wp8",
+      "blackberry10",
+      "windows8",
+      "windows",
+      "firefoxos"
     ]
   },
   "deprecated": false,
@@ -67,10 +73,16 @@
     "file",
     "ecosystem:cordova",
     "cordova-android",
-    "cordova-browser",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
     "cordova-ios",
     "cordova-osx",
-    "cordova-windows"
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-blackberry10",
+    "cordova-windows8",
+    "cordova-windows",
+    "cordova-firefoxos"
   ],
   "license": "Apache-2.0",
   "name": "cordova-plugin-file",
@@ -83,5 +95,5 @@
     "test": "npm run eslint"
   },
   "types": "./types/index.d.ts",
-  "version": "6.0.0"
+  "version": "5.0.0"
 }
