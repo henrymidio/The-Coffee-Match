@@ -439,8 +439,8 @@ this.searchPeople = function () {
       dataType: 'json',
       data: projeto,
       success: function(data) {
-        //console.log(data)
-        renderNewProject(data[0], true);
+
+        renderProjectCreated(data[0], true);
         var linha2 = "<li class='item-link item-content open-myproject' id='"+data[0].id+"'>"
           + "<div class='item-media profile'>"
           + "<img class='icon icons8-Settings-Filled' src='"+data[0].image+"' style='border-radius: 100%; margin-top: 5px; width: 60px; height: 60px'>"

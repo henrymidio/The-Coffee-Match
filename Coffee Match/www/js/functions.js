@@ -16,6 +16,7 @@ function formatDate(date) {
 }
 
 function setIndexEvents() {
+  projectsTab = false;
   // Loading flag
   var loading = false;
   $(document.body).on('infinite', '.infinite-scroll', function () {
@@ -31,7 +32,19 @@ function setIndexEvents() {
       loading = false;
     }, 3000);
 
-    usuario.renderPeople(usuario.getCache());
+    if(projectsTab) {
+      //Pega o número de usuários que já está renderizado
+      var index = $$('#tab2 .facebook-card').length;
+      //Loop limitado pelo número de usuários q se quer visualizar
+      var cacheProjects = usuario.getCacheProjects();
+      cacheProjects.reverse();
+
+      for(i = index; i < (index + 10); i++){
+        renderNewProject(cacheProjects[i], true);
+      }
+    } else {
+      usuario.renderPeople(usuario.getCache());
+    }
 
   })
 
@@ -177,16 +190,18 @@ function setIndexEvents() {
   var altura2 = $('#tab2').height();
 
   $(document).on('tab:show', '#tab2', function () {
+      projectsTab = true;
       $('#search img').attr('src', 'img/ic_filter.png')
       $('#search').attr('id','filter-projects');
       $$('.floating-button-np').removeClass('none');
-      myApp.detachInfiniteScroll($$('.infinite-scroll'));
+      //myApp.detachInfiniteScroll($$('.infinite-scroll'));
   });
   $(document).on('tab:hide', '#tab2', function () {
+      projectsTab = false;
       $('#filter-projects img').attr('src', 'img/ic_search_white.png')
       $('#filter-projects').attr('id','search');
       $$('.floating-button-np').addClass('none');
-      myApp.attachInfiniteScroll($$('.infinite-scroll'))
+      //myApp.attachInfiniteScroll($$('.infinite-scroll'))
   });
 
   //Evento de JOIN ao projeto
@@ -413,11 +428,11 @@ function renderNewProject(projeto, fromBD) {
   if(fromBD) {
     projeto.looking_for = projeto.looking_for.split(",");
   }
-    projeto.looking_for.forEach(function(entry) {
+  projeto.looking_for.forEach(function(entry) {
       skills += '<div class="chip" style="margin-right: 3px">'
                 +'<div class="chip-label">'+entry+'</div>'
                 +'</div>';
-    });
+  });
 
     //Verifica se já deu join no projeto para marcar o check
     try {
@@ -434,41 +449,42 @@ function renderNewProject(projeto, fromBD) {
     //var shortDescription; = projeto.description.replace(/^(.{50}[^\s]*).*/, "$1"); //replace with your string.
 
     //trim the string to the maximum length
-var trimmedString = projeto.description.substr(0, 140);
+    var trimmedString = projeto.description.substr(0, 140);
 
-//re-trim if we are in the middle of a word
-var shortDescription = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+    //re-trim if we are in the middle of a word
+    var shortDescription = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
 
-  var line = '<div class="card facebook-card">'
-    +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
-      +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
-      +'<div class="facebook-name">'+projeto.owner_name+'</div>'
-      +'<div class="facebook-date">Posted on '+projectDate+'</div>'
-    +'</div>'
-    +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
-      +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
-    +'</div>'
-    +'<div class="card-content">'
-       +'<div class="card-content-inner">'
-          +'<p class="project-description">'+shortDescription+'...</p><hr>'
-          +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
-          +'<div class="skills" style="margin-top: -10px">'
-            +skills
-          +'</div>'
-       +'</div>'
-    +'</div>'
-  +'</div>';
- $("#tab2").prepend(line);
+      var line = '<div class="card facebook-card">'
+        +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
+          +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
+          +'<div class="facebook-name">'+projeto.owner_name+'</div>'
+          +'<div class="facebook-date">Posted on '+projectDate+'</div>'
+        +'</div>'
+        +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
+          +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
+        +'</div>'
+        +'<div class="card-content">'
+           +'<div class="card-content-inner">'
+              +'<p class="project-description">'+shortDescription+'...</p><hr>'
+              +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+              +'<div class="skills" style="margin-top: -10px">'
+                +skills
+              +'</div>'
+           +'</div>'
+        +'</div>'
+      +'</div>';
+     $("#tab2").append(line);
 
- $('.avatar-click').on('click', function(){
-   var id = $(this).attr('id');
-   localStorage.setItem("shown_user_id", id);
-   mainView.router.loadPage('profile-view.html');
- });
+     $('.avatar-click').on('click', function(){
+       var id = $(this).attr('id');
+       localStorage.setItem("shown_user_id", id);
+       mainView.router.loadPage('profile-view.html');
+     });
 
- $('#ctb').toggleClass('invisible');
- //$('.tabs-animated-wrap').height('auto')
- cleanProjectForm();
+     $('#ctb').toggleClass('invisible');
+     //$('.tabs-animated-wrap').height('auto')
+     cleanProjectForm();
+
 }
 
 function cleanProjectForm() {
@@ -476,6 +492,74 @@ function cleanProjectForm() {
     $('#project-category option:eq(0)').prop('selected', true)
     $('#project-description').val('');
     $('.container-chip').empty()
+  }
+
+  function renderProjectCreated(projeto, fromBD) {
+    var projectDate = new Date(projeto.created.replace(/\s/, 'T'));
+    projectDate = formatDate(projectDate);
+    var skills = '';
+    var icon = '';
+
+    if(fromBD) {
+      projeto.looking_for = projeto.looking_for.split(",");
+    }
+    projeto.looking_for.forEach(function(entry) {
+        skills += '<div class="chip" style="margin-right: 3px">'
+                  +'<div class="chip-label">'+entry+'</div>'
+                  +'</div>';
+    });
+
+      //Verifica se já deu join no projeto para marcar o check
+      try {
+        projeto.joined_users.forEach(function(entry) {
+            if(entry.joined_user == usuario.getID()) {
+              icon = '<i class="f7-icons" style="color: #00aced">check</i>';
+            }
+        });
+      } catch(error) {
+
+      }
+
+
+      //var shortDescription; = projeto.description.replace(/^(.{50}[^\s]*).*/, "$1"); //replace with your string.
+
+      //trim the string to the maximum length
+      var trimmedString = projeto.description.substr(0, 140);
+
+      //re-trim if we are in the middle of a word
+      var shortDescription = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+
+        var line = '<div class="card facebook-card">'
+          +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
+            +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
+            +'<div class="facebook-name">'+projeto.owner_name+'</div>'
+            +'<div class="facebook-date">Posted on '+projectDate+'</div>'
+          +'</div>'
+          +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
+            +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
+          +'</div>'
+          +'<div class="card-content">'
+             +'<div class="card-content-inner">'
+                +'<p class="project-description">'+shortDescription+'...</p><hr>'
+                +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+                +'<div class="skills" style="margin-top: -10px">'
+                  +skills
+                +'</div>'
+             +'</div>'
+          +'</div>'
+        +'</div>';
+       $("#tab2").prepend(line);
+
+       $('.avatar-click').on('click', function(){
+         var id = $(this).attr('id');
+         localStorage.setItem("shown_user_id", id);
+         mainView.router.loadPage('profile-view.html');
+       });
+
+       $('#ctb').toggleClass('invisible');
+       //$('.tabs-animated-wrap').height('auto')
+       cleanProjectForm();
+
   }
 
 function configSidePanel() {
@@ -491,10 +575,17 @@ function retrieveProjects() {
     type: 'get',
     dataType: 'json',
     success: function (data) {
-      for(i in data) {
-        //console.log(data[i])
-        renderNewProject(data[i], true);
-      }
+        usuario.setCacheProjects(data)
+        var index = $$('#tab2 .facebook-card').length;
+
+        //Loop limitado pelo número de usuários q se quer visualizar
+        var cacheProjects = usuario.getCacheProjects();
+        cacheProjects = cacheProjects.reverse();
+
+        for(i = index; i < (index + 10); i++){
+          renderNewProject(cacheProjects[i], true);
+        }
+
     }
   });
 }

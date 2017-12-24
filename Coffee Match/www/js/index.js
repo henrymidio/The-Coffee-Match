@@ -145,6 +145,7 @@ var app = {
               $("#tab2").empty();
               retrieveProjects()
 
+
             } else {
               myApp.pullToRefreshTrigger('.pull-to-refresh-content');
             }
