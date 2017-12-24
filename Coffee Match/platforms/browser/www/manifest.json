@@ -1,18 +1,24 @@
 {
-  "background_color": "#FFF",
-  "display": "standalone",
   "name": "Coffee Match",
   "short_name": "Coffee Match",
-  "version": "com.henrique.coffeematch",
-  "description": "Hello World sample application that responds to the deviceready event.",
-  "author": "PhoneGap Team",
+  "description": "Description of your app from template",
+  "start_url": "index.html",
+  "scope": "index.html",
   "icons": [
     {
-      "src": "img/logotipo.png",
-      "type": "image/png",
-      "sizes": "undefinedxundefined"
+      "src": "img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/splash.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "orientation": "portrait",
-  "start_url": "index.html"
+  "default_locale": "en",
+  "display": "standalone",
+  "background_color": "#FFF",
+  "theme_color": "#000",
+  "orientation": "landscape"
 }

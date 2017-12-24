@@ -1269,9 +1269,11 @@ myApp.onPageInit('profile', function (page) {
   $$("#p-link").val(localStorage.getItem("personal-link"));
 
 });
+/*
 $(document).on('click', '#picture', function(){
   getPhoto()
 })
+*/
 
 //SHOWN USER
 myApp.onPageBack('user', function (page) {
