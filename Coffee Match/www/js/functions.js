@@ -65,10 +65,10 @@ function setIndexEvents() {
       $(".page-content").children().hide();
       var searchLine = '<form class="searchbar" style="background: #2f3a41">'
                       + '<div class="searchbar-input">'
-                      + '<input type="search" placeholder="Filter by skill">'
+                      + '<input type="search" placeholder="Filtrar por habilidade">'
                       + '<a href="#" class="searchbar-clear"></a>'
                       + '</div>'
-                      + '<a href="#" class="searchbar-cancel">Cancel</a>'
+                      + '<a href="#" class="searchbar-cancel">Cancelar</a>'
                       + '</form>';
       $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
 
@@ -121,7 +121,7 @@ function setIndexEvents() {
                       + '<input type="search" placeholder="Filter by skill">'
                       + '<a href="#" class="searchbar-clear"></a>'
                       + '</div>'
-                      + '<a href="#" class="searchbar-cancel">Cancel</a>'
+                      + '<a href="#" class="searchbar-cancel">Cancelar</a>'
                       + '</form>';
       $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
 
@@ -207,8 +207,8 @@ function setIndexEvents() {
   //Evento de JOIN ao projeto
   $(document).on('click', '.join-project', function () {
     var self = $(this);
-        myApp.confirm('Are you sure?', '', function () {
-            myApp.alert("Sua solicitação foi enviado ao responsável pelo projeto", '')
+        myApp.confirm('Tem certeza?', '', function () {
+            myApp.alert("Parabéns! A sua solicitação foi enviada com sucesso. Aguarde o contato do responsável pelo projeto. Boa sorte!", '')
             self.find('i').addClass('color-yellow');
         });
   });
@@ -219,7 +219,7 @@ function setIndexEvents() {
   //Evento que deuncia projeto
   $(document).on('click', '.report-project', function () {
     var self = $(this);
-    myApp.confirm('Are you sure?', '', function () {
+    myApp.confirm('Tem certeza?', '', function () {
         myApp.alert('Sua denúncia será revisada pelos nossos moderadores', '')
         self.find('i').addClass('color-red');
     });

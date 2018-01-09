@@ -416,7 +416,7 @@ myApp.onPageInit('convites', function (page) {
 										var self   = $(this);
 										var inviteId = self.parents("li").find("div.div-match").attr("id");
 										var swipeout = self.closest(".swipeout");
-										myApp.confirm("Are you sure?", "The Coffee Match", function(){
+										myApp.confirm("Você tem certeza?", "The Coffee Match", function(){
 											myApp.swipeoutDelete(swipeout, function() {
 												var matchToDelete = {
 													invite: inviteId
@@ -541,7 +541,7 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='bg-red unmatch'>Unmatch</a>"
+												+ "<a href='#' class='bg-red unmatch'>Desfazer convite</a>"
 												+ "</div>"
 												+"</li>";
 									    $("#match-li").append(line1);
@@ -561,7 +561,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										var idMatch = self.parent().siblings(".match").attr("id");
 										var swipeout = self.closest(".swipeout");
 
-										myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
+										myApp.confirm("Vocês não poderão se conectar", "Tem certeza?", function(){
 											myApp.swipeoutDelete(swipeout, function() {
 												var abc = {
 													match: idMatch
@@ -618,7 +618,7 @@ myApp.onPageInit('detail-calendar', function(page){
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -814,7 +814,7 @@ myApp.onPageInit('myprojects', function (page) {
 
 
 $(document).on('click', '.delete-project', function () {
-  myApp.confirm("Are you sure you want to delete the project?", "", function(){
+  myApp.confirm("Tem certeza que deseja deletar este projeto?", "", function(){
     myApp.showIndicator()
     var project_id = localStorage.getItem('project_id');
     deleteProject(project_id, function() {
@@ -1035,7 +1035,7 @@ myApp.onPageInit('project', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1053,7 +1053,7 @@ $(document).on("click", ".erase", function(){
   var idMatch = self.parent().siblings().find(".chat").attr("id");
   var swipeout = self.closest(".swipeout");
 
-  myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
+  myApp.confirm("Vocês não poderão mais se conectar", "Tem certeza?", function(){
     myApp.swipeoutDelete(swipeout, function() {
         var abc = {
           match: idMatch
@@ -1105,7 +1105,7 @@ myApp.onPageInit('messages', function (page) {
 										var replyArrow = "";
 										var weight = "bold";
 										if(data[i].last_message === null){
-											data[i].last_message = "Connected in "+data[i].date;
+											data[i].last_message = "Conectado em "+data[i].date;
 										}
 
 										if(data[i].user == x.user_id) {
@@ -1404,7 +1404,7 @@ myApp.onPageInit('user', function (page) {
 											data.distance = '<1';
 									}
 
-									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Km');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
                   $(".blur-back").css("background-size", 'cover');
@@ -1458,7 +1458,7 @@ myApp.onPageInit('user', function (page) {
 					{
 						text: 'Report',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: suid,
 									reason: value
@@ -1484,7 +1484,7 @@ myApp.onPageInit('user', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1573,7 +1573,7 @@ myApp.onPageInit('user-com-chat', function (page) {
 											data.distance = '<1';
 									}
 
-									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Km');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
                   $(".blur-back").css("background-size", 'cover');
@@ -1612,9 +1612,9 @@ myApp.onPageInit('user-com-chat', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: suid,
 									reason: value
@@ -1640,7 +1640,7 @@ myApp.onPageInit('user-com-chat', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1722,7 +1722,7 @@ myApp.onPageInit('profile-view', function (page) {
 											data.distance = '<1';
 									}
 
-									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Km');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
                   $(".blur-back").css("background-size", 'cover');
@@ -1768,9 +1768,9 @@ myApp.onPageInit('profile-view', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: suid,
 									reason: value
@@ -1796,7 +1796,7 @@ myApp.onPageInit('profile-view', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1852,7 +1852,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 										$('#change-status').prop('checked', false);
 									}
 
-										$$("#valBox").html(data.distance + " Mi")
+										$$("#valBox").html(data.distance + " Km")
 
 								},
 								error: function (request, status, error) {
@@ -1907,7 +1907,7 @@ myApp.onPageInit('chat', function (page) {
 						text: 'Denunciar',
 						color: 'red',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: match,
 									match: match,
@@ -1928,7 +1928,7 @@ myApp.onPageInit('chat', function (page) {
 						}
 					},
 					{
-						text: 'Unmatch',
+						text: 'Desfazer convite',
 						color: 'red',
 						onClick: function () {
 
@@ -2371,7 +2371,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
                      + "<div class='item-inner'>"
                      + "<div class='item-title-row'>"
                      + "<div class='item-title'>"+data[i].name+"</div>"
-                     + "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " Mi</div>"
+                     + "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " Km</div>"
                      + "</div>"
                      + "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
                      + "</div>"

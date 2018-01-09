@@ -181,7 +181,7 @@ this.getPreferences = function() {
     var line1 = '<figure id="'+data[i].id+'">'
        +'<div class="user-card">'
           +'<div class="row">'
-             +'<div class="col-20 user-card open-profile" style="font-size: 12px; #596872; opacity: 0.6">'+data[i].distance+' Mi</div>'
+             +'<div class="col-20 user-card open-profile" style="font-size: 12px; #596872; opacity: 0.6">'+data[i].distance+' Km</div>'
              +'<div class="col-60 user-card user-card-profile open-profile"><img class="img-circle-plus" src="'+data[i].picture+'" /></div>'
              +'<div class="col-22 user-card hide-user" style="color: #596872; opacity: 0.6"><i class="f7-icons">close</i></div>'
           +'</div>'
