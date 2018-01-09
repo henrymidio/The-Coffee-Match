@@ -458,7 +458,7 @@ function renderNewProject(projeto, fromBD) {
         +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
           +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
           +'<div class="facebook-name">'+projeto.owner_name+'</div>'
-          +'<div class="facebook-date">Posted on '+projectDate+'</div>'
+          +'<div class="facebook-date">Postado em '+projectDate+'</div>'
         +'</div>'
         +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
           +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
