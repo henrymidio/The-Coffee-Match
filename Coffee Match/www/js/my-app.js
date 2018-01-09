@@ -372,7 +372,7 @@ myApp.onPageInit('convites', function (page) {
                         +'<div class="text-center" style="margin-top: 180px">'
                         +'<img src="img/icNotificationBig.png" />'
                           +'<br>'
-                          +'<p style="color: rgb(89, 104, 114); font-size: 21px">No new invites...</p>'
+                          +'<p style="color: rgb(89, 104, 114); font-size: 21px">Sem novos convites...</p>'
                         +'</div>'
                       +'</li>';
                       $("#invites-li").append(line);
@@ -396,14 +396,14 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='user.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle' id='mess'>Wants to grab a coffee!</span>"
+												+ "<span class='subtitle' id='mess'>Quer tomar um café com você!</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
 												+ "</a>"
 												+ "</div>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='bg-red del-invite'>Delete</a>"
+												+ "<a href='#' class='bg-red del-invite'>Deletar</a>"
 												+ "</div>"
 												+ "</li>";
 
@@ -798,7 +798,7 @@ myApp.onPageInit('myprojects', function (page) {
         + "<div class='item-inner'>"
         + "<a href='#' class='item-link'>"
         + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
-        + "<span class='subtitle'>"+number_joined_users+" interested</span></div></div></a>"
+        + "<span class='subtitle'>"+number_joined_users+" interessados</span></div></div></a>"
         + "</li>";
         $('.ul-projects').append(line);
     }
@@ -869,7 +869,7 @@ myApp.onPageInit('joined-project', function (page) {
               type: 'get',
               dataType: 'json',
               success: function (data) {
-                $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>All')
+                $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>Todos')
                 c += 1;
                 j += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
                        + '<img src='+data.picture+' />'
@@ -1416,7 +1416,7 @@ myApp.onPageInit('user', function (page) {
 									$$("#user-view-college").html(data.college);
 									//$$("#user-view-description").html(data.description);
                   if(data.description.length > 0) {
-                    var lineAbout = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>About Me</p>'
+                    var lineAbout = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>Sobre mim</p>'
                                   + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41">'+data.description+'</p>'
                                   + '<br>';
                     $('.tc').before(lineAbout)
@@ -1813,7 +1813,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 	var dst = null;
 
 	$$('#delete-account').on('click', function(){
-		myApp.confirm("All your data will be lost", "Are you sure you want to delete your account?", function(){
+		myApp.confirm("Todas as suas informações serão perdidas", "Tem certeza que deseja deletar o seu perfil?", function(){
 			myApp.showIndicator()
 			$.ajax({
 				url: 'http://thecoffeematch.com/webservice/delete-user.php',

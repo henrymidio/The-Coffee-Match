@@ -466,7 +466,7 @@ function renderNewProject(projeto, fromBD) {
         +'<div class="card-content">'
            +'<div class="card-content-inner">'
               +'<p class="project-description">'+shortDescription+'...</p><hr>'
-              +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+              +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Procurando por</p>'
               +'<div class="skills" style="margin-top: -10px">'
                 +skills
               +'</div>'
