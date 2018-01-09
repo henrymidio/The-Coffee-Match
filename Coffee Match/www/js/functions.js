@@ -262,13 +262,13 @@ function setIndexEvents() {
     if(conteudo.length < 2) {
       return false
     } else if (conteudo.length > 30) {
-      myApp.alert('Maximum 30 characters', '');
+      myApp.alert('Máximo de 30 caracteres', '');
       return false;
     }
 
     var countChips = $('.container-chip div.chip').length;
     if(countChips > 4) {
-      myApp.alert('You can add only 5 skills', '');
+      myApp.alert('Você pode adicionar 5 habilidades', '');
       return false;
     }
 
@@ -402,12 +402,12 @@ function setIndexEvents() {
     }
     //Valida os inputs
     if(projectName < 1 || projectCategory < 1 ||  projectSkills < 1) {
-      myApp.alert("Please, fill in all required fields.", '');
+      myApp.alert("Preencha os campos obrigatórios.", '');
       myApp.hideIndicator();
       return false;
     }
     else if (projectDescription.length < 25) {
-      myApp.alert('Your description must have at least 25 characters.', '')
+      myApp.alert('Sua descrição deve ter pelo menos 25 caracteres.', '')
       myApp.hideIndicator();
       return false;
     }
@@ -643,7 +643,7 @@ function searchPeopleBySkill(filterSkill) {
               console.log(data)
               if(!data) {
                 myApp.hideIndicator()
-                myApp.alert('Sorry! No users were found.', '')
+                myApp.alert('Nenhum usuário encontrado.', '')
                 return false;
               }
               //Renderiza no DOM
@@ -671,7 +671,7 @@ function searchProjectsByCategory(category) {
               //console.log(data)
               if(data.length < 1) {
                 myApp.hideIndicator()
-                myApp.alert('Sorry! No projects were found.', '')
+                myApp.alert('Nenhum projeto foi encontrado.', '')
                 return false;
               }
 

@@ -386,7 +386,7 @@ this.searchPeople = function () {
                 mainView.router.loadPage("chat.html")
               } else {
                 mainView.router.back();
-                myApp.alert('Your invite was successfully sent', '');
+                myApp.alert('Seu convite foi enviado com sucesso!', '');
               }
             },
             error: function (request, status, error) {

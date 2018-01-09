@@ -85,11 +85,11 @@ myApp.onPageInit('login-final', function (page) {
     var ssqnt = secondarySkills.split(',')
 
     if(topSkill.length < 1) {
-      myApp.alert('Select yout top skill', '')
+      myApp.alert('Selecione sua habilidade principal', '')
       return false;
     }
     if(secondarySkills.length < 1 || ssqnt.length < 2) {
-      myApp.alert('Select two secondary skills', '')
+      myApp.alert('Selecione suas habilidades secundárias', '')
       return false;
     }
     myApp.showIndicator();
@@ -956,7 +956,7 @@ myApp.onPageInit('joined-project', function (page) {
     editProject(project_id, name, description, editSkills, function(data) {
       myApp.hideIndicator();
       myApp.closeModal(".popup-edit-form", true);
-      myApp.alert('Your information has been successfully updated', '')
+      myApp.alert('Suas informações foram atualizadas com sucesso', '')
       $('.j-name').html(name);
       $('.j-description').html(description);
     });
@@ -1002,7 +1002,7 @@ myApp.onPageInit('project', function (page) {
       } else {
         data[i].all_joined_users.forEach(function(entry) {
             if(entry.joined_user == usuario.getID()) {
-              myApp.alert('You have already applied to this project', '')
+              myApp.alert('Você já se cadastrou a este projeto', '')
               $('#join-project').hide()
             }
         });
@@ -1012,7 +1012,7 @@ myApp.onPageInit('project', function (page) {
 
   $('#join-project').on('click', function() {
       usuario.joinProject(project_id);
-      myApp.alert("Your request has been successfully delivered. Awaiting for the contact of the Project Owner", "")
+      myApp.alert("Sua solicitação foi enviada com sucesso!", "")
       mainView.router.back();
   })
 /*
@@ -1027,8 +1027,8 @@ myApp.onPageInit('project', function (page) {
 					{
 						text: 'Report',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
-								myApp.alert("The user has been reported", "Thank you")
+							myApp.prompt("Qual o motivo?", "The Coffee Match", function(value){
+								myApp.alert("Usuário denunciado", "Obrigado")
 							})
 						}
 					}
@@ -1183,11 +1183,11 @@ $$(document).on("click", "#finalizar-edicao", function(){
   var ssqnt = skillsSecundarias.split(',')
 
   if(topSkill.length < 1) {
-    myApp.alert('Select yout top skill', '')
+    myApp.alert('Selecione sua habilidade principal', '')
     return false;
   }
   if(skillsSecundarias.length < 1 || ssqnt.length < 2) {
-    myApp.alert('Select two secondary skills', '')
+    myApp.alert('Selecione suas habilidades secundárias', '')
     return false;
   }
 
@@ -1209,7 +1209,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
   localStorage.setItem("college", faculdade);
   localStorage.setItem("personal-link", link);
 
-  myApp.alert('Your profile has been updated', "")
+  myApp.alert('Seu perfil foi atualizado', "")
   mainView.router.loadPage('index.html');
 
 })
@@ -1468,11 +1468,11 @@ myApp.onPageInit('user', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										}
@@ -1624,11 +1624,11 @@ myApp.onPageInit('user-com-chat', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										}
@@ -1780,11 +1780,11 @@ myApp.onPageInit('profile-view', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										}
@@ -1826,7 +1826,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 					mainView.router.loadPage('login2.html');
 				},error: function (request, status, error) {
 					myApp.hideIndicator()
-					alert("Error");
+					alert("Erro");
 				}
 			});
 		});
@@ -1904,7 +1904,7 @@ myApp.onPageInit('chat', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						color: 'red',
 						onClick: function () {
 							myApp.prompt("For what reason?", "The Coffee Match", function(value){
@@ -1918,9 +1918,9 @@ myApp.onPageInit('chat', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you")
+											myApp.alert("Usuário denunciado", "Obrigado")
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you")
+											myApp.alert("Usuário denunciado", "Obrigado")
 										}
 								});
 
@@ -1955,7 +1955,7 @@ myApp.onPageInit('chat', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						bold: true
 					}
 				];
@@ -2157,7 +2157,7 @@ myApp.onPageBack('calendario', function(){
   $$("#toolbar").toggleClass("none visivel");
 });
 myApp.onPageInit('calendario', function(page){
-	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'];
+	var monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto' , 'Setembro' , 'Outubro', 'Novembro', 'Dezembro'];
 
 var calendarInline = myApp.calendar({
     container: '#calendar-inline-container',
