@@ -118,7 +118,7 @@ function setIndexEvents() {
       $(".page-content").children().hide();
       var searchLine = '<form class="searchbar" style="background: #2f3a41">'
                       + '<div class="searchbar-input">'
-                      + '<input type="search" placeholder="Filter by skill">'
+                      + '<input type="search" placeholder="Filtrar por categoria">'
                       + '<a href="#" class="searchbar-clear"></a>'
                       + '</div>'
                       + '<a href="#" class="searchbar-cancel">Cancelar</a>'
