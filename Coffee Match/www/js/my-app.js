@@ -2420,7 +2420,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
           if(entry.open_time == null) {
             $('.horarios').append('<p>Closed</p>')
           } else {
-            $('.horarios').append('<p>'+entry.open_time + ' at ' + entry.close_time+'</p>')
+            $('.horarios').append('<p>'+entry.open_time + ' às ' + entry.close_time+'</p>')
           }
         });
 			}
