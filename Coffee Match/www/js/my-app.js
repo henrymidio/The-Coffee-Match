@@ -1025,7 +1025,7 @@ myApp.onPageInit('project', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
 							myApp.prompt("Qual o motivo?", "The Coffee Match", function(value){
 								myApp.alert("Usuário denunciado", "Obrigado")
@@ -1456,7 +1456,7 @@ myApp.onPageInit('user', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
 							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
@@ -2418,7 +2418,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
         data['horarios'].forEach(function(entry){
           if(entry.open_time == null) {
-            $('.horarios').append('<p>Closed</p>')
+            $('.horarios').append('<p>Fechado</p>')
           } else {
             $('.horarios').append('<p>'+entry.open_time + ' às ' + entry.close_time+'</p>')
           }
