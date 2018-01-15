@@ -52,6 +52,9 @@
     },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.henrique.coffeematch"
+    },
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.henrique.coffeematch"
     }
   },
   "dependent_plugins": {

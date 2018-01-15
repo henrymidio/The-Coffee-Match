@@ -803,7 +803,8 @@ module.exports.metadata =
     "cordova-plugin-console": "1.0.3",
     "cordova-plugin-contacts": "2.0.1",
     "cordova-plugin-device": "1.1.2",
-    "cordova-plugin-device-motion": "1.2.1"
+    "cordova-plugin-device-motion": "1.2.1",
+    "cordova-custom-config": "5.0.2"
 }
 // BOTTOM OF METADATA
 });
