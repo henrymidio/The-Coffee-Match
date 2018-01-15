@@ -58,8 +58,6 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string/>
     <key>FacebookAppID</key>
     <string>1647443792236383</string>
     <key>FacebookDisplayName</key>
@@ -100,5 +98,7 @@
     <string/>
     <key>NSMicrophoneUsageDescription</key>
     <string/>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Need location access to find things nearby</string>
   </dict>
 </plist>

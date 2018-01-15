@@ -72,6 +72,9 @@
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
     <content src="index.html" />
     <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="^2.0.10" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Need location access to find things nearby</string>
+    </edit-config>
     <config-file mode="replace" parent="NSPhotoLibraryUsageDescription" platform="ios">
         <string>Allows access to photo library</string>
     </config-file>

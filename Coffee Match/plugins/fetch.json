@@ -29,7 +29,9 @@
       "id": "cordova-plugin-geolocation@~2.1.0"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "GEOLOCATION_USAGE_DESCRIPTION": "Need location access to find users nearby"
+    }
   },
   "cordova-plugin-globalization": {
     "source": {
