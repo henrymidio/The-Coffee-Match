@@ -10,6 +10,9 @@
         <variable name="MICROPHONE_USAGE_DESCRIPTION" value="App would like to access the microphone." />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
     </plugin>
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+      <string>need location access to find things nearby</string>
+    </edit-config>
     <config-file mode="replace" parent="NSPhotoLibraryUsageDescription" platform="ios">
         <string>Allows access to photo library</string>
     </config-file>

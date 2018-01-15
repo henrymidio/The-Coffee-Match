@@ -2436,6 +2436,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
     //Request que verifica se já foi resgatada uma recompensa no dia atual
     usuario.getRewards(function(dados) {
+      
       if(dados == null) {
         return false;
       }

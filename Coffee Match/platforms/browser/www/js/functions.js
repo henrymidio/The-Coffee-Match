@@ -65,10 +65,10 @@ function setIndexEvents() {
       $(".page-content").children().hide();
       var searchLine = '<form class="searchbar" style="background: #2f3a41">'
                       + '<div class="searchbar-input">'
-                      + '<input type="search" placeholder="Filter by skill">'
+                      + '<input type="search" placeholder="Filtrar por habilidade">'
                       + '<a href="#" class="searchbar-clear"></a>'
                       + '</div>'
-                      + '<a href="#" class="searchbar-cancel">Cancel</a>'
+                      + '<a href="#" class="searchbar-cancel">Cancelar</a>'
                       + '</form>';
       $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
 
@@ -118,10 +118,10 @@ function setIndexEvents() {
       $(".page-content").children().hide();
       var searchLine = '<form class="searchbar" style="background: #2f3a41">'
                       + '<div class="searchbar-input">'
-                      + '<input type="search" placeholder="Filter by skill">'
+                      + '<input type="search" placeholder="Filtrar por categoria">'
                       + '<a href="#" class="searchbar-clear"></a>'
                       + '</div>'
-                      + '<a href="#" class="searchbar-cancel">Cancel</a>'
+                      + '<a href="#" class="searchbar-cancel">Cancelar</a>'
                       + '</form>';
       $(searchLine).hide().prependTo(".blue-page").slideToggle('fast');
 
@@ -207,8 +207,8 @@ function setIndexEvents() {
   //Evento de JOIN ao projeto
   $(document).on('click', '.join-project', function () {
     var self = $(this);
-        myApp.confirm('Are you sure?', '', function () {
-            myApp.alert("Sua solicitação foi enviado ao responsável pelo projeto", '')
+        myApp.confirm('Tem certeza?', '', function () {
+            myApp.alert("Parabéns! A sua solicitação foi enviada com sucesso. Aguarde o contato do responsável pelo projeto. Boa sorte!", '')
             self.find('i').addClass('color-yellow');
         });
   });
@@ -219,7 +219,7 @@ function setIndexEvents() {
   //Evento que deuncia projeto
   $(document).on('click', '.report-project', function () {
     var self = $(this);
-    myApp.confirm('Are you sure?', '', function () {
+    myApp.confirm('Tem certeza?', '', function () {
         myApp.alert('Sua denúncia será revisada pelos nossos moderadores', '')
         self.find('i').addClass('color-red');
     });
@@ -262,13 +262,13 @@ function setIndexEvents() {
     if(conteudo.length < 2) {
       return false
     } else if (conteudo.length > 30) {
-      myApp.alert('Maximum 30 characters', '');
+      myApp.alert('Máximo de 30 caracteres', '');
       return false;
     }
 
     var countChips = $('.container-chip div.chip').length;
     if(countChips > 4) {
-      myApp.alert('You can add only 5 skills', '');
+      myApp.alert('Você pode adicionar 5 habilidades', '');
       return false;
     }
 
@@ -402,12 +402,12 @@ function setIndexEvents() {
     }
     //Valida os inputs
     if(projectName < 1 || projectCategory < 1 ||  projectSkills < 1) {
-      myApp.alert("Please, fill in all required fields.", '');
+      myApp.alert("Preencha os campos obrigatórios.", '');
       myApp.hideIndicator();
       return false;
     }
     else if (projectDescription.length < 25) {
-      myApp.alert('Your description must have at least 25 characters.', '')
+      myApp.alert('Sua descrição deve ter pelo menos 25 caracteres.', '')
       myApp.hideIndicator();
       return false;
     }
@@ -458,7 +458,7 @@ function renderNewProject(projeto, fromBD) {
         +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
           +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
           +'<div class="facebook-name">'+projeto.owner_name+'</div>'
-          +'<div class="facebook-date">Posted on '+projectDate+'</div>'
+          +'<div class="facebook-date">Postado em '+projectDate+'</div>'
         +'</div>'
         +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
           +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
@@ -466,7 +466,7 @@ function renderNewProject(projeto, fromBD) {
         +'<div class="card-content">'
            +'<div class="card-content-inner">'
               +'<p class="project-description">'+shortDescription+'...</p><hr>'
-              +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+              +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Procurando por</p>'
               +'<div class="skills" style="margin-top: -10px">'
                 +skills
               +'</div>'
@@ -533,7 +533,7 @@ function cleanProjectForm() {
           +'<div class="card-header no-border avatar-click" id="'+projeto.owner+'">'
             +'<div class="facebook-avatar"><img src="'+projeto.owner_picture+'" width="34" height="34" style="border-radius: 100%"></div>'
             +'<div class="facebook-name">'+projeto.owner_name+'</div>'
-            +'<div class="facebook-date">Posted on '+projectDate+'</div>'
+            +'<div class="facebook-date">Postado em '+projectDate+'</div>'
           +'</div>'
           +'<div id="'+projeto.id+'" class="card-content open-card" valign="center" style="background-image:url('+projeto.image+'); background-size: cover; background-position: center; color: white; height: 20vh">'
             +'<br><br><p class="project-name" style="line-height: 25px">'+projeto.name+'<br><span style="font-size: 15px">'+projeto.category+'</span></p>'
@@ -541,7 +541,7 @@ function cleanProjectForm() {
           +'<div class="card-content">'
              +'<div class="card-content-inner">'
                 +'<p class="project-description">'+shortDescription+'...</p><hr>'
-                +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Looking for</p>'
+                +'<p class="color-gray"><i class="f7-icons" style="font-size: 12px; margin-right: 3px">search</i> Procurando por</p>'
                 +'<div class="skills" style="margin-top: -10px">'
                   +skills
                 +'</div>'
@@ -643,7 +643,7 @@ function searchPeopleBySkill(filterSkill) {
               console.log(data)
               if(!data) {
                 myApp.hideIndicator()
-                myApp.alert('Sorry! No users were found.', '')
+                myApp.alert('Nenhum usuário encontrado.', '')
                 return false;
               }
               //Renderiza no DOM
@@ -671,7 +671,7 @@ function searchProjectsByCategory(category) {
               //console.log(data)
               if(data.length < 1) {
                 myApp.hideIndicator()
-                myApp.alert('Sorry! No projects were found.', '')
+                myApp.alert('Nenhum projeto foi encontrado.', '')
                 return false;
               }
 

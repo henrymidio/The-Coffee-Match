@@ -159,7 +159,7 @@ var app = {
 					}
 				});
 			}, function(){
-				myApp.alert('It was not possible to find your location. Check it out on settings.', 'The Coffee Match');
+				myApp.alert('Não foi possível encontrar a sua geolocalização. Verifique as configurações.', 'The Coffee Match');
 			});
 
       $(document).on('click', '.back-call', function () {

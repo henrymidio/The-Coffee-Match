@@ -85,11 +85,11 @@ myApp.onPageInit('login-final', function (page) {
     var ssqnt = secondarySkills.split(',')
 
     if(topSkill.length < 1) {
-      myApp.alert('Select yout top skill', '')
+      myApp.alert('Selecione sua habilidade principal', '')
       return false;
     }
     if(secondarySkills.length < 1 || ssqnt.length < 2) {
-      myApp.alert('Select two secondary skills', '')
+      myApp.alert('Selecione suas habilidades secundárias', '')
       return false;
     }
     myApp.showIndicator();
@@ -372,7 +372,7 @@ myApp.onPageInit('convites', function (page) {
                         +'<div class="text-center" style="margin-top: 180px">'
                         +'<img src="img/icNotificationBig.png" />'
                           +'<br>'
-                          +'<p style="color: rgb(89, 104, 114); font-size: 21px">No new invites...</p>'
+                          +'<p style="color: rgb(89, 104, 114); font-size: 21px">Sem novos convites...</p>'
                         +'</div>'
                       +'</li>';
                       $("#invites-li").append(line);
@@ -396,14 +396,14 @@ myApp.onPageInit('convites', function (page) {
 												+ "<div class='item-inner'>"
 												+ "<a href='user.html' class='item-link match' id="+data[i].id+">"
 												+ "<div class='item-title div-match' id="+data[i].like_id+"><span id='matches-name'><b>"+data[i].name+"</b></span><br>"
-												+ "<span class='subtitle' id='mess'>Wants to grab a coffee!</span>"
+												+ "<span class='subtitle' id='mess'>Quer tomar um café com você!</span>"
 												+ "</div>"
 												+ "</div>"
 												+ "</div>"
 												+ "</a>"
 												+ "</div>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='bg-red del-invite'>Delete</a>"
+												+ "<a href='#' class='bg-red del-invite'>Deletar</a>"
 												+ "</div>"
 												+ "</li>";
 
@@ -416,7 +416,7 @@ myApp.onPageInit('convites', function (page) {
 										var self   = $(this);
 										var inviteId = self.parents("li").find("div.div-match").attr("id");
 										var swipeout = self.closest(".swipeout");
-										myApp.confirm("Are you sure?", "The Coffee Match", function(){
+										myApp.confirm("Você tem certeza?", "The Coffee Match", function(){
 											myApp.swipeoutDelete(swipeout, function() {
 												var matchToDelete = {
 													invite: inviteId
@@ -541,7 +541,7 @@ myApp.onPageInit('combinacoes', function (page) {
 												+ starbucksLine
 												+ "<span class='subtitle'><img style='width: 11px; height: 11px; margin-right: 6px' src='img/time.png' />"+agendamento+"</span></div></div></a>"
 												+ "<div class='swipeout-actions-right'>"
-												+ "<a href='#' class='bg-red unmatch'>Unmatch</a>"
+												+ "<a href='#' class='bg-red unmatch'>Desfazer convite</a>"
 												+ "</div>"
 												+"</li>";
 									    $("#match-li").append(line1);
@@ -561,7 +561,7 @@ myApp.onPageInit('combinacoes', function (page) {
 										var idMatch = self.parent().siblings(".match").attr("id");
 										var swipeout = self.closest(".swipeout");
 
-										myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
+										myApp.confirm("Vocês não poderão se conectar", "Tem certeza?", function(){
 											myApp.swipeoutDelete(swipeout, function() {
 												var abc = {
 													match: idMatch
@@ -618,7 +618,7 @@ myApp.onPageInit('detail-calendar', function(page){
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -798,7 +798,7 @@ myApp.onPageInit('myprojects', function (page) {
         + "<div class='item-inner'>"
         + "<a href='#' class='item-link'>"
         + "<div class='item-title'><span><b>"+data[i].name+"</b></span><br>"
-        + "<span class='subtitle'>"+number_joined_users+" interested</span></div></div></a>"
+        + "<span class='subtitle'>"+number_joined_users+" interessados</span></div></div></a>"
         + "</li>";
         $('.ul-projects').append(line);
     }
@@ -814,7 +814,7 @@ myApp.onPageInit('myprojects', function (page) {
 
 
 $(document).on('click', '.delete-project', function () {
-  myApp.confirm("Are you sure you want to delete the project?", "", function(){
+  myApp.confirm("Tem certeza que deseja deletar este projeto?", "", function(){
     myApp.showIndicator()
     var project_id = localStorage.getItem('project_id');
     deleteProject(project_id, function() {
@@ -869,7 +869,7 @@ myApp.onPageInit('joined-project', function (page) {
               type: 'get',
               dataType: 'json',
               success: function (data) {
-                $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>All')
+                $('.label-old').html('<i class="f7-icons" style="font-size: 12px; margin-right: 7px">persons</i>Todos')
                 c += 1;
                 j += '<div id='+data.id+' class="col-33 op-profile" style="position: relative">'
                        + '<img src='+data.picture+' />'
@@ -956,7 +956,7 @@ myApp.onPageInit('joined-project', function (page) {
     editProject(project_id, name, description, editSkills, function(data) {
       myApp.hideIndicator();
       myApp.closeModal(".popup-edit-form", true);
-      myApp.alert('Your information has been successfully updated', '')
+      myApp.alert('Suas informações foram atualizadas com sucesso', '')
       $('.j-name').html(name);
       $('.j-description').html(description);
     });
@@ -1002,7 +1002,7 @@ myApp.onPageInit('project', function (page) {
       } else {
         data[i].all_joined_users.forEach(function(entry) {
             if(entry.joined_user == usuario.getID()) {
-              myApp.alert('You have already applied to this project', '')
+              myApp.alert('Você já se cadastrou a este projeto', '')
               $('#join-project').hide()
             }
         });
@@ -1012,7 +1012,7 @@ myApp.onPageInit('project', function (page) {
 
   $('#join-project').on('click', function() {
       usuario.joinProject(project_id);
-      myApp.alert("Your request has been successfully delivered. Awaiting for the contact of the Project Owner", "")
+      myApp.alert("Sua solicitação foi enviada com sucesso!", "")
       mainView.router.back();
   })
 /*
@@ -1025,17 +1025,17 @@ myApp.onPageInit('project', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
-								myApp.alert("The user has been reported", "Thank you")
+							myApp.prompt("Qual o motivo?", "The Coffee Match", function(value){
+								myApp.alert("Usuário denunciado", "Obrigado")
 							})
 						}
 					}
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1053,7 +1053,7 @@ $(document).on("click", ".erase", function(){
   var idMatch = self.parent().siblings().find(".chat").attr("id");
   var swipeout = self.closest(".swipeout");
 
-  myApp.confirm("You will no longer be able to talk", "Are you sure?", function(){
+  myApp.confirm("Vocês não poderão mais se conectar", "Tem certeza?", function(){
     myApp.swipeoutDelete(swipeout, function() {
         var abc = {
           match: idMatch
@@ -1105,7 +1105,7 @@ myApp.onPageInit('messages', function (page) {
 										var replyArrow = "";
 										var weight = "bold";
 										if(data[i].last_message === null){
-											data[i].last_message = "Connected in "+data[i].date;
+											data[i].last_message = "Conectado em "+data[i].date;
 										}
 
 										if(data[i].user == x.user_id) {
@@ -1183,11 +1183,11 @@ $$(document).on("click", "#finalizar-edicao", function(){
   var ssqnt = skillsSecundarias.split(',')
 
   if(topSkill.length < 1) {
-    myApp.alert('Select yout top skill', '')
+    myApp.alert('Selecione sua habilidade principal', '')
     return false;
   }
   if(skillsSecundarias.length < 1 || ssqnt.length < 2) {
-    myApp.alert('Select two secondary skills', '')
+    myApp.alert('Selecione suas habilidades secundárias', '')
     return false;
   }
 
@@ -1209,7 +1209,7 @@ $$(document).on("click", "#finalizar-edicao", function(){
   localStorage.setItem("college", faculdade);
   localStorage.setItem("personal-link", link);
 
-  myApp.alert('Your profile has been updated', "")
+  myApp.alert('Seu perfil foi atualizado', "")
   mainView.router.loadPage('index.html');
 
 })
@@ -1404,7 +1404,7 @@ myApp.onPageInit('user', function (page) {
 											data.distance = '<1';
 									}
 
-									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Km');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
                   $(".blur-back").css("background-size", 'cover');
@@ -1416,7 +1416,7 @@ myApp.onPageInit('user', function (page) {
 									$$("#user-view-college").html(data.college);
 									//$$("#user-view-description").html(data.description);
                   if(data.description.length > 0) {
-                    var lineAbout = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>About Me</p>'
+                    var lineAbout = '<p class="friends user-label color-silver"><i class="f7-icons" style="font-size: 14px; margin-right: 5px">chat</i>Sobre mim</p>'
                                   + '<p class="friends" style="margin-left: 20px; margin-right: 10px; color: #2f3a41">'+data.description+'</p>'
                                   + '<br>';
                     $('.tc').before(lineAbout)
@@ -1456,9 +1456,9 @@ myApp.onPageInit('user', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: suid,
 									reason: value
@@ -1468,11 +1468,11 @@ myApp.onPageInit('user', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										}
@@ -1484,7 +1484,7 @@ myApp.onPageInit('user', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1573,7 +1573,7 @@ myApp.onPageInit('user-com-chat', function (page) {
 											data.distance = '<1';
 									}
 
-									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Km');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
                   $(".blur-back").css("background-size", 'cover');
@@ -1612,9 +1612,9 @@ myApp.onPageInit('user-com-chat', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: suid,
 									reason: value
@@ -1624,11 +1624,11 @@ myApp.onPageInit('user-com-chat', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										}
@@ -1640,7 +1640,7 @@ myApp.onPageInit('user-com-chat', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1722,7 +1722,7 @@ myApp.onPageInit('profile-view', function (page) {
 											data.distance = '<1';
 									}
 
-									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Miles');
+									$$("#user-distance").html('<img width="15" height="15" style="vertical-align: top; margin-right: 5px" src="img/pin-9-xxl.png" />' + data.distance + ' Km');
 									$$("#user-view-img").attr("src", data.picture);
                   $(".blur-back").css("background", 'url('+data.picture+')');
                   $(".blur-back").css("background-size", 'cover');
@@ -1768,9 +1768,9 @@ myApp.onPageInit('profile-view', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: suid,
 									reason: value
@@ -1780,11 +1780,11 @@ myApp.onPageInit('profile-view', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you", function(){
+											myApp.alert("Usuário denunciado", "Obrigado", function(){
 												mainView.router.back();
 											})
 										}
@@ -1796,7 +1796,7 @@ myApp.onPageInit('profile-view', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						color: 'red'
 					}
 				];
@@ -1813,7 +1813,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 	var dst = null;
 
 	$$('#delete-account').on('click', function(){
-		myApp.confirm("All your data will be lost", "Are you sure you want to delete your account?", function(){
+		myApp.confirm("Todas as suas informações serão perdidas", "Tem certeza que deseja deletar o seu perfil?", function(){
 			myApp.showIndicator()
 			$.ajax({
 				url: 'http://thecoffeematch.com/webservice/delete-user.php',
@@ -1826,7 +1826,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 					mainView.router.loadPage('login2.html');
 				},error: function (request, status, error) {
 					myApp.hideIndicator()
-					alert("Error");
+					alert("Erro");
 				}
 			});
 		});
@@ -1852,7 +1852,7 @@ myApp.onPageBeforeInit('settings', function (page) {
 										$('#change-status').prop('checked', false);
 									}
 
-										$$("#valBox").html(data.distance + " Mi")
+										$$("#valBox").html(data.distance + " Km")
 
 								},
 								error: function (request, status, error) {
@@ -1904,10 +1904,10 @@ myApp.onPageInit('chat', function (page) {
 
 				var buttons1 = [
 					{
-						text: 'Report',
+						text: 'Denunciar',
 						color: 'red',
 						onClick: function () {
-							myApp.prompt("For what reason?", "The Coffee Match", function(value){
+							myApp.prompt("Por qual razão?", "The Coffee Match", function(value){
 								var dataReport = {
 									user_id: match,
 									match: match,
@@ -1918,9 +1918,9 @@ myApp.onPageInit('chat', function (page) {
 										type: 'post',
 										data: dataReport,
 										success: function(data){
-											myApp.alert("User has been reported", "Thank you")
+											myApp.alert("Usuário denunciado", "Obrigado")
 										},error: function (request, status, error) {
-											myApp.alert("User has been reported", "Thank you")
+											myApp.alert("Usuário denunciado", "Obrigado")
 										}
 								});
 
@@ -1928,7 +1928,7 @@ myApp.onPageInit('chat', function (page) {
 						}
 					},
 					{
-						text: 'Unmatch',
+						text: 'Desfazer convite',
 						color: 'red',
 						onClick: function () {
 
@@ -1955,7 +1955,7 @@ myApp.onPageInit('chat', function (page) {
 				];
 				var buttons2 = [
 					{
-						text: 'Cancel',
+						text: 'Cancelar',
 						bold: true
 					}
 				];
@@ -2157,7 +2157,7 @@ myApp.onPageBack('calendario', function(){
   $$("#toolbar").toggleClass("none visivel");
 });
 myApp.onPageInit('calendario', function(page){
-	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August' , 'September' , 'October', 'November', 'December'];
+	var monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto' , 'Setembro' , 'Outubro', 'Novembro', 'Dezembro'];
 
 var calendarInline = myApp.calendar({
     container: '#calendar-inline-container',
@@ -2371,7 +2371,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
                      + "<div class='item-inner'>"
                      + "<div class='item-title-row'>"
                      + "<div class='item-title'>"+data[i].name+"</div>"
-                     + "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " Mi</div>"
+                     + "<div class='item-after' style='color: #00d173'>"+data[i].distance+ " Km</div>"
                      + "</div>"
                      + "<div class='item-text'>"+data[i].street+", "+data[i].num+"</div>"
                      + "</div>"
@@ -2418,9 +2418,9 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
         data['horarios'].forEach(function(entry){
           if(entry.open_time == null) {
-            $('.horarios').append('<p>Closed</p>')
+            $('.horarios').append('<p>Fechado</p>')
           } else {
-            $('.horarios').append('<p>'+entry.open_time + ' at ' + entry.close_time+'</p>')
+            $('.horarios').append('<p>'+entry.open_time + ' às ' + entry.close_time+'</p>')
           }
         });
 			}
@@ -2436,6 +2436,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
     //Request que verifica se já foi resgatada uma recompensa no dia atual
     usuario.getRewards(function(dados) {
+      
       if(dados == null) {
         return false;
       }
