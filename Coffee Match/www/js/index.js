@@ -300,8 +300,8 @@ var app = {
 				var fbLoginSuccess = function (userData) {
 
 				myApp.showIndicator()
-					facebookConnectPlugin.api("/me?fields=id,name,gender,email,birthday,work,education",
-					["public_profile", "email", "user_birthday", "user_work_history", "user_education_history"],
+					facebookConnectPlugin.api("/me?fields=id,name,gender,email,birthday",
+					["public_profile", "email", "user_birthday"],
 						function onSuccess (result) {
 
 							  try {

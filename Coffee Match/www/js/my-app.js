@@ -769,7 +769,7 @@ myApp.onPageInit('myprojects', function (page) {
         +'<div class="text-center" style="margin-top: 90px">'
         +'<img src="img/icProjectsBig.png" />'
           +'<br>'
-          +'<p style="color: rgb(89, 104, 114); font-size: 21px">Start a new project!</p>'
+          +'<p style="color: rgb(89, 104, 114); font-size: 21px">Inicie um novo projeto!</p>'
         +'</div>'
         + '<div class="text-center">'
         + '<a href="#" id="button-new-project" class="btn-0 btn-2 btn-2c open-popup" data-popup=".popup-form">New Project</a>'
@@ -2436,7 +2436,7 @@ function setProfile(description, occupation, nascimento, college, skills, lookin
 
     //Request que verifica se já foi resgatada uma recompensa no dia atual
     usuario.getRewards(function(dados) {
-      
+
       if(dados == null) {
         return false;
       }
