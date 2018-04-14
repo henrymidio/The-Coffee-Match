@@ -311,7 +311,7 @@ var app = {
 							  } catch(err) {
 								localStorage.setItem("birthday", "");
 							  }
-		  
+
 								localStorage.setItem("occupation", "");
 
 								localStorage.setItem("college", "");
@@ -408,7 +408,7 @@ var app = {
 				};
 
 				$$('#loginFB').on('click', function(){
-					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_work_history", "user_education_history", "user_friends"], fbLoginSuccess,
+					facebookConnectPlugin.login(["public_profile", "email", "user_birthday", "user_friends"], fbLoginSuccess,
 					  function loginError (error) {
 						//myApp.alert("second" + "-" + error);
 					  }
