@@ -311,20 +311,10 @@ var app = {
 							  } catch(err) {
 								localStorage.setItem("birthday", "");
 							  }
-
-							  try {
-								localStorage.setItem("occupation", result.work[0].position.name + " - " + result.work[0].employer.name);
-							  } catch(err) {
+		  
 								localStorage.setItem("occupation", "");
-							  }
 
-							  try {
-								var lnt = result.education.length;
-								var college = result.education[lnt - 1].school.name;
-								localStorage.setItem("college", college);
-							  } catch(err) {
 								localStorage.setItem("college", "");
-							  }
 
 							  var person = {
 									fbid: result.id
