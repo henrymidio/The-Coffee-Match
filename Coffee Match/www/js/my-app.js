@@ -1486,7 +1486,7 @@ myApp.onPageInit('user', function (page) {
 					{
 						text: 'Bloquear',
 						onClick: function () {
-							usuario.removeUserFromCache(shown_user_id);
+							usuario.removeUserFromCache(suid);
               mainView.router.back();
 						}
 					}
