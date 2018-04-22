@@ -1497,7 +1497,7 @@ myApp.onPageInit('user', function (page) {
 						color: 'red'
 					}
 				];
-				var groups = [buttons1, buttons2];
+				var groups = [buttons1, buttons3, buttons2];
 				myApp.actions(groups);
 	});
 
