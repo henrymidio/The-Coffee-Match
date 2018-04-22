@@ -1482,6 +1482,15 @@ myApp.onPageInit('user', function (page) {
 						}
 					}
 				];
+        var buttons3 = [
+					{
+						text: 'Bloquear',
+						onClick: function () {
+							usuario.removeUserFromCache(shown_user_id);
+              mainView.router.back();
+						}
+					}
+				];
 				var buttons2 = [
 					{
 						text: 'Cancelar',
