@@ -1488,6 +1488,7 @@ myApp.onPageInit('user', function (page) {
 						onClick: function () {
 							usuario.removeUserFromCache(suid);
               mainView.router.back();
+              $('figure#'+suid).css({"visibility":"hidden",display:'block'}).slideUp();
 						}
 					}
 				];
